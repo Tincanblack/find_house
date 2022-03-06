@@ -35,6 +35,7 @@
 				>
 					<i class="nav-icon bi bi-folder2-open me-3"></i>
 					<span class="nav-text">案件管理</span>
+					<span class="nav-tooltip">案件管理</span>
 				</router-link>
 			</li>
 			<li class="nav-item d-flex">
@@ -45,6 +46,7 @@
 				>
 					<i class="nav-icon bi bi-newspaper me-3"></i>
 					<span class="nav-text">房訊管理</span>
+					<span class="nav-tooltip">房訊管理</span>
 				</router-link>
 			</li>
 			<li class="nav-item d-flex">
@@ -55,6 +57,7 @@
 				>
 					<i class="nav-icon bi bi-pencil-square me-3"></i>
 					<span class="nav-text">預約表單管理</span>
+					<span class="nav-tooltip">預約表單管理</span>
 				</router-link>
 			</li>
 			<li class="nav-item d-flex">
@@ -65,6 +68,7 @@
 				>
 					<i class="nav-icon bi bi-ticket me-3"></i>
 					<span class="nav-text">優惠券管理</span>
+					<span class="nav-tooltip">優惠券管理</span>
 				</router-link>
 			</li>
 		</ul>
@@ -74,6 +78,7 @@
 				<a class="nav-link text-danger" href="#">
 					<i class="nav-icon bi bi-box-arrow-left me-3"></i>
 					<span class="nav-text nav-logout">登出</span>
+					<span class="nav-tooltip">登出</span>
 				</a>
 			</li>
 		</ul>
