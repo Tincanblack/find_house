@@ -1,4 +1,5 @@
 <template lang="">
+	<LoadingAnimate :active="isLoading" :z-index="1060"></LoadingAnimate>
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-8">
@@ -46,11 +47,15 @@
 <script>
 export default {
 	data() {
-		return { user: { username: "", password: "" } };
+		return {
+			isLoading: false,
+			user: { username: "", password: "" },
+		};
 	},
 	methods: {
 		login() {
 			const formData = { ...this.user };
+			this.isLoading = true;
 			this.$http
 				.post(`${process.env.VUE_APP_URL}/admin/signin`, formData)
 				.then((res) => {
@@ -58,10 +63,12 @@ export default {
 					document.cookie = `userId=${token};expires=${new Date(
 						expired
 					)}; path=/`;
+					this.isLoading = false;
 					this.$router.push("/admin");
 				})
 				.catch((err) => {
 					// 跳出錯誤訊息
+					this.isLoading = false;
 					alert(err.data.message);
 				});
 		},
