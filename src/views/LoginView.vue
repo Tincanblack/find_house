@@ -52,6 +52,7 @@ export default {
 			user: { username: "", password: "" },
 		};
 	},
+	inject: ["emitter"],
 	methods: {
 		login() {
 			const formData = { ...this.user };
@@ -59,8 +60,8 @@ export default {
 			this.$http
 				.post(`${process.env.VUE_APP_URL}/admin/signin`, formData)
 				.then((res) => {
-					const { token, expired } = res.data; // 將token與過期時間寫入cookie中並導向至商品頁
-					document.cookie = `userId=${token};expires=${new Date(
+					const { token, expired } = res.data; // 將token與過期時間寫入cookie中
+					document.cookie = `user_token=${token};expires=${new Date(
 						expired
 					)}; path=/`;
 					this.isLoading = false;
@@ -69,10 +70,9 @@ export default {
 				.catch((err) => {
 					// 跳出錯誤訊息
 					this.isLoading = false;
-					alert(err.data.message);
+					this.$httpMessageState(err.response, "登入");
 				});
 		},
 	},
 };
 </script>
-<style lang="scss"></style>

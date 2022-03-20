@@ -2,6 +2,11 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
 	{
+		path: "/login",
+		component: () => import("@/views/LoginView.vue"),
+	},
+	// admin
+	{
 		path: "/admin",
 		component: () => import("@/views/AdminView.vue"),
 		children: [
@@ -23,14 +28,22 @@ const routes = [
 			},
 		],
 	},
+	// user
 	{
-		path: "/login",
-		component: () => import("@/views/LoginView.vue"),
+		path: "/",
+		component: () => import("@/views/FrontView.vue"),
+		children: [
+			{
+				path: "",
+				component: () => import("@/views/HomeView.vue"),
+			},
+		],
 	},
 ];
 
 const router = createRouter({
 	history: createWebHashHistory(),
+	linkActiveClass: "active",
 	routes,
 });
 

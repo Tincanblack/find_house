@@ -29,7 +29,7 @@
 		<ul class="nav nav-pills flex-column mb-auto">
 			<li class="nav-item d-flex">
 				<router-link
-					class="nav-link text-white"
+					class="nav-link"
 					to="/admin/cases"
 					title="案件管理"
 				>
@@ -39,11 +39,7 @@
 				</router-link>
 			</li>
 			<li class="nav-item d-flex">
-				<router-link
-					class="nav-link text-white"
-					to="/admin/news"
-					title="房訊管理"
-				>
+				<router-link class="nav-link" to="/admin/news" title="房訊管理">
 					<i class="nav-icon bi bi-newspaper me-3"></i>
 					<span class="nav-text">房訊管理</span>
 					<span class="nav-tooltip">房訊管理</span>
@@ -51,7 +47,7 @@
 			</li>
 			<li class="nav-item d-flex">
 				<router-link
-					class="nav-link text-white"
+					class="nav-link"
 					to="/admin/reserves"
 					title="預約表單管理"
 				>
@@ -62,7 +58,7 @@
 			</li>
 			<li class="nav-item d-flex">
 				<router-link
-					class="nav-link text-white"
+					class="nav-link"
 					to="/admin/coupons"
 					title="優惠券管理"
 				>
