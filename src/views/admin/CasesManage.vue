@@ -70,20 +70,22 @@
 		</table>
 		<!-- <Pagination></Pagination> -->
 	</div>
-	<CaseModal
+	<!-- 新增/更新 -->
+	<CaseEditModal
 		@update-product="updateProduct"
 		:product="tempCase"
 		:isNew="isNew"
 		ref="caseModal"
-	></CaseModal>
+	></CaseEditModal>
+	<Pagination :pages="pagination"></Pagination>
 </template>
 <script>
 // import Pagination from "@components/Pagination";
-import CaseModal from "@/components/modals/CaseModal";
+import CaseEditModal from "@/components/modals/CaseEditModal";
 
 export default {
 	components: {
-		CaseModal,
+		CaseEditModal,
 		// Pagination,
 	},
 	data() {
@@ -124,7 +126,7 @@ export default {
 					this.isLoading = false;
 					this.$httpMessageState(response, statusText);
 					caseComponent.closeModal();
-					this.getProducts(this.currentPage);
+					this.getCasesList(this.currentPage);
 				})
 				.catch((error) => {
 					this.isLoading = false;
@@ -137,16 +139,17 @@ export default {
 				.get(
 					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
 				)
-				.then((res) => {
+				.then((response) => {
 					// 將收到的data賦予給cases, pagination
-					this.cases = res.data.products;
-					this.pagination = res.data.pagination;
+					this.cases = response.data.products;
+					this.pagination = response.data.pagination;
 					this.isLoading = false;
 				})
-				.catch((err) => {
+				.catch((error) => {
 					// 跳出錯誤訊息
 					this.isLoading = false;
-					this.$httpMessageState(err.response, "錯誤訊息");
+					console.log("here");
+					this.$httpMessageState(error.response, "錯誤訊息");
 				});
 		},
 	},

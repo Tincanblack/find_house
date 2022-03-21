@@ -2,7 +2,6 @@ import emitter from "@/methods/emitter";
 
 export default function (response, title = "更新") {
 	// 如果回傳 success 是 true 的話
-	console.log(response);
 	if (response.data.success) {
 		emitter.emit("push-message", {
 			style: "success",

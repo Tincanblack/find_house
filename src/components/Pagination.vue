@@ -2,7 +2,14 @@
 	<nav aria-label="Page navigation example">
 		<ul class="pagination">
 			<li class="page-item" :class="{ disabled: pages.has_pre !== true }">
-				<a class="page-link" href="#" aria-label="Previous">
+				<a
+					class="page-link"
+					href="#"
+					aria-label="Previous"
+					@click.prevent="
+						$emit('get-casesList', pages.current_page - 1)
+					"
+				>
 					<span aria-hidden="true">&laquo;</span>
 				</a>
 			</li>
@@ -12,13 +19,25 @@
 				v-for="page in pages.total_pages"
 				:key="'page' + page"
 			>
-				<a class="page-link" href="#">{{ page }}</a>
+				<a
+					class="page-link"
+					href="#"
+					@click.prevent="$emit('get-products', page)"
+					>{{ page }}</a
+				>
 			</li>
 			<li
 				class="page-item"
 				:class="{ disabled: pages.has_next !== true }"
 			>
-				<a class="page-link" href="#" aria-label="Next">
+				<a
+					class="page-link"
+					href="#"
+					aria-label="Next"
+					@click.prevent="
+						$emit('get-casesList', pages.current_page + 1)
+					"
+				>
 					<span aria-hidden="true">&raquo;</span>
 				</a>
 			</li>
