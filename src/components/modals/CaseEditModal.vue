@@ -116,6 +116,9 @@
 										id="category"
 										v-model="tempCase.category"
 									>
+										<option value="" disabled>
+											請選擇
+										</option>
 										<option value="公寓">公寓</option>
 										<option value="透天/別墅">
 											透天 / 別墅
@@ -345,7 +348,9 @@ export default {
 		return {
 			status: {},
 			modal: "",
-			tempCase: {},
+			tempCase: {
+				category: "",
+			},
 		};
 	},
 	emits: ["update-product"],
@@ -383,18 +388,18 @@ export default {
 					if (response.data.success) {
 						this.tempCase.imageUrl = response.data.imageUrl;
 						this.$refs.fileInput.value = "";
-						this.emitter.emit("push-message", {
-							style: "success",
-							title: "圖片上傳結果",
-							content: response.data.message,
-						});
+						this.$httpMessageState(
+							response,
+							"圖片上傳結果",
+							response.data.message
+						);
 					} else {
 						this.$refs.fileInput.value = "";
-						this.emitter.emit("push-message", {
-							style: "danger",
-							title: "圖片上傳結果",
-							content: response.data.message,
-						});
+						this.$httpMessageState(
+							response,
+							"圖片上傳結果",
+							response.data.message
+						);
 					}
 				})
 				.catch((error) => {

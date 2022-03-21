@@ -68,7 +68,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<!-- <Pagination></Pagination> -->
+		<Pagination :pages="pagination" @emit-pages="getCasesList"></Pagination>
 	</div>
 	<!-- 新增/更新 -->
 	<CaseEditModal
@@ -77,21 +77,24 @@
 		:isNew="isNew"
 		ref="caseModal"
 	></CaseEditModal>
-	<Pagination :pages="pagination"></Pagination>
+	<!-- 刪除 -->
+	<!-- <DelConfirmModal ref="delModal"></DelConfirmModal> -->
 </template>
 <script>
-// import Pagination from "@components/Pagination";
+import Pagination from "@/components/Pagination";
 import CaseEditModal from "@/components/modals/CaseEditModal";
+// import DelConfirmModal from "@/components/modals/DelConfirmModal";
 
 export default {
 	components: {
 		CaseEditModal,
-		// Pagination,
+		// DelConfirmModal,
+		Pagination,
 	},
 	data() {
 		return {
 			isLoading: false,
-			tempCase: { imagesUrl: [] },
+			tempCase: { imagesUrl: [], category: "" },
 			cases: [],
 			pagination: {},
 			isNew: false,
@@ -111,8 +114,8 @@ export default {
 		},
 		updateProduct(item) {
 			this.tempCase = item;
-			let api = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product`;
 			this.isLoading = true;
+			let api = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product`;
 			let httpMethod = "post";
 			let statusText = "新增案件";
 			if (!this.isNew) {

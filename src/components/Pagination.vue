@@ -1,50 +1,45 @@
 <template lang="">
-	<nav aria-label="Page navigation example">
-		<ul class="pagination">
-			<li class="page-item" :class="{ disabled: pages.has_pre !== true }">
-				<a
-					class="page-link"
-					href="#"
-					aria-label="Previous"
-					@click.prevent="
-						$emit('get-casesList', pages.current_page - 1)
-					"
-				>
-					<span aria-hidden="true">&laquo;</span>
-				</a>
-			</li>
-			<li
-				class="page-item"
-				:class="{ active: pages.current_page === page }"
-				v-for="page in pages.total_pages"
-				:key="'page' + page"
+	<ul class="pagination align-items-center justify-content-center">
+		<li class="page-item" :class="{ disabled: pages.has_pre !== true }">
+			<a
+				class="page-link"
+				href="#"
+				aria-label="Previous"
+				@click.prevent="clickPage(pages.current_page - 1)"
 			>
-				<a
-					class="page-link"
-					href="#"
-					@click.prevent="$emit('get-products', page)"
-					>{{ page }}</a
-				>
-			</li>
-			<li
-				class="page-item"
-				:class="{ disabled: pages.has_next !== true }"
+				<span aria-hidden="true">&laquo;</span>
+			</a>
+		</li>
+		<li
+			class="page-item"
+			:class="{ active: pages.current_page === page }"
+			v-for="page in pages.total_pages"
+			:key="'page' + page"
+		>
+			<a class="page-link" href="#" @click.prevent="clickPage(page)">{{
+				page
+			}}</a>
+		</li>
+		<li class="page-item" :class="{ disabled: pages.has_next !== true }">
+			<a
+				class="page-link"
+				href="#"
+				aria-label="Next"
+				@click.prevent="clickPage(pages.current_page + 1)"
 			>
-				<a
-					class="page-link"
-					href="#"
-					aria-label="Next"
-					@click.prevent="
-						$emit('get-casesList', pages.current_page + 1)
-					"
-				>
-					<span aria-hidden="true">&raquo;</span>
-				</a>
-			</li>
-		</ul>
-	</nav>
+				<span aria-hidden="true">&raquo;</span>
+			</a>
+		</li>
+	</ul>
 </template>
 <script>
-export default {};
+export default {
+	props: ["pages"],
+	methods: {
+		clickPage(page) {
+			this.$emit("emit-pages", page);
+		},
+	},
+};
 </script>
 <style lang=""></style>
