@@ -59,6 +59,7 @@
 							<button
 								type="button"
 								class="btn btn-outline-danger btn-sm"
+								@click="openDelModal(item)"
 							>
 								<i class="bi bi-trash3"></i>
 								刪除
@@ -72,23 +73,27 @@
 	</div>
 	<!-- 新增/更新 -->
 	<CaseEditModal
-		@update-product="updateProduct"
 		:product="tempCase"
 		:isNew="isNew"
+		@update-product="updateCase"
 		ref="caseModal"
 	></CaseEditModal>
 	<!-- 刪除 -->
-	<!-- <DelConfirmModal ref="delModal"></DelConfirmModal> -->
+	<DelConfirmModal
+		:item="tempCase"
+		@del-item="deleteCase"
+		ref="delModal"
+	></DelConfirmModal>
 </template>
 <script>
 import Pagination from "@/components/Pagination";
 import CaseEditModal from "@/components/modals/CaseEditModal";
-// import DelConfirmModal from "@/components/modals/DelConfirmModal";
+import DelConfirmModal from "@/components/modals/DelConfirmModal";
 
 export default {
 	components: {
 		CaseEditModal,
-		// DelConfirmModal,
+		DelConfirmModal,
 		Pagination,
 	},
 	data() {
@@ -112,7 +117,7 @@ export default {
 			const caseComponent = this.$refs.caseModal;
 			caseComponent.openModal();
 		},
-		updateProduct(item) {
+		updateCase(item) {
 			this.tempCase = item;
 			this.isLoading = true;
 			let api = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product`;
@@ -123,11 +128,11 @@ export default {
 				httpMethod = "put";
 				statusText = "更新案件";
 			}
-			const caseComponent = this.$refs.caseModal;
 			this.$http[httpMethod](api, { data: this.tempCase })
 				.then((response) => {
 					this.isLoading = false;
 					this.$httpMessageState(response, statusText);
+					const caseComponent = this.$refs.caseModal;
 					caseComponent.closeModal();
 					this.getCasesList(this.currentPage);
 				})
@@ -153,6 +158,29 @@ export default {
 					this.isLoading = false;
 					console.log("here");
 					this.$httpMessageState(error.response, "錯誤訊息");
+				});
+		},
+		openDelModal(item) {
+			this.tempCase = { ...item };
+			const delComponent = this.$refs.delModal;
+			delComponent.openModal();
+		},
+		deleteCase() {
+			this.isLoading = true;
+			this.$http
+				.delete(
+					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product/${this.tempCase.id}`
+				)
+				.then((response) => {
+					this.isLoading = false;
+					this.$httpMessageState(response, "刪除案件");
+					const delComponent = this.$refs.delModal;
+					delComponent.closeModal();
+					this.getCasesList(this.currentPage);
+				})
+				.catch((error) => {
+					this.isLoading = false;
+					this.$httpMessageState(error.response, "刪除案件");
 				});
 		},
 	},

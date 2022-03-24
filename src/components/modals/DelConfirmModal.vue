@@ -16,7 +16,7 @@
 					</h5>
 					<button
 						type="button"
-						class="btn-close"
+						class="btn-close btn-close-white"
 						data-bs-dismiss="modal"
 						aria-label="Close"
 					></button>
@@ -47,9 +47,11 @@
 	</div>
 </template>
 <script>
+import modalMixin from "@/mixins/modalMixin";
+
 export default {
 	props: {
-		product: {
+		item: {
 			type: Object,
 			default() {
 				return {};
@@ -60,5 +62,7 @@ export default {
 		return {};
 	},
 	emits: ["del-item"],
+	mixins: [modalMixin],
+	inject: ["emitter"],
 };
 </script>

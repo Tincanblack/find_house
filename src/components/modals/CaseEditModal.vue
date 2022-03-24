@@ -147,8 +147,8 @@
 									/>
 								</div>
 							</div>
-							<div class="row gx-2">
-								<div class="mb-3 col-md-6">
+							<div class="row gx-3">
+								<div class="mb-3 col-md-4">
 									<label for="category" class="form-label"
 										>坪數</label
 									>
@@ -160,7 +160,7 @@
 										placeholder="請輸入坪數"
 									/>
 								</div>
-								<div class="mb-3 col-md-6">
+								<div class="mb-3 col-md-4">
 									<label for="price" class="form-label"
 										>單位 (坪)
 										<span class="text-danger"
@@ -175,8 +175,6 @@
 										placeholder="請輸入單位 (坪)"
 									/>
 								</div>
-							</div>
-							<div class="row gx-3">
 								<div class="mb-3 col-md-4">
 									<label for="houseAge" class="form-label"
 										>屋齡 (年)</label
@@ -189,7 +187,10 @@
 										placeholder="請輸入屋齡"
 									/>
 								</div>
-								<div class="mb-3 col-md-4">
+							</div>
+							<hr />
+							<div class="row gx-2">
+								<div class="mb-3 col-md-6">
 									<label for="floor" class="form-label"
 										>樓/樓</label
 									>
@@ -201,7 +202,7 @@
 										placeholder="請輸入樓層"
 									/>
 								</div>
-								<div class="mb-3 col-md-4">
+								<div class="mb-3 col-md-6">
 									<label for="pattern" class="form-label"
 										>格局 (房/廳/衛/室)</label
 									>
