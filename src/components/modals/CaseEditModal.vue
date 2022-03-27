@@ -120,13 +120,9 @@
 											請選擇
 										</option>
 										<option value="公寓">公寓</option>
-										<option value="透天/別墅">
-											透天 / 別墅
-										</option>
-										<option value="社區/大樓">
-											社區 / 大樓
-										</option>
-										<option value="辦公">辦公</option>
+										<option value="華廈">華廈</option>
+										<option value="大樓">大樓</option>
+										<option value="別墅">別墅</option>
 									</select>
 								</div>
 							</div>
@@ -150,23 +146,23 @@
 							<div class="row gx-3">
 								<div class="mb-3 col-md-4">
 									<label for="category" class="form-label"
-										>坪數</label
-									>
+										>建坪
+										<span class="form-text"> (坪) </span>
+									</label>
 									<input
 										type="number"
 										class="form-control"
 										id="category"
 										v-model.number="tempCase.squareFeet"
-										placeholder="請輸入坪數"
+										placeholder="請輸入建坪"
 									/>
 								</div>
 								<div class="mb-3 col-md-4">
 									<label for="price" class="form-label"
-										>單位 (坪)
-										<span class="text-danger"
-											>*</span
-										></label
-									>
+										>單位
+										<span class="form-text"> (坪) </span>
+										<span class="text-danger">*</span>
+									</label>
 									<input
 										type="text"
 										class="form-control"
@@ -177,8 +173,9 @@
 								</div>
 								<div class="mb-3 col-md-4">
 									<label for="houseAge" class="form-label"
-										>屋齡 (年)</label
-									>
+										>屋齡
+										<span class="form-text"> (年) </span>
+									</label>
 									<input
 										type="number"
 										class="form-control"
@@ -189,11 +186,14 @@
 								</div>
 							</div>
 							<hr />
-							<div class="row gx-2">
-								<div class="mb-3 col-md-6">
+							<div class="row gx-3">
+								<div class="mb-3 col-md-4">
 									<label for="floor" class="form-label"
-										>樓/樓</label
-									>
+										>樓/樓
+										<span class="form-text">
+											(公寓5↓, 華廈5-10, 大樓10↑)
+										</span>
+									</label>
 									<input
 										type="text"
 										class="form-control"
@@ -202,10 +202,13 @@
 										placeholder="請輸入樓層"
 									/>
 								</div>
-								<div class="mb-3 col-md-6">
+								<div class="mb-3 col-md-4">
 									<label for="pattern" class="form-label"
-										>格局 (房/廳/衛/室)</label
-									>
+										>格局
+										<span class="form-text">
+											(房/廳/衛/室)
+										</span>
+									</label>
 									<input
 										type="text"
 										class="form-control"
@@ -214,15 +217,26 @@
 										placeholder="請輸入格局 (房/廳/衛/室)"
 									/>
 								</div>
+								<div class="mb-3 col-md-4">
+									<label for="parking" class="form-label"
+										>車位
+									</label>
+									<input
+										type="text"
+										class="form-control"
+										id="parking"
+										v-model="tempCase.parking"
+										placeholder="請輸入車位"
+									/>
+								</div>
 							</div>
 							<div class="row gx-2">
 								<div class="mb-3 col-md-6">
 									<label for="origin_price" class="form-label"
-										>總價 (萬)
-										<span class="text-danger"
-											>*</span
-										></label
-									>
+										>總價
+										<span class="form-text"> (萬) </span>
+										<span class="text-danger">*</span>
+									</label>
 									<input
 										type="number"
 										class="form-control"
@@ -234,11 +248,10 @@
 								</div>
 								<div class="mb-3 col-md-6">
 									<label for="price" class="form-label"
-										>售價 (萬)
-										<span class="text-danger"
-											>*</span
-										></label
-									>
+										>售價
+										<span class="form-text"> (萬) </span>
+										<span class="text-danger">*</span>
+									</label>
 									<input
 										type="number"
 										class="form-control"
@@ -270,8 +283,8 @@
 							<div class="row">
 								<div class="mb-3">
 									<label for="tags" class="form-label"
-										>特色標籤</label
-									>
+										>物件特色
+									</label>
 									<input
 										class="form-control"
 										type="text"
@@ -280,7 +293,325 @@
 									/>
 								</div>
 							</div>
+							<div class="row">
+								<label for="" class="form-label fs-6"
+									>特色標籤</label
+								>
+								<div class="d-flex flex-wrap">
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="balcony"
+											class="btn-check"
+											value="有陽台"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="balcony"
+											class="btn btn-sm btn-outline-secondary"
+											>有陽台
+										</label>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="roomsHasWindow"
+											class="btn-check"
+											value="房間皆有窗"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="roomsHasWindow"
+											class="btn btn-sm btn-outline-secondary"
+											>房間皆有窗
+										</label>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="bathWindow"
+											class="btn-check"
+											value="廁所開窗"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="bathWindow"
+											class="btn btn-sm btn-outline-secondary"
+											>廁所開窗</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="security"
+											class="btn-check"
+											value="警衛管理"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="security"
+											class="btn btn-sm btn-outline-secondary"
+											>警衛管理</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="barrierFree"
+											class="btn-check"
+											value="無障礙空間"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="barrierFree"
+											class="btn btn-sm btn-outline-secondary"
+											>無障礙空間</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="handleGarbage"
+											class="btn-check"
+											value="具垃圾處理"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="handleGarbage"
+											class="btn btn-sm btn-outline-secondary"
+											>具垃圾處理</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="hasView"
+											class="btn-check"
+											value="有景觀"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="hasView"
+											class="btn btn-sm btn-outline-secondary"
+											>有景觀</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="garden"
+											class="btn-check"
+											value="花園"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="garden"
+											class="btn btn-sm btn-outline-secondary"
+											>花園</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="gym"
+											class="btn-check"
+											value="健身房"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="gym"
+											class="btn btn-sm btn-outline-secondary"
+											>健身房</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="swimmingPool"
+											class="btn-check"
+											value="游泳池"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="swimmingPool"
+											class="btn btn-sm btn-outline-secondary"
+											>游泳池</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="hasParking"
+											class="btn-check"
+											value="有車位"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="hasParking"
+											class="btn btn-sm btn-outline-secondary"
+											>有車位</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="decorate"
+											class="btn-check"
+											value="有裝潢"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="decorate"
+											class="btn btn-sm btn-outline-secondary"
+											>有裝潢</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="blankHouse"
+											class="btn-check"
+											value="毛胚屋"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="blankHouse"
+											class="btn btn-sm btn-outline-secondary"
+											>毛胚屋</label
+										>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<label for="" class="form-label fs-6"
+									>鄰近設施</label
+								>
+								<div class="d-flex">
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="metro"
+											class="btn-check"
+											value="近捷運"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="metro"
+											class="btn btn-sm btn-outline-secondary"
+											>近捷運</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="park"
+											class="btn-check"
+											value="近公園"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="park"
+											class="btn btn-sm btn-outline-secondary"
+											>近公園</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="market"
+											class="btn-check"
+											value="近市場"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="market"
+											class="btn btn-sm btn-outline-secondary"
+											>近市場</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="school"
+											class="btn-check"
+											value="近學校"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="school"
+											class="btn btn-sm btn-outline-secondary"
+											>近學校</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="department"
+											class="btn-check"
+											value="近商圈"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="department"
+											class="btn btn-sm btn-outline-secondary"
+											>近商圈</label
+										>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<label for="" class="form-label fs-6"
+									>物件狀況</label
+								>
+								<div class="d-flex">
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="new"
+											class="btn-check"
+											value="新上架"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="new"
+											class="btn btn-sm btn-outline-secondary"
+											>新上架</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="lowPrice"
+											class="btn-check"
+											value="低總價"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="lowPrice"
+											class="btn btn-sm btn-outline-secondary"
+											>低總價</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="hottest"
+											class="btn-check"
+											value="店長推薦"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="hottest"
+											class="btn btn-sm btn-outline-secondary"
+											>店長推薦</label
+										>
+									</div>
+								</div>
+							</div>
 							<div class="mb-3">
+								<label for="" class="form-label"
+									>顯示狀況</label
+								>
 								<div class="form-check form-switch">
 									<input
 										class="form-check-input"
@@ -351,6 +682,7 @@ export default {
 			modal: "",
 			tempCase: {
 				category: "",
+				tags: [],
 			},
 		};
 	},
@@ -376,7 +708,7 @@ export default {
 			this.status.fileUploading = true;
 			this.$http
 				.post(
-					`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/upload`,
+					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/upload`,
 					formData,
 					{
 						headers: {
