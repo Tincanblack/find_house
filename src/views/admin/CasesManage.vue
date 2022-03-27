@@ -126,7 +126,6 @@ export default {
 				this.isNew = true;
 			} else {
 				this.tempCase = { ...item };
-				this.tempCase.tags = [];
 				this.isNew = false;
 			}
 			const caseComponent = this.$refs.caseModal;
