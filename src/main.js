@@ -10,7 +10,11 @@ import VueAxios from "vue-axios";
 import Loading from "vue3-loading-overlay";
 import "vue3-loading-overlay/dist/vue3-loading-overlay.css";
 // user
-import { currency } from "@/methods/formatUnit";
+import {
+	currencyFormat,
+	patternFormat,
+	priceDiscount,
+} from "@/methods/formatUnit";
 import $httpMessageState from "@/methods/updateMessageState";
 import App from "./App.vue";
 import router from "./router";
@@ -18,7 +22,9 @@ import router from "./router";
 const app = createApp(App);
 
 app.config.globalProperties.$formatUnit = {
-	currency,
+	currencyFormat,
+	patternFormat,
+	priceDiscount,
 };
 
 // 將 $httpMessageState 加入全域下

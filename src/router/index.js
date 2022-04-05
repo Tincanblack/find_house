@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 const routes = [
 	{
 		path: "/login",
-		component: () => import("@/views/LoginView.vue"),
+		component: () => import("@/views/Login.vue"),
 	},
 	// admin
 	{
@@ -35,7 +35,27 @@ const routes = [
 		children: [
 			{
 				path: "",
-				component: () => import("@/views/HomeView.vue"),
+				component: () => import("@/views/Home.vue"),
+			},
+			{
+				path: "about",
+				component: () => import("@/views/About.vue"),
+			},
+			{
+				path: "cases",
+				component: () => import("@/views/Cases.vue"),
+			},
+			{
+				path: "case/:id",
+				component: () => import("@/views/Case.vue"),
+			},
+			{
+				path: "news",
+				component: () => import("@/views/News.vue"),
+			},
+			{
+				path: "reserves",
+				component: () => import("@/views/Reserves.vue"),
 			},
 		],
 	},

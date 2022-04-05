@@ -39,7 +39,7 @@
 						{{ item.title }}
 					</td>
 					<td class="text-end">
-						{{ $formatUnit.currency(item.origin_price) }}
+						{{ $formatUnit.currencyFormat(item.origin_price) }}
 					</td>
 					<td
 						class="text-end"
@@ -47,7 +47,7 @@
 							'text-danger': item.origin_price > item.price,
 						}"
 					>
-						{{ $formatUnit.currency(item.price) }}
+						{{ $formatUnit.currencyFormat(item.price) }}
 					</td>
 					<td>
 						<span class="text-success" v-if="item.is_enabled === 1"
@@ -122,6 +122,7 @@ export default {
 					category: "",
 					unit: "坪",
 					is_enabled: 1,
+					tags: [],
 				};
 				this.isNew = true;
 			} else {

@@ -46,7 +46,21 @@
 								/>
 							</div>
 							<img class="img-fluid" :src="tempCase.imageUrl" />
-							<div class="mt-5" v-if="tempCase.imagesUrl">
+							<div v-if="tempCase.imagesUrl">
+								<div
+									v-if="
+										tempCase.imagesUrl[
+											tempCase.imagesUrl.length - 1
+										] || !tempCase.imagesUrl.length
+									"
+								>
+									<button
+										class="btn btn-outline-primary btn-sm d-block w-100 my-3"
+										@click="tempCase.imagesUrl.push('')"
+									>
+										新增圖片
+									</button>
+								</div>
 								<div
 									v-for="(image, key) in tempCase.imagesUrl"
 									class="mb-3"
@@ -54,7 +68,7 @@
 								>
 									<input
 										type="url"
-										class="form-control form-control"
+										class="form-control form-control my-3"
 										v-model="tempCase.imagesUrl[key]"
 										placeholder="請輸入連結"
 									/>
@@ -69,20 +83,6 @@
 										"
 									>
 										移除
-									</button>
-								</div>
-								<div
-									v-if="
-										tempCase.imagesUrl[
-											tempCase.imagesUrl.length - 1
-										] || !tempCase.imagesUrl.length
-									"
-								>
-									<button
-										class="btn btn-outline-primary btn-sm d-block w-100"
-										@click="tempCase.imagesUrl.push('')"
-									>
-										新增圖片
 									</button>
 								</div>
 							</div>
@@ -280,7 +280,7 @@
 									></textarea>
 								</div>
 							</div>
-							<div class="row">
+							<!-- <div class="row">
 								<div class="mb-3">
 									<label for="tags" class="form-label"
 										>物件特色
@@ -292,12 +292,40 @@
 										v-model.trim="tempCase.tags"
 									/>
 								</div>
-							</div>
+							</div> -->
 							<div class="row">
 								<label for="" class="form-label fs-6"
 									>特色標籤</label
 								>
 								<div class="d-flex flex-wrap">
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="decorate"
+											class="btn-check"
+											value="有裝潢"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="decorate"
+											class="btn btn-sm btn-outline-secondary"
+											>有裝潢</label
+										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="hasView"
+											class="btn-check"
+											value="有景觀"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="hasView"
+											class="btn btn-sm btn-outline-secondary"
+											>有景觀</label
+										>
+									</div>
 									<div class="me-1 mb-1">
 										<input
 											type="checkbox"
@@ -315,20 +343,6 @@
 									<div class="me-1 mb-1">
 										<input
 											type="checkbox"
-											id="roomsHasWindow"
-											class="btn-check"
-											value="房間皆有窗"
-											v-model="tempCase.tags"
-										/>
-										<label
-											for="roomsHasWindow"
-											class="btn btn-sm btn-outline-secondary"
-											>房間皆有窗
-										</label>
-									</div>
-									<div class="me-1 mb-1">
-										<input
-											type="checkbox"
 											id="bathWindow"
 											class="btn-check"
 											value="廁所開窗"
@@ -339,6 +353,20 @@
 											class="btn btn-sm btn-outline-secondary"
 											>廁所開窗</label
 										>
+									</div>
+									<div class="me-1 mb-1">
+										<input
+											type="checkbox"
+											id="roomsHasWindow"
+											class="btn-check"
+											value="房間皆有窗"
+											v-model="tempCase.tags"
+										/>
+										<label
+											for="roomsHasWindow"
+											class="btn btn-sm btn-outline-secondary"
+											>房間皆有窗
+										</label>
 									</div>
 									<div class="me-1 mb-1">
 										<input
@@ -385,15 +413,15 @@
 									<div class="me-1 mb-1">
 										<input
 											type="checkbox"
-											id="hasView"
+											id="gym"
 											class="btn-check"
-											value="有景觀"
+											value="健身房"
 											v-model="tempCase.tags"
 										/>
 										<label
-											for="hasView"
+											for="gym"
 											class="btn btn-sm btn-outline-secondary"
-											>有景觀</label
+											>健身房</label
 										>
 									</div>
 									<div class="me-1 mb-1">
@@ -408,20 +436,6 @@
 											for="garden"
 											class="btn btn-sm btn-outline-secondary"
 											>花園</label
-										>
-									</div>
-									<div class="me-1 mb-1">
-										<input
-											type="checkbox"
-											id="gym"
-											class="btn-check"
-											value="健身房"
-											v-model="tempCase.tags"
-										/>
-										<label
-											for="gym"
-											class="btn btn-sm btn-outline-secondary"
-											>健身房</label
 										>
 									</div>
 									<div class="me-1 mb-1">
@@ -450,20 +464,6 @@
 											for="hasParking"
 											class="btn btn-sm btn-outline-secondary"
 											>有車位</label
-										>
-									</div>
-									<div class="me-1 mb-1">
-										<input
-											type="checkbox"
-											id="decorate"
-											class="btn-check"
-											value="有裝潢"
-											v-model="tempCase.tags"
-										/>
-										<label
-											for="decorate"
-											class="btn btn-sm btn-outline-secondary"
-											>有裝潢</label
 										>
 									</div>
 									<div class="me-1 mb-1">

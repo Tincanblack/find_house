@@ -1,12 +1,15 @@
 <template lang="">
-	<!-- <FrontNav></FrontNav> -->
+	<FrontNav></FrontNav>
 	<router-view></router-view>
+	<Footer></Footer>
 </template>
 <script>
-// import FrontNav from "@/components/FrontNav.vue";
+import FrontNav from "@/components/FrontNav";
+import Footer from "@/views/Footer";
 export default {
 	components: {
-		// FrontNav,
+		FrontNav,
+		Footer,
 	},
 };
 </script>

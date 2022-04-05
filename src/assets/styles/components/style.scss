@@ -1,3 +1,5 @@
+@import "_var";
+
 main {
 	display: flex;
 	flex-wrap: nowrap;
@@ -6,6 +8,77 @@ main {
 	max-height: 100vh;
 	overflow-x: auto;
 	overflow-y: hidden;
+}
+
+// nav
+.navbar {
+	transition: all 0.5s;
+	&-nav {
+		.nav {
+			&-link {
+				padding-right: 0 !important;
+				padding-left: 0 !important;
+				position: relative;
+				display: inline-block;
+				line-height: 25px;
+				letter-spacing: 2px;
+				&::before {
+					content: "";
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					width: 0;
+					height: 2px;
+					background: $color-main;
+					transition: all 0.5s;
+				}
+				&:hover {
+					color: $color-main !important;
+					&::before {
+						width: 100%;
+					}
+				}
+			}
+			&-item {
+				padding: 0 0.5rem;
+			}
+		}
+	}
+}
+
+// card
+.card {
+	&-image {
+		position: relative;
+	}
+	&-tag {
+		position: absolute;
+		top: 0;
+		left: 0;
+		padding: .5rem;
+		width: 100%;
+		line-height: 1;
+		&__tag {
+			display: inline-block;
+			background: $color-main;
+		}
+	}
+	&-text {
+		&__item {
+			display: inline-block;
+			&::after {
+				display: inline-block;
+				content: '|';
+				color: black;
+				margin: 0 .25rem;
+			}
+			&:last-child {
+				&::after {
+					display: none;
+				}
+			}
+		}
+	}
 }
 
 // login
