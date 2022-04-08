@@ -14,13 +14,103 @@
 			><img src="https://via.placeholder.com/1920x750" alt="" />
 		</swiper-slide>
 	</swiper>
-	<section class="index-category py-5"></section>
+	<!-- <section class="inx-feature text-center py-5 d-none d-lg-block">
+		<div class="container">
+			<h2 class="mb-5">想要找什麼樣類型的房子?</h2>
+			<div class="row">
+				<div class="col-lg-3">
+					<router-link class="text-dark text-decoration-none" to="">
+						<svg
+							class="bd-placeholder-img rounded-circle"
+							width="140"
+							height="140"
+							xmlns="http://www.w3.org/2000/svg"
+							role="img"
+							aria-label="Placeholder: 140x140"
+							preserveAspectRatio="xMidYMid slice"
+							focusable="false"
+						>
+							<title>Placeholder</title>
+							<rect width="100%" height="100%" fill="#777"></rect>
+							<text x="50%" y="50%" fill="#777" dy=".3em">
+								140x140
+							</text>
+						</svg>
+						<h6 class="mt-3">公寓</h6>
+					</router-link>
+				</div>
+				<div class="col-lg-3">
+					<router-link class="text-dark text-decoration-none" to="">
+						<svg
+							class="bd-placeholder-img rounded-circle"
+							width="140"
+							height="140"
+							xmlns="http://www.w3.org/2000/svg"
+							role="img"
+							aria-label="Placeholder: 140x140"
+							preserveAspectRatio="xMidYMid slice"
+							focusable="false"
+						>
+							<title>Placeholder</title>
+							<rect width="100%" height="100%" fill="#777"></rect>
+							<text x="50%" y="50%" fill="#777" dy=".3em">
+								140x140
+							</text>
+						</svg>
+						<h6 class="mt-3">別墅</h6>
+					</router-link>
+				</div>
+				<div class="col-lg-3">
+					<router-link class="text-dark text-decoration-none" to="">
+						<svg
+							class="bd-placeholder-img rounded-circle"
+							width="140"
+							height="140"
+							xmlns="http://www.w3.org/2000/svg"
+							role="img"
+							aria-label="Placeholder: 140x140"
+							preserveAspectRatio="xMidYMid slice"
+							focusable="false"
+						>
+							<title>Placeholder</title>
+							<rect width="100%" height="100%" fill="#777"></rect>
+							<text x="50%" y="50%" fill="#777" dy=".3em">
+								140x140
+							</text>
+						</svg>
+						<h6 class="mt-3">華廈</h6>
+					</router-link>
+				</div>
+				<div class="col-lg-3">
+					<router-link class="text-dark text-decoration-none" to="">
+						<svg
+							class="bd-placeholder-img rounded-circle"
+							width="140"
+							height="140"
+							xmlns="http://www.w3.org/2000/svg"
+							role="img"
+							aria-label="Placeholder: 140x140"
+							preserveAspectRatio="xMidYMid slice"
+							focusable="false"
+						>
+							<title>Placeholder</title>
+							<rect width="100%" height="100%" fill="#777"></rect>
+							<text x="50%" y="50%" fill="#777" dy=".3em">
+								140x140
+							</text>
+						</svg>
+						<h6 class="mt-3">大樓</h6>
+					</router-link>
+				</div>
+			</div>
+		</div>
+	</section> -->
 	<section class="index-cases py-5">
 		<div class="container">
-			<div class="row row-cols-1 row-cols-md-4 g-3">
+			<div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-2">
 				<div class="col" v-for="item in cases" :key="item.id">
 					<router-link
-						class="card text-decoration-none rounded-0"
+						class="card text-decoration-none rounded-0 text-dark"
 						:to="`/case/${item.id}`"
 					>
 						<div class="card-image">
@@ -37,7 +127,12 @@
 										)
 									}}
 								</span>
-								<span v-if="item.tags"></span>
+								<span
+									class="badge card-tag__tag"
+									v-for="(tag, index) in filterTags"
+									:key="index"
+									>{{ tag }}</span
+								>
 							</div>
 							<img
 								class="img-fluid"
@@ -46,21 +141,17 @@
 							/>
 						</div>
 						<div class="card-body">
-							<h5 class="card-title text-dark">
+							<h5 class="card-title text-center text-truncate">
 								{{ item.title }}
 							</h5>
-							<h6 class="card-subtitle mb-2 text-secondary">
-								{{ item.description }}
-							</h6>
-							<p class="card-text">
+							<p class="card-text text-center fs-6">
 								<span class="card-text__item"
-									>建坪 {{ item.squareFeet }}</span
+									>建坪<small>{{
+										item.squareFeet
+									}}</small></span
 								>
-								<span class="card-text__item">{{
-									item.pattern
-								}}</span>
 								<span class="card-text__item"
-									>{{ item.houseAge }}年</span
+									><small>{{ item.pattern }}</small></span
 								>
 							</p>
 						</div>
@@ -80,7 +171,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="index-news py-5">
+	<!-- <section class="index-news py-5">
 		<div class="container">
 			<div class="row row-cols-1 row-cols-md-2 g-3">
 				<div class="col">
@@ -117,7 +208,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 </template>
 <script>
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -140,6 +231,7 @@ export default {
 				.get(url)
 				.then((res) => {
 					this.cases = res.data.products;
+					console.log(this.cases);
 				})
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");
@@ -147,8 +239,16 @@ export default {
 		},
 	},
 	computed: {
-		tagsInArray(array) {
-			return this.array.includes(array);
+		filterTags() {
+			return this.cases.forEach((item) => {
+				item.tags = item.tags.filter((tag) => {
+					return (
+						tag === "新上架" ||
+						tag === "低總價" ||
+						tag === "店長推薦"
+					);
+				});
+			});
 		},
 	},
 	mounted() {

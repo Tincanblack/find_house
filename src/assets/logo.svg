@@ -6,14 +6,14 @@
 <g>
 	<g>
 		
-			<path fill="#D02926" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			<path fill="#ED1B00" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
 			M42.804,44.368v11.296c4.765,0,22.281-8.95,16.81-23.181c-5.55-14.437-20.236-8.673-20.236-8.673
 			c5.461-4.657-0.054-20.986-14.562-20.986S7.83,19.361,6.989,27.718c-0.857,8.512,3.104,21.949,3.64,23.93
 			c0.536,1.98,1.927,2.034,1.927,2.034l8.994,1.981V44.368H42.804z"/>
-		<path fill="#54B888" stroke="#FFFFFF" stroke-width="2.1016" stroke-linejoin="round" stroke-miterlimit="10" d="M32.235,44.368
+		<path fill="#089ABC" stroke="#FFFFFF" stroke-width="2.1016" stroke-linejoin="round" stroke-miterlimit="10" d="M32.235,44.368
 			c0,0,10.6,0,13.009,0c2.239,0,0.5-1.734,0.5-1.734L32.235,27.719L18.726,42.634c0,0-1.74,1.734,0.5,1.734
 			C21.635,44.368,32.235,44.368,32.235,44.368z"/>
-		<polygon fill="#54B888" stroke="#FFFFFF" stroke-width="2.1016" stroke-linejoin="round" stroke-miterlimit="10" points="
+		<polygon fill="#54b788" stroke="#FFFFFF" stroke-width="2.1016" stroke-linejoin="round" stroke-miterlimit="10" points="
 			22.193,38.807 22.193,27.669 29.045,27.669 29.045,31.24 25.269,35.41 		"/>
 	</g>
 	<g>

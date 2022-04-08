@@ -48,6 +48,12 @@ main {
 
 // card
 .card {
+	overflow: hidden;
+	transition: all .5s;
+	&:hover {
+		transform: translate3d(0,-3px,0);
+		box-shadow: 0 3px 8px rgb(0 0 0 / 20%);
+	}
 	&-image {
 		position: relative;
 	}
@@ -58,9 +64,16 @@ main {
 		padding: .5rem;
 		width: 100%;
 		line-height: 1;
+		z-index: 1;
 		&__tag {
 			display: inline-block;
-			background: $color-main;
+			background: $color-sec;
+			margin-right: .25rem;
+			margin-bottom: .25rem;
+			&:last-child {
+				margin-right: 0;
+				margin-bottom: 0;
+			}
 		}
 	}
 	&-text {
@@ -69,7 +82,7 @@ main {
 			&::after {
 				display: inline-block;
 				content: '|';
-				color: black;
+				color: map-get($grays, "300");
 				margin: 0 .25rem;
 			}
 			&:last-child {
@@ -78,6 +91,10 @@ main {
 				}
 			}
 		}
+	}
+	&-title {
+		padding-bottom: .5rem;
+		border-bottom: 2px solid $color-main;
 	}
 }
 
