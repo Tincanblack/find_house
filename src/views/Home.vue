@@ -1,110 +1,101 @@
 <template lang="">
-	<swiper :slides-per-view="1" :space-between="50">
+	<swiper
+		effect="fade"
+		:slides-per-view="1"
+		:loop="true"
+		:modules="modules"
+		:autoplay="{
+			delay: 3000,
+			stopOnLastSlide: false,
+			disableOnInteraction: false,
+			pauseOnMouseEnter: true,
+		}"
+	>
 		<swiper-slide
 			><img
 				class="img-fluid"
-				src="https://via.placeholder.com/1920x750"
+				src="https://via.placeholder.com/1920x750?text=1"
 				alt=""
 			/>
 		</swiper-slide>
 		<swiper-slide
-			><img src="https://via.placeholder.com/1920x750" alt="" />
+			><img
+				class="img-fluid"
+				src="https://via.placeholder.com/1920x750?text=2"
+				alt=""
+			/>
 		</swiper-slide>
 		<swiper-slide
-			><img src="https://via.placeholder.com/1920x750" alt="" />
+			><img
+				class="img-fluid"
+				src="https://via.placeholder.com/1920x750?text=3"
+				alt=""
+			/>
 		</swiper-slide>
 	</swiper>
-	<!-- <section class="inx-feature text-center py-5 d-none d-lg-block">
+	<section class="inxdex-feature text-center py-5 d-none d-lg-block bg-light">
 		<div class="container">
-			<h2 class="mb-5">想要找什麼樣類型的房子?</h2>
+			<h2 class="mb-3">想要找什麼樣類型的房子?</h2>
 			<div class="row">
 				<div class="col-lg-3">
-					<router-link class="text-dark text-decoration-none" to="">
-						<svg
-							class="bd-placeholder-img rounded-circle"
-							width="140"
-							height="140"
-							xmlns="http://www.w3.org/2000/svg"
-							role="img"
-							aria-label="Placeholder: 140x140"
-							preserveAspectRatio="xMidYMid slice"
-							focusable="false"
-						>
-							<title>Placeholder</title>
-							<rect width="100%" height="100%" fill="#777"></rect>
-							<text x="50%" y="50%" fill="#777" dy=".3em">
-								140x140
-							</text>
-						</svg>
-						<h6 class="mt-3">公寓</h6>
+					<router-link
+						class="index-feature-card text-dark text-decoration-none"
+						to=""
+					>
+						<div class="index-feature-image shadow-sm">
+							<img
+								src="https://via.placeholder.com/125x125"
+								alt=""
+							/>
+							<h5 class="index-feature-card__title">公寓</h5>
+						</div>
 					</router-link>
 				</div>
 				<div class="col-lg-3">
-					<router-link class="text-dark text-decoration-none" to="">
-						<svg
-							class="bd-placeholder-img rounded-circle"
-							width="140"
-							height="140"
-							xmlns="http://www.w3.org/2000/svg"
-							role="img"
-							aria-label="Placeholder: 140x140"
-							preserveAspectRatio="xMidYMid slice"
-							focusable="false"
-						>
-							<title>Placeholder</title>
-							<rect width="100%" height="100%" fill="#777"></rect>
-							<text x="50%" y="50%" fill="#777" dy=".3em">
-								140x140
-							</text>
-						</svg>
-						<h6 class="mt-3">別墅</h6>
+					<router-link
+						class="index-feature-card text-dark text-decoration-none"
+						to=""
+					>
+						<div class="index-feature-image shadow-sm">
+							<img
+								src="https://via.placeholder.com/125x125"
+								alt=""
+							/>
+							<h5 class="index-feature-card__title">別墅</h5>
+						</div>
 					</router-link>
 				</div>
 				<div class="col-lg-3">
-					<router-link class="text-dark text-decoration-none" to="">
-						<svg
-							class="bd-placeholder-img rounded-circle"
-							width="140"
-							height="140"
-							xmlns="http://www.w3.org/2000/svg"
-							role="img"
-							aria-label="Placeholder: 140x140"
-							preserveAspectRatio="xMidYMid slice"
-							focusable="false"
-						>
-							<title>Placeholder</title>
-							<rect width="100%" height="100%" fill="#777"></rect>
-							<text x="50%" y="50%" fill="#777" dy=".3em">
-								140x140
-							</text>
-						</svg>
-						<h6 class="mt-3">華廈</h6>
+					<router-link
+						class="index-feature-card text-dark text-decoration-none"
+						to=""
+					>
+						<div class="index-feature-image shadow-sm">
+							<img
+								src="https://via.placeholder.com/125x125"
+								alt=""
+							/>
+							<h5 class="index-feature-card__title">華廈</h5>
+						</div>
 					</router-link>
 				</div>
 				<div class="col-lg-3">
-					<router-link class="text-dark text-decoration-none" to="">
-						<svg
-							class="bd-placeholder-img rounded-circle"
-							width="140"
-							height="140"
-							xmlns="http://www.w3.org/2000/svg"
-							role="img"
-							aria-label="Placeholder: 140x140"
-							preserveAspectRatio="xMidYMid slice"
-							focusable="false"
-						>
-							<title>Placeholder</title>
-							<rect width="100%" height="100%" fill="#777"></rect>
-							<text x="50%" y="50%" fill="#777" dy=".3em">
-								140x140
-							</text>
-						</svg>
-						<h6 class="mt-3">大樓</h6>
+					<router-link
+						class="index-feature-card text-dark text-decoration-none"
+						to=""
+					>
+						<div class="index-feature-image shadow-sm">
+							<img
+								src="https://via.placeholder.com/125x125"
+								alt=""
+							/>
+							<h5 class="index-feature-card__title">大樓</h5>
+						</div>
 					</router-link>
 				</div>
 			</div>
 		</div>
-	</section> -->
+	</section>
 	<section class="index-cases py-5">
 		<div class="container">
 			<div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-2">
@@ -115,24 +106,48 @@
 					>
 						<div class="card-image">
 							<div class="card-tag">
-								<span
+								<div
+									class="card-tag-block"
 									v-if="item.origin_price !== item.price"
-									class="badge card-tag__tag"
 								>
-									<i class="bi bi-arrow-down"></i>
-									{{
-										$formatUnit.priceDiscount(
-											item.origin_price,
-											item.price
-										)
-									}}
-								</span>
-								<span
-									class="badge card-tag__tag"
-									v-for="(tag, index) in filterTags"
-									:key="index"
-									>{{ tag }}</span
+									<span
+										class="badge card-tag__tag card-tag__tag--discount"
+									>
+										<i class="bi bi-arrow-down"></i>
+										{{
+											$formatUnit.priceDiscount(
+												item.origin_price,
+												item.price
+											)
+										}}
+									</span>
+								</div>
+								<div
+									class="card-tag-block"
+									v-for="tag in filterTags(item)"
+									:key="tag"
 								>
+									<span
+										class="badge card-tag__tag"
+										:class="{
+											'card-tag__tag--new':
+												tag === '新上架',
+											'card-tag__tag--low':
+												tag === '低總價',
+											'card-tag__tag--recommend':
+												tag === '店長推薦',
+										}"
+										>{{ tag }}</span
+									>
+								</div>
+							</div>
+							<div class="card-price">
+								<div class="card-price__price">
+									{{ $formatUnit.currencyFormat(item.price) }}
+									<span class="card-price__price-unit"
+										>萬</span
+									>
+								</div>
 							</div>
 							<img
 								class="img-fluid"
@@ -141,18 +156,20 @@
 							/>
 						</div>
 						<div class="card-body">
-							<h5 class="card-title text-center text-truncate">
+							<h5
+								class="card-title text-center text-truncate fw-bold"
+							>
 								{{ item.title }}
 							</h5>
 							<p class="card-text text-center fs-6">
 								<span class="card-text__item"
-									>建坪<small>{{
-										item.squareFeet
-									}}</small></span
+									>建坪
+									<small>{{ item.squareFeet }}</small></span
 								>
-								<span class="card-text__item"
-									><small>{{ item.pattern }}</small></span
-								>
+								<span class="card-text__item">
+									<!-- <small>{{ $formatUnit.patternFormat(item.pattern) }}</small> -->
+									<small>{{ item.pattern }}</small>
+								</span>
 							</p>
 						</div>
 					</router-link>
@@ -160,18 +177,19 @@
 			</div>
 			<div class="row">
 				<div class="col">
-					<div class="text-center py-5">
+					<div class="index-cases-footer text-center py-5">
 						<router-link
-							class="btn btn-primary text-decoration-none"
+							class="cases-footer__button btn btn-outline-primary w-25 text-decoration-none"
 							to="/cases"
-							>查看更多案件</router-link
+							>查看更多</router-link
 						>
+						<button class="btn btn-secondary">123</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<!-- <section class="index-news py-5">
+	<section class="index-news py-5">
 		<div class="container">
 			<div class="row row-cols-1 row-cols-md-2 g-3">
 				<div class="col">
@@ -208,11 +226,13 @@
 				</div>
 			</div>
 		</div>
-	</section> -->
+	</section>
 </template>
 <script>
+import { EffectFade, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
+import "swiper/css/bundle";
 
 export default {
 	components: {
@@ -222,6 +242,7 @@ export default {
 	data() {
 		return {
 			cases: [],
+			modules: [EffectFade, Autoplay],
 		};
 	},
 	methods: {
@@ -231,24 +252,18 @@ export default {
 				.get(url)
 				.then((res) => {
 					this.cases = res.data.products;
-					console.log(this.cases);
 				})
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");
 				});
 		},
-	},
-	computed: {
-		filterTags() {
-			return this.cases.forEach((item) => {
-				item.tags = item.tags.filter((tag) => {
-					return (
-						tag === "新上架" ||
-						tag === "低總價" ||
-						tag === "店長推薦"
-					);
-				});
+		filterTags(caseItem) {
+			const filteredTags = caseItem.tags.filter((tag) => {
+				return (
+					tag === "新上架" || tag === "低總價" || tag === "店長推薦"
+				);
 			});
+			return filteredTags;
 		},
 	},
 	mounted() {

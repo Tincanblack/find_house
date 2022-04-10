@@ -1,12 +1,19 @@
 export function currencyFormat(num) {
 	const parts = num.toString().split(".");
 	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	return `${parts.join(".")}萬`;
+	return `${parts.join(".")}`;
 }
 
-export function patternFormat(pattern) {
-	const parts = pattern.toString().split("/");
-	return parts;
+export function patternFormat(patterns) {
+	const formatPatternVal = patterns.toString().split("/");
+	let result;
+	formatPatternVal.forEach((pattern) => {
+		const patternName = ["房", "廳", "衛", "室"];
+		patternName.forEach((name) => {
+			result += pattern.join(name);
+		});
+	});
+	return result;
 }
 
 export function priceDiscount(originPrice, currentPrice) {
