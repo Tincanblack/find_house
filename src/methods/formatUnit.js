@@ -5,13 +5,13 @@ export function currencyFormat(num) {
 }
 
 export function patternFormat(patterns) {
-	const formatPatternVal = patterns.toString().split("/");
-	let result;
-	formatPatternVal.forEach((pattern) => {
+	const patternsCount = patterns.toString().split("/");
+	let result = "";
+	patternsCount.forEach((patternCount, index) => {
 		const patternName = ["房", "廳", "衛", "室"];
-		patternName.forEach((name) => {
-			result += pattern.join(name);
-		});
+		if (patternCount > 0) {
+			result += patternCount + patternName[index];
+		}
 	});
 	return result;
 }
