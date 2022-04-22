@@ -1,6 +1,6 @@
 <template lang="">
 	<swiper
-		effect="fade"
+		:effect="'fade'"
 		:slides-per-view="1"
 		:loop="true"
 		:modules="modules"
@@ -33,9 +33,9 @@
 			/>
 		</swiper-slide>
 	</swiper>
-	<section class="inxdex-feature text-center py-5 d-none d-lg-block bg-light">
+	<section class="index-feature text-center py-5 d-none d-lg-block bg-light">
 		<div class="container">
-			<h2 class="mb-3">想要找什麼樣類型的房子?</h2>
+			<h2 class="mb-5">想要找什麼樣類型的房子?</h2>
 			<div class="row">
 				<div class="col-lg-3">
 					<router-link
@@ -101,17 +101,18 @@
 			<div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-2">
 				<div class="col" v-for="item in cases" :key="item.id">
 					<router-link
-						class="card text-decoration-none rounded-0 text-dark"
+						class="card index-cases-card text-decoration-none rounded-0 text-dark"
 						:to="`/case/${item.id}`"
 					>
 						<div class="card-image">
 							<div class="card-tag">
 								<div
-									class="card-tag-block"
+									class="tag"
 									v-if="item.origin_price !== item.price"
 								>
 									<span
-										class="badge card-tag__tag card-tag__tag--discount"
+										v-if="item.origin_price && item.price"
+										class="badge tag__element--discount"
 									>
 										<i class="bi bi-arrow-down"></i>
 										{{
@@ -123,18 +124,18 @@
 									</span>
 								</div>
 								<div
-									class="card-tag-block"
+									class="tag"
 									v-for="tag in filterTags(item)"
 									:key="tag"
 								>
 									<span
-										class="badge card-tag__tag"
+										class="badge tag__element"
 										:class="{
-											'card-tag__tag--new':
+											'tag__element--new':
 												tag === '新上架',
-											'card-tag__tag--low':
+											'tag__element--low':
 												tag === '低總價',
-											'card-tag__tag--recommend':
+											'tag__element--recommend':
 												tag === '店長推薦',
 										}"
 										>{{ tag }}</span
@@ -142,12 +143,26 @@
 								</div>
 							</div>
 							<div class="card-price">
-								<div class="card-price__price">
+								<span
+									class="card-price__price card-price__price--selling"
+								>
 									{{ $formatUnit.currencyFormat(item.price) }}
 									<span class="card-price__price-unit"
 										>萬</span
 									>
-								</div>
+								</span>
+								<small
+									v-if="item.origin_price !== item.price"
+									class="card-price__price card-price__price--origin fs-6"
+									><del
+										>{{
+											$formatUnit.currencyFormat(
+												item.origin_price
+											)
+										}}
+										萬</del
+									></small
+								>
 							</div>
 							<img
 								class="img-fluid"
@@ -162,13 +177,21 @@
 								{{ item.title }}
 							</h5>
 							<p class="card-text text-center fs-6">
-								<span class="card-text__item"
-									>建坪
-									<small>{{ item.squareFeet }}</small></span
+								<span class="card-text__item">
+									<small
+										>建坪 {{ item.squareFeet }}坪</small
+									></span
 								>
 								<span class="card-text__item">
-									<!-- <small>{{ $formatUnit.patternFormat(item.pattern) }}</small> -->
-									<small>{{ item.pattern }}</small>
+									<small>{{
+										$formatUnit.patternFormat(item.pattern)
+									}}</small>
+								</span>
+								<span class="card-text__item">
+									<small v-if="item.houseAge !== ''">
+										{{ item.houseAge }}年</small
+									>
+									<small v-else>預售</small>
 								</span>
 							</p>
 						</div>
@@ -177,13 +200,12 @@
 			</div>
 			<div class="row">
 				<div class="col">
-					<div class="index-cases-footer text-center py-5">
+					<div class="index-cases-footer text-center py-4">
 						<router-link
-							class="cases-footer__button btn btn-outline-primary w-25 text-decoration-none"
+							class="cases-footer__button btn btn-outline-primary w-25 rounded-0"
 							to="/cases"
 							>查看更多</router-link
 						>
-						<button class="btn btn-secondary">123</button>
 					</div>
 				</div>
 			</div>

@@ -1,4 +1,4 @@
-export function currencyFormat(num) {
+export function currencyFormat(num = 0) {
 	const parts = num.toString().split(".");
 	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	return `${parts.join(".")}`;
@@ -16,7 +16,7 @@ export function patternFormat(patterns) {
 	return result;
 }
 
-export function priceDiscount(originPrice, currentPrice) {
+export function priceDiscount(originPrice = 0, currentPrice = 0) {
 	var result = ((originPrice - currentPrice) / originPrice) * 100;
 	return result.toFixed(2) + "%";
 }
