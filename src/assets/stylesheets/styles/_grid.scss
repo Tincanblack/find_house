@@ -1,0 +1,92 @@
+// clearfix
+%clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+// grid system
+@mixin grid($col-number,$col-gutter) {
+    width: ($width - $col-gutter*($col-number - 1) ) / $col-number;
+    margin-right: $col-gutter;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+        &:nth-child(#{$col-number}n) {
+        margin-right: 0;
+    }
+}
+
+@mixin col($col, $sum) {
+	width: 100%;
+	display: inline-block;
+	box-sizing: border-box;
+	@media only screen and (min-width: 750px) {
+		width: percentage($col/$sum);
+	}
+}
+
+// 桌機 ↑
+@mixin desktop() {
+	@media all and (min-width: $desktop-width) {
+		@content;
+	}
+}
+
+// 筆電 ↑ 桌機 ↓
+@mixin laptop2desktop() {
+	@media all and (min-width: $laptop-width) and (max-width: ($desktop-width - 1)) {
+		@content;
+	}
+}
+
+// 筆電 ↓
+@mixin laptop {
+	@media all and (max-width: $laptop-width) {
+		@content;
+	}
+}
+
+// 大平板 ↑ 筆電 ↓
+@mixin padWide2laptop() {
+	@media all and (min-width: $pad-large-width) and (max-width: ($laptop-width - 1)) {
+		@content;
+	}
+}
+
+// 大平板 ↓
+@mixin padWide {
+	@media all and (max-width: $pad-large-width) {
+		@content;
+	}
+}
+
+// 平板 ↑ 大平板 ↓
+@mixin pad2padWide() {
+	@media all and (min-width: $pad-width) and (max-width: ($pad-large-width - 1)) {
+		@content;
+	}
+}
+
+// 平板 ↓
+@mixin pad {
+	@media all and (max-width: $pad-width) {
+		@content;
+	}
+}
+
+//  手機 ↑ 平板 ↓
+@mixin mobile2pad {
+	@media all and (min-width: $mobile-width) and (max-width: ($pad-width- 1)) {
+		@content;
+	}
+}
+
+// 手機 ↓
+@mixin mobile() {
+	@media all and (max-width: $mobile-width) {
+		@content;
+	}
+}
