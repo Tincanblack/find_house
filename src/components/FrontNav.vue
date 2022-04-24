@@ -8,7 +8,7 @@
 				><img src="../assets/logo.svg" alt="心儀房屋" width="140"
 			/></a>
 			<button
-				class="navbar-toggler"
+				class="navbar-toggler collapsed"
 				type="button"
 				data-bs-toggle="collapse"
 				data-bs-target="#navbarCollapse"
@@ -18,11 +18,7 @@
 			>
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div
-				class="navbar-collapse collapse show"
-				id="navbarCollapse"
-				style=""
-			>
+			<div class="navbar-collapse collapse" id="navbarCollapse" style="">
 				<ul
 					class="navbar-nav flex-md-row ms-md-auto align-items-md-center"
 				>

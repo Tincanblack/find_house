@@ -1,3 +1,10 @@
+@import "_siteVariable";
+@import "_grid";
+
+// init
+body {
+	font-size: 15px;
+}
 // nav
 .navbar {
 	transition: all 0.3s;
@@ -28,6 +35,9 @@
 			}
 			&-item {
 				padding: 0 0.5rem;
+				&:last-child {
+					padding-right: 0;
+				}
 			}
 		}
 	}
@@ -101,6 +111,7 @@
 		}
 	}
 }
+
 // card
 .card {
 	overflow: hidden;
@@ -262,9 +273,11 @@
 		}
 	}
 	&-header {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+		&-inner {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
 	}
 	&-tag {
 		font-size: 1rem;
@@ -284,8 +297,112 @@
 			}
 		}
 	}
+	&-info {
+		&-list {
+			.info-list {
+				&-item {
+					padding: 0.5rem 0;
+					border-top: 1px dotted map-get($grays, "600");
+					list-style: none;
+				}
+				&-title {
+					font-weight: bold;
+					font-size: 1rem;
+					margin-right: 0.25rem;
+					color: map-get($map: $theme-site-colors, $key: "main");
+					&__icon {
+						vertical-align: middle;
+					}
+				}
+			}
+		}
+	}
 	&__subtitle {
 		color: map-get($grays, "600");
+	}
+	.slide {
+		.carousel-slide {
+			&__image {
+				height: 500px;
+			}
+			.swiper {
+				&-button {
+					&-prev {
+						left: 15px;
+					}
+					&-next {
+						right: 15px;
+					}
+					&-prev,
+					&-next {
+						color: white;
+					}
+				}
+				&-pagination-fraction {
+					padding: 0.25rem 0.5rem;
+					width: initial;
+					left: 10px;
+					color: white;
+					background: rgba(0, 0, 0, 0.6);
+					&::before {
+						content: "\f220";
+						display: inline-block;
+						margin-right: 0.5rem;
+						width: 1.25rem;
+						height: 1.25rem;
+						font-size: 1.25rem;
+						line-height: 1.25rem;
+						vertical-align: middle;
+						font-family: bootstrap-icons;
+					}
+				}
+			}
+		}
+		.thumbnail-slide {
+			&__image {
+				height: 100px;
+				cursor: pointer;
+				@include pad {
+					height: 70px;
+				}
+			}
+			.swiper-button {
+				&-prev {
+					left: 0;
+				}
+				&-next {
+					right: 0;
+				}
+				&-prev,
+				&-next {
+					width: calc(var(--swiper-navigation-size) / 44 * 20);
+					height: var(--swiper-navigation-size);
+					padding: 0.1rem;
+					background: rgba(0, 0, 0, 0.5);
+					color: white;
+					&::after {
+						font-size: 12px;
+						font-weight: bold;
+					}
+				}
+			}
+			.slide-item {
+				&.swiper-slide {
+					opacity: 0.4;
+					border: 2px solid white;
+					&.swiper-slide-thumb-active {
+						opacity: 1;
+						border: 2px solid
+							map-get($map: $theme-site-colors, $key: "main");
+					}
+				}
+			}
+		}
+		&-footer {
+			&-notice {
+				color: map-get($grays, "600");
+			}
+		}
 	}
 }
 

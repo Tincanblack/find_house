@@ -1,4 +1,4 @@
-<template lang="">
+<template>
 	<swiper
 		:effect="'fade'"
 		:slides-per-view="1"

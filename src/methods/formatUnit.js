@@ -4,7 +4,7 @@ export function currencyFormat(num = 0) {
 	return `${parts.join(".")}`;
 }
 
-export function patternFormat(patterns) {
+export function patternFormat(patterns = "") {
 	const patternsCount = patterns.toString().split("/");
 	let result = "";
 	patternsCount.forEach((patternCount, index) => {
