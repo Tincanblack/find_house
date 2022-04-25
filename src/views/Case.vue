@@ -40,22 +40,22 @@
 		</div>
 	</nav>
 	<section class="product py-3">
-		<div class="product-header">
+		<div class="case-header">
 			<div class="container">
-				<div class="product-header-inner">
-					<div class="product-info">
-						<h2 class="product__title">
+				<div class="case-header-inner">
+					<div class="case-header-title">
+						<h2 class="case-header__title">
 							{{ product.title }}
 						</h2>
-						<h6 class="product__subtitle">
+						<h6 class="case-header__subtitle">
 							{{ product.description }}
 						</h6>
 					</div>
-					<div class="product-price text-end">
+					<div class="case-price text-end">
 						<div class="d-flex align-items-center">
 							<div
 								v-if="product.origin_price !== product.price"
-								class="product-tag"
+								class="case-header-tag"
 							>
 								<span
 									class="badge color-secondary tag__element--discount"
@@ -95,9 +95,17 @@
 						</div>
 					</div>
 				</div>
+				<div class="case-tag">
+					<span
+						class="badge tag color-primary tag__element tag__element--main"
+						v-for="tag in product.tags"
+						:key="tag"
+						>{{ tag }}</span
+					>
+				</div>
 			</div>
 		</div>
-		<div class="product-preview mb-3">
+		<div class="case-preview mb-3">
 			<div class="container">
 				<div class="row">
 					<div class="col-12 col-lg-8">
@@ -174,8 +182,8 @@
 						</div>
 					</div>
 					<div class="col-12 col-lg-4 ms-auto">
-						<div class="product-info mb-3">
-							<ul class="product-info-list list-group">
+						<div class="case-preview mb-3">
+							<ul class="case-preview-list list-group">
 								<li class="info-list-item">
 									<span class="info-list-title">
 										<i
@@ -218,12 +226,12 @@
 								</li>
 							</ul>
 						</div>
-						<div class="product-assistant card shadow-sm mb-3">
+						<div class="case-assistant card shadow-sm mb-3">
 							<div class="card-body">
 								<h5 class="card-title">您的案件經理人</h5>
 								<div class="d-flex align-items-center my-3">
 									<div
-										class="product-assistant__image me-2"
+										class="case-assistant__image me-2"
 										:style="{
 											backgroundImage: `url(${assistantData.picture?.medium})`,
 										}"
@@ -302,8 +310,21 @@
 				</div>
 			</div>
 		</div>
-		<div class="product-info mb-3">
-			<div class="container">123</div>
+		<div class="case-detail mb-3">
+			<div class="container">
+				<div class="case-detail-header">
+					<h4 class="case-detail-header__title">物件詳情</h4>
+				</div>
+				<div class="case-detail-content">
+					{{ product.content }}
+				</div>
+				<div class="case-detail-header">
+					<h4 class="case-detail-header__title">周遭環境</h4>
+				</div>
+				<div class="case-detail-content">
+					{{ product.content }}
+				</div>
+			</div>
 		</div>
 	</section>
 </template>

@@ -112,7 +112,7 @@
 								>
 									<span
 										v-if="item.origin_price && item.price"
-										class="badge tag__element--discount"
+										class="badge tag__element--sec"
 									>
 										<i class="bi bi-arrow-down"></i>
 										{{
@@ -131,11 +131,11 @@
 									<span
 										class="badge tag__element"
 										:class="{
-											'tag__element--new':
+											'tag__element--third':
 												tag === '新上架',
-											'tag__element--low':
+											'tag__element--fourth':
 												tag === '低總價',
-											'tag__element--recommend':
+											'tag__element--main':
 												tag === '店長推薦',
 										}"
 										>{{ tag }}</span
