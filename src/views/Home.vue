@@ -101,7 +101,7 @@
 			<div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-2">
 				<div class="col" v-for="item in cases" :key="item.id">
 					<router-link
-						class="card index-cases-card text-decoration-none rounded-0 text-dark"
+						class="card cases-card text-decoration-none rounded-0 text-dark"
 						:to="`/case/${item.id}`"
 					>
 						<div class="card-image">

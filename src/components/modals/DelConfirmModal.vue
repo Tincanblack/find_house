@@ -10,7 +10,7 @@
 	>
 		<div class="modal-dialog" role="document">
 			<div class="modal-content border-0">
-				<div class="modal-header bg-secondary text-white">
+				<div class="modal-header bg-danger text-white">
 					<h5 class="modal-title">
 						<span>刪除 {{ item.title }}</span>
 					</h5>
@@ -23,7 +23,7 @@
 				</div>
 				<div class="modal-body">
 					是否刪除
-					<strong class="text-secondary">{{ item.title }}</strong>
+					<strong class="text-danger">{{ item.title }}</strong>
 					(刪除後將無法恢復)。
 				</div>
 				<div class="modal-footer">
@@ -36,7 +36,7 @@
 					</button>
 					<button
 						type="button"
-						class="btn btn-secondary"
+						class="btn btn-danger"
 						@click="$emit('del-item')"
 					>
 						確認刪除

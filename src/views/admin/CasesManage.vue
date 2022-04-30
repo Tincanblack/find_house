@@ -1,8 +1,8 @@
-<template lang="">
+<template>
 	<div class="main-content container-fluid px-4">
 		<LoadingAnimate :active="isLoading" :z-index="1060"></LoadingAnimate>
-		<h2 class="my-4 fw-bold">案件管理</h2>
-		<div class="text-end mt-4">
+		<h3 class="mt-4 fw-bold">案件管理</h3>
+		<div class="text-end my-2">
 			<button
 				type="button"
 				class="btn btn-success"

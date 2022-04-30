@@ -27,7 +27,7 @@ body {
 					background: map-get($map: $theme-site-colors, $key: "main");
 					transition: all 0.3s;
 				}
-				&:hover {
+				&:hover, &.active {
 					&::before {
 						width: 100%;
 					}
@@ -47,7 +47,7 @@ body {
 				&-nav {
 					.nav {
 						&-link {
-							&:hover {
+							&:hover, &.active {
 								color: map-get(
 									$map: $theme-site-colors,
 									$key: "main"
@@ -335,6 +335,9 @@ body {
 			.carousel-slide {
 				&__image {
 					height: 500px;
+					@include pad {
+						height: 275px;
+					}
 				}
 				.swiper {
 					&-button {
@@ -410,6 +413,7 @@ body {
 				}
 			}
 			&-footer {
+				font-size: 1rem;
 				&-notice {
 					color: map-get($grays, "600");
 				}
@@ -417,27 +421,35 @@ body {
 		}
 	}
 	&-detail {
-		&-header {
-			overflow: hidden;
+		&-section {
 			margin-bottom: 1rem;
-			&__title {
-				margin: 0;
-				position: relative;
-				display: inline-block;
-				padding-right: 1rem;
-				color: map-get($map: $theme-site-colors, $key: "main");
-				background: white;
-				z-index: 2;
-				&::after {
-					content: "";
-					position: absolute;
-					z-index: 1;
-					top: 50%;
-					left: 100%;
-					transform: translate(0, -50%);
-					width: 100vw;
-					height: 2px;
-					background: map-get($map: $theme-site-colors, $key: "main");
+			.detail {
+				&-header {
+					overflow: hidden;
+					margin-bottom: .5rem;
+					&__title {
+						margin: 0;
+						position: relative;
+						display: inline-block;
+						padding-right: 1rem;
+						color: map-get($map: $theme-site-colors, $key: "main");
+						background: white;
+						z-index: 2;
+						&::after {
+							content: "";
+							position: absolute;
+							z-index: 1;
+							top: 50%;
+							left: 100%;
+							transform: translate(0, -50%);
+							width: 100vw;
+							height: 2px;
+							background: map-get(
+								$map: $theme-site-colors,
+								$key: "main"
+							);
+						}
+					}
 				}
 			}
 		}

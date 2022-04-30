@@ -28,7 +28,7 @@
 						>
 					</li>
 					<li class="nav-item">
-						<router-link class="nav-link" to="/collection"
+						<router-link class="nav-link" to="/collections"
 							>收藏名單
 						</router-link>
 					</li>
@@ -38,7 +38,7 @@
 						>
 					</li>
 					<li class="nav-item">
-						<router-link class="nav-link" to="/reserves"
+						<router-link class="nav-link" to="/reserve"
 							>查詢預約</router-link
 						>
 					</li>

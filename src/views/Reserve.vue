@@ -1,6 +1,6 @@
 <template lang="">
 	<div>
-		<h1>房清單</h1>
+		<h1>查詢預約</h1>
 	</div>
 </template>
 <script>

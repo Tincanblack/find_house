@@ -39,7 +39,7 @@
 			</ol>
 		</div>
 	</nav>
-	<section class="product py-3">
+	<section class="case py-3">
 		<div class="case-header">
 			<div class="container">
 				<div class="case-header-inner">
@@ -138,7 +138,7 @@
 							</swiper>
 							<swiper
 								@swiper="setThumbsSwiper"
-								:spaceBetween="15"
+								:spaceBetween="5"
 								:slidesPerView="4.5"
 								:freeMode="true"
 								:navigation="true"
@@ -152,7 +152,7 @@
 										slidesPerView: 4.5,
 									},
 								}"
-								class="thumbnail-slide mt-3"
+								class="thumbnail-slide mt-2"
 							>
 								<swiper-slide
 									class="slide-item"
@@ -172,7 +172,7 @@
 								</swiper-slide>
 							</swiper>
 						</div>
-						<div class="slide-footer my-1 fs-6">
+						<div class="slide-footer my-1">
 							<i
 								class="bi bi-exclamation-circle-fill text-secondary"
 							></i>
@@ -312,17 +312,21 @@
 		</div>
 		<div class="case-detail mb-3">
 			<div class="container">
-				<div class="case-detail-header">
-					<h4 class="case-detail-header__title">物件詳情</h4>
+				<div class="case-detail-section" id="detail">
+					<div class="detail-header">
+						<h5 class="detail-header__title">物件特色</h5>
+					</div>
+					<div class="detail-content">
+						{{ product.content }}
+					</div>
 				</div>
-				<div class="case-detail-content">
-					{{ product.content }}
-				</div>
-				<div class="case-detail-header">
-					<h4 class="case-detail-header__title">周遭環境</h4>
-				</div>
-				<div class="case-detail-content">
-					{{ product.content }}
+				<div class="case-detail-section" id="near">
+					<div class="detail-header">
+						<h5 class="detail-header__title">周遭環境</h5>
+					</div>
+					<div class="detail-content">
+						{{ product.content }}
+					</div>
 				</div>
 			</div>
 		</div>

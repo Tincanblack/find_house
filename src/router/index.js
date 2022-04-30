@@ -8,22 +8,23 @@ const routes = [
 	// admin
 	{
 		path: "/admin",
-		component: () => import("@/views/AdminView.vue"),
+		component: () => import("@/views/admin/AdminView.vue"),
 		children: [
 			{
 				path: "cases",
-				name: "cases",
 				component: () => import("@/views/admin/CasesManage.vue"),
 			},
 			{
 				path: "news",
-				name: "news",
 				component: () => import("@/views/admin/NewsManage.vue"),
 			},
 			{
 				path: "reserves",
-				name: "reserves",
 				component: () => import("@/views/admin/ReservesManage.vue"),
+			},
+			{
+				path: "imageUpload",
+				component: () => import("@/views/admin/ImageUpload.vue"),
 			},
 		],
 	},
@@ -36,11 +37,6 @@ const routes = [
 				path: "",
 				name: "index",
 				component: () => import("@/views/Home.vue"),
-			},
-			{
-				path: "about",
-				name: "about",
-				component: () => import("@/views/About.vue"),
 			},
 			{
 				path: "cases",
@@ -58,16 +54,21 @@ const routes = [
 				component: () => import("@/views/News.vue"),
 			},
 			{
-				path: "collection",
-				name: "collection",
-				component: () => import("@/views/Collection.vue"),
+				path: "collections",
+				name: "collections",
+				component: () => import("@/views/Collections.vue"),
 			},
 			{
-				path: "reserves",
-				name: "reserves",
-				component: () => import("@/views/Reserves.vue"),
+				path: "reserve",
+				name: "reserve",
+				component: () => import("@/views/Reserve.vue"),
 			},
 		],
+	},
+	// 404頁面
+	{
+		path: "/:pathMatch(.*)*",
+		component: () => import("@/views/NotFound.vue"),
 	},
 ];
 

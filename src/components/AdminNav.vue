@@ -56,20 +56,26 @@
 					<span class="nav-tooltip">預約表單管理</span>
 				</router-link>
 			</li>
+		</ul>
+		<hr />
+		<ul class="nav nav-pills flex-column">
 			<li class="nav-item d-flex">
-				<router-link
-					class="nav-link"
-					to="/admin/coupons"
-					title="優惠券管理"
-				>
-					<i class="nav-icon bi bi-ticket me-3"></i>
-					<span class="nav-text">優惠券管理</span>
-					<span class="nav-tooltip">優惠券管理</span>
+				<router-link class="nav-link" to="/admin/imageUpload">
+					<i class="nav-icon bi bi-card-image me-3"></i>
+					<span class="nav-text">圖片上傳</span>
+					<span class="nav-tooltip">圖片上傳</span>
 				</router-link>
 			</li>
 		</ul>
 		<hr />
 		<ul class="nav nav-pills flex-column">
+			<li class="nav-item d-flex">
+				<router-link class="nav-link" to="/">
+					<i class="nav-icon bi bi-house me-3"></i>
+					<span class="nav-text nav-logout">回到前台</span>
+					<span class="nav-tooltip">回到前台</span>
+				</router-link>
+			</li>
 			<li class="nav-item d-flex">
 				<a class="nav-link text-danger" href="#">
 					<i class="nav-icon bi bi-box-arrow-left me-3"></i>

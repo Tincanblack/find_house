@@ -77,7 +77,7 @@
 									</div>
 									<button
 										type="button"
-										class="btn btn-outline-secondary my-3 btn-sm d-block w-100"
+										class="btn btn-outline-danger my-3 btn-sm d-block w-100"
 										@click="
 											tempCase.imagesUrl.splice(key, 1)
 										"
@@ -92,7 +92,7 @@
 								<div class="mb-3 col-md-6">
 									<label for="title" class="form-label"
 										>標題
-										<span class="text-secondary"
+										<span class="text-danger"
 											>*</span
 										></label
 									>
@@ -107,7 +107,7 @@
 								<div class="mb-3 col-md-6">
 									<label for="category" class="form-label"
 										>分類
-										<span class="text-secondary"
+										<span class="text-danger"
 											>*</span
 										></label
 									>
@@ -130,7 +130,7 @@
 								<div class="mb-3">
 									<label for="address" class="form-label"
 										>地址
-										<span class="text-secondary"
+										<span class="text-danger"
 											>*</span
 										></label
 									>
@@ -161,7 +161,7 @@
 									<label for="price" class="form-label"
 										>單位
 										<span class="form-text"> (坪) </span>
-										<span class="text-secondary">*</span>
+										<span class="text-danger">*</span>
 									</label>
 									<input
 										type="text"
@@ -235,7 +235,7 @@
 									<label for="origin_price" class="form-label"
 										>總價
 										<span class="form-text"> (萬) </span>
-										<span class="text-secondary">*</span>
+										<span class="text-danger">*</span>
 									</label>
 									<input
 										type="number"
@@ -250,7 +250,7 @@
 									<label for="price" class="form-label"
 										>售價
 										<span class="form-text"> (萬) </span>
-										<span class="text-secondary">*</span>
+										<span class="text-danger">*</span>
 									</label>
 									<input
 										type="number"
@@ -267,7 +267,7 @@
 								<div class="mb-3">
 									<label for="content" class="form-label"
 										>物件詳情
-										<span class="text-secondary"
+										<span class="text-danger"
 											>*</span
 										></label
 									>
@@ -626,14 +626,14 @@
 										class="form-check-label"
 										for="is_enabled"
 										>顯示
-										<span class="text-secondary">*</span>
+										<span class="text-danger">*</span>
 									</label>
 									<label
 										v-else
 										class="form-check-label"
 										for="is_enabled"
 										>不顯示
-										<span class="text-secondary">*</span>
+										<span class="text-danger">*</span>
 									</label>
 								</div>
 							</div>
