@@ -1,7 +1,9 @@
 <template lang="">
-	<div>
-		<h1>房訊知識</h1>
-	</div>
+	<section class="py-3">
+		<div class="container">
+			<h1>房訊知識</h1>
+		</div>
+	</section>
 </template>
 <script>
 export default {};

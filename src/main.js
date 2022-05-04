@@ -13,7 +13,7 @@ import "vue3-loading-overlay/dist/vue3-loading-overlay.css";
 import {
 	currencyFormat,
 	patternFormat,
-	priceDiscount,
+	calToPercent,
 } from "@/methods/formatUnit";
 import $httpMessageState from "@/methods/updateMessageState";
 import App from "./App.vue";
@@ -24,7 +24,7 @@ const app = createApp(App);
 app.config.globalProperties.$formatUnit = {
 	currencyFormat,
 	patternFormat,
-	priceDiscount,
+	calToPercent,
 };
 
 // 將 $httpMessageState 加入全域下

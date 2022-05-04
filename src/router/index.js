@@ -74,8 +74,13 @@ const routes = [
 
 const router = createRouter({
 	history: createWebHashHistory(),
-	linkActiveClass: "active",
 	routes,
+	linkActiveClass: "active",
+	scrollBehavior() {
+		return {
+			top: 0,
+		};
+	},
 });
 
 export default router;

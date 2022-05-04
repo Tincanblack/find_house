@@ -4,7 +4,7 @@
 		:class="{ isOpen: sideBarOpen }"
 	>
 		<header class="position-relative">
-			<router-link
+			<routerLink
 				to="/admin"
 				class="d-flex align-items-center mb-md-0 me-md-auto text-white text-decoration-none"
 			>
@@ -15,7 +15,7 @@
 					style="width: 40px; height: 40px"
 				/>
 				<span class="nav-text fs-4 fw-bold">後臺管理</span>
-			</router-link>
+			</routerLink>
 			<div
 				class="bx bx-chevron-right nav-toggle"
 				@click="sideBarOpen = !sideBarOpen"
@@ -28,7 +28,7 @@
 		<hr />
 		<ul class="nav nav-pills flex-column mb-auto">
 			<li class="nav-item d-flex">
-				<router-link
+				<routerLink
 					class="nav-link"
 					to="/admin/cases"
 					title="案件管理"
@@ -36,17 +36,17 @@
 					<i class="nav-icon bi bi-folder2-open me-3"></i>
 					<span class="nav-text">案件管理</span>
 					<span class="nav-tooltip">案件管理</span>
-				</router-link>
+				</routerLink>
 			</li>
 			<li class="nav-item d-flex">
-				<router-link class="nav-link" to="/admin/news" title="房訊管理">
+				<routerLink class="nav-link" to="/admin/news" title="房訊管理">
 					<i class="nav-icon bi bi-newspaper me-3"></i>
 					<span class="nav-text">房訊管理</span>
 					<span class="nav-tooltip">房訊管理</span>
-				</router-link>
+				</routerLink>
 			</li>
 			<li class="nav-item d-flex">
-				<router-link
+				<routerLink
 					class="nav-link"
 					to="/admin/reserves"
 					title="預約表單管理"
@@ -54,27 +54,27 @@
 					<i class="nav-icon bi bi-pencil-square me-3"></i>
 					<span class="nav-text">預約表單管理</span>
 					<span class="nav-tooltip">預約表單管理</span>
-				</router-link>
+				</routerLink>
 			</li>
 		</ul>
 		<hr />
 		<ul class="nav nav-pills flex-column">
 			<li class="nav-item d-flex">
-				<router-link class="nav-link" to="/admin/imageUpload">
+				<routerLink class="nav-link" to="/admin/imageUpload">
 					<i class="nav-icon bi bi-card-image me-3"></i>
 					<span class="nav-text">圖片上傳</span>
 					<span class="nav-tooltip">圖片上傳</span>
-				</router-link>
+				</routerLink>
 			</li>
 		</ul>
 		<hr />
 		<ul class="nav nav-pills flex-column">
 			<li class="nav-item d-flex">
-				<router-link class="nav-link" to="/">
+				<routerLink class="nav-link" to="/">
 					<i class="nav-icon bi bi-house me-3"></i>
 					<span class="nav-text nav-logout">回到前台</span>
 					<span class="nav-tooltip">回到前台</span>
-				</router-link>
+				</routerLink>
 			</li>
 			<li class="nav-item d-flex">
 				<a class="nav-link text-danger" href="#">

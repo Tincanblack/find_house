@@ -16,7 +16,17 @@ export function patternFormat(patterns = "") {
 	return result;
 }
 
-export function priceDiscount(originPrice = 0, currentPrice = 0) {
-	var result = ((originPrice - currentPrice) / originPrice) * 100;
-	return result.toFixed(2) + "%";
+export function calToPercent(originPrice = 0, currentPrice = 0, type) {
+	let result = ((originPrice - currentPrice) / originPrice) * 100;
+	switch (type) {
+		case "discount":
+			result = result.toFixed(2) + "%";
+			break;
+		case "management":
+			result = result.toFixed(1) + "%";
+			break;
+		default:
+			break;
+	}
+	return result;
 }

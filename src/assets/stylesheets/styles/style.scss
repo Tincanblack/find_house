@@ -27,7 +27,8 @@ body {
 					background: map-get($map: $theme-site-colors, $key: "main");
 					transition: all 0.3s;
 				}
-				&:hover, &.active {
+				&:hover,
+				&.active {
 					&::before {
 						width: 100%;
 					}
@@ -47,7 +48,8 @@ body {
 				&-nav {
 					.nav {
 						&-link {
-							&:hover, &.active {
+							&:hover,
+							&.active {
 								color: map-get(
 									$map: $theme-site-colors,
 									$key: "main"
@@ -88,6 +90,13 @@ body {
 //  breadcrumb
 .breadcrumb {
 	margin-bottom: 0;
+	&-item {
+		+ .breadcrumb-item {
+			&::before {
+				font-family: bootstrap-icons !important;
+			}
+		}
+	}
 }
 
 // tag
@@ -115,17 +124,56 @@ body {
 	&:hover {
 		box-shadow: 0 3px 8px rgb(0 0 0 / 20%);
 		.card-image {
+			&-hover {
+				&__title {
+					top: 50%;
+					opacity: 1;
+				}
+			}
 			img {
 				transform: scale(1.2);
+			}
+			&::before {
+				opacity: 1;
+				background: rgba(0, 0, 0, 0.5);
 			}
 		}
 	}
 	&-image {
 		position: relative;
 		overflow: hidden;
+		&-hover {
+			&__title {
+				padding: 0.25rem;
+				position: absolute;
+				display: inline-block;
+				left: 50%;
+				top: 30%;
+				transform: translate(-50%, -50%);
+				opacity: 0;
+				z-index: 4;
+				color: white;
+				transition: all 0.3s ease-out;
+				border: 1px solid white;
+			}
+		}
 		img {
+			width: 100%;
+			height: 203.25px;
 			zoom: 1;
 			transition: all 0.3s ease-out;
+			object-fit: cover;
+		}
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 4;
+			opacity: 0;
+			transition: all 0.3s ease;
 		}
 	}
 	&-price {
@@ -266,12 +314,22 @@ body {
 // page - product
 .case {
 	&-assistant {
+		&__title {
+			padding-bottom: 0.5rem;
+			border-bottom: 2px solid
+				map-get($map: $theme-site-colors, $key: "main");
+			color: map-get($map: $theme-site-colors, $key: "main");
+		}
 		&__image {
 			background-size: cover;
 			width: 70px;
 			height: 70px;
 			border: 1px solid map-get($grays, "500");
 			border-radius: 50%;
+		}
+		&__icon {
+			display: inline-block;
+			margin-right: 0.25rem;
 		}
 	}
 	&-header {
@@ -331,7 +389,7 @@ body {
 				}
 			}
 		}
-		.slide {
+		.case-slide {
 			.carousel-slide {
 				&__image {
 					height: 500px;
@@ -357,7 +415,7 @@ body {
 						width: initial;
 						left: 10px;
 						color: white;
-						background: rgba(0, 0, 0, 0.6);
+						background: rgba(0, 0, 0, 0.5);
 						&::before {
 							content: "\f220";
 							display: inline-block;
@@ -373,6 +431,7 @@ body {
 				}
 			}
 			.thumbnail-slide {
+				margin-top: 2rem;
 				&__image {
 					height: 100px;
 					cursor: pointer;
@@ -426,7 +485,7 @@ body {
 			.detail {
 				&-header {
 					overflow: hidden;
-					margin-bottom: .5rem;
+					margin-bottom: 0.5rem;
 					&__title {
 						margin: 0;
 						position: relative;
@@ -454,164 +513,12 @@ body {
 			}
 		}
 	}
-}
-
-// admin
-main {
-	display: flex;
-	flex-wrap: nowrap;
-	height: 100vh;
-	height: -webkit-fill-available;
-	max-height: 100vh;
-	overflow-x: auto;
-	overflow-y: hidden;
-}
-
-// admin - sidebar
-.sidebar {
-	position: relative;
-	z-index: 3;
-	height: 100vh;
-	width: 90px;
-	transition: all 0.3s ease;
-	.nav {
-		&-item {
-			width: 100%;
-			height: 50px;
-			align-items: center;
-			margin-bottom: 0.5rem;
-			&:only-child {
-				margin-bottom: 0;
-			}
-		}
-		&-link {
-			position: relative;
-			display: flex;
-			width: 100%;
-			align-items: center;
-			color: white;
-			&.active {
-				color: $body-color;
-				background: #eee;
-			}
-			&:hover {
-				opacity: 0.8;
-				background: #eee;
-				.nav-text,
-				.nav-icon {
-					color: $body-color;
-				}
-				.nav-tooltip {
-					opacity: 1;
-					pointer-events: auto;
-					transition: all 0.3s ease;
-					top: 50%;
-					transform: translateY(-50%);
-				}
-			}
-		}
-		&-icon {
-			font-size: 1.5rem;
-			transition: all 0.3s ease;
-		}
-		&-text {
-			white-space: nowrap;
-			opacity: 0;
-			transition: all 0.3s ease;
-		}
-		&-tooltip {
-			position: absolute;
-			top: -20px;
-			left: calc(100% + 10px);
-			z-index: 3;
-			color: $body-color;
-			background: #fff;
-			box-shadow: 0 5px 10px rgb(0 0 0 / 30%);
-			padding: 0.25rem 0.5rem;
-			border-radius: 0.25rem;
-			font-size: 1rem;
-			opacity: 0;
-			transition: 0s;
-			white-space: nowrap;
-			pointer-events: none;
-		}
-		&-toggle {
-			position: absolute;
-			top: 50%;
-			right: -30px;
-			transform: translate(0, -50%);
-			z-index: 3;
-			padding: 0.5rem;
-			height: 32px;
-			width: 32px;
-			background-color: $body-color;
-			color: white;
-			border-radius: 50%;
-			cursor: pointer;
-			transition: all 0.3s ease;
-			&-bar {
-				position: relative;
-				background-color: #fff;
-				display: block;
-				width: 15px;
-				height: 2px;
-				margin: 0 auto 4px;
-				transition: all 0.3s;
-				&:last-child {
-					margin-bottom: 0;
-				}
-				&:nth-of-type(1) {
-					top: 6px;
-					transform: rotate(45deg);
-				}
-				&:nth-of-type(2) {
-					opacity: 0;
-					transform: translateX(-100%);
-				}
-				&:nth-of-type(3) {
-					top: -6px;
-					transform: rotate(-45deg);
-				}
+	&-table {
+		td {
+			&:first-child {
+				width: 30%;
+				background: map-get($grays, "200");
 			}
 		}
 	}
-	&.isOpen {
-		width: 200px;
-		.nav-text {
-			opacity: 1;
-		}
-		.nav-tooltip {
-			display: none;
-		}
-		.nav-toggle {
-			&-bar {
-				&:nth-of-type(1) {
-					top: initial;
-					transform: rotate(0);
-				}
-				&:nth-of-type(2) {
-					opacity: 1;
-					transform: translateX(0);
-				}
-				&:nth-of-type(3) {
-					top: initial;
-					transform: rotate(0);
-				}
-			}
-		}
-		~ .main-content {
-			width: calc(100% - 200px);
-		}
-	}
-}
-
-// admin - content
-.main-content {
-	position: relative;
-	min-height: 100vh;
-	top: 0;
-	width: calc(100% - 90px);
-	transition: all 0.3s ease;
-	z-index: 2;
-	overflow: auto;
 }

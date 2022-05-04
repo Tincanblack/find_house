@@ -1,7 +1,7 @@
 <template>
 	<nav
 		class="py-3 bg-light"
-		style="--bs-breadcrumb-divider: '>'"
+		style="--bs-breadcrumb-divider: '\F285'"
 		aria-label="breadcrumb"
 	>
 		<div class="container">
@@ -40,6 +40,15 @@
 	</nav>
 </template>
 <script>
-export default {};
+export default {
+	props: {
+		product: {
+			type: Object,
+			default() {
+				return {};
+			},
+		},
+	},
+};
 </script>
 <style lang=""></style>

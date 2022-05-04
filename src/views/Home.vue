@@ -1,46 +1,13 @@
 <template>
-	<swiper
-		:effect="'fade'"
-		:slides-per-view="1"
-		:loop="true"
-		:modules="modules"
-		:autoplay="{
-			delay: 3000,
-			stopOnLastSlide: false,
-			disableOnInteraction: false,
-			pauseOnMouseEnter: true,
-		}"
-	>
-		<swiper-slide
-			><img
-				class="img-fluid"
-				src="https://via.placeholder.com/1920x750?text=1"
-				alt=""
-			/>
-		</swiper-slide>
-		<swiper-slide
-			><img
-				class="img-fluid"
-				src="https://via.placeholder.com/1920x750?text=2"
-				alt=""
-			/>
-		</swiper-slide>
-		<swiper-slide
-			><img
-				class="img-fluid"
-				src="https://via.placeholder.com/1920x750?text=3"
-				alt=""
-			/>
-		</swiper-slide>
-	</swiper>
+	<IndexBanner></IndexBanner>
 	<section class="index-feature text-center py-5 d-none d-lg-block bg-light">
 		<div class="container">
 			<h2 class="mb-5">想要找什麼樣類型的房子?</h2>
 			<div class="row">
 				<div class="col-lg-3">
-					<router-link
+					<routerLink
 						class="index-feature-card text-dark text-decoration-none"
-						to=""
+						:to="{ path: '/cases', query: { category: '公寓' } }"
 					>
 						<div class="index-feature-image shadow-sm">
 							<img
@@ -49,12 +16,12 @@
 							/>
 							<h5 class="index-feature-card__title">公寓</h5>
 						</div>
-					</router-link>
+					</routerLink>
 				</div>
 				<div class="col-lg-3">
-					<router-link
+					<routerLink
 						class="index-feature-card text-dark text-decoration-none"
-						to=""
+						:to="{ path: '/cases', query: { category: '別墅' } }"
 					>
 						<div class="index-feature-image shadow-sm">
 							<img
@@ -63,12 +30,12 @@
 							/>
 							<h5 class="index-feature-card__title">別墅</h5>
 						</div>
-					</router-link>
+					</routerLink>
 				</div>
 				<div class="col-lg-3">
-					<router-link
+					<routerLink
 						class="index-feature-card text-dark text-decoration-none"
-						to=""
+						:to="{ path: '/cases', query: { category: '華廈' } }"
 					>
 						<div class="index-feature-image shadow-sm">
 							<img
@@ -77,12 +44,12 @@
 							/>
 							<h5 class="index-feature-card__title">華廈</h5>
 						</div>
-					</router-link>
+					</routerLink>
 				</div>
 				<div class="col-lg-3">
-					<router-link
+					<routerLink
 						class="index-feature-card text-dark text-decoration-none"
-						to=""
+						:to="{ path: '/cases', query: { category: '大樓' } }"
 					>
 						<div class="index-feature-image shadow-sm">
 							<img
@@ -91,7 +58,7 @@
 							/>
 							<h5 class="index-feature-card__title">大樓</h5>
 						</div>
-					</router-link>
+					</routerLink>
 				</div>
 			</div>
 		</div>
@@ -99,8 +66,8 @@
 	<section class="index-cases py-5">
 		<div class="container">
 			<div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-2">
-				<div class="col" v-for="item in cases" :key="item.id">
-					<router-link
+				<div class="col" v-for="item in randomData" :key="item.id">
+					<routerLink
 						class="card cases-card text-decoration-none rounded-0 text-dark"
 						:to="`/case/${item.id}`"
 					>
@@ -116,16 +83,17 @@
 									>
 										<i class="bi bi-arrow-down"></i>
 										{{
-											$formatUnit.priceDiscount(
+											$formatUnit.calToPercent(
 												item.origin_price,
-												item.price
+												item.price,
+												"discount"
 											)
 										}}
 									</span>
 								</div>
 								<div
 									class="tag"
-									v-for="tag in filterTags(item)"
+									v-for="tag in filterItemTag(item)"
 									:key="tag"
 								>
 									<span
@@ -164,6 +132,9 @@
 									></small
 								>
 							</div>
+							<span class="card-image-hover__title">
+								查看案件內容
+							</span>
 							<img
 								class="img-fluid"
 								:src="item.imageUrl"
@@ -178,9 +149,7 @@
 							</h5>
 							<p class="card-text text-center fs-6">
 								<span class="card-text__item">
-									<small
-										>建坪 {{ item.squareFeet }}坪</small
-									></span
+									<small>{{ item.squareFeet }}坪</small></span
 								>
 								<span class="card-text__item">
 									<small>{{
@@ -195,16 +164,16 @@
 								</span>
 							</p>
 						</div>
-					</router-link>
+					</routerLink>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
 					<div class="index-cases-footer text-center py-4">
-						<router-link
+						<routerLink
 							class="cases-footer__button btn btn-outline-primary w-25 rounded-0"
 							to="/cases"
-							>查看更多</router-link
+							>查看更多</routerLink
 						>
 					</div>
 				</div>
@@ -251,35 +220,43 @@
 	</section>
 </template>
 <script>
-import { EffectFade, Autoplay } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css";
-import "swiper/css/bundle";
+import IndexBanner from "@/components/IndexBanner.vue";
 
 export default {
 	components: {
-		Swiper,
-		SwiperSlide,
+		IndexBanner,
 	},
 	data() {
 		return {
 			cases: [],
-			modules: [EffectFade, Autoplay],
+			randomData: [],
 		};
 	},
 	methods: {
-		getCaseList() {
+		getCasesList() {
 			const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`;
 			this.$http
 				.get(url)
 				.then((res) => {
 					this.cases = res.data.products;
+					this.randomProduct(12);
 				})
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");
 				});
 		},
-		filterTags(caseItem) {
+		randomProduct(count) {
+			const tempData = this.cases;
+			this.randomData = [];
+			for (let x = 0; x < count; x += 1) {
+				const randomCase = Math.floor(
+					Math.random() * (tempData.length - 0) + 0
+				);
+				this.randomData.push(this.cases[randomCase]);
+				tempData.splice(randomCase, 1);
+			}
+		},
+		filterItemTag(caseItem) {
 			const filteredTags = caseItem.tags.filter((tag) => {
 				return (
 					tag === "新上架" || tag === "低總價" || tag === "店長推薦"
@@ -289,7 +266,7 @@ export default {
 		},
 	},
 	mounted() {
-		this.getCaseList();
+		this.getCasesList();
 	},
 };
 </script>
