@@ -14,17 +14,19 @@ import {
 	currencyFormat,
 	patternFormat,
 	calToPercent,
-} from "@/methods/formatUnit";
+	filterItemTag,
+} from "@/methods/format";
 import $httpMessageState from "@/methods/updateMessageState";
 import App from "./App.vue";
 import router from "./router";
 
 const app = createApp(App);
 
-app.config.globalProperties.$formatUnit = {
+app.config.globalProperties.$format = {
 	currencyFormat,
 	patternFormat,
 	calToPercent,
+	filterItemTag,
 };
 
 // 將 $httpMessageState 加入全域下

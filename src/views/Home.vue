@@ -1,5 +1,5 @@
 <template>
-	<IndexBanner></IndexBanner>
+	<IndexBannerSlide></IndexBannerSlide>
 	<section class="index-feature text-center py-5 d-none d-lg-block bg-light">
 		<div class="container">
 			<h2 class="mb-5">想要找什麼樣類型的房子?</h2>
@@ -83,7 +83,7 @@
 									>
 										<i class="bi bi-arrow-down"></i>
 										{{
-											$formatUnit.calToPercent(
+											$format.calToPercent(
 												item.origin_price,
 												item.price,
 												"discount"
@@ -93,7 +93,7 @@
 								</div>
 								<div
 									class="tag"
-									v-for="tag in filterItemTag(item)"
+									v-for="tag in $format.filterItemTag(item)"
 									:key="tag"
 								>
 									<span
@@ -114,7 +114,7 @@
 								<span
 									class="card-price__price card-price__price--selling"
 								>
-									{{ $formatUnit.currencyFormat(item.price) }}
+									{{ $format.currencyFormat(item.price) }}
 									<span class="card-price__price-unit"
 										>萬</span
 									>
@@ -124,7 +124,7 @@
 									class="card-price__price card-price__price--origin fs-6"
 									><del
 										>{{
-											$formatUnit.currencyFormat(
+											$format.currencyFormat(
 												item.origin_price
 											)
 										}}
@@ -153,7 +153,7 @@
 								>
 								<span class="card-text__item">
 									<small>{{
-										$formatUnit.patternFormat(item.pattern)
+										$format.patternFormat(item.pattern)
 									}}</small>
 								</span>
 								<span class="card-text__item">
@@ -220,11 +220,11 @@
 	</section>
 </template>
 <script>
-import IndexBanner from "@/components/IndexBanner.vue";
+import IndexBannerSlide from "@/components/IndexBannerSlide.vue";
 
 export default {
 	components: {
-		IndexBanner,
+		IndexBannerSlide,
 	},
 	data() {
 		return {
@@ -255,14 +255,6 @@ export default {
 				this.randomData.push(this.cases[randomCase]);
 				tempData.splice(randomCase, 1);
 			}
-		},
-		filterItemTag(caseItem) {
-			const filteredTags = caseItem.tags.filter((tag) => {
-				return (
-					tag === "新上架" || tag === "低總價" || tag === "店長推薦"
-				);
-			});
-			return filteredTags;
 		},
 	},
 	mounted() {

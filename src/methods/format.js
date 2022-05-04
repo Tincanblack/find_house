@@ -30,3 +30,10 @@ export function calToPercent(originPrice = 0, currentPrice = 0, type) {
 	}
 	return result;
 }
+
+export function filterItemTag(item) {
+	const filteredTags = item.tags.filter((tag) => {
+		return tag === "新上架" || tag === "低總價" || tag === "店長推薦";
+	});
+	return filteredTags;
+}

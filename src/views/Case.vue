@@ -24,7 +24,7 @@
 								>
 									<i class="bi bi-arrow-down"></i>
 									{{
-										$formatUnit.calToPercent(
+										$format.calToPercent(
 											product.origin_price,
 											product.price,
 											"discount"
@@ -36,9 +36,7 @@
 								v-if="product.price"
 								class="price price__selling text-secondary"
 							>
-								{{
-									$formatUnit.currencyFormat(product.price)
-								}}萬
+								{{ $format.currencyFormat(product.price) }}萬
 							</h2>
 						</div>
 						<div
@@ -50,7 +48,7 @@
 						>
 							<del
 								>{{
-									$formatUnit.currencyFormat(
+									$format.currencyFormat(
 										product.origin_price
 									)
 								}}萬
@@ -181,7 +179,7 @@
 													"
 												>
 													{{
-														$formatUnit.calToPercent(
+														$format.calToPercent(
 															product.squareFeet,
 															product.mainSquareFeet,
 															"management"
@@ -200,7 +198,7 @@
 												<td>格局</td>
 												<td>
 													{{
-														$formatUnit.patternFormat(
+														$format.patternFormat(
 															product.pattern
 														)
 													}}
@@ -292,11 +290,7 @@
 										></i>
 										格局
 									</span>
-									{{
-										$formatUnit.patternFormat(
-											product.pattern
-										)
-									}}
+									{{ $format.patternFormat(product.pattern) }}
 								</li>
 								<li class="info-list-item">
 									<span class="info-list-title">
@@ -424,115 +418,15 @@
 			</div>
 		</div>
 	</section>
-	<section class="case-related bg-light">
+	<section class="case-related bg-light py-5">
 		<div class="container">
-			<div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-2">
-				<div class="col" v-for="item in randomData" :key="item.id">
-					<routerLink
-						class="card cases-card text-decoration-none rounded-0 text-dark"
-						:to="`/case/${item.id}`"
-					>
-						<div class="card-image">
-							<div class="card-tag">
-								<div
-									class="tag"
-									v-if="item.origin_price !== item.price"
-								>
-									<span
-										v-if="item.origin_price && item.price"
-										class="badge tag__element--sec"
-									>
-										<i class="bi bi-arrow-down"></i>
-										{{
-											$formatUnit.calToPercent(
-												item.origin_price,
-												item.price,
-												"discount"
-											)
-										}}
-									</span>
-								</div>
-								<div
-									class="tag"
-									v-for="tag in filterItemTag(item)"
-									:key="tag"
-								>
-									<span
-										class="badge tag__element"
-										:class="{
-											'tag__element--third':
-												tag === '新上架',
-											'tag__element--fourth':
-												tag === '低總價',
-											'tag__element--main':
-												tag === '店長推薦',
-										}"
-										>{{ tag }}</span
-									>
-								</div>
-							</div>
-							<div class="card-price">
-								<span
-									class="card-price__price card-price__price--selling"
-								>
-									{{ $formatUnit.currencyFormat(item.price) }}
-									<span class="card-price__price-unit"
-										>萬</span
-									>
-								</span>
-								<small
-									v-if="item.origin_price !== item.price"
-									class="card-price__price card-price__price--origin fs-6"
-									><del
-										>{{
-											$formatUnit.currencyFormat(
-												item.origin_price
-											)
-										}}
-										萬</del
-									></small
-								>
-							</div>
-							<span class="card-image-hover__title">
-								查看案件內容
-							</span>
-							<img
-								class="img-fluid"
-								:src="item.imageUrl"
-								alt=""
-							/>
-						</div>
-						<div class="card-body">
-							<h5
-								class="card-title text-center text-truncate fw-bold"
-							>
-								{{ item.title }}
-							</h5>
-							<p class="card-text text-center fs-6">
-								<span class="card-text__item">
-									<small>{{ item.squareFeet }}坪</small></span
-								>
-								<span class="card-text__item">
-									<small>{{
-										$formatUnit.patternFormat(item.pattern)
-									}}</small>
-								</span>
-								<span class="card-text__item">
-									<small v-if="item.houseAge !== ''">
-										{{ item.houseAge }}年</small
-									>
-									<small v-else>預售</small>
-								</span>
-							</p>
-						</div>
-					</routerLink>
-				</div>
-			</div>
+			<CasesSlide :category="category" :id="id"></CasesSlide>
 		</div>
 	</section>
 </template>
 <script>
 import Breadcrumb from "@/components/Breadcrumb.vue";
+import CasesSlide from "@/components/CasesSlide.vue";
 import { Thumbs, Pagination, Navigation, FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -541,11 +435,12 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/pagination";
 export default {
-	components: { Breadcrumb, Swiper, SwiperSlide },
+	components: { Swiper, SwiperSlide, Breadcrumb, CasesSlide },
 	data() {
 		return {
 			isLoading: false,
 			product: {},
+			category: "",
 			assistantData: {},
 			swiper: {
 				thumbsSwiper: null,
@@ -555,7 +450,7 @@ export default {
 		};
 	},
 	methods: {
-		getProducts() {
+		getCase() {
 			this.isLoading = true;
 			const { id } = this.$route.params;
 			this.$http
@@ -565,11 +460,11 @@ export default {
 				.then((res) => {
 					// 將收到的data資料展賦予給case
 					this.product = res.data.product;
+					this.category = res.data.product.category;
 					this.isLoading = false;
 				})
-				.catch((err) => {
-					// 跳出錯誤訊息
-					alert(err.data.message);
+				.catch((error) => {
+					this.$httpMessageState(error.response, "錯誤訊息");
 				});
 		},
 		getCaseAssistant() {
@@ -590,13 +485,13 @@ export default {
 		$route(to) {
 			this.id = to.params.id;
 			if (this.$route.params.id !== undefined) {
-				this.getProducts();
+				this.getCase();
 			}
 		},
 	},
 	mounted() {
 		this.getCaseAssistant();
-		this.getProducts();
+		this.getCase();
 	},
 };
 </script>
