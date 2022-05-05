@@ -26,7 +26,7 @@
 									>
 										<i class="bi bi-arrow-down"></i>
 										{{
-											$formatUnit.calToPercent(
+											$format.calToPercent(
 												item.origin_price,
 												item.price,
 												"discount"
@@ -36,7 +36,7 @@
 								</div>
 								<div
 									class="tag"
-									v-for="tag in filterItemTag(item)"
+									v-for="tag in $format.filterItemTag(item)"
 									:key="tag"
 								>
 									<span
@@ -57,7 +57,7 @@
 								<span
 									class="card-price__price card-price__price--selling"
 								>
-									{{ $formatUnit.currencyFormat(item.price) }}
+									{{ $format.currencyFormat(item.price) }}
 									<span class="card-price__price-unit"
 										>萬</span
 									>
@@ -67,7 +67,7 @@
 									class="card-price__price card-price__price--origin fs-6"
 									><del
 										>{{
-											$formatUnit.currencyFormat(
+											$format.currencyFormat(
 												item.origin_price
 											)
 										}}
@@ -75,6 +75,9 @@
 									></small
 								>
 							</div>
+							<span class="card-image-hover__title">
+								查看案件內容
+							</span>
 							<img
 								class="img-fluid"
 								:src="item.imageUrl"
@@ -89,13 +92,11 @@
 							</h5>
 							<p class="card-text text-center fs-6">
 								<span class="card-text__item">
-									<small
-										>建坪 {{ item.squareFeet }}坪</small
-									></span
+									<small>{{ item.squareFeet }}坪</small></span
 								>
 								<span class="card-text__item">
 									<small>{{
-										$formatUnit.patternFormat(item.pattern)
+										$format.patternFormat(item.pattern)
 									}}</small>
 								</span>
 								<span class="card-text__item">
@@ -131,14 +132,6 @@ export default {
 					this.$httpMessageState(error.response, "錯誤訊息");
 					// console.log(error);
 				});
-		},
-		filterItemTag(caseItem) {
-			const filteredTags = caseItem.tags.filter((tag) => {
-				return (
-					tag === "新上架" || tag === "低總價" || tag === "店長推薦"
-				);
-			});
-			return filteredTags;
 		},
 	},
 	mounted() {

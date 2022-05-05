@@ -123,12 +123,12 @@ export default {
 				return "";
 			},
 		},
-		id: {
-			type: String,
-			default() {
-				return "";
-			},
-		},
+		// id: {
+		// 	type: String,
+		// 	default() {
+		// 		return "";
+		// 	},
+		// },
 	},
 	data() {
 		return {
@@ -154,8 +154,7 @@ export default {
 	computed: {
 		filterCases() {
 			return this.cases.filter((item) => {
-				(this.category === "" || item.category === this.category) &&
-					item.id !== this.id;
+				this.category === "" || item.category === this.category;
 			});
 		},
 	},

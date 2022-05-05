@@ -45,7 +45,7 @@ const routes = [
 			},
 			{
 				path: "case/:id",
-				name: "case",
+				name: "product",
 				component: () => import("@/views/Case.vue"),
 			},
 			{

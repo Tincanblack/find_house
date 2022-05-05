@@ -420,7 +420,7 @@
 	</section>
 	<section class="case-related bg-light py-5">
 		<div class="container">
-			<CasesSlide :category="category" :id="id"></CasesSlide>
+			<CasesSlide :category="category"></CasesSlide>
 		</div>
 	</section>
 </template>
@@ -441,12 +441,12 @@ export default {
 			isLoading: false,
 			product: {},
 			category: "",
+			id: "",
 			assistantData: {},
 			swiper: {
 				thumbsSwiper: null,
 				modules: [Thumbs, Pagination, Navigation, FreeMode],
 			},
-			id: "",
 		};
 	},
 	methods: {
@@ -481,13 +481,13 @@ export default {
 			this.swiper.thumbsSwiper = swiper;
 		},
 	},
-	watch: {
-		$route(to) {
-			this.id = to.params.id;
-			if (this.$route.params.id !== undefined) {
-				this.getCase();
-			}
-		},
+	// watch偵測到網址的id有變，將新的id帶入到data的id
+	$route(to) {
+		this.id = to.params.id;
+		if (this.$route.name === "product") {
+			this.getCase();
+			console.log("success");
+		}
 	},
 	mounted() {
 		this.getCaseAssistant();
