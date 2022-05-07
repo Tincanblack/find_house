@@ -5,7 +5,7 @@
 			<h2 class="mb-5">想要找什麼樣類型的房子?</h2>
 			<div class="row">
 				<div class="col-lg-3">
-					<routerLink
+					<RouterLink
 						class="index-feature-card text-dark text-decoration-none"
 						:to="{ path: '/cases', query: { category: '公寓' } }"
 					>
@@ -16,10 +16,10 @@
 							/>
 							<h5 class="index-feature-card__title">公寓</h5>
 						</div>
-					</routerLink>
+					</RouterLink>
 				</div>
 				<div class="col-lg-3">
-					<routerLink
+					<RouterLink
 						class="index-feature-card text-dark text-decoration-none"
 						:to="{ path: '/cases', query: { category: '別墅' } }"
 					>
@@ -30,10 +30,10 @@
 							/>
 							<h5 class="index-feature-card__title">別墅</h5>
 						</div>
-					</routerLink>
+					</RouterLink>
 				</div>
 				<div class="col-lg-3">
-					<routerLink
+					<RouterLink
 						class="index-feature-card text-dark text-decoration-none"
 						:to="{ path: '/cases', query: { category: '華廈' } }"
 					>
@@ -44,10 +44,10 @@
 							/>
 							<h5 class="index-feature-card__title">華廈</h5>
 						</div>
-					</routerLink>
+					</RouterLink>
 				</div>
 				<div class="col-lg-3">
-					<routerLink
+					<RouterLink
 						class="index-feature-card text-dark text-decoration-none"
 						:to="{ path: '/cases', query: { category: '大樓' } }"
 					>
@@ -58,7 +58,7 @@
 							/>
 							<h5 class="index-feature-card__title">大樓</h5>
 						</div>
-					</routerLink>
+					</RouterLink>
 				</div>
 			</div>
 		</div>
@@ -67,7 +67,8 @@
 		<div class="container">
 			<div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-2">
 				<div class="col" v-for="item in randomData" :key="item.id">
-					<routerLink
+					<CaseCard :item="item"></CaseCard>
+					<!-- <RouterLink
 						class="card cases-card text-decoration-none rounded-0 text-dark"
 						:to="`/case/${item.id}`"
 					>
@@ -164,16 +165,16 @@
 								</span>
 							</p>
 						</div>
-					</routerLink>
+					</RouterLink> -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
 					<div class="index-cases-footer text-center py-4">
-						<routerLink
+						<RouterLink
 							class="cases-footer__button btn btn-outline-primary w-25 rounded-0"
 							to="/cases"
-							>查看更多</routerLink
+							>查看更多</RouterLink
 						>
 					</div>
 				</div>
@@ -221,10 +222,12 @@
 </template>
 <script>
 import IndexBannerSlide from "@/components/IndexBannerSlide.vue";
+import CaseCard from "@/components/CaseCard.vue";
 
 export default {
 	components: {
 		IndexBannerSlide,
+		CaseCard,
 	},
 	data() {
 		return {

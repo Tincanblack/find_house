@@ -311,6 +311,33 @@ body {
 }
 
 // page
+// page - common
+.section {
+	&-header {
+		overflow: hidden;
+		margin-bottom: 1rem;
+		&__title {
+			margin: 0;
+			padding-right: 1rem;
+			position: relative;
+			display: inline-block;
+			z-index: 2;
+			color: map-get($map: $theme-site-colors, $key: "main");
+			background: white;
+			&::after {
+				content: "";
+				position: absolute;
+				z-index: 1;
+				top: 50%;
+				left: 100%;
+				transform: translate(0, -50%);
+				width: 100vw;
+				height: 2px;
+				background: map-get($map: $theme-site-colors, $key: "main");
+			}
+		}
+	}
+}
 // page - case
 .case {
 	&-assistant {
@@ -454,7 +481,7 @@ body {
 						background: rgba(0, 0, 0, 0.5);
 						color: white;
 						&::after {
-							font-size: 12px;
+							font-size: 1rem;
 							font-weight: bold;
 						}
 					}
@@ -462,11 +489,15 @@ body {
 				.slide-item {
 					&.swiper-slide {
 						opacity: 0.4;
-						border: 2px solid white;
 						&.swiper-slide-thumb-active {
 							opacity: 1;
-							border: 2px solid
-								map-get($map: $theme-site-colors, $key: "main");
+							.thumbnail-slide__image {
+								border: 3px solid
+									map-get(
+										$map: $theme-site-colors,
+										$key: "main"
+									);
+							}
 						}
 					}
 				}
@@ -482,35 +513,6 @@ body {
 	&-detail {
 		&-section {
 			margin-bottom: 1rem;
-			.detail {
-				&-header {
-					overflow: hidden;
-					margin-bottom: 0.5rem;
-					&__title {
-						margin: 0;
-						position: relative;
-						display: inline-block;
-						padding-right: 1rem;
-						color: map-get($map: $theme-site-colors, $key: "main");
-						background: white;
-						z-index: 2;
-						&::after {
-							content: "";
-							position: absolute;
-							z-index: 1;
-							top: 50%;
-							left: 100%;
-							transform: translate(0, -50%);
-							width: 100vw;
-							height: 2px;
-							background: map-get(
-								$map: $theme-site-colors,
-								$key: "main"
-							);
-						}
-					}
-				}
-			}
 		}
 	}
 	&-table {
@@ -518,6 +520,37 @@ body {
 			&:first-child {
 				width: 30%;
 				background: map-get($grays, "200");
+			}
+		}
+	}
+	&-related {
+		.list-slide {
+			.swiper-button {
+				&-prev {
+					left: 0;
+				}
+				&-next {
+					right: 0;
+				}
+				&-prev,
+				&-next {
+					width: calc(var(--swiper-navigation-size) / 44 * 25);
+					height: var(--swiper-navigation-size);
+					padding: 0.5rem;
+					background: rgba(0, 0, 0, 0.5);
+					color: white;
+					&::after {
+						font-size: 1.25rem;
+						font-weight: bold;
+					}
+				}
+			}
+		}
+	}
+	&-action {
+		&__button {
+			&:hover {
+				color: white;
 			}
 		}
 	}

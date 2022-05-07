@@ -70,68 +70,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-12 col-lg-8">
+						<CasePreviewSlide :product="product"></CasePreviewSlide>
 						<div class="case-slide">
-							<swiper
-								class="carousel-slide"
-								:modules="swiper.modules"
-								:navigation="true"
-								:pagination="{
-									clickable: true,
-									type: 'fraction',
-								}"
-								:thumbs="{ swiper: swiper.thumbsSwiper }"
-							>
-								<swiper-slide
-									v-for="(image, index) in product.imagesUrl"
-									:key="`carouselImage_${index}`"
-								>
-									<div
-										class="carousel-slide__image"
-										style="
-											background-size: cover;
-											background-position: center;
-										"
-										:style="{
-											backgroundImage: `url(${image})`,
-										}"
-									></div>
-								</swiper-slide>
-							</swiper>
-							<swiper
-								class="thumbnail-slide"
-								@swiper="setThumbsSwiper"
-								:spaceBetween="5"
-								:slidesPerView="4.5"
-								:freeMode="true"
-								:navigation="true"
-								:watchSlidesProgress="true"
-								:modules="swiper.modules"
-								:breakpoints="{
-									'@0.00': {
-										slidesPerView: 3.5,
-									},
-									'@1.50': {
-										slidesPerView: 4.5,
-									},
-								}"
-							>
-								<swiper-slide
-									class="slide-item"
-									v-for="(image, index) in product.imagesUrl"
-									:key="`thumbnailImg_${index}`"
-								>
-									<div
-										class="thumbnail-slide__image"
-										style="
-											background-size: cover;
-											background-position: center;
-										"
-										:style="{
-											backgroundImage: `url(${image})`,
-										}"
-									></div>
-								</swiper-slide>
-							</swiper>
 							<div class="case-slide-footer my-1">
 								<i
 									class="bi bi-exclamation-circle-fill text-secondary"
@@ -143,10 +83,10 @@
 						</div>
 						<div class="case-detail mt-3">
 							<div class="case-detail-section" id="info">
-								<div class="detail-header">
-									<h5 class="detail-header__title">
+								<div class="section-header">
+									<h4 class="section-header__title">
 										基本資料
-									</h5>
+									</h4>
 								</div>
 								<div class="detail-content">
 									<table class="table border case-table">
@@ -241,20 +181,20 @@
 								</div>
 							</div>
 							<div class="case-detail-section" id="detail">
-								<div class="detail-header">
-									<h5 class="detail-header__title">
+								<div class="section-header">
+									<h4 class="section-header__title">
 										物件特色
-									</h5>
+									</h4>
 								</div>
 								<div class="detail-content">
 									{{ product.content }}
 								</div>
 							</div>
 							<div class="case-detail-section" id="near">
-								<div class="detail-header">
-									<h5 class="detail-header__title">
+								<div class="section-header">
+									<h4 class="section-header__title">
 										周遭環境
-									</h5>
+									</h4>
 								</div>
 								<div class="detail-content">
 									{{ product.content }}
@@ -308,9 +248,9 @@
 								class="case-assistant card position-sticky shadow-sm mb-3"
 							>
 								<div class="card-body">
-									<h5 class="case-assistant__title">
+									<h4 class="case-assistant__title">
 										您的案件經理人
-									</h5>
+									</h4>
 									<div class="d-flex align-items-center my-3">
 										<div
 											class="case-assistant__image me-2"
@@ -399,13 +339,13 @@
 							<div class="case-action">
 								<div class="btn-group w-100">
 									<button
-										class="btn btn-outline-secondary shadow-sm mb-3"
+										class="case-action__button btn btn-outline-secondary shadow-sm mb-3"
 									>
 										<i class="bi bi-search-heart"></i>
 										收藏案件
 									</button>
 									<button
-										class="btn btn-outline-success shadow-sm mb-3"
+										class="case-action__button btn btn-outline-success shadow-sm mb-3"
 									>
 										<i class="bi bi-files"></i>
 										加入比較
@@ -420,36 +360,50 @@
 	</section>
 	<section class="case-related bg-light py-5">
 		<div class="container">
-			<CasesSlide :category="category"></CasesSlide>
+			<div class="section-header">
+				<h4 class="section-header__title bg-light">相似的物件</h4>
+			</div>
+			<CasesSlide
+				:category="category"
+				:cases="cases"
+				:id="id"
+			></CasesSlide>
 		</div>
 	</section>
 </template>
 <script>
 import Breadcrumb from "@/components/Breadcrumb.vue";
+import CasePreviewSlide from "@/components/CasePreviewSlide.vue";
 import CasesSlide from "@/components/CasesSlide.vue";
-import { Thumbs, Pagination, Navigation, FreeMode } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
-import "swiper/css/pagination";
+
 export default {
-	components: { Swiper, SwiperSlide, Breadcrumb, CasesSlide },
+	components: {
+		Breadcrumb,
+		CasePreviewSlide,
+		CasesSlide,
+	},
 	data() {
 		return {
 			isLoading: false,
+			cases: [],
 			product: {},
 			category: "",
 			id: "",
 			assistantData: {},
-			swiper: {
-				thumbsSwiper: null,
-				modules: [Thumbs, Pagination, Navigation, FreeMode],
-			},
 		};
 	},
 	methods: {
+		getCasesList() {
+			const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`;
+			this.$http
+				.get(url)
+				.then((res) => {
+					this.cases = res.data.products;
+				})
+				.catch((error) => {
+					this.$httpMessageState(error.response, "錯誤訊息");
+				});
+		},
 		getCase() {
 			this.isLoading = true;
 			const { id } = this.$route.params;
@@ -477,21 +431,21 @@ export default {
 					alert(err.error);
 				});
 		},
-		setThumbsSwiper(swiper) {
-			this.swiper.thumbsSwiper = swiper;
-		},
 	},
 	// watch偵測到網址的id有變，將新的id帶入到data的id
-	$route(to) {
-		this.id = to.params.id;
-		if (this.$route.name === "product") {
-			this.getCase();
-			console.log("success");
-		}
+	watch: {
+		$route() {
+			this.id = this.$route.params.id;
+			if (this.$route.params.id !== undefined) {
+				this.getCase();
+			}
+		},
 	},
 	mounted() {
+		this.id = this.$route.params.id;
 		this.getCaseAssistant();
 		this.getCase();
+		this.getCasesList();
 	},
 };
 </script>

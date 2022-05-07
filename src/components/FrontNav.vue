@@ -23,23 +23,23 @@
 					class="navbar-nav flex-md-row ms-md-auto align-items-md-center"
 				>
 					<li class="nav-item">
-						<routerLink class="nav-link" to="/cases"
-							>找房</routerLink
+						<RouterLink class="nav-link" to="/cases"
+							>找房</RouterLink
 						>
 					</li>
 					<li class="nav-item">
-						<routerLink class="nav-link" to="/collections"
+						<RouterLink class="nav-link" to="/collections"
 							>收藏名單
-						</routerLink>
+						</RouterLink>
 					</li>
 					<li class="nav-item">
-						<routerLink class="nav-link" to="/news"
-							>房訊知識</routerLink
+						<RouterLink class="nav-link" to="/news"
+							>房訊知識</RouterLink
 						>
 					</li>
 					<li class="nav-item">
-						<routerLink class="nav-link" to="/reserve"
-							>查詢預約</routerLink
+						<RouterLink class="nav-link" to="/reserve"
+							>查詢預約</RouterLink
 						>
 					</li>
 				</ul>
