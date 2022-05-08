@@ -99,6 +99,18 @@ body {
 	}
 }
 
+.side-navigation {
+	&__button--to-top {
+		transition: all .5s;
+		border: 0;
+		background: 0;
+		box-shadow: none;
+		position: fixed;
+		right: 15px;
+		bottom: 15px;
+	}
+}
+
 // tag
 .tag {
 	&__element {
@@ -391,6 +403,9 @@ body {
 			&__selling {
 				font-size: 2rem;
 				margin-bottom: 0;
+				@include pad {
+					font-size: 1.25rem;
+				}
 			}
 			&__origin {
 				color: map-get($grays, "500");
@@ -421,7 +436,7 @@ body {
 				&__image {
 					height: 500px;
 					@include pad {
-						height: 275px;
+						height: 225px;
 					}
 				}
 				.swiper {
@@ -458,7 +473,7 @@ body {
 				}
 			}
 			.thumbnail-slide {
-				margin-top: 2rem;
+				margin-top: 1rem;
 				&__image {
 					height: 100px;
 					cursor: pointer;
@@ -525,6 +540,7 @@ body {
 	}
 	&-related {
 		.list-slide {
+			padding-bottom: 0.5rem;
 			.swiper-button {
 				&-prev {
 					left: 0;

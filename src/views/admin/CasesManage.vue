@@ -20,7 +20,8 @@
 					<th width="45%" class="text-start">案件名稱</th>
 					<th width="5%" class="text-end">原價</th>
 					<th width="5%" class="text-end">售價</th>
-					<th width="10%">是否顯示</th>
+					<th width="5%" class="text-end">車位售價</th>
+					<th width="5%">是否顯示</th>
 					<th width="10%">操作</th>
 				</tr>
 			</thead>
@@ -39,7 +40,7 @@
 						{{ item.title }}
 					</td>
 					<td class="text-end">
-						{{ $formatUnit.currencyFormat(item.origin_price) }}
+						{{ $format.currencyFormat(item.origin_price) }}
 					</td>
 					<td
 						class="text-end"
@@ -47,7 +48,13 @@
 							'text-danger': item.origin_price > item.price,
 						}"
 					>
-						{{ $formatUnit.currencyFormat(item.price) }}
+						{{ $format.currencyFormat(item.price) }}
+					</td>
+					<td class="text-end">
+						<span v-if="item.parkingPrice > 0">{{
+							item.parkingPrice
+						}}</span>
+						<span v-else>--</span>
 					</td>
 					<td>
 						<span class="text-success" v-if="item.is_enabled === 1"

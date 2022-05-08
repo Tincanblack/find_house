@@ -1,5 +1,4 @@
 <template>
-	<LoadingAnimate :active="isLoading" :z-index="1060"></LoadingAnimate>
 	<Breadcrumb :product="product"></Breadcrumb>
 	<section class="case py-3">
 		<div class="case-header">
@@ -173,6 +172,16 @@
 												<td>車位</td>
 												<td v-if="product.parking">
 													{{ product.parking }}
+													<span
+														v-if="
+															product.parkingPrice >
+															0
+														"
+														>(車位
+														{{
+															product.parkingPrice
+														}}萬)</span
+													>
 												</td>
 												<td v-else>--</td>
 											</tr>
@@ -202,8 +211,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-12 col-lg-4 ms-auto">
-						<div class="case-preview mb-3">
+					<div class="col-12 col-lg-4 ms-auto d-none d-lg-block">
+						<div class="case-preview">
 							<ul class="case-preview-list list-group">
 								<li class="info-list-item">
 									<span class="info-list-title">
