@@ -89,6 +89,10 @@ body {
 
 //  breadcrumb
 .breadcrumb {
+	&-wrapper {
+		border-top: 1px solid map-get($grays, "200");
+		border-bottom: 1px solid map-get($grays, "200");
+	}
 	margin-bottom: 0;
 	&-item {
 		+ .breadcrumb-item {
@@ -101,7 +105,7 @@ body {
 
 .side-navigation {
 	&__button--to-top {
-		transition: all .5s;
+		transition: all 0.5s;
 		border: 0;
 		background: 0;
 		box-shadow: none;
@@ -243,7 +247,7 @@ body {
 			&::after {
 				display: inline-block;
 				content: "|";
-				color: map-get($grays, "300");
+				color: map-get($grays, "200");
 				margin: 0 0.25rem;
 			}
 			&:last-child {
@@ -350,6 +354,41 @@ body {
 		}
 	}
 }
+
+// page - sort
+.sort {
+	&-display {
+		&__button {
+			display: inline-block;
+			position: relative;
+			cursor: pointer;
+			margin-right: 0.25rem;
+			&::after {
+				content: '';
+				position: relative;
+				display: inline-block;
+				width: 2px;
+				height: 1.75rem;
+				margin: 0 .5rem;
+				vertical-align: middle;
+				background: map-get($map: $grays, $key: "200");
+			}
+			&:last-child {
+				margin-right: 0;
+				&::after {
+					display: none;
+				}
+			}
+			&:hover {
+				color: map-get($map: $theme-site-colors, $key: "main");
+			}
+		}
+		&__icon {
+			vertical-align: middle;
+		}
+	}
+}
+
 // page - case
 .case {
 	&-assistant {

@@ -3,7 +3,7 @@
 		class="card cases-card text-decoration-none rounded-0 text-dark"
 		:to="`/case/${item.id}`"
 	>
-		<div class="card-image">
+		<div v-if="item.imageUrl" class="card-image">
 			<div class="card-tag">
 				<div class="tag" v-if="item.origin_price !== item.price">
 					<span

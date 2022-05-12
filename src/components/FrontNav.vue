@@ -59,9 +59,9 @@ export default {
 	methods: {
 		navScrollShadow() {
 			const windowY = window.scrollY;
-			if (windowY > 100) {
+			if (windowY > 30) {
 				this.navStyle.shadow = "shadow-sm";
-			} else if (windowY < 100) {
+			} else if (windowY < 30) {
 				this.navStyle.shadow = "";
 			}
 		},
