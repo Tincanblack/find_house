@@ -15,10 +15,7 @@
 				</li>
 				<li class="breadcrumb-item">
 					<RouterLink
-						:to="{
-							path: '/cases',
-							query: { category: '全部' },
-						}"
+						to="/cases"
 						class="breadcrumb-link text-decoration-none"
 						>找房</RouterLink
 					>
@@ -30,7 +27,7 @@
 					<RouterLink
 						class="breadcrumb-link text-decoration-none"
 						:to="{
-							path: '/cases',
+							path: `/cases?category=${product.category}`,
 							query: { category: product.category },
 						}"
 					>

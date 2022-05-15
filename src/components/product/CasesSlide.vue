@@ -25,7 +25,7 @@
 	</swiper>
 </template>
 <script>
-import CaseCard from "@/components/CaseCard.vue";
+import CaseCard from "@/components/product/CaseCard.vue";
 import { Thumbs, Pagination, Navigation, FreeMode } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";

@@ -1,4 +1,5 @@
 <template>
+	<LoadingAnimate :active="isLoading" :z-index="1060"></LoadingAnimate>
 	<Breadcrumb :product="product"></Breadcrumb>
 	<section class="case py-3">
 		<div class="case-header">
@@ -382,8 +383,8 @@
 </template>
 <script>
 import Breadcrumb from "@/components/Breadcrumb.vue";
-import CasePreviewSlide from "@/components/CasePreviewSlide.vue";
-import CasesSlide from "@/components/CasesSlide.vue";
+import CasePreviewSlide from "@/components/product/CasePreviewSlide.vue";
+import CasesSlide from "@/components/product/CasesSlide.vue";
 
 export default {
 	components: {
