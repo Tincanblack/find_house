@@ -35,16 +35,16 @@
 					<div class="sort">
 						<span
 							class="sort-display__button"
-							:class="{ isActive: this.displayStyle === 'card' }"
-							@click="changeCardView('card')"
+							:class="{ isActive: this.caseCardView === 'card' }"
+							@click="handleCaseCard('card')"
 						>
 							<i class="bi bi-grid fs-3 sort-display__icon"></i>
 							卡片
 						</span>
 						<span
 							class="sort-display__button"
-							:class="{ isActive: this.displayStyle === 'list' }"
-							@click="changeCardView('list')"
+							:class="{ isActive: this.caseCardView === 'list' }"
+							@click="handleCaseCard('list')"
 						>
 							<i
 								class="bi bi-list-ul fs-3 sort-display__icon"
@@ -59,14 +59,14 @@
 	<section class="category-cases pb-3">
 		<div class="container">
 			<div
-				v-if="displayStyle === 'card'"
+				v-if="caseCardView === 'card'"
 				class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-2"
 			>
 				<div class="col" v-for="item in cases" :key="item.id">
 					<CaseCard :item="item"></CaseCard>
 				</div>
 			</div>
-			<div v-if="displayStyle === 'list'" class="row row-cols-1 g-2">
+			<div v-if="caseCardView === 'list'" class="row row-cols-1 g-2">
 				<div class="col pb-lg-3" v-for="item in cases" :key="item.id">
 					<CaseList :item="item"></CaseList>
 				</div>
@@ -87,7 +87,7 @@ export default {
 	data() {
 		return {
 			cases: [],
-			displayStyle: "list",
+			caseCardView: localStorage.getItem("case_card_view") || "card",
 			reverseSort: false,
 			filter: "",
 			isLoading: false,
@@ -108,12 +108,20 @@ export default {
 				})
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");
-					// console.log(error);
 				});
 		},
-		changeCardView(view) {
-			if (view == "card") this.displayStyle = "card";
-			else if (view === "list") this.displayStyle = "list";
+		handleCaseCard(view) {
+			if (view == "card") {
+				this.caseCardView = "card";
+			} else if (view === "list") {
+				this.caseCardView = "list";
+			}
+			localStorage.setItem("case_card_view", this.caseCardView);
+		},
+		resizeWidth() {
+			if (window.matchMedia("(max-width: 767px)").matches) {
+				this.caseCardView = "card";
+			}
 		},
 	},
 	computed: {
@@ -132,6 +140,7 @@ export default {
 	mounted() {
 		this.filter = this.$route.query.category;
 		this.getCaseList(this.filter);
+		window.addEventListener("resize", this.resizeWidth);
 	},
 };
 </script>

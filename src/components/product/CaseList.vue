@@ -66,20 +66,9 @@
 						class="card-title text-lg-left text-truncate fw-bold position-relative"
 					>
 						{{ item.title }}
-						<div class="card-price d-none d-lg-block">
-							<span
-								v-if="item.origin_price && item.price"
-								class="badge tag__element tag__element--sec"
-							>
-								<i class="bi bi-arrow-down"></i>
-								{{
-									$format.calToPercent(
-										item.origin_price,
-										item.price,
-										"discount"
-									)
-								}}
-							</span>
+						<div
+							class="card-price d-none d-lg-flex align-items-center"
+						>
 							<span
 								class="card-price__price card-price__price--selling"
 							>

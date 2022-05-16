@@ -474,17 +474,6 @@ body {
 						top: 0;
 						background: 0;
 						line-height: initial;
-						@include pad {
-							padding-right: 0.5rem;
-							position: absolute;
-							width: 100%;
-							background: linear-gradient(
-								to right,
-								white 0%,
-								white 40%,
-								#ffffff00 95%
-							);
-						}
 					}
 				}
 			}
