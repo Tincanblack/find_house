@@ -144,11 +144,37 @@ body {
 // index
 .index {
 	&-feature {
+		position: relative;
+		background: url("https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1653141239579.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=qw5vaDdO7qzw5lOONQEathILcMqPcgwjhoNScgINaUGUHdfszjWdhu6SdmOsjvgxFqnXBe3TBNrBA2s%2Bu7dGRvX0X2ayKPYcTMqlrAluGG6uKHe77Tndg3aucVv4nWfXuXf4f6LUk0dawiRe3pGGC9Tnm%2F2Wl4TOU75lcfxfwwGHvsiFimaAoHNycn1yqB1ck54g2FYYYBBCFDO2I0Y68DoPsoWpXRq%2FlD7%2BVjzhJeQKnr4xqQJzuGH307yxXUH%2FDlX3BLmoeam%2BSvoOtOVp1sLRSXghUYAxwu%2Blb9I%2FPJjpMXFCkKIqtXbOCPcdGt0ZJ%2Fq2%2FWJtTKzS10mJiYt2GA%3D%3D"),
+			linear-gradient(0deg, white 50%, #b9efff 100%);
+		background-position: center bottom;
+		background-size: contain;
+		@include pad {
+			background-size: cover;
+		}
+		&::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.5;
+			background-color: white;
+			z-index: 0;
+		}
+		&__title {
+			position: relative;
+			z-index: 1;
+		}
 		&-card {
+			position: relative;
+			z-index: 1;
+			display: inline-block;
 			&:hover {
 				.index-feature-image {
 					img {
-						transform: scale(1.2);
+						filter: blur(0px);
 					}
 				}
 			}
@@ -164,6 +190,7 @@ body {
 			}
 		}
 		&-image {
+			position: relative;
 			display: inline-block;
 			min-width: 125px;
 			width: 125px;
@@ -173,7 +200,13 @@ body {
 			letter-spacing: normal;
 			border-radius: 50%;
 			border: 3px solid white;
+			background: map-get($map: $grays, $key: "200");
 			zoom: 1;
+			@include pad {
+				min-width: 100px;
+				width: 100px;
+				height: 100px;
+			}
 			img {
 				position: absolute;
 				left: 0;
@@ -181,7 +214,7 @@ body {
 				width: 100%;
 				height: auto;
 				filter: blur(3px);
-				transition: all 0.3s ease-out;
+				transition: all 0.5s;
 			}
 		}
 	}
@@ -233,6 +266,7 @@ body {
 			position: relative;
 			cursor: pointer;
 			margin-right: 0.25rem;
+			transition: all 0.5s;
 			&.isActive {
 				color: map-get($map: $theme-site-colors, $key: "main");
 			}
@@ -311,6 +345,11 @@ body {
 	.case-item {
 		&__card {
 			.card {
+				&-body {
+					@include padWide {
+						padding: 0.25rem;
+					}
+				}
 				&-image {
 					position: relative;
 					overflow: hidden;
