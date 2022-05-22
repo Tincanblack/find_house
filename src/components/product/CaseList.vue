@@ -78,7 +78,7 @@
 						</div>
 					</h5>
 					<div class="card-text">
-						<div class="d-none d-lg-block">
+						<div class="card-text-list d-none d-lg-block">
 							{{ item.description }}
 						</div>
 						<div class="card-text-list">
@@ -97,10 +97,18 @@
 								<small v-else>預售</small>
 							</span>
 						</div>
-						<div class="d-none d-lg-block">{{ item.parking }}</div>
+						<div
+							class="card-text-list card-text-list--light d-none d-lg-block"
+							v-if="item.parking"
+						>
+							<span
+								class="card-text__icon card-text__icon-parking"
+								>P</span
+							>{{ item.parking }}
+						</div>
 						<ul class="card-feature-tag p-0 m-0 d-none d-lg-block">
 							<li
-								class="badge bg-primary card-feature-tag__item"
+								class="badge card-feature-tag__item"
 								v-for="tag in item.tags"
 								:key="tag"
 							>

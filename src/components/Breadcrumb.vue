@@ -34,7 +34,7 @@
 						{{ $route.query.category || product.category }}
 					</RouterLink>
 				</li>
-				<li class="breadcrumb-item" v-show="product.title">
+				<li class="breadcrumb-item fw-bold" v-show="product.title">
 					{{ product.title }}
 				</li>
 			</ol>

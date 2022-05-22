@@ -1,8 +1,10 @@
 <template>
 	<IndexBannerSlide></IndexBannerSlide>
-	<section class="index-feature text-center py-5 bg-light">
+	<section class="index-feature text-center py-3 py-lg-5 bg-light">
 		<div class="container">
-			<h2 class="index-feature__title mb-5">想要找什麼樣類型的房子?</h2>
+			<h2 class="index-feature__title mb-3 mb-lg-5">
+				想要找什麼樣類型的房子?
+			</h2>
 			<div class="row">
 				<div class="col-6 col-lg-3">
 					<RouterLink
@@ -63,9 +65,9 @@
 			</div>
 		</div>
 	</section>
-	<section class="index-cases py-5">
+	<section class="index-cases py-3 py-lg-5">
 		<div class="container">
-			<div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-2">
+			<div class="row row-cols-1 row-cols-sm-3 row-cols-lg-4 g-2">
 				<div
 					class="col case-item__card case-item__card--cardStyle"
 					v-for="item in randomData"
@@ -87,9 +89,9 @@
 			</div>
 		</div>
 	</section>
-	<section class="index-news py-5">
+	<section class="index-news py-3 py-lg-5">
 		<div class="container">
-			<div class="row row-cols-1 row-cols-md-2 g-3">
+			<div class="row row-cols-1 row-cols-lg-2 g-3">
 				<div class="col">
 					<div class="card shadow-sm">
 						<img

@@ -206,7 +206,10 @@ export default {
 	watch: {
 		$route() {
 			this.filterCategory = this.$route.query.category;
-			if (this.$route.query.category !== undefined) {
+			if (
+				this.filterCategory !== this.$route.query.category ||
+				this.filterCategory === undefined
+			) {
 				this.getCaseList();
 			}
 		},

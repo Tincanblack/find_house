@@ -454,6 +454,23 @@ body {
 								}
 							}
 						}
+						&--light {
+							color: map-get($map: $grays, $key: "500");
+						}
+					}
+					&__icon {
+						display: inline-block;
+						margin-right: 0.125rem;
+						text-align: center;
+						&-parking {
+							width: 1.5rem;
+							height: 1.5rem;
+							border: 1px solid white;
+							border-radius: .25rem;
+							color: white;
+							font-weight: bold;
+							background: map-get($map: $theme-site-colors,$key: "main");
+						}
 					}
 					@include pad {
 						text-align: center;
@@ -492,10 +509,24 @@ body {
 						@include pad {
 							text-align: center;
 						}
+						&-list {
+							margin-bottom: 0.25rem;
+						}
 					}
 					&-feature {
 						&-tag {
 							&__item {
+								color: map-get(
+									$map: $theme-site-colors,
+									$key: "main"
+								);
+								background: lighten(
+									map-get(
+										$map: $theme-site-colors,
+										$key: "main"
+									),
+									65%
+								);
 								display: inline-block;
 								margin-right: 0.25rem;
 								&:last-child {
