@@ -20,92 +20,141 @@
 							for="inlineFormSelectPref"
 							>Preference</label
 						>
-						<!-- <div class="dropdown">
+						<div class="dropdown sort-cases">
 							<button
-								class="btn dropdown-toggle"
+								class="btn sort-cases__current dropdown-toggle"
 								type="button"
-								id="dropdownMenuButton1"
+								id="dropdownButton"
 								data-bs-toggle="dropdown"
 								aria-expanded="false"
+								ref="currentSort"
 							>
 								預設顯示
 							</button>
 							<ul
-								class="dropdown-menu"
-								aria-labelledby="dropdownMenuButton1"
+								class="dropdown-menu sort-cases-select"
+								aria-labelledby="dropdownButton"
 							>
+								<!-- <li>
+									<button
+										type="button"
+										class="dropdown-item sort-cases-select__option"
+										:class="{
+											active: sortBy === 'priceLow2High',
+										}"
+										@click="sortCaseList('')"
+									>
+										預設顯示
+									</button>
+								</li> -->
 								<li>
-									<button class="dropdown-item">
+									<button
+										type="button"
+										class="dropdown-item sort-cases-select__option"
+										:class="{
+											active: sortBy === 'priceLow2High',
+										}"
+										@click="sortCaseList('priceLow2High')"
+									>
 										售價從低到高
 									</button>
 								</li>
 								<li>
-									<button class="dropdown-item">
+									<button
+										type="button"
+										class="dropdown-item sort-cases-select__option"
+										:class="{
+											active: sortBy === 'priceHigh2Low',
+										}"
+										@click="sortCaseList('priceHigh2Low')"
+									>
 										售價從高到低
 									</button>
 								</li>
 								<li>
-									<button class="dropdown-item">
+									<button
+										type="button"
+										class="dropdown-item sort-cases-select__option"
+										:class="{
+											active:
+												sortBy === 'houseAgeLow2High',
+										}"
+										@click="
+											sortCaseList('houseAgeLow2High')
+										"
+									>
 										屋齡從低到高
 									</button>
 								</li>
 								<li>
-									<button class="dropdown-item">
+									<button
+										type="button"
+										class="dropdown-item sort-cases-select__option"
+										:class="{
+											active:
+												sortBy === 'houseAgeHigh2Low',
+										}"
+										@click="
+											sortCaseList('houseAgeHigh2Low')
+										"
+									>
 										屋齡從高到低
 									</button>
 								</li>
 								<li>
-									<button class="dropdown-item">
+									<button
+										type="button"
+										class="dropdown-item sort-cases-select__option"
+										:class="{
+											active:
+												sortBy === 'squareFeetLow2High',
+										}"
+										@click="
+											sortCaseList('squareFeetLow2High')
+										"
+									>
 										坪數從小到大
 									</button>
 								</li>
 								<li>
-									<button class="dropdown-item">
+									<button
+										type="button"
+										class="dropdown-item sort-cases-select__option"
+										:class="{
+											active:
+												sortBy ===
+												'squareFeetHight2Low',
+										}"
+										@click="
+											sortCaseList('squareFeetHight2Low')
+										"
+									>
 										坪數從大到小
 									</button>
 								</li>
 							</ul>
-						</div> -->
-						<select
-							class="form-select"
-							v-model="sortBy"
-							@change="sortCaseList(sortBy)"
-						>
-							<option value="" selected disabled>預設顯示</option>
-							<option value="priceLow2High">售價從低到高</option>
-							<option value="priceHigh2Low">售價從高到低</option>
-							<option value="houseAgeLow2High">
-								屋齡從低到高
-							</option>
-							<option value="houseAgeHigh2Low">
-								屋齡從高到低
-							</option>
-							<option value="squareFeetLow2High">
-								坪數從小到大
-							</option>
-							<option value="squareFeetHight2Low">
-								坪數從大到小
-							</option>
-						</select>
+						</div>
 					</div>
 				</div>
 				<div class="col-12 d-none d-lg-block">
-					<div class="sort">
+					<div class="case-card-display">
 						<span
-							class="sort-display__button"
+							class="case-card-display__button"
 							:class="{ isActive: this.caseCardView === 'card' }"
 							@click="changeCardView('card')"
 						>
-							<i class="bi bi-grid fs-3 sort-display__icon"></i>
+							<i
+								class="bi bi-grid fs-3 case-card-display__icon"
+							></i>
 							卡片
 						</span>
 						<span
-							class="sort-display__button"
+							class="case-card-display__button"
 							:class="{ isActive: this.caseCardView === 'list' }"
 							@click="changeCardView('list')"
 						>
 							<i
-								class="bi bi-list-ul fs-3 sort-display__icon"
+								class="bi bi-list-ul fs-3 case-card-display__icon"
 							></i>
 							列表
 						</span>
@@ -173,26 +222,34 @@ export default {
 			switch (type) {
 				case "priceLow2High":
 					this.cases.sort((a, b) => a.price - b.price);
+					this.$refs.currentSort.innerHTML = "售價從低到高";
 					break;
 				case "priceHigh2Low":
 					this.cases.sort((a, b) => b.price - a.price);
+					this.$refs.currentSort.innerHTML = "售價從高到低";
 					break;
 				case "houseAgeLow2High":
 					this.cases.sort((a, b) => a.houseAge - b.houseAge);
+					this.$refs.currentSort.innerHTML = "屋齡從低到高";
 					break;
 				case "houseAgeHigh2Low":
 					this.cases.sort((a, b) => b.houseAge - a.houseAge);
+					this.$refs.currentSort.innerHTML = "屋齡從高到低";
 					break;
 				case "squareFeetLow2High":
 					this.cases.sort((a, b) => a.squareFeet - b.squareFeet);
+					this.$refs.currentSort.innerHTML = "坪數從小到大";
 					break;
 				case "squareFeetHight2Low":
 					this.cases.sort((a, b) => b.squareFeet - a.squareFeet);
+					this.$refs.currentSort.innerHTML = "坪數從大到小";
 					break;
 				default:
-					this.cases.sort((a, b) => b.id - a.id);
+					// this.cases.sort((a, b) => b.id - a.id);
+					// this.$refs.currentSort.innerHTML = "預設顯示";
 					break;
 			}
+			this.sortBy = type;
 		},
 		changeCardView(view) {
 			this.caseCardView = view === "card" ? "card" : "list";

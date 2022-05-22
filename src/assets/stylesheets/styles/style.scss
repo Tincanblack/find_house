@@ -258,8 +258,23 @@ body {
 	}
 }
 
-// page - sort
-.sort {
+// page - sortCase
+.sort-cases {
+	&__current {
+		border: 1px solid map-get($map: $theme-site-colors, $key: "main");
+		background: white;
+	}
+	&-select {
+		&__option {
+			&:active, &.active {
+				color: map-get($map: $theme-site-colors, $key: "main");
+				background: white;
+			}
+		}
+	}
+}
+// page - caseCardDisplay
+.case-card {
 	&-display {
 		&__button {
 			display: inline-block;

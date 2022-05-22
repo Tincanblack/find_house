@@ -13,7 +13,7 @@
 					>
 						<div class="index-feature-image shadow-sm">
 							<img
-								src="https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1653146522965.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=ih5vBlnow6TzqKY1hA5Fh8wefrGi8GyMLlQn5iouyAlUoHbQSL0jhV8VsTHELBzZz3UTEVkZhwlJPoE4tccddopCBL4i8qZTOvrDt%2BChOemFKEUW2giGmYeQbUNtnd5k%2F0gW%2FJ8oz44bK393EoiyKSq%2B9R5L7lLotVHOKORs2DdBBe3XLZbhOl2neSWruCpjVDfkzJIrfG1sLkdTEPDHlEZq7lszPtmhUiy3QOjUKkXsY9mFNKnZjExcbwO%2B%2BI7myEwpPC6JQxUvPqeLEztTiwwTFPdSV9DWhAwhLMGPqwK87XA9dqOrmMOwveNVmMPQs%2F65IOfgbB3k7eyig08uDQ%3D%3D"
+								src="https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1653222842559.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=hi8IN0aw46F52fvShq87olsxBG2Rb2G0gJ%2BHvhwrU6GKvIt6JHxZj7GIciMoZpqk14Ysc8XcP8Gom8AeSSX%2BAih3hokEujj%2BET%2Bh5Cne61qq38DkREEWtvYmILK3Fzt6Qr%2B2tLhgsXtQ9pSgmNbZJbHu13HbBUL%2BkS7qdL43bmXEY4Y6vKEgH21Dzy4op4blZ4EEEKT91X8NVAPhrn13oRbn%2BAfhdeZLwbdv%2F%2FDV5dvxxXtXWinb3gjiDocG%2FM7jb7R6sENXEhhq2yBJy%2FGgWXl3W5lV5oTG7SPrmCpzq8Kdxw9Lb8jnwBI%2FdFgyH8FetR2jBhiUxNZumyjRnv7Jog%3D%3D"
 								alt=""
 							/>
 							<h5 class="index-feature-card__title">公寓</h5>
@@ -27,7 +27,7 @@
 					>
 						<div class="index-feature-image shadow-sm">
 							<img
-								src="https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1653146548529.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=pIvgZMIAGiSjNSmjTWy67RytdLMAZpDiRTdoWkA7EeylkDUzgPl4PdoFegu2OR%2BuSynsqDTdQWfbfkYEuhIOYvIOVED%2BlOO0BfsCmCUt7HmO69NO40cxU5CIQWA%2BxODBmXZx2pwvrTvya0a8W%2B7J5TVcWS6MZN%2FtlIaMp14haCBAPRVjTxRXf6moPjIlbUkCQzVqQS5SzPYkWRn2owjlatNW1l8FA939Dvri1RsQr1iJ1ww0GG5FsI9q%2BooMLJ8ZpppRZtCtEm%2BjnMfVLUVn6%2B%2FaAjnkDoqGwBlUmgjkOFC4Vjo0OybwgBhkUVe0tkc3Vp5bgmJsTK7G77E4uqbZqg%3D%3D"
+								src="https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1653222859692.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=fZ6GzcOTDExUFZzwh2ne2oBlCuNAxFgQKDTbOlTfyAuAr%2B%2BBfIag%2BL0xOc9IiObdrWdOVXqZs4EMWz%2B1fz%2Fvn0ynqesAI%2FBzgaTAtJNw%2Fy%2BUdWTti%2Be5giyv%2BOlawLIa0%2Flg1qU27L97Gd7e9e4EwKDaS13398Ekyk2xTUYsRiZBtfyf2UvbhzZzHhSyRwmjRdatpJosYCl6qEM5a9wN07nPtWpycdgmqH89SAzncH0m8hS3cBYqPzOqvdRjcFN8SIGX%2BHSA8Qe9MLYWRAKPQUGNVjM%2FtR%2F7x2aZnre3XQAksdkDNwpEZEvZB9LG2l11Q8Tx82oAuhMPp2%2FL7wYddg%3D%3D"
 								alt=""
 							/>
 							<h5 class="index-feature-card__title">別墅</h5>
@@ -41,7 +41,7 @@
 					>
 						<div class="index-feature-image shadow-sm">
 							<img
-								src="https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1653146570464.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=EDwCNAo6QGAGzXi557L51PBsNZ57mUvqLjlFO%2Fw9itZ5xCRxJRGG7Qmbr82B8bTyPIwuO87lDQn1tM0%2FRiebw9tcmz5Yiwm7r9tjuGm7YEXuu%2Bqzz86sNsehTqrL6WZQdR8LGcV8Fo1G0gl9l%2BwLP6JsxfUIBm3TY3goKzspbU5ZC8olHZreYEuCbqDQdgJ%2BijvLcj4vikTiIGGa0igSJmz83H%2Fp9vWoYCIKIFgynK6no6FF%2BSqmBUO2W80ZY%2FUq%2Bqy16UkSNLGFCQ8L6%2BpUV9ntrROTciWty2amCtmuK43gkHL26etNbNbAR0Med%2FVdnZP31ghNeQ4ORWp2Kxsz6g%3D%3D"
+								src="https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1653222870662.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=IK1VVG3TOoH%2FSYlC7Vk4PVWcWILlQiejaJ9VZCUgZr5Fy5f7NtULtp%2B7WopUhcj%2F2dmCRR6dbIOyoqSc4cDJ1zDc9I5splUraouiS3xmSCSNGgH7%2FntsuqYDSGnlkazxqJ%2BZm6%2BYYYvnKDuei%2B%2BCJsI4YETWC0s3VLdURm8CCQIq81BVQbZ9Gj%2Bb83CY%2F6yW7i7B0S2Ss34iffjeJQsTHZf1dc9A7YTy30a2Pb4N0SMkUHIAQPKikm%2F7bQ%2BN09Xw4%2Fze5R6tDsR%2F%2FlVM9iDe5c%2FcM17XZ9NnC%2BU7DsDxYdjyiUf59m%2BN3Zo6xqOLvWP3EUX9Yhrgx%2BgXe6RyrolcJw%3D%3D"
 								alt=""
 							/>
 							<h5 class="index-feature-card__title">華廈</h5>
@@ -55,7 +55,7 @@
 					>
 						<div class="index-feature-image shadow-sm">
 							<img
-								src="https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1653146590645.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=gBt3cbBdT5Kg%2BgVbdpRif%2FaRkXitNllCwjGMcJ19j3txnU9xZm8EYSFsEVMrLdWT74Viegwdz2FFhS6kBp97EKZ5KVVpmlxhgYPPs8WtXAIZ7QoYBWcefpfgXPvzYmspbGI3dWIryZAQh4khS7rLl9%2BQVwFmmLxRDeGVTe9%2FE5Lonqr7baU8DuEAWZmmJXqLsQlgNZwNFjyW%2FSOO%2FVrmk1bCz2r63HmGp%2BmXaZ9LULmcKjM8hOintJGUbXdOCIM%2BnrnHVJI3l5L5FjEzeG%2Bv%2B%2FPKNRgWcNhm1ND0VJThZfq4XK1hxj6xbDRytXs684kXR1DqeAnL2TpbzW4JRxNKSw%3D%3D"
+								src="https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1653222883032.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=G1bhOjbedG45P49MlAIXkYLwHvTClm8SULOl9iikoxTPwLdwM8bW9WJvA7%2FyJit3jrFfrGK8SaFCnC%2B7eQIJvNeRZWmrumtQIBkA5XN24%2BwJQ0IUZOgxR8McPRYTonG7clnQEsrCTtUOcG282hrGQkSibdz097OIJOI%2BMj5CtmCQfJYdhcRyXc1umvm5uvJkhyPPiwkc2YGO5Xn2iv3Gr2If%2FmKoP3OgAlADH4rqd1CjZDphNRy38SVJ8wAp3bnezE91AWkww7JbE5R3UmbZWw00bUHsWiR6Gcj7vj%2FoYxgPHvIaqGPlomd0jLR9Ha4o3oAqvUZ9y68ZQGfwIPQ8vw%3D%3D"
 								alt=""
 							/>
 							<h5 class="index-feature-card__title">大樓</h5>
@@ -89,7 +89,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="index-news py-3 py-lg-5">
+	<section class="index-news bg-light py-3 py-lg-5">
 		<div class="container">
 			<div class="row row-cols-1 row-cols-lg-2 g-3">
 				<div class="col">
