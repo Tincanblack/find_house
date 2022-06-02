@@ -260,13 +260,26 @@ body {
 
 // page - sortCase
 .sort-cases {
-	&__current {
-		border: 1px solid map-get($map: $theme-site-colors, $key: "main");
+	&-status {
 		background: white;
+		border: 1px solid map-get($map: $grays, $key: "300");
+		color: map-get($map: $grays, $key: "600");
+		&:hover {
+			border: 1px solid map-get($map: $theme-site-colors, $key: "main");
+		}
+		&.dropdown-toggle.show {
+			&:focus {
+				&::after {
+					transform: rotate(180deg);
+				}
+			}
+		}
 	}
 	&-select {
 		&__option {
-			&:active, &.active {
+			color: map-get($map: $grays, $key: "600");
+			&:active,
+			&.active {
 				color: map-get($map: $theme-site-colors, $key: "main");
 				background: white;
 			}
@@ -481,10 +494,13 @@ body {
 							width: 1.5rem;
 							height: 1.5rem;
 							border: 1px solid white;
-							border-radius: .25rem;
+							border-radius: 0.25rem;
 							color: white;
 							font-weight: bold;
-							background: map-get($map: $theme-site-colors,$key: "main");
+							background: map-get(
+								$map: $theme-site-colors,
+								$key: "main"
+							);
 						}
 					}
 					@include pad {

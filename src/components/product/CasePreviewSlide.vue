@@ -12,7 +12,7 @@
 		>
 			<swiper-slide
 				v-for="(image, index) in product.imagesUrl"
-				:key="`carouselImage_${index}`"
+				:key="index"
 			>
 				<div
 					class="carousel-slide__image"
@@ -26,11 +26,11 @@
 		<swiper
 			class="thumbnail-slide"
 			@swiper="setThumbsSwiper"
+			watch-slides-progress
 			:spaceBetween="5"
 			:slidesPerView="4.5"
 			:freeMode="true"
 			:navigation="true"
-			:watchSlidesProgress="true"
 			:modules="swiper.modules"
 			:breakpoints="{
 				'@0.00': {
@@ -44,7 +44,7 @@
 			<swiper-slide
 				class="slide-item"
 				v-for="(image, index) in product.imagesUrl"
-				:key="`thumbnailImg_${index}`"
+				:key="index"
 			>
 				<div
 					class="thumbnail-slide__image"

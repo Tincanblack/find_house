@@ -6,7 +6,7 @@
 				想要找什麼樣類型的房子?
 			</h2>
 			<div class="row">
-				<div class="col-6 col-lg-3">
+				<div class="col-3 col-lg-3">
 					<RouterLink
 						class="index-feature-card text-dark text-decoration-none"
 						:to="{ path: '/cases', query: { category: '公寓' } }"
@@ -20,7 +20,7 @@
 						</div>
 					</RouterLink>
 				</div>
-				<div class="col-6 col-lg-3">
+				<div class="col-3 col-lg-3">
 					<RouterLink
 						class="index-feature-card text-dark text-decoration-none"
 						:to="{ path: '/cases', query: { category: '別墅' } }"
@@ -34,7 +34,7 @@
 						</div>
 					</RouterLink>
 				</div>
-				<div class="col-6 col-lg-3">
+				<div class="col-3 col-lg-3">
 					<RouterLink
 						class="index-feature-card text-dark text-decoration-none"
 						:to="{ path: '/cases', query: { category: '華廈' } }"
@@ -48,7 +48,7 @@
 						</div>
 					</RouterLink>
 				</div>
-				<div class="col-6 col-lg-3">
+				<div class="col-3 col-lg-3">
 					<RouterLink
 						class="index-feature-card text-dark text-decoration-none"
 						:to="{ path: '/cases', query: { category: '大樓' } }"
