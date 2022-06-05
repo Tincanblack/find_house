@@ -349,7 +349,15 @@
 							<div class="case-action">
 								<div class="btn-group w-100">
 									<button
-										class="case-action__button btn btn-outline-secondary shadow-sm mb-3"
+										class="case-action__button btn shadow-sm mb-3"
+										:class="
+											collectionCase.includes(product.id)
+												? 'btn-secondary'
+												: 'btn-outline-secondary'
+										"
+										@click="
+											handleCollectionCase(product.id)
+										"
 									>
 										<i class="bi bi-search-heart"></i>
 										收藏案件
@@ -400,6 +408,8 @@ export default {
 			category: "",
 			id: "",
 			assistantData: {},
+			collectionCase:
+				JSON.parse(localStorage.getItem("collection_case")) || [],
 		};
 	},
 	methods: {
@@ -422,7 +432,7 @@ export default {
 					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/product/${id}`
 				)
 				.then((res) => {
-					// 將收到的data資料展賦予給case
+					// 將收到的data資料展賦予給news
 					this.product = res.data.product;
 					this.category = res.data.product.category;
 					this.isLoading = false;
@@ -441,14 +451,35 @@ export default {
 					alert(err.error);
 				});
 		},
+		handleCollectionCase(id) {
+			const collectionCaseIndex = this.collectionCase.findIndex(
+				(item) => item === id
+			);
+			if (collectionCaseIndex === -1) {
+				this.collectionCase.push(id);
+				// 未來補上sweetaleret
+			} else {
+				this.collectionCase.splice(collectionCaseIndex, 1);
+				// 未來補上sweetaleret
+			}
+		},
 	},
-	// watch偵測到網址的id有變，將新的id帶入到data的id
 	watch: {
+		// watch偵測到網址的id有變，將新的id帶入到data的id
 		$route() {
 			this.id = this.$route.params.id;
 			if (this.$route.params.id !== undefined) {
 				this.getCase();
 			}
+		},
+		collectionCase: {
+			handler() {
+				localStorage.setItem(
+					"collection_case",
+					JSON.stringify(this.collectionCase)
+				);
+			},
+			deep: true,
 		},
 	},
 	mounted() {

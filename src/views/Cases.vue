@@ -177,7 +177,7 @@ export default {
 			isLoading: false,
 			cases: [],
 			sortCases: [],
-			caseCardView: localStorage.getItem("case_card_view") || "card",
+			caseCardView: localStorage.getItem("case_card_view") || "card", // 未來可補上pinina
 			filterCategory: "",
 			sortBy: "",
 		};
@@ -235,7 +235,6 @@ export default {
 		},
 		changeCardView(view) {
 			this.caseCardView = view === "card" ? "card" : "list";
-			localStorage.setItem("case_card_view", this.caseCardView);
 		},
 		resizeWidth() {
 			if (window.matchMedia("(max-width: 767px)").matches)
@@ -251,6 +250,11 @@ export default {
 			) {
 				this.getCaseList();
 			}
+		},
+		caseCardView: {
+			handler() {
+				localStorage.setItem("case_card_view", this.caseCardView);
+			},
 		},
 	},
 	mounted() {
