@@ -9,10 +9,10 @@
 	>
 		<div class="modal-dialog modal-xl">
 			<div class="modal-content border-0">
-				<div class="modal-header">
+				<div class="modal-header bg-dark text-white">
 					<h5 class="modal-title" id="exampleModalLabel">
-						<span v-if="isNew">新增文章</span>
-						<span v-if="!isNew">編輯文章</span>
+						<span v-if="isNew">新增房訊文章</span>
+						<span v-if="!isNew">編輯房訊文章</span>
 					</h5>
 					<button
 						type="button"
@@ -22,6 +22,25 @@
 					></button>
 				</div>
 				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="mb-3">
+								<label for="image" class="form-label"
+									>封面圖片</label
+								>
+								<input
+									type="text"
+									class="form-control"
+									id="image"
+									placeholder="請輸入圖片網址"
+									v-model="tempNews.image"
+								/>
+							</div>
+							<div class="mb-3">
+								<img class="img-fluid" :src="tempNews.image" />
+							</div>
+						</div>
+					</div>
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="mb-3">
@@ -37,35 +56,8 @@
 								/>
 							</div>
 						</div>
-						<div class="col-sm-12">
-							<div class="mb-3">
-								<label for="image" class="form-label"
-									>封面圖片</label
-								>
-								<input
-									type="text"
-									class="form-control"
-									id="image"
-									placeholder="請輸入圖片網址"
-									v-model="tempNews.image"
-								/>
-								<img :src="tempNews.image" class="img-fluid" />
-							</div>
-						</div>
-						<div class="col-sm-12">
-							<div class="mb-3">
-								<label for="description" class="form-label"
-									>文章簡述</label
-								>
-								<input
-									type="text"
-									class="form-control"
-									id="description"
-									placeholder="請輸入內容簡介"
-									v-model="tempNews.description"
-								/>
-							</div>
-						</div>
+					</div>
+					<div class="row">
 						<div class="col-sm-12">
 							<div class="mb-3">
 								<label for="author" class="form-label"
@@ -80,40 +72,38 @@
 								/>
 							</div>
 						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="mb-3">
+								<label for="description" class="form-label"
+									>文章簡述</label
+								>
+								<input
+									type="text"
+									class="form-control"
+									id="description"
+									placeholder="請輸入文章簡述"
+									v-model="tempNews.description"
+								/>
+							</div>
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-sm-12">
 							<div class="mb-3">
 								<label for="content" class="form-label"
 									>文章內容</label
 								>
-								<!-- <ckeditor
+								<ckeditor
 									class="form-control"
 									placeholder="請輸入內容"
-									v-model="tempNews.description"
+									v-model="tempNews.content"
 									:editor="editor"
 									:config="editorConfig"
 								>
-								</ckeditor> -->
+								</ckeditor>
 							</div>
-							<!-- <div class="col-sm-12">
-								<div class="mb-3">
-									<label for="image" class="form-label"
-										>標籤</label
-									>
-									<input
-										type="text"
-										class="form-control"
-										id="image"
-										placeholder="請輸入標籤"
-										v-model="selectTag"
-										@keyup.enter="addTags(selectTag)"
-									/>
-									<div>
-										<span v-for="tag in tags" :key="tag + 1"
-											>{{ tag }} 、</span
-										>
-									</div>
-								</div>
-							</div> -->
 							<div class="col-sm-12">
 								<div class="mb-3">
 									<label for="" class="form-label"
@@ -149,15 +139,15 @@
 				<div class="modal-footer">
 					<button
 						type="button"
-						class="btn btn-primary--border w-30"
+						class="btn btn-outline-secondary"
 						data-bs-dismiss="modal"
 					>
 						取消
 					</button>
 					<button
 						type="button"
-						class="btn btn-primary--fill w-30"
-						@click="updateBlog"
+						class="btn btn-primary"
+						@click="$emit('update-news', tempNews)"
 					>
 						確認
 					</button>
@@ -169,8 +159,20 @@
 
 <script>
 import modalMixin from "@/mixins/modalMixin";
-// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-// import MyUploadAdapter from "@/libs/myUploadAdaptor";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import MyUploadAdapter from "@/methods/myUploadAdapter";
+
+function MyCustomUploadAdapterPlugin(editor) {
+	editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+		return new MyUploadAdapter(loader);
+	};
+}
+
+// ClassicEditor.create(document.querySelector("#editor"), {
+// 	extraPlugins: [MyCustomUploadAdapterPlugin],
+// }).catch((error) => {
+// 	console.log(error);
+// });
 
 export default {
 	props: {
@@ -189,25 +191,54 @@ export default {
 		return {
 			status: {},
 			modal: "",
-			tempNews: {
-				image: "",
+			editor: ClassicEditor,
+			editorConfig: {
+				// toolbar: {
+				// 	item: [
+				// 		"heading",
+				// 		"bold",
+				// 		"italic",
+				// 		"strikethrough",
+				// 		"underline",
+				// 		"numberedList",
+				// 		"bulletedList",
+				// 		"|",
+				// 		"link",
+				// 		"|",
+				// 		"undo",
+				// 		"redo",
+				// 	],
+				// },
+				toolbar: [
+					"heading",
+					"bold",
+					"italic",
+					"strikethrough",
+					"underline",
+					"link",
+					"|",
+					"numberedList",
+					"bulletedList",
+					"|",
+					"undo",
+					"redo",
+				],
+				extraPlugins: [MyCustomUploadAdapterPlugin],
 			},
+			tempNews: {},
 		};
 	},
 	emits: ["update-news"],
 	mixins: [modalMixin],
 	inject: ["emitter"],
+	methods: {},
 	watch: {
-		product() {
-			this.tempCase = this.product;
-			if (!this.tempCase.imagesUrl) {
-				this.tempCase.imagesUrl = [];
-			}
-			if (!this.tempCase.imageUrl) {
-				this.tempCase.imageUrl = "";
-			}
+		news() {
+			this.tempNews = this.news;
 		},
 	},
-	methods: {},
+	mounted() {
+		console.log(this.editorConfig.toolbar);
+	},
 };
 </script>

@@ -91,9 +91,9 @@
 	</section>
 	<section class="index-news bg-light py-3 py-lg-5">
 		<div class="container">
-			<div class="row row-cols-1 row-cols-lg-2 g-3">
-				<div class="col">
-					<div class="card shadow-sm">
+			<div class="row">
+				<div class="col-12 col-lg-7">
+					<a class="card" href="#">
 						<img
 							class="img-fluid"
 							src="https://placem.at/people?w=1920&h=750"
@@ -106,22 +106,84 @@
 								content is a little bit longer.
 							</p>
 						</div>
-					</div>
+					</a>
 				</div>
-				<div class="col">
-					<div class="card shadow-sm">
-						<img
-							class="img-fluid"
-							src="https://placem.at/people?w=1920&h=750"
-							alt=""
-						/>
-						<div class="card-body">
-							<p class="card-text">
-								This is a wider card with supporting text below
-								as a natural lead-in to additional content. This
-								content is a little bit longer.
-							</p>
-						</div>
+				<div class="col-12 col-lg-5">
+					<div class="list-group">
+						<a
+							href="#"
+							class="list-group-item list-group-item-action d-flex gap-3 py-3"
+							aria-current="true"
+						>
+							<div
+								class="d-flex gap-2 w-100 justify-content-between"
+							>
+								<div>
+									<h6 class="mb-0">
+										List group item heading
+									</h6>
+									<p class="mb-0 opacity-75">
+										Some placeholder content in a paragraph.
+									</p>
+								</div>
+								<small class="opacity-50 text-nowrap"
+									>now</small
+								>
+							</div>
+						</a>
+						<a
+							href="#"
+							class="list-group-item list-group-item-action d-flex gap-3 py-3"
+							aria-current="true"
+						>
+							<div
+								class="d-flex gap-2 w-100 justify-content-between"
+							>
+								<div>
+									<h6 class="mb-0">Another title here</h6>
+									<p class="mb-0 opacity-75">
+										Some placeholder content in a paragraph
+										that goes a little longer so it wraps to
+										a new line.
+									</p>
+								</div>
+								<small class="opacity-50 text-nowrap">3d</small>
+							</div>
+						</a>
+						<a
+							href="#"
+							class="list-group-item list-group-item-action d-flex gap-3 py-3"
+							aria-current="true"
+						>
+							<div
+								class="d-flex gap-2 w-100 justify-content-between"
+							>
+								<div>
+									<h6 class="mb-0">Third heading</h6>
+									<p class="mb-0 opacity-75">
+										Some placeholder content in a paragraph.
+									</p>
+								</div>
+								<small class="opacity-50 text-nowrap">1w</small>
+							</div>
+						</a>
+						<a
+							href="#"
+							class="list-group-item list-group-item-action d-flex gap-3 py-3"
+							aria-current="true"
+						>
+							<div
+								class="d-flex gap-2 w-100 justify-content-between"
+							>
+								<div>
+									<h6 class="mb-0">Third heading</h6>
+									<p class="mb-0 opacity-75">
+										Some placeholder content in a paragraph.
+									</p>
+								</div>
+								<small class="opacity-50 text-nowrap">1w</small>
+							</div>
+						</a>
 					</div>
 				</div>
 			</div>
