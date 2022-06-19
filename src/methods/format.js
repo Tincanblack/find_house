@@ -43,7 +43,7 @@ export function filterItemTag(item) {
 }
 
 // 時間
-export function date(time) {
+export function dateFormat(time) {
 	const localDate = new Date(time * 1000);
 	return localDate.toLocaleDateString();
 }

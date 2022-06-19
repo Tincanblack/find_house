@@ -37,7 +37,11 @@
 								/>
 							</div>
 							<div class="mb-3">
-								<img class="img-fluid" :src="tempNews.image" />
+								<img
+									class="img-fluid"
+									:src="tempNews.image"
+									:alt="tempNews.title"
+								/>
 							</div>
 						</div>
 					</div>
@@ -92,12 +96,12 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="mb-3">
-								<label for="content" class="form-label"
+								<label for="description" class="form-label"
 									>文章內容</label
 								>
 								<ckeditor
+									id="editor"
 									class="form-control"
-									placeholder="請輸入內容"
 									v-model="tempNews.content"
 									:editor="editor"
 									:config="editorConfig"
@@ -114,8 +118,8 @@
 											class="form-check-input"
 											type="checkbox"
 											v-model="tempNews.isPublic"
-											:true-value="1"
-											:false-value="0"
+											:true-value="true"
+											:false-value="false"
 											id="isPublic"
 										/>
 										<label
@@ -162,14 +166,14 @@ import modalMixin from "@/mixins/modalMixin";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import MyUploadAdapter from "@/methods/myUploadAdapter";
 
-function MyCustomUploadAdapterPlugin(editor) {
+function UploadAdapterPlugin(editor) {
 	editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
 		return new MyUploadAdapter(loader);
 	};
 }
 
 // ClassicEditor.create(document.querySelector("#editor"), {
-// 	extraPlugins: [MyCustomUploadAdapterPlugin],
+// 	extraPlugins: [UploadAdapterPlugin],
 // }).catch((error) => {
 // 	console.log(error);
 // });
@@ -193,28 +197,10 @@ export default {
 			modal: "",
 			editor: ClassicEditor,
 			editorConfig: {
-				// toolbar: {
-				// 	item: [
-				// 		"heading",
-				// 		"bold",
-				// 		"italic",
-				// 		"strikethrough",
-				// 		"underline",
-				// 		"numberedList",
-				// 		"bulletedList",
-				// 		"|",
-				// 		"link",
-				// 		"|",
-				// 		"undo",
-				// 		"redo",
-				// 	],
-				// },
 				toolbar: [
 					"heading",
 					"bold",
 					"italic",
-					"strikethrough",
-					"underline",
 					"link",
 					"|",
 					"numberedList",
@@ -223,7 +209,7 @@ export default {
 					"undo",
 					"redo",
 				],
-				extraPlugins: [MyCustomUploadAdapterPlugin],
+				extraPlugins: [UploadAdapterPlugin],
 			},
 			tempNews: {},
 		};

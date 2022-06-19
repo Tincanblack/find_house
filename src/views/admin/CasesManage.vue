@@ -136,8 +136,7 @@ export default {
 				this.tempCase = { ...item };
 				this.isNew = false;
 			}
-			const caseComponent = this.$refs.caseModal;
-			caseComponent.openModal();
+			this.$refs.caseModal.openModal();
 		},
 		updateCase(item) {
 			this.tempCase = item;
@@ -154,8 +153,7 @@ export default {
 				.then((response) => {
 					this.isLoading = false;
 					this.$httpMessageState(response, statusText);
-					const caseComponent = this.$refs.caseModal;
-					caseComponent.closeModal();
+					this.$refs.caseModal.closeModal();
 					this.getCasesList(this.currentPage);
 				})
 				.catch((error) => {
@@ -178,14 +176,12 @@ export default {
 				.catch((error) => {
 					// 跳出錯誤訊息
 					this.isLoading = false;
-					console.log("here");
 					this.$httpMessageState(error.response, "錯誤訊息");
 				});
 		},
 		openDelModal(item) {
 			this.tempCase = { ...item };
-			const delComponent = this.$refs.delModal;
-			delComponent.openModal();
+			this.$refs.delModal.openModal();
 		},
 		deleteCase() {
 			this.isLoading = true;
@@ -196,8 +192,7 @@ export default {
 				.then((response) => {
 					this.isLoading = false;
 					this.$httpMessageState(response, "刪除案件");
-					const delComponent = this.$refs.delModal;
-					delComponent.closeModal();
+					this.$refs.delModal.closeModal();
 					this.getCasesList(this.currentPage);
 				})
 				.catch((error) => {

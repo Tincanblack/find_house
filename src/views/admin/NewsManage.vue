@@ -8,7 +8,7 @@
 				class="btn btn-success"
 				@click="openModal(true)"
 			>
-				<i class="bi bi-plus-square"></i> 新增房訊文章
+				<i class="bi bi-plus-square"></i> 新增房訊
 			</button>
 		</div>
 		<table class="table table-hover table-striped mt-4 text-center">
@@ -25,23 +25,25 @@
 			</thead>
 			<tbody>
 				<tr
-					v-for="(item, index) in news"
-					:key="item.id"
+					v-for="(article, index) in news"
+					:key="article.id"
 					style="vertical-align: middle"
 				>
 					<td>{{ index + 1 }}</td>
 					<td>
-						<img class="img-fluid" :src="item.image" />
+						<img class="img-fluid" :src="article.image" />
 					</td>
 					<td class="text-start">
-						{{ item.title }}
+						{{ article.title }}
 					</td>
 					<td>
-						{{ item.author }}
+						{{ article.author }}
 					</td>
-					<td>{{ $format.date(item.create_at) }}</td>
+					<td>{{ $format.dateFormat(article.create_at) }}</td>
 					<td>
-						<span class="text-success" v-if="item.isPublic === 1"
+						<span
+							class="text-success"
+							v-if="article.isPublic === true"
 							>顯示</span
 						>
 						<span v-else class="text-danger">不顯示</span>
@@ -51,7 +53,7 @@
 							<button
 								type="button"
 								class="btn btn-primary btn-sm"
-								@click="openModal(false, item)"
+								@click="getNews(article.id)"
 							>
 								<i class="bi bi-pencil-square"></i>
 								編輯
@@ -106,9 +108,6 @@ export default {
 		};
 	},
 	methods: {
-		getDate(time) {
-			return new Date(time).toISOString().split("T")[0];
-		},
 		openModal(isNew, item) {
 			if (isNew) {
 				this.tempNews = {
@@ -120,26 +119,24 @@ export default {
 				this.tempNews = { ...item };
 				this.isNew = false;
 			}
-			const newsComponent = this.$refs.newsModal;
-			newsComponent.openModal();
+			this.$refs.newsModal.openModal();
 		},
 		updateNews(item) {
 			this.tempNews = item;
 			this.isLoading = true;
 			let api = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/article`;
 			let httpMethod = "post";
-			let statusText = "新增房訊文章";
+			let statusText = "新增房訊";
 			if (!this.isNew) {
 				api = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/article/${this.tempNews.id}`;
 				httpMethod = "put";
-				statusText = "更新房訊文章";
+				statusText = "更新房訊";
 			}
 			this.$http[httpMethod](api, { data: this.tempNews })
 				.then((response) => {
 					this.isLoading = false;
 					this.$httpMessageState(response, statusText);
-					const newsComponent = this.$refs.newsModal;
-					newsComponent.closeModal();
+					this.$refs.newsModal.closeModal();
 					this.getNewsList(this.currentPage);
 				})
 				.catch((error) => {
@@ -165,10 +162,26 @@ export default {
 					this.$httpMessageState(error.response, "錯誤訊息");
 				});
 		},
+		getNews(id) {
+			const api = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/article/${id}`;
+			this.isLoading = true;
+			this.$http
+				.get(api)
+				.then((response) => {
+					this.isLoading = false;
+					if (response.data.success) {
+						this.openModal(false, response.data.article);
+						this.isNew = false;
+					}
+				})
+				.catch((error) => {
+					this.isLoading = false;
+					this.$httpMessageState(error, "刪除房訊");
+				});
+		},
 		openDelModal(item) {
 			this.tempNews = { ...item };
-			const delComponent = this.$refs.delModal;
-			delComponent.openModal();
+			this.$refs.delModal.openModal();
 		},
 		deleteNews() {
 			this.isLoading = true;
@@ -179,8 +192,7 @@ export default {
 				.then((response) => {
 					this.isLoading = false;
 					this.$httpMessageState(response, "刪除房訊");
-					const delComponent = this.$refs.delModal;
-					delComponent.closeModal();
+					this.$refs.delModal.closeModal();
 					this.getNewsList(this.currentPage);
 				})
 				.catch((error) => {

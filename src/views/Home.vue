@@ -109,9 +109,13 @@
 					</a>
 				</div>
 				<div class="col-12 col-lg-5">
-					<div class="list-group">
+					<div
+						class="list-group"
+						v-for="news in articles"
+						:key="news.id"
+					>
 						<a
-							href="#"
+							:to="`/article/${news.id}`"
 							class="list-group-item list-group-item-action d-flex gap-3 py-3"
 							aria-current="true"
 						>
@@ -120,68 +124,15 @@
 							>
 								<div>
 									<h6 class="mb-0">
-										List group item heading
+										{{ news.title }}
 									</h6>
 									<p class="mb-0 opacity-75">
-										Some placeholder content in a paragraph.
+										{{ news.description }}
 									</p>
 								</div>
 								<small class="opacity-50 text-nowrap"
-									>now</small
-								>
-							</div>
-						</a>
-						<a
-							href="#"
-							class="list-group-item list-group-item-action d-flex gap-3 py-3"
-							aria-current="true"
-						>
-							<div
-								class="d-flex gap-2 w-100 justify-content-between"
-							>
-								<div>
-									<h6 class="mb-0">Another title here</h6>
-									<p class="mb-0 opacity-75">
-										Some placeholder content in a paragraph
-										that goes a little longer so it wraps to
-										a new line.
-									</p>
-								</div>
-								<small class="opacity-50 text-nowrap">3d</small>
-							</div>
-						</a>
-						<a
-							href="#"
-							class="list-group-item list-group-item-action d-flex gap-3 py-3"
-							aria-current="true"
-						>
-							<div
-								class="d-flex gap-2 w-100 justify-content-between"
-							>
-								<div>
-									<h6 class="mb-0">Third heading</h6>
-									<p class="mb-0 opacity-75">
-										Some placeholder content in a paragraph.
-									</p>
-								</div>
-								<small class="opacity-50 text-nowrap">1w</small>
-							</div>
-						</a>
-						<a
-							href="#"
-							class="list-group-item list-group-item-action d-flex gap-3 py-3"
-							aria-current="true"
-						>
-							<div
-								class="d-flex gap-2 w-100 justify-content-between"
-							>
-								<div>
-									<h6 class="mb-0">Third heading</h6>
-									<p class="mb-0 opacity-75">
-										Some placeholder content in a paragraph.
-									</p>
-								</div>
-								<small class="opacity-50 text-nowrap">1w</small>
+									>{{ $format.dateFormat(news.create_at) }}
+								</small>
 							</div>
 						</a>
 					</div>
@@ -202,6 +153,7 @@ export default {
 	data() {
 		return {
 			cases: [],
+			articles: [],
 			randomData: [],
 		};
 	},
@@ -212,26 +164,40 @@ export default {
 				.get(url)
 				.then((res) => {
 					this.cases = res.data.products;
-					this.randomProduct(12);
+					this.randomItem(12);
 				})
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");
 				});
 		},
-		randomProduct(count) {
+		getNewsList(page = 1) {
+			this.isLoading = true;
+			this.$http
+				.get(
+					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/articles/?page=${page}`
+				)
+				.then((response) => {
+					this.articles = response.data.articles;
+				})
+				.catch((error) => {
+					this.$httpMessageState(error.response, "錯誤訊息");
+				});
+		},
+		randomItem(count) {
 			const tempData = this.cases;
 			this.randomData = [];
 			for (let x = 0; x < count; x += 1) {
-				const randomCase = Math.floor(
+				const randomItem = Math.floor(
 					Math.random() * (tempData.length - 0) + 0
 				);
-				this.randomData.push(this.cases[randomCase]);
-				tempData.splice(randomCase, 1);
+				this.randomData.push(this.cases[randomItem]);
+				tempData.splice(randomItem, 1);
 			}
 		},
 	},
 	mounted() {
 		this.getCasesList();
+		this.getNewsList();
 	},
 };
 </script>

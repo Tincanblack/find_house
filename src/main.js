@@ -17,7 +17,7 @@ import {
 	patternFormat,
 	calToPercent,
 	filterItemTag,
-	date,
+	dateFormat,
 } from "@/methods/format";
 import $httpMessageState from "@/methods/updateMessageState";
 import App from "./App.vue";
@@ -30,7 +30,7 @@ app.config.globalProperties.$format = {
 	patternFormat,
 	calToPercent,
 	filterItemTag,
-	date,
+	dateFormat,
 };
 
 // 將 $httpMessageState 加入全域下
