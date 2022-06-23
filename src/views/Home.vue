@@ -93,48 +93,42 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-lg-7">
-					<a class="card" href="#">
+					<RouterLink class="card" to="/news">
 						<img
 							class="img-fluid"
 							src="https://placem.at/people?w=1920&h=750"
 							alt=""
 						/>
-						<div class="card-body">
-							<p class="card-text">
-								This is a wider card with supporting text below
-								as a natural lead-in to additional content. This
-								content is a little bit longer.
-							</p>
-						</div>
-					</a>
+					</RouterLink>
 				</div>
 				<div class="col-12 col-lg-5">
 					<div
-						class="list-group"
+						class="list-group index-news-list"
 						v-for="news in articles"
 						:key="news.id"
 					>
-						<a
-							:to="`/article/${news.id}`"
+						<RouterLink
 							class="list-group-item list-group-item-action d-flex gap-3 py-3"
-							aria-current="true"
+							:to="`/article/${news.id}`"
 						>
 							<div
 								class="d-flex gap-2 w-100 justify-content-between"
 							>
 								<div>
-									<h6 class="mb-0">
+									<h6 class="index-news-list__title">
 										{{ news.title }}
 									</h6>
-									<p class="mb-0 opacity-75">
+									<div
+										class="opacity-75 index-news-list__description"
+									>
 										{{ news.description }}
-									</p>
+									</div>
 								</div>
 								<small class="opacity-50 text-nowrap"
 									>{{ $format.dateFormat(news.create_at) }}
 								</small>
 							</div>
-						</a>
+						</RouterLink>
 					</div>
 				</div>
 			</div>
