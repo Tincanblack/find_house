@@ -1,7 +1,7 @@
 <template lang="">
 	<section class="py-3">
 		<div class="container">
-			<h1>房訊知識</h1>
+			<h1>房訊新知</h1>
 		</div>
 	</section>
 </template>

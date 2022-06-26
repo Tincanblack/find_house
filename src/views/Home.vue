@@ -1,10 +1,8 @@
 <template>
 	<IndexBannerSlide></IndexBannerSlide>
-	<section class="index-feature text-center py-3 py-lg-5 bg-light">
+	<section class="index-feature py-3 py-lg-5 text-center bg-light">
 		<div class="container">
-			<h2 class="index-feature__title mb-3 mb-lg-5">
-				想要找什麼樣類型的房子?
-			</h2>
+			<h2 class="section__title mb-3 mb-lg-5">想要找什麼樣類型的房子?</h2>
 			<div class="row">
 				<div class="col-3 col-lg-3">
 					<RouterLink
@@ -67,7 +65,7 @@
 	</section>
 	<section class="index-cases py-3 py-lg-5">
 		<div class="container">
-			<div class="row row-cols-1 row-cols-sm-3 row-cols-lg-4 g-2">
+			<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-2">
 				<div
 					class="col case-item__card case-item__card--cardStyle"
 					v-for="item in randomData"
@@ -89,21 +87,24 @@
 			</div>
 		</div>
 	</section>
-	<section class="index-news bg-light py-3 py-lg-5">
+	<section class="index-news py-3 py-lg-5 bg-light">
 		<div class="container">
 			<div class="row">
-				<div class="col-12 col-lg-7">
-					<RouterLink class="card" to="/news">
+				<div class="col-12 d-block d-xl-none">
+					<h2 class="section__title">房訊新知</h2>
+				</div>
+				<div class="col-12 col-xl-6 d-none d-xl-block">
+					<RouterLink class="index-news-image" to="/news">
 						<img
 							class="img-fluid"
-							src="https://placem.at/people?w=1920&h=750"
+							src="https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1656256157967.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=VN8M1MPlr0V51LTxlGa%2Fd%2FpFilI8PE5kBh2G1C1sMP4xOPkh8T%2BXL0YeF2NaBGSdtUT%2F6nW%2BAaw4gii0ldrutUr4XF%2BaOE9gId0suwhMDwZJZGGSjRxSZQFgXjg9N5%2B00yZPnNQY0UTebNBoXorCMUqpd2sCnVasnJfuVgi0NLvNUJHZeEpGtXpo20yy2NpcfWljmPuNnxjLtAyasAw1AVnSgM9bmzEI8yL%2FLhyId6AYrGZDCZYEVrVaUTXJf1iZJ2KANg0j8dNRnNaasYIJfZlMAgE%2BQj6n4x78qWeGO6BE6KGfNE86EKxsjEo33uuoO76%2FSm0Kf5PaDVkVXvMZ1A%3D%3D"
 							alt=""
 						/>
 					</RouterLink>
 				</div>
-				<div class="col-12 col-lg-5">
+				<div class="col-12 col-xl-6">
 					<div
-						class="list-group index-news-list"
+						class="list-group index-news-list rounded-0"
 						v-for="news in articles"
 						:key="news.id"
 					>

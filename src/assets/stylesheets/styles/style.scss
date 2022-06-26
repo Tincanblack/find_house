@@ -229,14 +229,24 @@ body {
 		}
 	}
 	&-news {
+		position: relative;
+		background: url(https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1656237901480.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=ZDjfjkFp8VcKZA5F9H1K0QFidpDbKgdKtxmue6DoF%2FkB7pxuBV03NduojBrwyofJTRQ3e6MI2B%2FjQKPAzdV5TN8cAyARzfpp%2B51AoG%2BTo6OA8Q%2FTAB7Wum%2B8pYOmpF895ezqnd8R8qHZKreJ3YsuJ%2BAIVlA2ibprG%2BfX59oCeUCiUzc3L8CzRlCfV4WaTNgh0TescnF6wjR%2FVrIRqNAIc0uIJM%2FErnSgp5hxKcsc6vTuXCRvAVF2OnAmyaCWI8VPe7Grieoa3lct3Ri447Fv2NLmsq%2B6llcRFtecw%2B1ZASTH5sjI%2BgUygwS3X6fJUmi9ElT0rYAN3hw78%2Fnm8DGXtA%3D%3D);
+		// background: url(https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1656237268726.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=B0eYuB9ILm6uKCLMqaLYZe5EJhmXRqQqsGoBmLdzHtGRy6I6zbU%2FKE9Ocxrew0aX43V%2Bc94KWssYxcMpJ0Uuf8folTu94uRpSSSYGmJX6VWL7f%2BGnadzuy1s4KkYbPl29FpE6ba7PNkGxA3axZ2kq32tK14EGFFc4%2BsUQ4OVXEWAxnJWBv1WvQSR27x7nhjxXKLNRAclOOkC8vxGjRtzAGKEARqwURhyiWpRNBucm896%2BI4UwWJLET4GaHXnsNyH3jTQdmSmBcopcKfoG%2B%2FSBfaCgZAr9A4XjSTVsGPUiax4wewsHkDva%2FEdmUI7LbZ6%2FKQTsGHA7mKZkH9otDOd6A%3D%3D);
+		background-position: center bottom;
+		background-size: cover;
+		&-image {
+			display: block;
+			overflow: hidden;
+			height: 335px;
+		}
 		&-list {
-			margin-bottom: 0.25rem;
+			margin-bottom: 0.5rem;
 			overflow: hidden;
 			&:last-child {
 				margin-bottom: 0;
 			}
 			.list-group-item {
-				transition: all .5s;
+				transition: all 0.5s;
 			}
 			&__title {
 				@include text-hide-ellipsis(1);
@@ -245,6 +255,14 @@ body {
 				@include text-hide-ellipsis(2);
 			}
 		}
+	}
+}
+
+.section {
+	&__title {
+		text-align: center;
+		position: relative;
+		z-index: 1;
 	}
 }
 
@@ -306,6 +324,7 @@ body {
 		}
 	}
 }
+
 // page - caseCardDisplay
 .case-card {
 	&-display {
@@ -394,6 +413,7 @@ body {
 		&__card {
 			.card {
 				&-body {
+					padding: 1rem .5rem;
 					@include padWide {
 						padding: 0.25rem;
 					}
@@ -821,5 +841,11 @@ body {
 				color: white;
 			}
 		}
+	}
+}
+
+.footer {
+	&-nav {
+		border-bottom: 1px solid map-get($grays, "700");
 	}
 }
