@@ -235,9 +235,47 @@ body {
 		background-position: center bottom;
 		background-size: cover;
 		&-image {
+			position: relative;
 			display: block;
 			overflow: hidden;
-			height: 335px;
+			background: url(https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1656427342446.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=cB37q%2FYBNlXTYlToMwACZJ63A3uBmYdq8vT1VA3uB7oAMMV4zRt1t7SIKINVCFw6bUy5iSHGsufNOV6AGmndydA7xCgB6xakwHG9Hyaajp4QOXLdLAfJxWRDbjU%2Bvf2PbYGmQJRCefCeyG9MbUIOUC51S%2FRm%2FGQpp10IOciyKcwIidm%2BBh7I2MDotA8VSOuSmfVXYmlxw7HGQG22eGHLbZ%2BeGQ7O5cg%2BJ3ubV0wW%2B9SLtVvd73qkfgNLsIyM7Ida9X0Nym%2F5MMYJGpiq9R5wx9rJlmK780V6HPRCAatDb3Zi5frFQGhyx5z3CyxsNI%2BY9JuMi0%2BVR9Mt77iAzKV2lg%3D%3D);
+			background-position: center center;
+			background-repeat: no-repeat;
+			padding-top: 61.5%;
+			filter: grayscale(100%);
+			transition: all 0.5s;
+			&::after {
+				display: block;
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				opacity: 0;
+				transition: all 0.5s;
+			}
+			&:hover {
+				filter: grayscale(0%);
+				&::after {
+					opacity: 1;
+					background: rgba(0, 0, 0, 0.5);
+				}
+				.index-news-image__text {
+					opacity: 1;
+				}
+			}
+			&__text {
+				opacity: 0;
+				z-index: 1;
+				position: absolute;
+				color: white;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				transition: all 0.5s;
+				font-size: 2rem;
+			}
 		}
 		&-list {
 			margin-bottom: 0.5rem;
@@ -336,6 +374,7 @@ body {
 			transition: all 0.5s;
 			&.isActive {
 				color: map-get($map: $theme-site-colors, $key: "main");
+				font-weight: bold;
 			}
 			&::after {
 				content: "";
@@ -413,7 +452,7 @@ body {
 		&__card {
 			.card {
 				&-body {
-					padding: 1rem .5rem;
+					padding: 1rem 0.5rem;
 					@include padWide {
 						padding: 0.25rem;
 					}

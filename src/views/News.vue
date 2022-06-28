@@ -1,4 +1,4 @@
-<template lang="">
+<template>
 	<section class="py-3">
 		<div class="container">
 			<h1>房訊新知</h1>
@@ -8,4 +8,3 @@
 <script>
 export default {};
 </script>
-<style lang=""></style>

@@ -95,11 +95,7 @@
 				</div>
 				<div class="col-12 col-xl-6 d-none d-xl-block">
 					<RouterLink class="index-news-image" to="/news">
-						<img
-							class="img-fluid"
-							src="https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1656256157967.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=VN8M1MPlr0V51LTxlGa%2Fd%2FpFilI8PE5kBh2G1C1sMP4xOPkh8T%2BXL0YeF2NaBGSdtUT%2F6nW%2BAaw4gii0ldrutUr4XF%2BaOE9gId0suwhMDwZJZGGSjRxSZQFgXjg9N5%2B00yZPnNQY0UTebNBoXorCMUqpd2sCnVasnJfuVgi0NLvNUJHZeEpGtXpo20yy2NpcfWljmPuNnxjLtAyasAw1AVnSgM9bmzEI8yL%2FLhyId6AYrGZDCZYEVrVaUTXJf1iZJ2KANg0j8dNRnNaasYIJfZlMAgE%2BQj6n4x78qWeGO6BE6KGfNE86EKxsjEo33uuoO76%2FSm0Kf5PaDVkVXvMZ1A%3D%3D"
-							alt=""
-						/>
+						<span class="index-news-image__text">更多房訊新知</span>
 					</RouterLink>
 				</div>
 				<div class="col-12 col-xl-6">
