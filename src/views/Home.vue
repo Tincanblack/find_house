@@ -1,10 +1,12 @@
 <template>
 	<IndexBannerSlide></IndexBannerSlide>
-	<section class="index-feature py-3 py-lg-5 text-center bg-light">
+	<section class="index-feature py-3 py-xl-5 text-center bg-light">
 		<div class="container">
-			<h2 class="section__title mb-3 mb-lg-5">想要找什麼樣類型的房子?</h2>
+			<h2 class="section__title mb-3 mb-xl-5 fw-bold">
+				想要找什麼樣類型的房子?
+			</h2>
 			<div class="row">
-				<div class="col-3 col-lg-3">
+				<div class="col-6 col-xl-3">
 					<RouterLink
 						class="index-feature-card text-dark text-decoration-none"
 						:to="{ path: '/cases', query: { category: '公寓' } }"
@@ -18,7 +20,7 @@
 						</div>
 					</RouterLink>
 				</div>
-				<div class="col-3 col-lg-3">
+				<div class="col-6 col-xl-3">
 					<RouterLink
 						class="index-feature-card text-dark text-decoration-none"
 						:to="{ path: '/cases', query: { category: '別墅' } }"
@@ -32,7 +34,7 @@
 						</div>
 					</RouterLink>
 				</div>
-				<div class="col-3 col-lg-3">
+				<div class="col-6 col-xl-3">
 					<RouterLink
 						class="index-feature-card text-dark text-decoration-none"
 						:to="{ path: '/cases', query: { category: '華廈' } }"
@@ -46,7 +48,7 @@
 						</div>
 					</RouterLink>
 				</div>
-				<div class="col-3 col-lg-3">
+				<div class="col-6 col-xl-3">
 					<RouterLink
 						class="index-feature-card text-dark text-decoration-none"
 						:to="{ path: '/cases', query: { category: '大樓' } }"
@@ -63,15 +65,18 @@
 			</div>
 		</div>
 	</section>
-	<section class="index-cases py-3 py-lg-5">
+	<section class="index-cases py-3 py-xl-5">
 		<div class="container">
-			<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-2">
+			<div class="row row-cols-1 row-cols-md-3 row-cols-xl-4 g-2">
 				<div
 					class="col case-item__card case-item__card--cardStyle"
 					v-for="item in randomData"
 					:key="item.id"
 				>
-					<CaseCard :item="item"></CaseCard>
+					<CaseCard
+						:item="item"
+						:cardLoading="cardLoading"
+					></CaseCard>
 				</div>
 			</div>
 			<div class="row">
@@ -87,7 +92,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="index-news py-3 py-lg-5 bg-light">
+	<section class="index-news py-3 py-xl-5 bg-light">
 		<div class="container">
 			<div class="row">
 				<div class="col-12 d-block d-xl-none">
@@ -143,6 +148,7 @@ export default {
 	},
 	data() {
 		return {
+			cardLoading: true,
 			cases: [],
 			articles: [],
 			randomData: [],
@@ -156,6 +162,9 @@ export default {
 				.then((res) => {
 					this.cases = res.data.products;
 					this.randomItem(12);
+					setTimeout(() => {
+						this.cardLoading = false;
+					}, 1000);
 				})
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");

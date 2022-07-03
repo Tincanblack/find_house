@@ -91,8 +91,8 @@ body {
 //  breadcrumb
 .breadcrumb {
 	&-wrapper {
-		border-top: 1px solid map-get($grays, "200");
-		border-bottom: 1px solid map-get($grays, "200");
+		border-top: 1px solid map-get($map: $grays, $key: "200");
+		border-bottom: 1px solid map-get($map: $grays, $key: "200");
 	}
 	margin-bottom: 0;
 	&-item {
@@ -413,41 +413,6 @@ body {
 .card {
 	overflow: hidden;
 	transition: all 0.3s ease;
-	&:hover {
-		box-shadow: 0 3px 8px rgb(0 0 0 / 20%);
-		.case-item {
-			&__card {
-				&--cardStyle {
-					.card-image {
-						&-hover {
-							&__title {
-								top: 50%;
-								opacity: 1;
-							}
-						}
-						img {
-							transform: scale(1.2);
-						}
-						&::before {
-							opacity: 1;
-							background: rgba(0, 0, 0, 0.5);
-						}
-					}
-				}
-				&--listStyle {
-					.card-image {
-						img {
-							transform: scale(1.2);
-						}
-						&::before {
-							opacity: 1;
-							background: rgba(255, 255, 255, 0.25);
-						}
-					}
-				}
-			}
-		}
-	}
 	.case-item {
 		&__card {
 			.card {
@@ -481,6 +446,7 @@ body {
 						zoom: 1;
 						transition: all 0.3s ease-out;
 						object-fit: cover;
+						opacity: 1;
 					}
 					&::before {
 						content: "";
@@ -524,7 +490,7 @@ body {
 							color: $site-sec;
 						}
 						&--origin {
-							color: map-get($grays, "500");
+							color: map-get($map: $grays, $key: "500");
 						}
 					}
 				}
@@ -543,16 +509,25 @@ body {
 						}
 					}
 				}
+				&-title {
+					font-size: 1.25rem;
+					text-align: center;
+				}
 				&-text {
+					padding-top: 0.5rem;
 					font-size: 1rem;
 					text-align: center;
+					border-top: 2px solid
+						map-get($map: $theme-site-colors, $key: "main");
 					&-list {
+						display: flex;
+						justify-content: center;
 						&__item {
 							display: inline-block;
 							&::after {
 								display: inline-block;
 								content: "|";
-								color: map-get($grays, "200");
+								color: map-get($map: $grays, $key: "200");
 								margin: 0 0.25rem;
 							}
 							&:last-child {
@@ -586,12 +561,16 @@ body {
 						text-align: center;
 					}
 				}
-				&-title {
-					font-size: 1.25rem;
-					text-align: center;
-					padding-bottom: 0.5rem;
-					border-bottom: 2px solid
-						map-get($map: $theme-site-colors, $key: "main");
+			}
+			&--cardStyle {
+				.card {
+					&-text {
+						&-list {
+							&__item {
+								font-size: 0.875rem;
+							}
+						}
+					}
 				}
 			}
 			&--listStyle {
@@ -620,6 +599,7 @@ body {
 							text-align: center;
 						}
 						&-list {
+							justify-content: flex-start;
 							margin-bottom: 0.25rem;
 						}
 					}
@@ -659,6 +639,124 @@ body {
 			}
 		}
 	}
+	&:hover {
+		box-shadow: 0 3px 8px rgb(0 0 0 / 20%);
+		.case-item {
+			&__card {
+				&--cardStyle {
+					.card-image {
+						&-hover {
+							&__title {
+								top: 50%;
+								opacity: 1;
+							}
+						}
+						img {
+							transform: scale(1.2);
+						}
+						&::before {
+							opacity: 1;
+							background: rgba(0, 0, 0, 0.5);
+						}
+					}
+				}
+				&--listStyle {
+					.card-image {
+						img {
+							transform: scale(1.2);
+						}
+						&::before {
+							opacity: 1;
+							background: rgba(255, 255, 255, 0.25);
+						}
+					}
+				}
+			}
+		}
+	}
+	&.is-loading {
+		cursor: default;
+		&:hover {
+			box-shadow: none;
+			.case-item {
+				&__card {
+					&--cardStyle {
+						.card-image {
+							&::before {
+								opacity: 0;
+							}
+						}
+					}
+					&--listStyle {
+						.card-image {
+							img {
+								transform: scale(1.2);
+							}
+							&::before {
+								opacity: 1;
+								background: rgba(255, 255, 255, 0.25);
+							}
+						}
+					}
+				}
+			}
+		}
+		.case-item {
+			&__card {
+				&--cardStyle {
+					.card {
+						&-image {
+							width: 100%;
+							height: auto;
+							img {
+								opacity: 0;
+							}
+						}
+						&-title {
+							height: 1.25rem;
+						}
+						&-text {
+							border-top: 2px solid
+								map-get($map: $grays, $key: "500");
+								&-list {
+									&__item {
+										width: 33.3%;
+										height: 1.25rem;
+										margin-right: 0.25rem;
+										&::after {
+											display: none;
+										}
+										&:last-child {
+											margin-right: 0;
+										}
+									}
+								}
+						}
+					}
+				}
+			}
+		}
+		.card-text-list__item {
+			&::after {
+				background: white;
+			}
+		}
+		// loading status
+		.card-image,
+		.card-title,
+		.card-text-list__item {
+			background: linear-gradient(
+					90deg,
+					rgba(255, 255, 255, 0) 30%,
+					rgba(255, 255, 255, 0.5) 50%,
+					rgba(255, 255, 255, 0) 30%
+				)
+				map-get($map: $grays, $key: "500");
+			background-size: 200% 100%;
+			background-position-x: 180%;
+			animation: 2s loading ease-in-out infinite;
+		}
+	}
 }
 
 // page - item
@@ -674,7 +772,7 @@ body {
 			background-size: cover;
 			width: 70px;
 			height: 70px;
-			border: 1px solid map-get($grays, "500");
+			border: 1px solid map-get($map: $grays, $key: "500");
 			border-radius: 50%;
 		}
 		&__icon {
@@ -689,7 +787,7 @@ body {
 			justify-content: space-between;
 		}
 		&__subtitle {
-			color: map-get($grays, "600");
+			color: map-get($map: $grays, $key: "600");
 		}
 		&-tag {
 			font-size: 1rem;
@@ -719,7 +817,7 @@ body {
 				}
 			}
 			&__origin {
-				color: map-get($grays, "500");
+				color: map-get($map: $grays, $key: "500");
 			}
 		}
 	}
@@ -728,7 +826,7 @@ body {
 			.info-list {
 				&-item {
 					padding: 0.5rem 0;
-					border-top: 1px dotted map-get($grays, "600");
+					border-top: 1px dotted map-get($map: $grays, $key: "600");
 					list-style: none;
 				}
 				&-title {
@@ -831,7 +929,7 @@ body {
 			&-footer {
 				font-size: 1rem;
 				&-notice {
-					color: map-get($grays, "600");
+					color: map-get($map: $grays, $key: "600");
 				}
 			}
 		}
@@ -845,7 +943,7 @@ body {
 		td {
 			&:first-child {
 				width: 30%;
-				background: map-get($grays, "200");
+				background: map-get($map: $grays, $key: "200");
 			}
 		}
 	}
@@ -885,6 +983,12 @@ body {
 
 .footer {
 	&-nav {
-		border-bottom: 1px solid map-get($grays, "700");
+		border-bottom: 1px solid map-get($map: $grays, $key: "700");
+	}
+}
+
+@keyframes loading {
+	to {
+		background-position-x: -20%;
 	}
 }

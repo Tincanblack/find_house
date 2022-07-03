@@ -1,5 +1,4 @@
 <template>
-	<LoadingAnimate :active="isLoading" :z-index="1060"></LoadingAnimate>
 	<Breadcrumb></Breadcrumb>
 	<section
 		style="
@@ -151,7 +150,10 @@
 				class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-2"
 			>
 				<div class="col" v-for="item in cases" :key="item.id">
-					<CaseCard :item="item"></CaseCard>
+					<CaseCard
+						:item="item"
+						:cardLoading="cardLoading"
+					></CaseCard>
 				</div>
 			</div>
 			<div v-if="caseCardView === 'list'" class="row row-cols-1 g-2">
@@ -174,7 +176,7 @@ export default {
 	},
 	data() {
 		return {
-			isLoading: false,
+			cardLoading: false,
 			cases: [],
 			sortCases: [],
 			caseCardView: localStorage.getItem("case_card_view") || "card", // 未來可補上pinina
@@ -184,7 +186,7 @@ export default {
 	},
 	methods: {
 		getCaseList(query) {
-			this.isLoading = true;
+			this.cardLoading = true;
 			let url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`;
 			if (query) {
 				url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products?category=${query}`;
@@ -192,8 +194,8 @@ export default {
 			this.$http
 				.get(url)
 				.then((res) => {
-					this.isLoading = false;
 					this.cases = res.data.products;
+					this.cardLoading = false;
 				})
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");
