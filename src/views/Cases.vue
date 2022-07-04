@@ -165,8 +165,8 @@
 	</section>
 </template>
 <script>
-import CaseCard from "@/components/product/CaseCard.vue";
-import CaseList from "@/components/product/CaseList.vue";
+import CaseCard from "@/components/product/CaseCardLayout.vue";
+import CaseList from "@/components/product/CaseListLayout.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 export default {
 	components: {
@@ -195,7 +195,9 @@ export default {
 				.get(url)
 				.then((res) => {
 					this.cases = res.data.products;
-					this.cardLoading = false;
+					setTimeout(() => {
+						this.cardLoading = false;
+					}, 1000);
 				})
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");

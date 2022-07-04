@@ -139,7 +139,7 @@
 </template>
 <script>
 import IndexBannerSlide from "@/components/IndexBannerSlide.vue";
-import CaseCard from "@/components/product/CaseCard.vue";
+import CaseCard from "@/components/product/CaseCardLayout.vue";
 
 export default {
 	components: {

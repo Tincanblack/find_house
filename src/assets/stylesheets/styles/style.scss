@@ -751,11 +751,17 @@ body {
 					rgba(255, 255, 255, 0.5) 50%,
 					rgba(255, 255, 255, 0) 30%
 				)
-				map-get($map: $grays, $key: "500");
+				map-get($map: $grays, $key: "300");
 			background-size: 200% 100%;
-			background-position-x: 180%;
-			animation: 2s loading ease-in-out infinite;
+			background-position-x: 110%;
+			animation: 2s cardLoadingAnimate ease-in-out infinite;
 		}
+	}
+}
+
+@keyframes cardLoadingAnimate {
+	to {
+		background-position-x: -90%;
 	}
 }
 
@@ -984,11 +990,5 @@ body {
 .footer {
 	&-nav {
 		border-bottom: 1px solid map-get($map: $grays, $key: "700");
-	}
-}
-
-@keyframes loading {
-	to {
-		background-position-x: -20%;
 	}
 }
