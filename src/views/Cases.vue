@@ -143,10 +143,10 @@
 			</form>
 		</div>
 	</section>
-	<section class="category-cases pb-3">
+	<section class="category-cases site-content pb-3">
 		<div class="container">
 			<div
-				v-if="caseCardView === 'card'"
+				v-show="caseCardView === 'card'"
 				class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-2"
 			>
 				<div class="col" v-for="item in cases" :key="item.id">
@@ -156,9 +156,12 @@
 					></CaseCard>
 				</div>
 			</div>
-			<div v-if="caseCardView === 'list'" class="row row-cols-1 g-2">
+			<div v-show="caseCardView === 'list'" class="row row-cols-1 g-2">
 				<div class="col pb-lg-3" v-for="item in cases" :key="item.id">
-					<CaseList :item="item"></CaseList>
+					<CaseList
+						:item="item"
+						:cardLoading="cardLoading"
+					></CaseList>
 				</div>
 			</div>
 		</div>

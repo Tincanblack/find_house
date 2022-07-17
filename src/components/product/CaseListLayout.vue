@@ -1,18 +1,19 @@
 <template>
 	<RouterLink
 		class="card text-decoration-none rounded-0 text-dark"
+		:class="{ 'is-loading': cardLoading }"
 		:to="`/case/${item.id}`"
 	>
 		<div class="case-item__card case-item__card--listStyle">
 			<div class="d-block d-lg-flex align-items-center">
 				<div v-if="item.imageUrl" class="card-image">
-					<div class="card-tag">
+					<div class="card-tag" v-show="!cardLoading">
 						<div
 							class="tag"
 							v-if="item.origin_price !== item.price"
 						>
 							<span
-								v-if="item.origin_price && item.price"
+								v-show="item.origin_price && item.price"
 								class="badge tag__element tag__element--sec"
 							>
 								<i class="bi bi-arrow-down"></i>
@@ -65,54 +66,62 @@
 					<h5
 						class="card-title text-lg-left text-truncate fw-bold position-relative"
 					>
-						{{ item.title }}
+						{{ cardLoading ? "" : item.title }}
 						<div
 							class="card-price d-none d-lg-flex align-items-center"
 						>
 							<span
 								class="card-price__price card-price__price--selling"
+								v-show="!cardLoading"
 							>
 								{{ $format.currencyFormat(item.price) }}
 								<span class="card-price__price-unit">萬</span>
 							</span>
 						</div>
 					</h5>
+					<h6 class="card-description d-none d-lg-inline-block">
+						{{ cardLoading ? "" : item.description }}
+					</h6>
 					<div class="card-text">
-						<div class="card-text-list d-none d-lg-block">
-							{{ item.description }}
-						</div>
 						<div class="card-text-list">
 							<span class="card-text-list__item">
-								<small>{{ item.squareFeet }}坪</small></span
-							>
-							<span class="card-text-list__item">
-								<small>{{
-									$format.patternFormat(item.pattern)
-								}}</small>
+								{{ cardLoading ? "" : item.squareFeet + "坪" }}
 							</span>
 							<span class="card-text-list__item">
-								<small v-if="item.houseAge !== ''">
-									{{ item.houseAge }}年</small
-								>
-								<small v-else>預售</small>
+								{{
+									cardLoading
+										? ""
+										: $format.patternFormat(item.pattern)
+								}}
+							</span>
+							<span class="card-text-list__item">
+								{{ cardLoading ? "" : item.houseAge + "年" }}
 							</span>
 						</div>
 						<div
 							class="card-text-list card-text-list--light d-none d-lg-block"
-							v-if="item.parking"
 						>
-							<span
-								class="card-text__icon card-text__icon-parking"
-								>P</span
-							>{{ item.parking }}
+							<div
+								class="card-text-list__item card-text-list__item--parking"
+								v-show="item.parking"
+							>
+								<span
+									class="card-text__icon card-text__icon-parking"
+									v-show="!cardLoading"
+									>P
+								</span>
+								{{ cardLoading ? "" : item.parking }}
+							</div>
 						</div>
-						<ul class="card-feature-tag p-0 m-0 d-none d-lg-block">
+						<ul
+							class="card-feature-tag p-0 m-0 d-none d-lg-inline-block"
+						>
 							<li
 								class="badge card-feature-tag__item"
 								v-for="tag in item.tags"
 								:key="tag"
 							>
-								{{ tag }}
+								{{ cardLoading ? "" : tag }}
 							</li>
 						</ul>
 					</div>
@@ -129,6 +138,9 @@ export default {
 			default() {
 				return {};
 			},
+		},
+		cardLoading: {
+			type: Boolean,
 		},
 	},
 };
