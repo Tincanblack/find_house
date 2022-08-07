@@ -338,7 +338,7 @@ body {
 	}
 }
 
-// page - sortCase
+// page - feature - sortCase
 .sort-cases {
 	&-status {
 		background: white;
@@ -368,7 +368,7 @@ body {
 	}
 }
 
-// page - caseCardDisplay
+// page - feature - displayStyle
 .case-card {
 	&-display {
 		&__button {
@@ -407,14 +407,7 @@ body {
 	}
 }
 
-// page category
-.category {
-	&-list-item {
-		padding-bottom: 1.5rem;
-	}
-}
-
-// page - card
+// page - feature - card
 .card {
 	overflow: hidden;
 	transition: all 0.3s ease;
@@ -1016,5 +1009,24 @@ body {
 .footer {
 	&-nav {
 		border-bottom: 1px solid map-get($map: $grays, $key: "700");
+	}
+}
+
+// page - news
+.news-slide {
+	background: map-get($map: $grays, $key: "200");
+	&__link {
+		overflow: hidden;
+		&:hover {
+			.news-slide__image {
+				background-size: 115%;
+			}
+		}
+	}
+	&__image {
+		padding-top: 65%;
+		background-position: center;
+		background-size: 100%;
+		transition: all 0.3s ease-out;
 	}
 }

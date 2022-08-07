@@ -14,13 +14,6 @@
 		<swiper-slide
 			><img
 				class="img-fluid"
-				src="https://events.sinyi.com.tw/life-drawing-game/?utm_source=sinyi&utm_medium=banner&utm_campaign=website"
-				alt=""
-			/>
-		</swiper-slide>
-		<swiper-slide
-			><img
-				class="img-fluid"
 				src="https://res.sinyi.com.tw/a_d_sense/index_buy_20210825133411.jpg"
 				alt=""
 			/>
@@ -29,6 +22,13 @@
 			><img
 				class="img-fluid"
 				src="https://res.sinyi.com.tw/a_d_sense/index_buy_20210825134712.jpg"
+				alt=""
+			/>
+		</swiper-slide>
+		<swiper-slide
+			><img
+				class="img-fluid"
+				src="https://res.sinyi.com.tw/a_d_sense/index_buy_20210825133411.jpg"
 				alt=""
 			/>
 		</swiper-slide>

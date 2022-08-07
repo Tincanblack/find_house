@@ -182,7 +182,7 @@ export default {
 			cardLoading: false,
 			cases: [],
 			sortCases: [],
-			caseCardView: localStorage.getItem("case_card_view") || "card", // 未來可補上pinina
+			caseCardView: "card",
 			filterCategory: "",
 			sortBy: "",
 		};
@@ -267,6 +267,7 @@ export default {
 	mounted() {
 		this.filterCategory = this.$route.query.category;
 		this.getCaseList(this.filterCategory);
+		this.caseCardView = localStorage.getItem("case_card_view");
 		window.addEventListener("resize", this.resizeWidth);
 	},
 };
