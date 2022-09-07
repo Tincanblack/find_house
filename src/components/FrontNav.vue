@@ -34,7 +34,7 @@
 					</li>
 					<li class="nav-item">
 						<RouterLink class="nav-link" to="/news"
-							>房訊知識</RouterLink
+							>房訊新知</RouterLink
 						>
 					</li>
 					<li class="nav-item">

@@ -18,6 +18,7 @@ import {
 	calToPercent,
 	filterItemTag,
 	dateFormat,
+	timeBlockFormat,
 } from "@/methods/format";
 import $httpMessageState from "@/methods/updateMessageState";
 import App from "./App.vue";
@@ -31,6 +32,7 @@ app.config.globalProperties.$format = {
 	calToPercent,
 	filterItemTag,
 	dateFormat,
+	timeBlockFormat,
 };
 
 // 將 $httpMessageState 加入全域下

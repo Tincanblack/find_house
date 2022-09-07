@@ -18,7 +18,7 @@
 						<div class="col-md-6">
 							<RouterLink
 								class="news-slide__link"
-								:to="article.id"
+								:to="`/news/${article.id}`"
 							>
 								<div
 									class="news-slide__image"
@@ -31,11 +31,13 @@
 						<div class="col-md-6">
 							<h4 class="news-slide__title fw-bold">
 								{{ article.title }}
-								<span class="news-slide__author fs-6">{{
-									article.author
-								}}</span>
 							</h4>
-							{{ article.description }}
+							<h6 class="news-slide__author fs-6">
+								{{ article.author }}
+							</h6>
+							<div class="news-slide__content">
+								{{ article.description }}
+							</div>
 						</div>
 					</div>
 				</swiper-slide>

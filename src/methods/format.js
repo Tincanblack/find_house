@@ -47,3 +47,12 @@ export function dateFormat(time) {
 	const localDate = new Date(time * 1000);
 	return localDate.toLocaleDateString();
 }
+
+export function timeBlockFormat(time) {
+	const localDate = new Date(time * 1000);
+	const dateFormatAttay = localDate
+		.toLocaleDateString()
+		.replace("/", ".")
+		.split("/");
+	return dateFormatAttay;
+}

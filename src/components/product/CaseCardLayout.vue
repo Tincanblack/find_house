@@ -97,8 +97,5 @@ export default {
 			type: Boolean,
 		},
 	},
-	data() {
-		[];
-	},
 };
 </script>

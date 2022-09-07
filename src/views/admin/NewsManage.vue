@@ -17,8 +17,9 @@
 					<th width="5%">順序</th>
 					<th width="10%">封面圖片</th>
 					<th width="45%" class="text-start">標題</th>
+					<th width="10%">分類</th>
 					<th width="10%">發布者</th>
-					<th width="15%">發布時間</th>
+					<th width="5%">發布時間</th>
 					<th width="5%">是否顯示</th>
 					<th width="10%">操作</th>
 				</tr>
@@ -35,6 +36,9 @@
 					</td>
 					<td class="text-start">
 						{{ article.title }}
+					</td>
+					<td>
+						{{ article.category }}
 					</td>
 					<td>
 						{{ article.author }}

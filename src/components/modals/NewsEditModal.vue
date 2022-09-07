@@ -25,6 +25,35 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<div class="mb-3">
+								<label for="" class="form-label"
+									>顯示狀況</label
+								>
+								<div class="form-check form-switch">
+									<input
+										class="form-check-input"
+										type="checkbox"
+										v-model="tempNews.isPublic"
+										:true-value="true"
+										:false-value="false"
+										id="isPublic"
+									/>
+									<label
+										v-if="tempNews.isPublic"
+										class="form-check-label"
+										for="isPublic"
+										>顯示
+									</label>
+									<label
+										v-else
+										class="form-check-label"
+										for="isPublic"
+										>不顯示
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="mb-3">
 								<label for="image" class="form-label"
 									>封面圖片</label
 								>
@@ -46,7 +75,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-sm-12">
+						<div class="col-sm-6">
 							<div class="mb-3">
 								<label for="title" class="form-label"
 									>標題</label
@@ -57,6 +86,20 @@
 									id="title"
 									placeholder="請輸入標題"
 									v-model="tempNews.title"
+								/>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="mb-3">
+								<label for="category" class="form-label"
+									>分類</label
+								>
+								<input
+									type="text"
+									class="form-control"
+									id="category"
+									placeholder="請輸入分類"
+									v-model="tempNews.category"
 								/>
 							</div>
 						</div>
@@ -107,35 +150,6 @@
 									:config="editorConfig"
 								>
 								</ckeditor>
-							</div>
-							<div class="col-sm-12">
-								<div class="mb-3">
-									<label for="" class="form-label"
-										>顯示狀況</label
-									>
-									<div class="form-check form-switch">
-										<input
-											class="form-check-input"
-											type="checkbox"
-											v-model="tempNews.isPublic"
-											:true-value="true"
-											:false-value="false"
-											id="isPublic"
-										/>
-										<label
-											v-if="tempNews.isPublic"
-											class="form-check-label"
-											for="isPublic"
-											>顯示
-										</label>
-										<label
-											v-else
-											class="form-check-label"
-											for="isPublic"
-											>不顯示
-										</label>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>

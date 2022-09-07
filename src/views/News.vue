@@ -1,5 +1,56 @@
 <template>
-	<NewsSlide :articles="articles"></NewsSlide>
+	<div class="site-content">
+		<NewsSlide v-if="articles.length > 0" :articles="articles"></NewsSlide>
+		<div class="news-list py-5">
+			<div class="news-list-column">
+				<div class="container">
+					<div class="row">
+						<div
+							class="col-md-4"
+							v-for="(item, index) in articles"
+							:key="item.id"
+						>
+							<div class="news-list-card">
+								<RouterLink
+									class="news-list-card__link"
+									v-if="articles[index]"
+									:to="`/news/${articles[index]['id']}`"
+								>
+									<div class="news-list-card__date">
+										<div class="time-block">
+											<div class="time-block__main">
+												{{
+													$format.timeBlockFormat(
+														item.create_at
+													)[1]
+												}}
+											</div>
+											<div class="time-block__sec">
+												{{
+													$format.timeBlockFormat(
+														item.create_at
+													)[0]
+												}}
+											</div>
+										</div>
+									</div>
+									<div
+										class="news-list-card__background"
+										:style="{
+											backgroundImage: `url(${articles[index]['image']})`,
+										}"
+									></div>
+									<h5 class="news-list-card__title">
+										{{ articles[index]["title"] }}
+									</h5>
+								</RouterLink>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 <script>
 import NewsSlide from "@/components/NewsSlide.vue";
@@ -27,17 +78,6 @@ export default {
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");
 				});
-		},
-		randomItem(count) {
-			const tempData = this.cases;
-			this.randomData = [];
-			for (let x = 0; x < count; x += 1) {
-				const randomItem = Math.floor(
-					Math.random() * (tempData.length - 0) + 0
-				);
-				this.randomData.push(this.cases[randomItem]);
-				tempData.splice(randomItem, 1);
-			}
 		},
 	},
 	mounted() {

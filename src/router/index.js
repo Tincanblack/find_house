@@ -45,13 +45,18 @@ const routes = [
 			},
 			{
 				path: "case/:id",
-				name: "product",
+				name: "case",
 				component: () => import("@/views/Case.vue"),
 			},
 			{
 				path: "news",
 				name: "news",
 				component: () => import("@/views/News.vue"),
+			},
+			{
+				path: "news/:id",
+				name: "newsDetail",
+				component: () => import("@/views/NewsDetail.vue"),
 			},
 			{
 				path: "collections",
