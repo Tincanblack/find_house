@@ -139,7 +139,7 @@ export default {
 			this.$refs.caseModal.openModal();
 		},
 		updateCase(item) {
-			this.tempCase = item;
+			this.tempCase = { ...item };
 			this.isLoading = true;
 			let api = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product`;
 			let httpMethod = "post";

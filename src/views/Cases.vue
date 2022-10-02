@@ -1,15 +1,15 @@
 <template>
 	<div class="site-content">
-		<Breadcrumb></Breadcrumb>
+		<CaseBreadcrumb></CaseBreadcrumb>
 		<section class="category-header py-3">
 			<div class="container">
 				<form
 					class="row row-cols-lg-auto g-3 align-items-center justify-content-between"
 				>
 					<div class="col-12">
-						<div class="dropdown sort-cases">
+						<div class="dropdown cases-sort">
 							<button
-								class="btn sort-cases-status dropdown-toggle"
+								class="btn cases-sort-status dropdown-toggle"
 								type="button"
 								id="dropdownButton"
 								data-bs-toggle="dropdown"
@@ -19,13 +19,13 @@
 								預設顯示
 							</button>
 							<ul
-								class="dropdown-menu sort-cases-select"
+								class="dropdown-menu cases-sort-select"
 								aria-labelledby="dropdownButton"
 							>
 								<li>
 									<button
 										type="button"
-										class="dropdown-item sort-cases-select__option"
+										class="dropdown-item cases-sort-select__option"
 										:class="{
 											active: sortBy === '',
 										}"
@@ -37,7 +37,7 @@
 								<li>
 									<button
 										type="button"
-										class="dropdown-item sort-cases-select__option"
+										class="dropdown-item cases-sort-select__option"
 										:class="{
 											active: sortBy === 'priceLow2High',
 										}"
@@ -49,7 +49,7 @@
 								<li>
 									<button
 										type="button"
-										class="dropdown-item sort-cases-select__option"
+										class="dropdown-item cases-sort-select__option"
 										:class="{
 											active: sortBy === 'priceHigh2Low',
 										}"
@@ -61,7 +61,7 @@
 								<li>
 									<button
 										type="button"
-										class="dropdown-item sort-cases-select__option"
+										class="dropdown-item cases-sort-select__option"
 										:class="{
 											active:
 												sortBy === 'houseAgeLow2High',
@@ -76,7 +76,7 @@
 								<li>
 									<button
 										type="button"
-										class="dropdown-item sort-cases-select__option"
+										class="dropdown-item cases-sort-select__option"
 										:class="{
 											active:
 												sortBy === 'houseAgeHigh2Low',
@@ -91,7 +91,7 @@
 								<li>
 									<button
 										type="button"
-										class="dropdown-item sort-cases-select__option"
+										class="dropdown-item cases-sort-select__option"
 										:class="{
 											active:
 												sortBy === 'squareFeetLow2High',
@@ -106,7 +106,7 @@
 								<li>
 									<button
 										type="button"
-										class="dropdown-item sort-cases-select__option"
+										class="dropdown-item cases-sort-select__option"
 										:class="{
 											active:
 												sortBy ===
@@ -123,28 +123,28 @@
 						</div>
 					</div>
 					<div class="col-12 d-none d-lg-block">
-						<div class="case-card-display">
+						<div class="cases-card-display">
 							<span
-								class="case-card-display__button"
+								class="cases-card-display__button"
 								:class="{
 									isActive: this.caseCardView === 'card',
 								}"
 								@click="changeCardView('card')"
 							>
 								<i
-									class="bi bi-grid fs-3 case-card-display__icon"
+									class="bi bi-grid fs-3 cases-card-display__icon"
 								></i>
 								卡片
 							</span>
 							<span
-								class="case-card-display__button"
+								class="cases-card-display__button"
 								:class="{
 									isActive: this.caseCardView === 'list',
 								}"
 								@click="changeCardView('list')"
 							>
 								<i
-									class="bi bi-list-ul fs-3 case-card-display__icon"
+									class="bi bi-list-ul fs-3 cases-card-display__icon"
 								></i>
 								列表
 							</span>
@@ -188,12 +188,12 @@
 <script>
 import CaseCard from "@/components/product/CaseCardLayout.vue";
 import CaseList from "@/components/product/CaseListLayout.vue";
-import Breadcrumb from "@/components/Breadcrumb.vue";
+import CaseBreadcrumb from "@/components/CaseBreadcrumb.vue";
 export default {
 	components: {
 		CaseCard,
 		CaseList,
-		Breadcrumb,
+		CaseBreadcrumb,
 	},
 	data() {
 		return {

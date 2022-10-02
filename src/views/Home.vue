@@ -3,7 +3,7 @@
 		<IndexBannerSlide></IndexBannerSlide>
 		<section class="index-feature py-3 py-xl-5 text-center bg-light">
 			<div class="container">
-				<h2 class="section__title mb-3 mb-xl-5 fw-bold">
+				<h2 class="index-feature__title mb-3 mb-xl-5 fw-bold">
 					想要找什麼樣類型的房子?
 				</h2>
 				<div class="row">
@@ -92,7 +92,7 @@
 					<div class="col">
 						<div class="index-cases-footer text-center py-4">
 							<RouterLink
-								class="cases-footer__button btn btn-outline-primary w-25 rounded-0"
+								class="cases-footer__button btn btn-outline-primary rounded-0"
 								to="/cases"
 								>查看更多</RouterLink
 							>
@@ -105,7 +105,15 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-12 d-block d-xl-none">
-						<h2 class="section__title">房訊新知</h2>
+						<div class="index-news-header">
+							<h2 class="index-news-header__title">房訊新知</h2>
+							<RouterLink
+								class="index-news-header__link fs-6 text-decoration-none"
+								to="/news"
+							>
+								更多房訊新知 →</RouterLink
+							>
+						</div>
 					</div>
 					<div class="col-12 col-xl-6 d-none d-xl-block">
 						<RouterLink class="index-news-image" to="/news">
@@ -128,27 +136,27 @@
 									:to="`/news/${news.id}`"
 								>
 									<div
-										class="d-flex gap-2 w-100 justify-content-between align-items-center"
+										class="d-flex gap-2 justify-content-between align-items-center"
 									>
 										<div class="index-news-list__date">
-											<div class="time-block">
-												<div class="time-block__main">
+											<div class="public-date">
+												<div class="public-date__main">
 													{{
-														$format.timeBlockFormat(
+														$format.publicDateFormat(
 															news.create_at
 														)[1]
 													}}
 												</div>
-												<div class="time-block__sec">
+												<div class="public-date__sec">
 													{{
-														$format.timeBlockFormat(
+														$format.publicDateFormat(
 															news.create_at
 														)[0]
 													}}
 												</div>
 											</div>
 										</div>
-										<div>
+										<div class="index-news-list__content">
 											<h6 class="index-news-list__title">
 												{{ news.title }}
 											</h6>

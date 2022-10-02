@@ -1,33 +1,28 @@
 <template>
 	<div class="site-content">
-		<NewsSlide v-if="articles.length > 0" :articles="articles"></NewsSlide>
+		<NewsSlide v-if="news.length > 0" :articles="news"></NewsSlide>
 		<div class="news-list py-5">
 			<div class="news-list-column">
 				<div class="container">
-					<div class="row">
-						<div
-							class="col-md-4"
-							v-for="(item, index) in articles"
-							:key="item.id"
-						>
+					<div class="row row-cols-1 row-cols-md-3">
+						<div class="col" v-for="item in news" :key="item.id">
 							<div class="news-list-card">
 								<RouterLink
 									class="news-list-card__link"
-									v-if="articles[index]"
-									:to="`/news/${articles[index]['id']}`"
+									:to="`/news/${item.id}`"
 								>
 									<div class="news-list-card__date">
-										<div class="time-block">
-											<div class="time-block__main">
+										<div class="public-date">
+											<div class="public-date__main">
 												{{
-													$format.timeBlockFormat(
+													$format.publicDateFormat(
 														item.create_at
 													)[1]
 												}}
 											</div>
-											<div class="time-block__sec">
+											<div class="public-date__sec">
 												{{
-													$format.timeBlockFormat(
+													$format.publicDateFormat(
 														item.create_at
 													)[0]
 												}}
@@ -37,11 +32,11 @@
 									<div
 										class="news-list-card__background"
 										:style="{
-											backgroundImage: `url(${articles[index]['image']})`,
+											backgroundImage: `url(${item.image})`,
 										}"
 									></div>
 									<h5 class="news-list-card__title">
-										{{ articles[index]["title"] }}
+										{{ item.title }}
 									</h5>
 								</RouterLink>
 							</div>
@@ -62,18 +57,17 @@ export default {
 
 	data() {
 		return {
-			articles: [],
+			news: [],
 		};
 	},
 	methods: {
 		getNewsList(page = 1) {
-			this.isLoading = true;
 			this.$http
 				.get(
 					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/articles/?page=${page}`
 				)
 				.then((response) => {
-					this.articles = response.data.articles;
+					this.news = response.data.articles;
 				})
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");

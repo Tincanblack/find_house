@@ -43,16 +43,15 @@ export function filterItemTag(item) {
 }
 
 // 時間
-export function dateFormat(time) {
+export function dateFormat(time = "") {
+	if (time === "") return false;
 	const localDate = new Date(time * 1000);
 	return localDate.toLocaleDateString();
 }
 
-export function timeBlockFormat(time) {
-	const localDate = new Date(time * 1000);
-	const dateFormatAttay = localDate
-		.toLocaleDateString()
-		.replace("/", ".")
-		.split("/");
+export function publicDateFormat(time = "") {
+	if (time === "") return false;
+	let dateFormatAttay = dateFormat(time);
+	dateFormatAttay = dateFormatAttay.replace("/", ".").split("/");
 	return dateFormatAttay;
 }

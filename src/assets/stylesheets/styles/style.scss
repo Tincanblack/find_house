@@ -89,8 +89,31 @@ body {
 	}
 }
 
+// footer
+.footer {
+	&-nav {
+		border-bottom: 1px solid map-get($map: $grays, $key: "700");
+	}
+}
+
+// utilities
+
+// side-content
 .site-content {
 	min-height: 80vh;
+}
+
+// backToTop
+.side-navigation {
+	&__button--to-top {
+		transition: all 0.3s;
+		border: 0;
+		background: 0;
+		box-shadow: none;
+		position: fixed;
+		right: 15px;
+		bottom: 15px;
+	}
 }
 
 //  breadcrumb
@@ -98,6 +121,7 @@ body {
 	&-wrapper {
 		border-top: 1px solid map-get($map: $grays, $key: "200");
 		border-bottom: 1px solid map-get($map: $grays, $key: "200");
+		margin-bottom: 1.25rem;
 	}
 	margin-bottom: 0;
 	&-item {
@@ -109,15 +133,19 @@ body {
 	}
 }
 
-.side-navigation {
-	&__button--to-top {
-		transition: all 0.3s;
-		border: 0;
-		background: 0;
-		box-shadow: none;
-		position: fixed;
-		right: 15px;
-		bottom: 15px;
+// publicDate
+.public {
+	&-date {
+		padding: 0.25rem;
+		text-align: center;
+		&__main {
+			font-weight: bold;
+			font-size: 1.25rem;
+			font-family: "Arial Black";
+		}
+		&__sec {
+			font-size: 12px;
+		}
 	}
 }
 
@@ -228,9 +256,12 @@ body {
 	// index-cases
 	&-cases {
 		&-footer {
-			.case-footer {
+			.cases-footer {
 				&__button {
-					color: white;
+					min-width: 10vw;
+					@include mobile {
+						width: 100%;
+					}
 				}
 			}
 		}
@@ -241,6 +272,15 @@ body {
 		background: url(https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1656237901480.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=ZDjfjkFp8VcKZA5F9H1K0QFidpDbKgdKtxmue6DoF%2FkB7pxuBV03NduojBrwyofJTRQ3e6MI2B%2FjQKPAzdV5TN8cAyARzfpp%2B51AoG%2BTo6OA8Q%2FTAB7Wum%2B8pYOmpF895ezqnd8R8qHZKreJ3YsuJ%2BAIVlA2ibprG%2BfX59oCeUCiUzc3L8CzRlCfV4WaTNgh0TescnF6wjR%2FVrIRqNAIc0uIJM%2FErnSgp5hxKcsc6vTuXCRvAVF2OnAmyaCWI8VPe7Grieoa3lct3Ri447Fv2NLmsq%2B6llcRFtecw%2B1ZASTH5sjI%2BgUygwS3X6fJUmi9ElT0rYAN3hw78%2Fnm8DGXtA%3D%3D);
 		background-position: center bottom;
 		background-size: cover;
+		&-header {
+			display: flex;
+			justify-content: space-between;
+		}
+		.list-group-item-action {
+			&:hover {
+				background-color: map-get($map: $grays, $key: "200");
+			}
+		}
 		// index-news-image
 		&-image {
 			position: relative;
@@ -249,8 +289,10 @@ body {
 			background: url(https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1656427342446.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=cB37q%2FYBNlXTYlToMwACZJ63A3uBmYdq8vT1VA3uB7oAMMV4zRt1t7SIKINVCFw6bUy5iSHGsufNOV6AGmndydA7xCgB6xakwHG9Hyaajp4QOXLdLAfJxWRDbjU%2Bvf2PbYGmQJRCefCeyG9MbUIOUC51S%2FRm%2FGQpp10IOciyKcwIidm%2BBh7I2MDotA8VSOuSmfVXYmlxw7HGQG22eGHLbZ%2BeGQ7O5cg%2BJ3ubV0wW%2B9SLtVvd73qkfgNLsIyM7Ida9X0Nym%2F5MMYJGpiq9R5wx9rJlmK780V6HPRCAatDb3Zi5frFQGhyx5z3CyxsNI%2BY9JuMi0%2BVR9Mt77iAzKV2lg%3D%3D);
 			background-position: center center;
 			background-repeat: no-repeat;
+			background-size: 100%;
+			background-color: rgba(black, 0.3);
+			background-blend-mode: multiply;
 			padding-top: 61.5%;
-			filter: grayscale(100%);
 			transition: all 0.3s;
 			&::after {
 				display: block;
@@ -264,17 +306,19 @@ body {
 				transition: all 0.3s;
 			}
 			&:hover {
-				filter: grayscale(0%);
-				&::after {
-					opacity: 1;
-					background: rgba(0, 0, 0, 0.5);
-				}
+				background-size: 115%;
 				.index-news-image__text {
-					opacity: 1;
+					&::after {
+						opacity: 1;
+						transform: translate(-50%, -50%);
+						right: -25%;
+						top: 50%;
+						color: #fff;
+					}
 				}
 			}
 			&__text {
-				opacity: 0;
+				opacity: 1;
 				z-index: 1;
 				position: absolute;
 				color: white;
@@ -283,6 +327,15 @@ body {
 				transform: translate(-50%, -50%);
 				transition: all 0.3s;
 				font-size: 2rem;
+				&::after {
+					content: "→";
+					position: absolute;
+					top: 50%;
+					right: 5%;
+					transform: translate(-50%, -50%);
+					opacity: 0;
+					transition: all 0.3s;
+				}
 			}
 		}
 		// index-news-list
@@ -299,59 +352,25 @@ body {
 				font-weight: bold;
 				max-width: 430px;
 				@include text-hide-ellipsis(1);
+				@include mobile {
+					max-width: 255px;
+				}
+			}
+			&__content {
+				padding-left: 0.75rem;
+				border-left: 1px solid map-get($map: $grays, $key: "300");
 			}
 			&__description {
 				@include text-hide-ellipsis(2);
 			}
-			&__date {
-				margin-right: 0.25rem;
-				padding-right: .5rem;
-				border-right: 1px solid map-get($map: $grays, $key: "300");
-			}
 		}
 	}
 }
 
-.section {
-	&__title {
-		text-align: center;
-		position: relative;
-		z-index: 1;
-	}
-}
-
-// page
-// page - common
-.section {
-	&-header {
-		overflow: hidden;
-		margin-bottom: 1rem;
-		&__title {
-			margin: 0;
-			padding-right: 1rem;
-			position: relative;
-			display: inline-block;
-			z-index: 2;
-			color: map-get($map: $theme-site-colors, $key: "main");
-			background: white;
-			&::after {
-				content: "";
-				position: absolute;
-				z-index: 1;
-				top: 50%;
-				left: 100%;
-				transform: translate(0, -50%);
-				width: 100vw;
-				height: 2px;
-				background: map-get($map: $theme-site-colors, $key: "main");
-			}
-		}
-	}
-}
-
-// page - feature - sortCase
-.sort-cases {
-	// sort-cases-status
+// page - cases
+// cases-sort
+.cases-sort {
+	// cases-sort-status
 	&-status {
 		background: white;
 		border: 1px solid map-get($map: $grays, $key: "300");
@@ -367,7 +386,7 @@ body {
 			}
 		}
 	}
-	// sort-cases-select
+	// cases-sort-select
 	&-select {
 		&__option {
 			color: map-get($map: $grays, $key: "600");
@@ -381,8 +400,8 @@ body {
 	}
 }
 
-// page - feature - displayStyle
-.case-card {
+// case-card
+.cases-card {
 	// case-card-display
 	&-display {
 		&__button {
@@ -421,7 +440,6 @@ body {
 	}
 }
 
-// page - feature - card
 .card {
 	overflow: hidden;
 	transition: all 0.3s ease;
@@ -452,13 +470,16 @@ body {
 							border: 1px solid white;
 						}
 					}
-					img {
+					> img {
 						width: 100%;
 						height: 203.25px;
 						zoom: 1;
 						transition: all 0.3s ease-out;
 						object-fit: cover;
 						opacity: 1;
+						@include mobile {
+							
+						}
 					}
 					&::before {
 						content: "";
@@ -798,7 +819,7 @@ body {
 	}
 }
 
-// page - item
+// page - case
 .case {
 	// case-assistant
 	&-assistant {
@@ -986,6 +1007,30 @@ body {
 		&-section {
 			margin-bottom: 1rem;
 		}
+		&-header {
+			overflow: hidden;
+			margin-bottom: 1rem;
+			&__title {
+				margin: 0;
+				padding-right: 1rem;
+				position: relative;
+				display: inline-block;
+				z-index: 2;
+				color: map-get($map: $theme-site-colors, $key: "main");
+				background: white;
+				&::after {
+					content: "";
+					position: absolute;
+					z-index: 1;
+					top: 50%;
+					left: 100%;
+					transform: translate(0, -50%);
+					width: 100vw;
+					height: 2px;
+					background: map-get($map: $theme-site-colors, $key: "main");
+				}
+			}
+		}
 	}
 	// case-table
 	&-table {
@@ -1032,13 +1077,8 @@ body {
 	}
 }
 
-.footer {
-	&-nav {
-		border-bottom: 1px solid map-get($map: $grays, $key: "700");
-	}
-}
-
 // page - news
+// news-slide
 .news-slide {
 	background: map-get($map: $grays, $key: "200");
 	&__link {
@@ -1062,7 +1102,7 @@ body {
 		@include text-hide-ellipsis(3);
 	}
 	.swiper {
-		min-height: 32.5vh;
+		min-height: 16vw;
 		@include laptop {
 			min-height: 42.5vh;
 		}
@@ -1084,112 +1124,127 @@ body {
 	}
 }
 
-.news {
-	// news-list
-	&-list {
-		// news-list-column
-		&-column {
-			margin-bottom: 1rem;
-			&:last-child {
-				margin-bottom: 0;
+// page
+// news-list
+.news-list {
+	// news-list-column
+	&-column {
+		margin-bottom: 1rem;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	// news-list-header
+	&-header {
+		&__title {
+			&.color-main {
+				color: map-get($map: $theme-site-colors, $key: "main");
 			}
 		}
-		// news-list-header
-		&-header {
-			&__title {
-				&.color-main {
-					color: map-get($map: $theme-site-colors, $key: "main");
-				}
-			}
-		}
-		// news-list-card
-		&-card {
-			margin-bottom: 1.5rem;
-			&__link {
-				position: relative;
-				overflow: hidden;
-				text-decoration: none;
+	}
+	// news-list-card
+	&-card {
+		margin-bottom: 1.25rem;
+		&__link {
+			position: relative;
+			overflow: hidden;
+			text-decoration: none;
+			color: white;
+			&:hover {
 				color: white;
-				&:hover {
-					color: white;
-					.news-list-card {
-						&__date {
-							.time-block {
-								background-color: rgba(
-									map-get(
-										$map: $theme-site-colors,
-										$key: "main"
-									),
-									1
-								);
-							}
-						}
-						&__background {
-							background-color: rgba(black, 0.6);
-						}
-						&__title {
+				.news-list-card {
+					&__date {
+						.public-date {
 							background-color: rgba(
 								map-get($map: $theme-site-colors, $key: "main"),
 								1
 							);
 						}
 					}
+					&__background {
+						background-color: rgba(black, 0.6);
+					}
+					&__title {
+						background-color: rgba(
+							map-get($map: $theme-site-colors, $key: "main"),
+							1
+						);
+					}
 				}
 			}
-			&__date {
-				position: absolute;
-				top: 0.5rem;
-				left: 0.5rem;
-				z-index: 2;
-				.time-block {
-					background-color: rgba(
-						map-get($map: $theme-site-colors, $key: "main"),
-						0.5
-					);
-					transition: all 0.3s;
-				}
-			}
-			&__background {
-				position: relative;
-				z-index: 1;
-				min-height: 225px;
-				width: 100%;
-				transition: all 0.3s;
-				background-color: rgba(black, 0.3);
-				background-blend-mode: multiply;
-				background-size: cover;
-				background-position: 50%;
-				background-repeat: no-repeat;
-			}
-			&__title {
-				position: absolute;
-				bottom: 0;
-				z-index: 2;
-				padding: 0.5rem;
-				margin-bottom: 0;
-				width: 100%;
-				transition: all 0.3s;
+		}
+		&__date {
+			position: absolute;
+			top: 0.5rem;
+			left: 0.5rem;
+			z-index: 2;
+			.public-date {
 				background-color: rgba(
 					map-get($map: $theme-site-colors, $key: "main"),
 					0.5
 				);
-				@include text-hide-ellipsis(1);
+				transition: all 0.3s;
 			}
+		}
+		&__background {
+			position: relative;
+			z-index: 1;
+			min-height: 225px;
+			width: 100%;
+			transition: all 0.3s;
+			background-color: rgba(black, 0.3);
+			background-blend-mode: multiply;
+			background-size: cover;
+			background-position: 50%;
+			background-repeat: no-repeat;
+		}
+		&__title {
+			position: absolute;
+			bottom: 0;
+			z-index: 2;
+			padding: 0.5rem;
+			margin-bottom: 0;
+			width: 100%;
+			transition: all 0.3s;
+			background-color: rgba(
+				map-get($map: $theme-site-colors, $key: "main"),
+				0.5
+			);
+			@include text-hide-ellipsis(1);
 		}
 	}
 }
 
-.time {
-	&-block {
-		padding: 0.25rem;
-		text-align: center;
-		&__main {
-			font-weight: bold;
-			font-size: 1.25rem;
-			font-family: "Arial Black";
+// news-detail
+.news-detail {
+	// news-detail-header
+	&-header {
+		display: flex;
+		align-items: center;
+		margin-bottom: 1.25rem;
+		&__date {
+			.public-date {
+				background-color: map-get(
+					$map: $theme-site-colors,
+					$key: "main"
+				);
+				color: white;
+				margin-right: 0.5rem;
+			}
 		}
-		&__sec {
-			font-size: 12px;
+		&__title {
+			margin-bottom: 0;
+			font-weight: bold;
+			flex: 1;
+		}
+		&__author {
+			margin-bottom: 0;
+		}
+	}
+	&-content {
+		img {
+			max-width: 100%;
+			height: auto;
 		}
 	}
 }

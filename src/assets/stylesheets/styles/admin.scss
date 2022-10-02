@@ -37,11 +37,11 @@ main {
 			color: white;
 			&.active {
 				color: $body-color;
-				background: #eee;
+				background: white;
 			}
 			&:hover {
 				opacity: 0.8;
-				background: #eee;
+				background: rgba(white, 0.8);
 				.nav-text,
 				.nav-icon {
 					color: $body-color;

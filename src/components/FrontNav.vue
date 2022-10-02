@@ -37,11 +37,11 @@
 							>房訊新知</RouterLink
 						>
 					</li>
-					<li class="nav-item">
+					<!-- <li class="nav-item">
 						<RouterLink class="nav-link" to="/reserve"
 							>查詢預約</RouterLink
 						>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 		</div>
