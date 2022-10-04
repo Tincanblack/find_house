@@ -328,29 +328,60 @@
 										<VForm
 											id="appointmentForm"
 											ref="appointmentForm"
-											@submit.prevent="
-												handleAppointmentForm
-											"
+											v-slot="{ errors }"
+											@submit="handleAppointmentForm"
 										>
-											<div class="mb-3">
-												<VField
-													type="text"
-													class="form-control"
-													autocomplete="off"
-													placeholder="如何稱呼"
-													v-model="formData.customer"
-												/>
+											<div class="mb-3 position-relative">
+												<div class="input-group">
+													<VField
+														type="text"
+														class="form-control"
+														autocomplete="off"
+														placeholder="如何稱呼"
+														v-model="
+															formData.customer
+														"
+														name="稱呼"
+														:class="{
+															'is-invalid':
+																errors['稱呼'],
+														}"
+														rules="required"
+													/>
+													<span
+														class="input-group-text"
+														id="validationTooltipUsernamePrepend"
+														>先生 / 小姐</span
+													>
+													<ErrorMessage
+														name="稱呼"
+														class="invalid-tooltip"
+													></ErrorMessage>
+												</div>
 											</div>
-											<div class="mb-3">
+											<div class="mb-3 position-relative">
 												<VField
 													type="tel"
 													class="form-control"
 													autocomplete="off"
-													placeholder="連絡電話"
+													placeholder="連絡電話 Ex: 0987654321..."
+													name="contactPhone"
 													v-model="
 														formData.contactPhone
 													"
+													:class="{
+														'is-invalid':
+															errors[
+																'contactPhone'
+															],
+													}"
+													:rules="checkInputIsPhone"
+													maxlength="10"
 												/>
+												<ErrorMessage
+													name="contactPhone"
+													class="invalid-tooltip"
+												></ErrorMessage>
 											</div>
 											<div class="mb-3">
 												<select
@@ -381,6 +412,10 @@
 												class="btn btn-primary w-100"
 											>
 												預約諮詢
+												<span
+													v-show="submitButtonLoading"
+													class="spinner-border spinner-border-sm"
+												></span>
 											</button>
 										</VForm>
 									</div>
@@ -464,6 +499,7 @@ export default {
 				freeTime: 0,
 				isHandle: false,
 			},
+			submitButtonLoading: false,
 		};
 	},
 	methods: {
@@ -486,7 +522,7 @@ export default {
 					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/product/${id}`
 				)
 				.then((res) => {
-					// 將收到的data資料展賦予給news
+					// 將收到的data資料展賦予給case
 					this.product = res.data.product;
 					this.category = res.data.product.category;
 					this.isLoading = false;
@@ -502,7 +538,10 @@ export default {
 					this.assistantData = res.data.results[0];
 				})
 				.catch((err) => {
-					alert(err.error);
+					this.$swal({
+						icon: "error",
+						title: `${err.error}`,
+					});
 				});
 		},
 		handleCollectionCase(id) {
@@ -511,24 +550,56 @@ export default {
 			);
 			if (collectionCaseIndex === -1) {
 				this.collectionCase.push(id);
-				// 未來補上sweetaleret
+				this.$swal({
+					icon: "success",
+					title: "加入收藏案件",
+					confirmButtonText: "我知道了",
+				});
 			} else {
 				this.collectionCase.splice(collectionCaseIndex, 1);
-				// 未來補上sweetaleret
+				this.$swal({
+					icon: "success",
+					title: "取消收藏案件",
+					confirmButtonText: "我知道了",
+				});
 			}
 		},
 		handleAppointmentForm() {
+			this.submitButtonLoading = true;
 			this.formData.caseID = this.id;
 			this.formData.caseName = this.product.title;
 			this.formData.manager = this.assistantData.name.first;
-			const googleUrl =
-				"https://script.google.com/macros/s/AKfycbyWsB3D437Km3jnpRu5NT2P4oFlc91KGomEEdpUjxY0jFx2C1AmbGWNh-pL61wXS1r7eQ/exec";
+			const googleScriptAPIUrl =
+				"https://script.google.com/macros/s/AKfycbxftWfxvDnCeDfSU1HZn-msTWyzvxjo3SWC5gPCQkD3y-K1e9ocdZgtxxra2fn7Z78X/exec";
 			this.$http
-				.post(googleUrl, null, { params: this.formData })
+				.post(googleScriptAPIUrl, null, { params: this.formData })
 				.then((res) => {
-					console.log(res);
-					this.$refs.appointmentForm.resetForm();
+					this.submitButtonLoading = false;
+					if (res.data.success !== true) {
+						this.$swal({
+							icon: "error",
+							title: "出現錯誤\n請直接諮詢服務人員",
+						});
+						return false;
+					}
+					this.$swal({
+						icon: "success",
+						title: "謝謝你的諮詢\n將盡快與您聯繫",
+						confirmButtonText: "我知道了",
+					}).then(() => {
+						this.$refs.appointmentForm.resetForm();
+					});
 				});
+		},
+		clickButton() {
+			this.submitButtonLoading = true;
+			setTimeout(() => {
+				this.submitButtonLoading = false;
+			}, 1000);
+		},
+		checkInputIsPhone(value) {
+			const phoneNumber = /^(09)[0-9]{8}$/;
+			return phoneNumber.test(value) ? true : "請輸入正確格式的手機號碼";
 		},
 	},
 	watch: {

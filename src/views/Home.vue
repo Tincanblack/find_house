@@ -116,7 +116,11 @@
 						</div>
 					</div>
 					<div class="col-12 col-xl-6 d-none d-xl-block">
-						<RouterLink class="index-news-image" to="/news">
+						<RouterLink
+							v-show="articles.length > 0"
+							class="index-news-image"
+							to="/news"
+						>
 							<span class="index-news-image__text"
 								>更多房訊新知</span
 							>

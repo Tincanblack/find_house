@@ -1,5 +1,10 @@
+// bootstrap
 @import "~bootstrap/scss/functions";
-@import "./helpers/_variables"; // custom bootstrap styles
+@import "./helpers/bootstrap/_variables"; // custom bootstrap styles
 @import "~bootstrap/scss/bootstrap";
+// sweetalert2
+@import './helpers/sweetalert/variables';
+@import '~sweetalert2/src/sweetalert2';
+// site
 @import "./styles/style";
 @import "./styles/admin";

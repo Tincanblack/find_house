@@ -4,6 +4,11 @@ import { createApp } from "vue";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap";
 
+// fontawsome
+import "@fortawesome/fontawesome-free";
+import "@fortawesome/fontawesome-free/css/all.css";
+import "@fortawesome/fontawesome-free/js/all.js";
+
 // axios
 import axios from "axios";
 import VueAxios from "vue-axios";
@@ -20,6 +25,9 @@ import { Field, Form, ErrorMessage, defineRule, configure } from "vee-validate";
 import AllRules from "@vee-validate/rules";
 import { localize, setLocale } from "@vee-validate/i18n";
 import zhTW from "@vee-validate/i18n/dist/locale/zh_TW.json";
+
+import VueSweetalert2 from "vue-sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 // user
 import {
@@ -65,4 +73,5 @@ app.component("LoadingAnimate", Loading);
 app.component("VForm", Form);
 app.component("VField", Field);
 app.component("ErrorMessage", ErrorMessage);
+app.use(VueSweetalert2);
 app.mount("#app");

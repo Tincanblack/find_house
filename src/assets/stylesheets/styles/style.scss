@@ -106,13 +106,14 @@ body {
 // backToTop
 .side-navigation {
 	&__button--to-top {
-		transition: all 0.3s;
+		right: 15px;
+		bottom: 15px;
 		border: 0;
 		background: 0;
 		box-shadow: none;
+		z-index: 1;
 		position: fixed;
-		right: 15px;
-		bottom: 15px;
+		transition: all 0.3s;
 	}
 }
 
