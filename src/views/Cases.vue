@@ -278,14 +278,14 @@ export default {
 		},
 		caseCardView: {
 			handler() {
-				localStorage.setItem("case_card_view", this.caseCardView);
+				localStorage.setItem("card_layout", this.caseCardView);
 			},
 		},
 	},
 	mounted() {
 		this.filterCategory = this.$route.query.category;
 		this.getCaseList(this.filterCategory);
-		this.caseCardView = localStorage.getItem("case_card_view");
+		this.caseCardView = localStorage.getItem("card_layout");
 		window.addEventListener("resize", this.resizeWidth);
 	},
 };

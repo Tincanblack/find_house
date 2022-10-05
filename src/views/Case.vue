@@ -217,16 +217,6 @@
 										{{ product.content }}
 									</div>
 								</div>
-								<div class="case-detail-section" id="near">
-									<div class="case-detail-header">
-										<h4 class="case-detail-header__title">
-											周遭環境
-										</h4>
-									</div>
-									<div class="detail-content">
-										{{ product.content }}
-									</div>
-								</div>
 							</div>
 						</div>
 						<div class="col-12 col-lg-4 ms-auto d-none d-lg-block">
@@ -329,7 +319,7 @@
 											id="appointmentForm"
 											ref="appointmentForm"
 											v-slot="{ errors }"
-											@submit="handleAppointmentForm"
+											@submit="submitAppointmentForm"
 										>
 											<div class="mb-3 position-relative">
 												<div class="input-group">
@@ -375,7 +365,7 @@
 																'contactPhone'
 															],
 													}"
-													:rules="checkInputIsPhone"
+													:rules="validatePhone"
 													maxlength="10"
 												/>
 												<ErrorMessage
@@ -418,34 +408,56 @@
 												></span>
 											</button>
 										</VForm>
+										<div class="case-action mt-3">
+											<div class="btn-group w-100">
+												<button
+													class="case-action__button btn btn-secondary shadow-sm mb-3"
+													@click="
+														handleCollectionCase(
+															product.id
+														)
+													"
+												>
+													<i
+														class="bi"
+														:class="
+															collectionCase.includes(
+																product.id
+															)
+																? 'bi-search'
+																: 'bi-search-heart'
+														"
+													></i>
+													{{
+														collectionCase.includes(
+															product.id
+														)
+															? "取消"
+															: ""
+													}}收藏案件
+												</button>
+												<button
+													class="case-action__button btn btn-success shadow-sm mb-3"
+												>
+													<i class="bi bi-files"></i>
+													加入比較
+												</button>
+											</div>
+										</div>
 									</div>
 								</div>
-								<div class="case-action">
-									<div class="btn-group w-100">
-										<button
-											class="case-action__button btn shadow-sm mb-3"
-											:class="
-												collectionCase.includes(
-													product.id
-												)
-													? 'btn-secondary'
-													: 'btn-outline-secondary'
-											"
-											@click="
-												handleCollectionCase(product.id)
-											"
-										>
-											<i class="bi bi-search-heart"></i>
-											收藏案件
-										</button>
-										<button
-											class="case-action__button btn btn-outline-success shadow-sm mb-3"
-										>
-											<i class="bi bi-files"></i>
-											加入比較
-										</button>
-									</div>
-								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="case-detail-section" id="near">
+							<div class="case-detail-header">
+								<h4 class="case-detail-header__title">
+									周遭環境
+								</h4>
+							</div>
+							<div class="detail-content">
+								{{ product.content }}
 							</div>
 						</div>
 					</div>
@@ -456,7 +468,7 @@
 			<div class="container">
 				<div class="case-detail-header">
 					<h4 class="case-detail-header__title bg-light">
-						相似的物件
+						A.I.智能推薦
 					</h4>
 				</div>
 				<CasesSlide
@@ -479,7 +491,6 @@ export default {
 		CasePreviewSlide,
 		CasesSlide,
 	},
-	setup() {},
 	data() {
 		return {
 			isLoading: false,
@@ -557,18 +568,15 @@ export default {
 				});
 			} else {
 				this.collectionCase.splice(collectionCaseIndex, 1);
-				this.$swal({
-					icon: "success",
-					title: "取消收藏案件",
-					confirmButtonText: "我知道了",
-				});
 			}
 		},
-		handleAppointmentForm() {
+		submitAppointmentForm() {
+			const today = new Date();
 			this.submitButtonLoading = true;
 			this.formData.caseID = this.id;
 			this.formData.caseName = this.product.title;
 			this.formData.manager = this.assistantData.name.first;
+			this.formData.dataTime = this.$format.dateFormatWithTime(today);
 			const googleScriptAPIUrl =
 				"https://script.google.com/macros/s/AKfycbxftWfxvDnCeDfSU1HZn-msTWyzvxjo3SWC5gPCQkD3y-K1e9ocdZgtxxra2fn7Z78X/exec";
 			this.$http
@@ -579,8 +587,10 @@ export default {
 						this.$swal({
 							icon: "error",
 							title: "出現錯誤\n請直接諮詢服務人員",
+						}).then(() => {
+							this.$refs.appointmentForm.resetForm();
+							return false;
 						});
-						return false;
 					}
 					this.$swal({
 						icon: "success",
@@ -597,7 +607,7 @@ export default {
 				this.submitButtonLoading = false;
 			}, 1000);
 		},
-		checkInputIsPhone(value) {
+		validatePhone(value) {
 			const phoneNumber = /^(09)[0-9]{8}$/;
 			return phoneNumber.test(value) ? true : "請輸入正確格式的手機號碼";
 		},

@@ -43,12 +43,35 @@ export function filterItemTag(item) {
 }
 
 // 時間
+// YYYY-MM-DD
 export function dateFormat(time = "") {
 	if (time === "") return false;
 	const localDate = new Date(time * 1000);
 	return localDate.toLocaleDateString();
 }
 
+// YYYY-MM-DD HH:MM
+export function dateFormatWithTime(dateTime) {
+	function padTo2Digits(dateTime) {
+		return dateTime.toString().padStart(2, "0");
+	}
+
+	return (
+		[
+			dateTime.getFullYear(),
+			padTo2Digits(dateTime.getMonth() + 1),
+			padTo2Digits(dateTime.getDate()),
+		].join("/") +
+		" " +
+		[
+			padTo2Digits(dateTime.getHours()),
+			padTo2Digits(dateTime.getMinutes()),
+			padTo2Digits(dateTime.getSeconds()),
+		].join(":")
+	);
+}
+
+// DD YYYY-MM
 export function publicDateFormat(time = "") {
 	if (time === "") return false;
 	let dateFormatAttay = dateFormat(time);

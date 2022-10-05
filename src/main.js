@@ -36,6 +36,7 @@ import {
 	calToPercent,
 	filterItemTag,
 	dateFormat,
+	dateFormatWithTime,
 	publicDateFormat,
 } from "@/methods/format";
 import $httpMessageState from "@/methods/updateMessageState";
@@ -61,6 +62,7 @@ app.config.globalProperties.$format = {
 	calToPercent,
 	filterItemTag,
 	dateFormat,
+	dateFormatWithTime,
 	publicDateFormat,
 };
 
