@@ -67,10 +67,10 @@ export default {
 					this.isLoading = false;
 					this.$router.push("/admin");
 				})
-				.catch((err) => {
+				.catch((error) => {
 					// 跳出錯誤訊息
 					this.isLoading = false;
-					this.$httpMessageState(err.response, "登入");
+					this.$httpMessageState(error.response, "登入");
 				});
 		},
 	},

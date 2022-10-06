@@ -548,10 +548,10 @@ export default {
 				.then((res) => {
 					this.assistantData = res.data.results[0];
 				})
-				.catch((err) => {
+				.catch((error) => {
 					this.$swal({
 						icon: "error",
-						title: `${err.error}`,
+						title: `${error.response}`,
 					});
 				});
 		},

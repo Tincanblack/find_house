@@ -28,14 +28,14 @@
 						>
 					</li>
 					<li class="nav-item">
-						<RouterLink class="nav-link" to="/collections"
-							>收藏名單
-						</RouterLink>
-					</li>
-					<li class="nav-item">
 						<RouterLink class="nav-link" to="/news"
 							>房訊新知</RouterLink
 						>
+					</li>
+					<li class="nav-item">
+						<RouterLink class="nav-link" to="/collections"
+							>收藏名單
+						</RouterLink>
 					</li>
 					<!-- <li class="nav-item">
 						<RouterLink class="nav-link" to="/reserve"

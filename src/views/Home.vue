@@ -182,7 +182,7 @@
 </template>
 <script>
 import IndexBannerSlide from "@/components/IndexBannerSlide.vue";
-import CaseCard from "@/components/product/CaseCardLayout.vue";
+import CaseCard from "@/components/widgets/CaseCardLayout.vue";
 
 export default {
 	components: {

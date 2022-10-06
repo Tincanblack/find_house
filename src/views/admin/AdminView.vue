@@ -27,10 +27,10 @@ export default {
 				this.$httpMessageState(res, "登入");
 				this.isCheckLogin = true;
 			})
-			.catch((err) => {
+			.catch((error) => {
 				// 如果無登入情況時或是驗證失敗會導向至登入頁並重新登入;
 				this.$router.push("/login");
-				this.$httpMessageState(err.response, "錯誤訊息");
+				this.$httpMessageState(error.response, "錯誤訊息");
 			});
 	},
 };

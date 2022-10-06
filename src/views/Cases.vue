@@ -3,7 +3,7 @@
 		<CaseBreadcrumb></CaseBreadcrumb>
 		<section class="category-header py-3">
 			<div class="container">
-				<form
+				<div
 					class="row row-cols-lg-auto g-3 align-items-center justify-content-between"
 				>
 					<div class="col-12">
@@ -43,7 +43,7 @@
 										}"
 										@click="sortCaseList('priceLow2High')"
 									>
-										售價從低 > 高
+										售價從 低 > 高
 									</button>
 								</li>
 								<li>
@@ -55,7 +55,7 @@
 										}"
 										@click="sortCaseList('priceHigh2Low')"
 									>
-										售價從高 > 低
+										售價從 高 > 低
 									</button>
 								</li>
 								<li>
@@ -70,7 +70,7 @@
 											sortCaseList('houseAgeLow2High')
 										"
 									>
-										屋齡從低 > 高
+										屋齡從 低 > 高
 									</button>
 								</li>
 								<li>
@@ -85,7 +85,7 @@
 											sortCaseList('houseAgeHigh2Low')
 										"
 									>
-										屋齡從高 > 低
+										屋齡從 高 > 低
 									</button>
 								</li>
 								<li>
@@ -100,7 +100,7 @@
 											sortCaseList('squareFeetLow2High')
 										"
 									>
-										坪數從小 > 大
+										坪數從 小 > 大
 									</button>
 								</li>
 								<li>
@@ -116,7 +116,7 @@
 											sortCaseList('squareFeetHight2Low')
 										"
 									>
-										坪數從大 > 小
+										坪數從 大 > 小
 									</button>
 								</li>
 							</ul>
@@ -129,7 +129,7 @@
 								:class="{
 									isActive: this.caseCardView === 'card',
 								}"
-								@click="changeCardView('card')"
+								@click="changeCardlayout('card')"
 							>
 								<i
 									class="bi bi-grid fs-3 cases-card-display__icon"
@@ -141,7 +141,7 @@
 								:class="{
 									isActive: this.caseCardView === 'list',
 								}"
-								@click="changeCardView('list')"
+								@click="changeCardlayout('list')"
 							>
 								<i
 									class="bi bi-list-ul fs-3 cases-card-display__icon"
@@ -150,10 +150,10 @@
 							</span>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 		</section>
-		<section class="category-cases site-content pb-3">
+		<section class="category-cases pb-3">
 			<div class="container">
 				<div
 					v-show="caseCardView === 'card'"
@@ -186,8 +186,8 @@
 	</div>
 </template>
 <script>
-import CaseCard from "@/components/product/CaseCardLayout.vue";
-import CaseList from "@/components/product/CaseListLayout.vue";
+import CaseCard from "@/components/widgets/CaseCardLayout.vue";
+import CaseList from "@/components/widgets/CaseListLayout.vue";
 import CaseBreadcrumb from "@/components/CaseBreadcrumb.vue";
 export default {
 	components: {
@@ -228,27 +228,27 @@ export default {
 			switch (type) {
 				case "priceLow2High":
 					this.cases.sort((a, b) => a.price - b.price);
-					this.$refs.currentSort.innerHTML = "售價從低 > 高";
+					this.$refs.currentSort.innerHTML = "售價從 低 > 高";
 					break;
 				case "priceHigh2Low":
 					this.cases.sort((a, b) => b.price - a.price);
-					this.$refs.currentSort.innerHTML = "售價從高 > 低";
+					this.$refs.currentSort.innerHTML = "售價從 高 > 低";
 					break;
 				case "houseAgeLow2High":
 					this.cases.sort((a, b) => a.houseAge - b.houseAge);
-					this.$refs.currentSort.innerHTML = "屋齡從低 > 高";
+					this.$refs.currentSort.innerHTML = "屋齡從 低 > 高";
 					break;
 				case "houseAgeHigh2Low":
 					this.cases.sort((a, b) => b.houseAge - a.houseAge);
-					this.$refs.currentSort.innerHTML = "屋齡從高 > 低";
+					this.$refs.currentSort.innerHTML = "屋齡從 高 > 低";
 					break;
 				case "squareFeetLow2High":
 					this.cases.sort((a, b) => a.squareFeet - b.squareFeet);
-					this.$refs.currentSort.innerHTML = "坪數從小 > 大";
+					this.$refs.currentSort.innerHTML = "坪數從 小 > 大";
 					break;
 				case "squareFeetHight2Low":
 					this.cases.sort((a, b) => b.squareFeet - a.squareFeet);
-					this.$refs.currentSort.innerHTML = "坪數從大 > 小";
+					this.$refs.currentSort.innerHTML = "坪數從 大 > 小";
 					break;
 				default:
 					console.log(type);
@@ -258,7 +258,7 @@ export default {
 			}
 			this.sortBy = type;
 		},
-		changeCardView(view) {
+		changeCardlayout(view) {
 			this.caseCardView = view === "card" ? "card" : "list";
 		},
 		resizeWidth() {
@@ -286,7 +286,7 @@ export default {
 		this.filterCategory = this.$route.query.category;
 		this.getCaseList(this.filterCategory);
 		this.caseCardView = localStorage.getItem("card_layout");
-		window.addEventListener("resize", this.resizeWidth);
+		window.addEventListener("resize", this.resizeWidth());
 	},
 };
 </script>
