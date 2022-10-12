@@ -260,6 +260,10 @@ export default {
 		},
 		changeCardlayout(view) {
 			this.caseCardView = view === "card" ? "card" : "list";
+			this.cardLoading = true;
+			setTimeout(() => {
+				this.cardLoading = false;
+			}, 1000);
 		},
 		resizeWidth() {
 			if (window.matchMedia("(max-width: 767px)").matches)
@@ -284,8 +288,8 @@ export default {
 	},
 	mounted() {
 		this.filterCategory = this.$route.query.category;
-		this.getCaseList(this.filterCategory);
 		this.caseCardView = localStorage.getItem("card_layout");
+		this.getCaseList(this.filterCategory);
 		window.addEventListener("resize", this.resizeWidth());
 	},
 };

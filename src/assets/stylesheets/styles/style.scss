@@ -12,6 +12,12 @@ body {
 	transition: all 0.3s;
 	&-nav {
 		.nav {
+			&-item {
+				padding: 0 0.5rem;
+				&:last-child {
+					padding-right: 0;
+				}
+			}
 			&-link {
 				padding-right: 0 !important;
 				padding-left: 0 !important;
@@ -35,11 +41,11 @@ body {
 						width: 100%;
 					}
 				}
-			}
-			&-item {
-				padding: 0 0.5rem;
-				&:last-child {
-					padding-right: 0;
+				&__count {
+					position: absolute;
+					left: 100%;
+					top: 5px;
+					padding: 0.25rem 0.5rem;
 				}
 			}
 		}
@@ -181,7 +187,7 @@ body {
 	// index-feature
 	&-feature {
 		position: relative;
-		background: url("https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1653141239579.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=qw5vaDdO7qzw5lOONQEathILcMqPcgwjhoNScgINaUGUHdfszjWdhu6SdmOsjvgxFqnXBe3TBNrBA2s%2Bu7dGRvX0X2ayKPYcTMqlrAluGG6uKHe77Tndg3aucVv4nWfXuXf4f6LUk0dawiRe3pGGC9Tnm%2F2Wl4TOU75lcfxfwwGHvsiFimaAoHNycn1yqB1ck54g2FYYYBBCFDO2I0Y68DoPsoWpXRq%2FlD7%2BVjzhJeQKnr4xqQJzuGH307yxXUH%2FDlX3BLmoeam%2BSvoOtOVp1sLRSXghUYAxwu%2Blb9I%2FPJjpMXFCkKIqtXbOCPcdGt0ZJ%2Fq2%2FWJtTKzS10mJiYt2GA%3D%3D"),
+		background: url("assets/images/index_feature_bg.png"),
 			linear-gradient(0deg, white 50%, #b9efff 100%);
 		background-position: center bottom;
 		background-size: contain;
@@ -270,7 +276,7 @@ body {
 	// index-news
 	&-news {
 		position: relative;
-		background: url(https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1656237901480.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=ZDjfjkFp8VcKZA5F9H1K0QFidpDbKgdKtxmue6DoF%2FkB7pxuBV03NduojBrwyofJTRQ3e6MI2B%2FjQKPAzdV5TN8cAyARzfpp%2B51AoG%2BTo6OA8Q%2FTAB7Wum%2B8pYOmpF895ezqnd8R8qHZKreJ3YsuJ%2BAIVlA2ibprG%2BfX59oCeUCiUzc3L8CzRlCfV4WaTNgh0TescnF6wjR%2FVrIRqNAIc0uIJM%2FErnSgp5hxKcsc6vTuXCRvAVF2OnAmyaCWI8VPe7Grieoa3lct3Ri447Fv2NLmsq%2B6llcRFtecw%2B1ZASTH5sjI%2BgUygwS3X6fJUmi9ElT0rYAN3hw78%2Fnm8DGXtA%3D%3D);
+		background: url("assets/images/index_news_bg.png");
 		background-position: center bottom;
 		background-size: cover;
 		&-header {
@@ -287,7 +293,7 @@ body {
 			position: relative;
 			display: block;
 			overflow: hidden;
-			background: url(https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1656427342446.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=cB37q%2FYBNlXTYlToMwACZJ63A3uBmYdq8vT1VA3uB7oAMMV4zRt1t7SIKINVCFw6bUy5iSHGsufNOV6AGmndydA7xCgB6xakwHG9Hyaajp4QOXLdLAfJxWRDbjU%2Bvf2PbYGmQJRCefCeyG9MbUIOUC51S%2FRm%2FGQpp10IOciyKcwIidm%2BBh7I2MDotA8VSOuSmfVXYmlxw7HGQG22eGHLbZ%2BeGQ7O5cg%2BJ3ubV0wW%2B9SLtVvd73qkfgNLsIyM7Ida9X0Nym%2F5MMYJGpiq9R5wx9rJlmK780V6HPRCAatDb3Zi5frFQGhyx5z3CyxsNI%2BY9JuMi0%2BVR9Mt77iAzKV2lg%3D%3D);
+			background: url("assets/images/index_news_main.jpg");
 			background-position: center center;
 			background-repeat: no-repeat;
 			background-size: 100%;
@@ -456,21 +462,6 @@ body {
 				&-image {
 					position: relative;
 					overflow: hidden;
-					&-hover {
-						&__title {
-							padding: 0.25rem;
-							position: absolute;
-							display: inline-block;
-							left: 50%;
-							top: 30%;
-							transform: translate(-50%, -50%);
-							opacity: 0;
-							z-index: 4;
-							color: white;
-							transition: all 0.3s ease-out;
-							border: 1px solid white;
-						}
-					}
 					> img {
 						width: 100%;
 						height: 203.25px;
@@ -478,8 +469,6 @@ body {
 						transition: all 0.3s ease-out;
 						object-fit: cover;
 						opacity: 1;
-						@include mobile {
-						}
 					}
 					&::before {
 						content: "";
@@ -540,6 +529,20 @@ body {
 						&:last-child {
 							margin-bottom: 0;
 						}
+					}
+				}
+				&-bookmark {
+					position: absolute;
+					top: 0.25rem;
+					right: 0.25rem;
+					z-index: 2;
+					&__button {
+						cursor: pointer;
+						padding: 0;
+						background: 0;
+						border: 0;
+						line-height: initial;
+						color: map-get($map: $theme-site-colors, $key: "sec");
 					}
 				}
 				&-title {
@@ -683,18 +686,8 @@ body {
 			&__card {
 				&--cardStyle {
 					.card-image {
-						&-hover {
-							&__title {
-								top: 50%;
-								opacity: 1;
-							}
-						}
 						img {
 							transform: scale(1.2);
-						}
-						&::before {
-							opacity: 1;
-							background: rgba(0, 0, 0, 0.5);
 						}
 					}
 				}
@@ -1257,14 +1250,19 @@ body {
 	&-banner {
 		width: 100%;
 		height: 20vw;
-		background-image: url("https://gill74123.github.io/CURLY/img/favorite-banner.0a0e6753.jpg");
-		background-position: bottom;
+		background-image: url("assets/images/collections_header_bg_1.jpg");
+		background-position: center;
 		background-size: cover;
 		background-attachment: fixed;
 		&__title {
-			padding: 1rem;
-			background: rgba(map-get($map: $grays, $key: "400"), 0.5);
+			padding: 0.5rem 1rem;
+			background: rgba(map-get($map: $grays, $key: "500"), 0.5);
 			color: white;
+		}
+	}
+	&-content {
+		&__button {
+			min-width: 10vw;
 		}
 	}
 }
