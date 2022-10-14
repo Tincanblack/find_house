@@ -63,7 +63,7 @@
 					</div>
 					<div class="case-tag">
 						<span
-							class="badge tag color-primary tag__element tag__element--main"
+							class="badge tag tag__element tag__element--main"
 							v-for="tag in product.tags"
 							:key="tag"
 							>{{ tag }}</span
@@ -399,8 +399,11 @@
 											</div>
 											<button
 												type="submit"
-												class="btn btn-primary w-100"
+												class="btn btn-primary w-100 mb-3"
 											>
+												<i
+													class="bi bi-pencil-square"
+												></i>
 												預約諮詢
 												<span
 													v-show="submitButtonLoading"
@@ -408,41 +411,39 @@
 												></span>
 											</button>
 										</VForm>
-										<div class="case-action mt-3">
-											<div class="btn-group w-100">
-												<button
-													class="case-action__button btn btn-secondary shadow-sm mb-3"
-													@click="
-														handleCollectionCase(
+										<div class="case-action">
+											<button
+												class="case-action__button btn btn-secondary w-100 mb-3"
+												@click="
+													handleCollectionCase(
+														product.id
+													)
+												"
+											>
+												<i
+													class="bi"
+													:class="
+														collectionCases.includes(
 															product.id
 														)
+															? 'bi-bookmark-x'
+															: 'bi-bookmark-heart'
 													"
-												>
-													<i
-														class="bi"
-														:class="
-															collectionCase.includes(
-																product.id
-															)
-																? 'bi-search'
-																: 'bi-search-heart'
-														"
-													></i>
-													{{
-														collectionCase.includes(
-															product.id
-														)
-															? "取消"
-															: ""
-													}}收藏案件
-												</button>
-												<button
-													class="case-action__button btn btn-success shadow-sm mb-3"
-												>
-													<i class="bi bi-files"></i>
-													加入比較
-												</button>
-											</div>
+												></i>
+												{{
+													collectionCases.includes(
+														product.id
+													)
+														? "取消"
+														: ""
+												}}收藏案件
+											</button>
+											<button
+												class="case-action__button btn btn-success w-100"
+											>
+												<i class="bi bi-files"></i>
+												加入比較
+											</button>
 										</div>
 									</div>
 								</div>
@@ -467,9 +468,7 @@
 		<section class="case-related bg-light py-5">
 			<div class="container">
 				<div class="case-detail-header">
-					<h4 class="case-detail-header__title bg-light">
-						A.I.智能推薦
-					</h4>
+					<h4 class="case-detail-header__title bg-light">為您推薦</h4>
 				</div>
 				<CasesSlide
 					:category="category"
@@ -484,7 +483,7 @@
 import CaseBreadcrumb from "@/components/CaseBreadcrumb.vue";
 import CasePreviewSlide from "@/components/product/CasePreviewSlide.vue";
 import CasesSlide from "@/components/product/CasesSlide.vue";
-
+import storagecollectionCase from "@/mixins/collectionCase.js";
 export default {
 	components: {
 		CaseBreadcrumb,
@@ -499,8 +498,7 @@ export default {
 			category: "",
 			id: "",
 			assistantData: {},
-			collectionCase:
-				JSON.parse(localStorage.getItem("collection_case")) || [],
+			collectionCases: [],
 			formData: {
 				caseID: "",
 				caseName: "",
@@ -513,8 +511,9 @@ export default {
 			submitButtonLoading: false,
 		};
 	},
+	mixins: [storagecollectionCase],
 	methods: {
-		getCasesList() {
+		getCasesRecommend() {
 			const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`;
 			this.$http
 				.get(url)
@@ -525,7 +524,7 @@ export default {
 					this.$httpMessageState(error.response, "錯誤訊息");
 				});
 		},
-		getCase() {
+		getCaseData() {
 			this.isLoading = true;
 			const { id } = this.$route.params;
 			this.$http
@@ -536,6 +535,7 @@ export default {
 					// 將收到的data資料展賦予給case
 					this.product = res.data.product;
 					this.category = res.data.product.category;
+
 					this.isLoading = false;
 				})
 				.catch((error) => {
@@ -544,7 +544,7 @@ export default {
 		},
 		getCaseAssistant() {
 			this.$http
-				.get(`https://randomuser.me/api/?nat=us,ch`)
+				.get(`${process.env.VUE_APP_RANDOMUSER_URL}?nat=us,ch`)
 				.then((res) => {
 					this.assistantData = res.data.results[0];
 				})
@@ -555,19 +555,11 @@ export default {
 					});
 				});
 		},
-		handleCollectionCase(id) {
-			const collectionCaseIndex = this.collectionCase.findIndex(
-				(item) => item === id
-			);
-			if (collectionCaseIndex === -1) {
-				this.collectionCase.push(id);
-				this.$swal({
-					icon: "success",
-					title: "加入收藏案件",
-					confirmButtonText: "我知道了",
-				});
-			} else {
-				this.collectionCase.splice(collectionCaseIndex, 1);
+		getCollectionStatus() {
+			if (localStorage.getItem("collection_case")) {
+				this.collectionCases = JSON.parse(
+					localStorage.getItem("collection_case")
+				);
 			}
 		},
 		submitAppointmentForm() {
@@ -601,15 +593,10 @@ export default {
 					});
 				});
 		},
-		clickButton() {
-			this.submitButtonLoading = true;
-			setTimeout(() => {
-				this.submitButtonLoading = false;
-			}, 1000);
-		},
 		validatePhone(value) {
-			const phoneNumber = /^(09)[0-9]{8}$/;
-			return phoneNumber.test(value) ? true : "請輸入正確格式的手機號碼";
+			return /^(09)[0-9]{8}$/.test(value)
+				? true
+				: "請輸入正確格式的手機號碼";
 		},
 	},
 	watch: {
@@ -617,24 +604,16 @@ export default {
 		$route() {
 			this.id = this.$route.params.id;
 			if (this.$route.params.id !== undefined) {
-				this.getCase();
+				this.getCaseData();
 			}
-		},
-		collectionCase: {
-			handler() {
-				localStorage.setItem(
-					"collection_case",
-					JSON.stringify(this.collectionCase)
-				);
-			},
-			deep: true,
 		},
 	},
 	mounted() {
 		this.id = this.$route.params.id;
 		this.getCaseAssistant();
-		this.getCase();
-		this.getCasesList();
+		this.getCaseData();
+		this.getCollectionStatus();
+		this.getCasesRecommend();
 	},
 };
 </script>

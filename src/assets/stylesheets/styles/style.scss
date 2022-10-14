@@ -1254,6 +1254,10 @@ body {
 		background-position: center;
 		background-size: cover;
 		background-attachment: fixed;
+		@include mobile {
+			background-attachment: initial;
+			height: 40vw;
+		}
 		&__title {
 			padding: 0.5rem 1rem;
 			background: rgba(map-get($map: $grays, $key: "500"), 0.5);
