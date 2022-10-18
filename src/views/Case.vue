@@ -71,7 +71,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="case-preview mb-3">
+			<div class="case-content mb-3">
 				<div class="container">
 					<div class="row">
 						<div class="col-12 col-lg-8">
@@ -95,8 +95,10 @@
 											基本資料
 										</h4>
 									</div>
-									<div class="detail-content">
-										<table class="table border case-table">
+									<div class="case-detail-content">
+										<table
+											class="table border info-table info-table--detail"
+										>
 											<tbody>
 												<tr>
 													<td>類型</td>
@@ -125,7 +127,9 @@
 													<td
 														v-if="
 															product.squareFeet !==
-															product.mainSquareFeet
+																product.mainSquareFeet &&
+															product.managementFee >
+																0
 														"
 													>
 														{{
@@ -220,8 +224,8 @@
 							</div>
 						</div>
 						<div class="col-12 col-lg-4 ms-auto d-none d-lg-block">
-							<div class="case-preview">
-								<ul class="case-preview-list list-group">
+							<div class="case-aside">
+								<ul class="case-aside-list list-group">
 									<li class="info-list-item">
 										<span class="info-list-title">
 											<i
@@ -243,7 +247,7 @@
 									<li class="info-list-item">
 										<span class="info-list-title">
 											<i
-												class="bi bi-door-open info-list-title__icon fs-4"
+												class="bi bi-columns-gap info-list-title__icon fs-4"
 											></i>
 											格局
 										</span>
@@ -256,7 +260,7 @@
 									<li class="info-list-item">
 										<span class="info-list-title">
 											<i
-												class="bi bi-building info-list-title__icon fs-4"
+												class="bi bi-bar-chart info-list-title__icon fs-4"
 											></i>
 											樓層
 										</span>
@@ -397,54 +401,78 @@
 													</option>
 												</select>
 											</div>
-											<button
-												type="submit"
-												class="btn btn-primary w-100 mb-3"
-											>
-												<i
-													class="bi bi-pencil-square"
-												></i>
-												預約諮詢
-												<span
-													v-show="submitButtonLoading"
-													class="spinner-border spinner-border-sm"
-												></span>
-											</button>
-										</VForm>
-										<div class="case-action">
-											<button
-												class="case-action__button btn btn-secondary w-100 mb-3"
-												@click="
-													handleCollectionCase(
-														product.id
-													)
-												"
-											>
-												<i
-													class="bi"
-													:class="
+											<div class="case-aside-action">
+												<button
+													type="submit"
+													class="case-aside-action__button btn btn-primary w-100"
+												>
+													<i
+														class="bi bi-pencil-square"
+													></i>
+													預約諮詢
+													<span
+														v-show="
+															submitBtnLoading
+														"
+														class="spinner-border spinner-border-sm"
+													></span>
+												</button>
+												<button
+													type="button"
+													class="case-aside-action__button btn btn-secondary w-100"
+													@click="
+														handleCollectionCase(
+															product.id
+														)
+													"
+												>
+													<i
+														class="bi"
+														:class="
+															collectionCases.includes(
+																product.id
+															)
+																? 'bi-bookmark-x'
+																: 'bi-bookmark-heart'
+														"
+													></i>
+													{{
 														collectionCases.includes(
 															product.id
 														)
-															? 'bi-bookmark-x'
-															: 'bi-bookmark-heart'
+															? "取消"
+															: ""
+													}}收藏案件
+												</button>
+												<button
+													type="button"
+													class="case-aside-action btn btn-success w-100 text-white"
+													@click="
+														handleCompareCase(
+															product.id
+														)
 													"
-												></i>
-												{{
-													collectionCases.includes(
-														product.id
-													)
-														? "取消"
-														: ""
-												}}收藏案件
-											</button>
-											<button
-												class="case-action__button btn btn-success w-100"
-											>
-												<i class="bi bi-files"></i>
-												加入比較
-											</button>
-										</div>
+												>
+													<i
+														class="bi"
+														:class="
+															compareCases.includes(
+																product.id
+															)
+																? 'bi-file-x'
+																: 'bi-files'
+														"
+													></i>
+													{{
+														compareCases.includes(
+															product.id
+														)
+															? "取消"
+															: "加入"
+													}}比較
+												</button>
+											</div>
+										</VForm>
 									</div>
 								</div>
 							</div>
@@ -483,7 +511,9 @@
 import CaseBreadcrumb from "@/components/CaseBreadcrumb.vue";
 import CasePreviewSlide from "@/components/product/CasePreviewSlide.vue";
 import CasesSlide from "@/components/product/CasesSlide.vue";
-import storagecollectionCase from "@/mixins/collectionCase.js";
+import storageCollectionCase from "@/mixins/collectionCase.js";
+import storageComparecase from "@/mixins/compareCase.js";
+
 export default {
 	components: {
 		CaseBreadcrumb,
@@ -508,22 +538,11 @@ export default {
 				freeTime: 0,
 				isHandle: false,
 			},
-			submitButtonLoading: false,
+			submitBtnLoading: false,
 		};
 	},
-	mixins: [storagecollectionCase],
+	mixins: [storageCollectionCase, storageComparecase],
 	methods: {
-		getCasesRecommend() {
-			const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`;
-			this.$http
-				.get(url)
-				.then((res) => {
-					this.cases = res.data.products;
-				})
-				.catch((error) => {
-					this.$httpMessageState(error.response, "錯誤訊息");
-				});
-		},
 		getCaseData() {
 			this.isLoading = true;
 			const { id } = this.$route.params;
@@ -555,16 +574,21 @@ export default {
 					});
 				});
 		},
-		getCollectionStatus() {
+		loadSotrageCase() {
 			if (localStorage.getItem("collection_case")) {
 				this.collectionCases = JSON.parse(
 					localStorage.getItem("collection_case")
 				);
 			}
+			if (localStorage.getItem("compare_case")) {
+				this.compareCases = JSON.parse(
+					localStorage.getItem("compare_case")
+				);
+			}
 		},
 		submitAppointmentForm() {
 			const today = new Date();
-			this.submitButtonLoading = true;
+			this.submitBtnLoading = true;
 			this.formData.caseID = this.id;
 			this.formData.caseName = this.product.title;
 			this.formData.manager = this.assistantData.name.first;
@@ -574,7 +598,7 @@ export default {
 			this.$http
 				.post(googleScriptAPIUrl, null, { params: this.formData })
 				.then((res) => {
-					this.submitButtonLoading = false;
+					this.submitBtnLoading = false;
 					if (res.data.success !== true) {
 						this.$swal({
 							icon: "error",
@@ -598,6 +622,17 @@ export default {
 				? true
 				: "請輸入正確格式的手機號碼";
 		},
+		getCaseRecommend() {
+			const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`;
+			this.$http
+				.get(url)
+				.then((res) => {
+					this.cases = res.data.products;
+				})
+				.catch((error) => {
+					this.$httpMessageState(error.response, "錯誤訊息");
+				});
+		},
 	},
 	watch: {
 		// watch偵測到網址的id有變，將新的id帶入到data的id
@@ -610,10 +645,10 @@ export default {
 	},
 	mounted() {
 		this.id = this.$route.params.id;
-		this.getCaseAssistant();
 		this.getCaseData();
-		this.getCollectionStatus();
-		this.getCasesRecommend();
+		this.getCaseAssistant();
+		this.loadSotrageCase();
+		this.getCaseRecommend();
 	},
 };
 </script>

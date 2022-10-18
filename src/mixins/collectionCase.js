@@ -15,12 +15,12 @@ export default {
 				}
 			);
 			if (collectionCaseIndex === -1) {
-				this.collectionCases.push(caseID);
 				this.$swal({
 					icon: "success",
 					title: "加入收藏案件",
 					confirmButtonText: "我知道了",
 				});
+				this.collectionCases.push(caseID);
 			} else {
 				this.collectionCases.splice(collectionCaseIndex, 1);
 			}
@@ -29,7 +29,7 @@ export default {
 		},
 	},
 	watch: {
-		// 因 this.collectionCases 為陣列，所以要做深層的監聽
+		// 因資料(collectionCases)為陣列，做深層的監聽
 		collectionCases: {
 			handler() {
 				// localStorage 資料寫入

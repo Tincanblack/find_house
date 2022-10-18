@@ -6,25 +6,260 @@
 		>
 			<h2 class="collection-banner__title">心之所向，儀之所往</h2>
 		</section>
-		<section class="collection-compare py-5 bg-light">
+		<section class="collection-compare py-5 bg-light" id="caseCompare">
 			<div class="container">
+				<div
+					v-if="compareCaseProducts.length !== 0"
+					class="d-flex align-items-center justify-content-center"
+				>
+					<h3 v-if="compareCaseProducts.length < 2">
+						再加入 1個案件就能幫您做「案件比較」囉！
+					</h3>
+					<h3 v-else>案件比較的結果如下</h3>
+				</div>
+				<div
+					v-else
+					class="d-flex align-items-center justify-content-center"
+				>
+					<h3>將案件「加入比較」我們來幫您分析案件之間的優劣吧</h3>
+				</div>
 				<div class="row">
 					<div
-						v-if="compareCase.length !== 0"
-						class="d-flex align-items-center justify-content-center"
+						class="mx-0 mx-md-auto"
+						:class="
+							compareCaseProducts.length === 2
+								? 'col-12 col-md-8'
+								: 'col-12 col-md-5'
+						"
 					>
-						<h2></h2>
-						<RouterLink
-							class="btn btn-outline-primary rounded-0 collection-content__button"
-							to="/compare"
-							>前去比較</RouterLink
-						>
-					</div>
-					<div
-						v-else
-						class="d-flex align-items-center justify-content-center"
-					>
-						<h3>將收藏的案件加入比較</h3>
+						<div class="table-responsive">
+							<table
+								v-if="compareCaseProducts.length !== 0"
+								class="table border table-bordered table-hover info-table info-table--compare bg-white"
+							>
+								<tbody>
+									<tr>
+										<td class="align-middle">案件名稱</td>
+										<template
+											v-for="item in compareCaseProducts"
+											:key="item.id"
+										>
+											<td>
+												<div
+													class="d-flex justify-content-between"
+												>
+													<div
+														class="compare-table__title"
+													>
+														{{ item.title }}
+													</div>
+													<button
+														type="button"
+														class="compare-table__button btn btn-danger btn-sm"
+														@click="
+															handleCompareCase(
+																item.id
+															)
+														"
+													>
+														<i
+															class="bi bi-x-lg"
+														></i>
+													</button>
+												</div>
+											</td>
+										</template>
+									</tr>
+									<tr>
+										<td></td>
+										<template
+											v-for="item in compareCaseProducts"
+											:key="item.id"
+										>
+											<td class="text-center">
+												<RouterLink
+													class="compare-table__link"
+													:to="`/case/${item.id}`"
+												>
+													<div
+														class="compare-table-img"
+													>
+														<img
+															class="img-fluid"
+															:src="item.imageUrl"
+															alt=""
+														/>
+													</div>
+												</RouterLink>
+											</td>
+										</template>
+									</tr>
+									<tr>
+										<td class="align-middle">價格</td>
+										<template
+											v-for="item in compareCaseProducts"
+											:key="item.id"
+										>
+											<td>
+												<span
+													class="fs-3 fw-bold text-danger"
+												>
+													{{
+														$format.currencyFormat(
+															item.price
+														)
+													}}</span
+												>
+												萬
+											</td>
+										</template>
+									</tr>
+									<tr>
+										<td>類型</td>
+										<template
+											v-for="item in compareCaseProducts"
+											:key="item.id"
+										>
+											<td>
+												{{ item.category }}
+											</td>
+										</template>
+									</tr>
+									<tr>
+										<td>登記建坪</td>
+										<template
+											v-for="item in compareCaseProducts"
+											:key="item.id"
+										>
+											<td>
+												{{ item.squareFeet }}
+												坪
+											</td>
+										</template>
+									</tr>
+									<tr>
+										<td>主建物</td>
+										<template
+											v-for="item in compareCaseProducts"
+											:key="item.id"
+										>
+											<td>
+												{{ item.mainSquareFeet }}
+												坪
+											</td>
+										</template>
+									</tr>
+									<tr>
+										<td>公設比</td>
+										<template
+											v-for="item in compareCaseProducts"
+											:key="item.id"
+										>
+											<td
+												v-if="
+													item.squareFeet !==
+													item.mainSquareFeet
+												"
+											>
+												{{
+													$format.calToPercent(
+														item.squareFeet,
+														item.mainSquareFeet,
+														"management"
+													)
+												}}
+											</td>
+											<td v-else>--</td>
+										</template>
+									</tr>
+									<tr>
+										<td>屋齡</td>
+										<template
+											v-for="item in compareCaseProducts"
+											:key="item.id"
+										>
+											<td>
+												{{ item.houseAge }}
+												年
+											</td>
+										</template>
+									</tr>
+									<tr>
+										<td>格局</td>
+										<template
+											v-for="item in compareCaseProducts"
+											:key="item.id"
+										>
+											<td>
+												{{
+													$format.patternFormat(
+														item.pattern
+													)
+												}}
+											</td>
+										</template>
+									</tr>
+									<tr>
+										<td>樓層</td>
+										<template
+											v-for="item in compareCaseProducts"
+											:key="item.id"
+										>
+											<td>{{ item.floor }} 樓</td>
+										</template>
+									</tr>
+									<tr>
+										<td>朝向</td>
+										<template
+											v-for="item in compareCaseProducts"
+											:key="item.id"
+										>
+											<td v-if="item.direction">
+												{{ item.direction }}
+											</td>
+											<td v-else>--</td>
+										</template>
+									</tr>
+									<tr>
+										<td>公共管理費</td>
+										<template
+											v-for="item in compareCaseProducts"
+											:key="item.id"
+										>
+											<td
+												v-if="
+													item.managementFee ||
+													item.managementFee > 0
+												"
+											>
+												{{ item.managementFee }}
+												元/ 每月
+											</td>
+											<td v-else>--</td>
+										</template>
+									</tr>
+									<tr>
+										<td>車位</td>
+										<template
+											v-for="item in compareCaseProducts"
+											:key="item.id"
+										>
+											<td v-if="item.parking">
+												{{ item.parking }}
+												<span
+													v-if="item.parkingPrice > 0"
+													>(車位
+													{{
+														item.parkingPrice
+													}}萬)</span
+												>
+											</td>
+											<td v-else>--</td>
+										</template>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -32,7 +267,7 @@
 		<section class="collection py-3">
 			<div class="container">
 				<template v-if="collectionProducts.length !== 0">
-					<div class="row row-cols-1 row-cols-md-3 row-cols-xl-4 g-2">
+					<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-2">
 						<div
 							class="col pb-lg-3"
 							v-for="item in collectionProducts"
@@ -40,185 +275,10 @@
 						>
 							<CaseCard
 								:item="item"
-								@emitCollectionCase="handleCollectionCase"
+								:compareCases="compareCases"
+								@emitHandleCollection="handleCollectionCase"
+								@emitHandleCompare="handleCompareCase"
 							></CaseCard>
-							<!-- <div
-								class="card"
-								:class="{ 'is-loading': cardLoading }"
-							>
-								<RouterLink
-									class="text-decoration-none rounded-0 text-dark"
-									:to="`/case/${item.id}`"
-								>
-									<div
-										class="case-item__card case-item__card--cardStyle"
-									>
-										<div
-											v-if="item.imageUrl"
-											class="card-image"
-										>
-											<div
-												class="card-tag"
-												v-show="!cardLoading"
-											>
-												<div
-													class="tag"
-													v-if="
-														item.origin_price !==
-														item.price
-													"
-												>
-													<span
-														v-if="
-															item.origin_price &&
-															item.price
-														"
-														class="badge tag__element--sec"
-													>
-														<i
-															class="bi bi-arrow-down"
-														></i>
-														{{
-															$format.calToPercent(
-																item.origin_price,
-																item.price,
-																"discount"
-															)
-														}}
-													</span>
-												</div>
-												<div
-													class="tag"
-													v-for="tag in $format.filterItemTag(
-														item
-													)"
-													:key="tag"
-												>
-													<span
-														class="badge tag__element"
-														:class="{
-															'tag__element--third':
-																tag ===
-																'新上架',
-															'tag__element--fourth':
-																tag ===
-																'低總價',
-															'tag__element--main':
-																tag ===
-																'店長推薦',
-														}"
-														>{{ tag }}</span
-													>
-												</div>
-											</div>
-											<div
-												class="card-price"
-												v-show="!cardLoading"
-											>
-												<span
-													class="card-price__price card-price__price--selling"
-												>
-													{{
-														$format.currencyFormat(
-															item.price
-														)
-													}}
-													<span
-														class="card-price__price-unit"
-														>萬</span
-													>
-												</span>
-												<small
-													v-if="
-														item.origin_price !==
-														item.price
-													"
-													class="card-price__price card-price__price--origin fs-6"
-													><del
-														>{{
-															$format.currencyFormat(
-																item.origin_price
-															)
-														}}
-														萬</del
-													></small
-												>
-											</div>
-											<img
-												class="img-fluid"
-												:src="item.imageUrl"
-												alt=""
-											/>
-										</div>
-										<div class="card-body">
-											<h5
-												class="card-title text-truncate fw-bold"
-											>
-												{{
-													cardLoading
-														? ""
-														: item.title
-												}}
-											</h5>
-											<div class="card-text">
-												<div class="card-text-list">
-													<span
-														class="card-text-list__item"
-													>
-														{{
-															cardLoading
-																? ""
-																: item.squareFeet +
-																  "坪"
-														}}
-													</span>
-													<span
-														class="card-text-list__item"
-													>
-														{{
-															cardLoading
-																? ""
-																: $format.patternFormat(
-																		item.pattern
-																  )
-														}}
-													</span>
-													<span
-														class="card-text-list__item"
-													>
-														{{
-															cardLoading
-																? ""
-																: item.houseAge +
-																  "年"
-														}}
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</RouterLink>
-								<div
-									class="card-footer text-center"
-									v-if="$route.name === 'collections'"
-								>
-									<div class="btn-group">
-										<button
-											class="btn btn-danger"
-											@click="
-												handleCollectionCase(item.id)
-											"
-										>
-											<i class="bi bi-bookmark-x"></i>
-											取消收藏
-										</button>
-										<button class="btn btn-primary">
-											<i class="bi bi-files"></i>
-											加入比較
-										</button>
-									</div>
-								</div>
-							</div> -->
 						</div>
 					</div>
 				</template>
@@ -244,7 +304,8 @@
 </template>
 <script>
 import CaseCard from "@/components/widgets/CaseCardLayout.vue";
-import storagecollectionCase from "@/mixins/collectionCase.js";
+import storageCollectionCase from "@/mixins/collectionCase.js";
+import storageComparecase from "@/mixins/compareCase.js";
 
 export default {
 	components: {
@@ -256,10 +317,10 @@ export default {
 			cardLoading: false,
 			cases: [],
 			collectionProducts: [],
-			compareCase: [],
+			compareCaseProducts: [],
 		};
 	},
-	mixins: [storagecollectionCase],
+	mixins: [storageCollectionCase, storageComparecase],
 	methods: {
 		getCaseList() {
 			this.isLoading = true;
@@ -269,6 +330,7 @@ export default {
 				.then((res) => {
 					this.cases = res.data.products;
 					this.filterCollectionCase();
+					this.filterCompareCase();
 
 					this.isLoading = false;
 				})
@@ -284,14 +346,28 @@ export default {
 				this.collectionProducts.push(filterCollectionData[0]);
 			});
 		},
+		filterCompareCase() {
+			this.compareCases.forEach((id) => {
+				const filtercompareData = this.cases.filter((item) => {
+					return item.id === id;
+				});
+				this.compareCaseProducts.push(filtercompareData[0]);
+			});
+		},
 	},
 	watch: {
-		// this.collectionsCases 一有變動就重新篩選
-		// 因 this.collectionsCases 為陣列，所以要做深層的監聽
+		// 因資料(collectionCases)為陣列，做深層的監聽
 		collectionCases: {
 			handler() {
 				this.collectionProducts = [];
 				this.filterCollectionCase();
+			},
+			deep: true,
+		},
+		compareCases: {
+			handler() {
+				this.compareCaseProducts = [];
+				this.filterCompareCase();
 			},
 			deep: true,
 		},
@@ -301,4 +377,3 @@ export default {
 	},
 };
 </script>
-<style lang=""></style>

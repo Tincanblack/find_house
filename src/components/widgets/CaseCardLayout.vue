@@ -92,14 +92,25 @@
 			<div class="btn-group">
 				<button
 					class="btn btn-danger"
-					@click="clickRemoveCollection(item.id)"
+					@click="this.$emit('emit-handle-collection', item.id)"
 				>
 					<i class="bi bi-bookmark-x"></i>
 					取消收藏
 				</button>
-				<button class="btn btn-primary">
-					<i class="bi bi-files"></i>
-					加入比較
+				<button
+					v-if="compareCases.length < 2"
+					class="btn btn-success text-white"
+					@click="this.$emit('emit-handle-compare', item.id)"
+				>
+					<i
+						class="bi"
+						:class="
+							compareCases.includes(item.id)
+								? 'bi-file-x'
+								: 'bi-files'
+						"
+					></i>
+					{{ compareCases.includes(item.id) ? "取消" : "加入" }}比較
 				</button>
 			</div>
 		</div>
@@ -114,13 +125,14 @@ export default {
 				return {};
 			},
 		},
+		compareCases: {
+			type: Array,
+			default() {
+				return [];
+			},
+		},
 		cardLoading: {
 			type: Boolean,
-		},
-	},
-	methods: {
-		clickRemoveCollection(id) {
-			this.$emit("emit-collection-case", id);
 		},
 	},
 };

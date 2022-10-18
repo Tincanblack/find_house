@@ -27,7 +27,7 @@
 			</ul>
 			<p class="text-center text-light m-0">
 				Copyright © 2022 Found Houses All rights reserved. <br />
-				本網站所使用到的資料皆為網站所提供，內容僅供個人學術使用，不提供商業用途
+				本網站所使用到的資料皆為各網站所提供，內容僅供個人學術使用，不提供商業用途
 			</p>
 		</div>
 	</footer>

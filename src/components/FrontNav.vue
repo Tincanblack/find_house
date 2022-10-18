@@ -10,11 +10,7 @@
 			<button
 				class="navbar-toggler collapsed"
 				type="button"
-				data-bs-toggle="collapse"
-				data-bs-target="#navbarCollapse"
-				aria-controls="navbarCollapse"
-				aria-expanded="true"
-				aria-label="Toggle navigation"
+				@click="toggleCollapse"
 			>
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -91,7 +87,7 @@ export default {
 				this.navStyle.shadow = "";
 			}
 		},
-		getColltecionCount() {
+		getCollectionCount() {
 			if (JSON.parse(localStorage.getItem("collection_case"))) {
 				this.collectionCaseCount = JSON.parse(
 					localStorage.getItem("collection_case")
@@ -102,7 +98,7 @@ export default {
 		},
 	},
 	mounted() {
-		this.getColltecionCount();
+		this.getCollectionCount();
 
 		// 跨元件監聽收藏事件
 		this.emitter.on("get-collection", (collectionCases) => {

@@ -1,16 +1,16 @@
 <template>
 	<div class="case-slide">
-		<swiper
+		<Swiper
 			class="carousel-slide"
-			:modules="swiper.modules"
 			:navigation="true"
+			:modules="modules"
+			:thumbs="{ swiper: thumbsSwiper }"
 			:pagination="{
 				clickable: true,
 				type: 'fraction',
 			}"
-			:thumbs="{ swiper: swiper.thumbsSwiper }"
 		>
-			<swiper-slide
+			<SwiperSlide
 				v-for="(image, index) in product.imagesUrl"
 				:key="index"
 			>
@@ -21,17 +21,15 @@
 						backgroundImage: `url(${image})`,
 					}"
 				></div>
-			</swiper-slide>
-		</swiper>
-		<swiper
+			</SwiperSlide>
+		</Swiper>
+		<Swiper
 			class="thumbnail-slide"
 			@swiper="setThumbsSwiper"
-			watch-slides-progress
 			:spaceBetween="5"
 			:slidesPerView="4.5"
-			:freeMode="true"
-			:navigation="true"
-			:modules="swiper.modules"
+			:watchSlidesVisibility="true"
+			:watchSlidesProgress="true"
 			:breakpoints="{
 				'@0.00': {
 					slidesPerView: 3.5,
@@ -41,7 +39,7 @@
 				},
 			}"
 		>
-			<swiper-slide
+			<SwiperSlide
 				class="slide-item"
 				v-for="(image, index) in product.imagesUrl"
 				:key="index"
@@ -53,15 +51,14 @@
 						backgroundImage: `url(${image})`,
 					}"
 				></div>
-			</swiper-slide>
-		</swiper>
+			</SwiperSlide>
+		</Swiper>
 	</div>
 </template>
 <script>
-import { Thumbs, Pagination, Navigation, FreeMode } from "swiper";
+import { Thumbs, Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
-import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/pagination";
@@ -77,15 +74,14 @@ export default {
 	},
 	data() {
 		return {
-			swiper: {
-				thumbsSwiper: null,
-				modules: [Thumbs, Pagination, Navigation, FreeMode],
-			},
+			thumbsSwiper: null,
+			modules: [Thumbs, Pagination, Navigation],
 		};
 	},
 	methods: {
 		setThumbsSwiper(swiper) {
-			this.swiper.thumbsSwiper = swiper;
+			console.log(swiper);
+			this.thumbsSwiper = swiper;
 		},
 	},
 };
