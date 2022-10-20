@@ -900,7 +900,7 @@ export default {
 			this.status.fileUploading = true;
 			this.$http
 				.post(
-					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/upload`,
+					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/upload`,
 					formData,
 					{
 						headers: {

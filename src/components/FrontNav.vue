@@ -4,9 +4,9 @@
 		:class="[navStyle.shadow]"
 	>
 		<div class="container">
-			<a class="navbar-brand" href="#"
-				><img src="../assets/logo.svg" alt="心儀房屋" width="140"
-			/></a>
+			<RouterLink class="navbar-brand" to="/">
+				<img src="../assets/logo.svg" alt="心儀房屋" width="140" />
+			</RouterLink>
 			<button
 				class="navbar-toggler collapsed"
 				type="button"

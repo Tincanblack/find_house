@@ -324,7 +324,7 @@ export default {
 	methods: {
 		getCaseList() {
 			this.isLoading = true;
-			let url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`;
+			let url = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/products/all`;
 			this.$http
 				.get(url)
 				.then((res) => {
