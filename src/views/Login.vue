@@ -58,7 +58,7 @@ export default {
 			const formData = { ...this.user };
 			this.isLoading = true;
 			this.$http
-				.post(`${process.env.VUE_APP_URL}/admin/signin`, formData)
+				.post(`${import.meta.env.VITE_URL}/admin/signin`, formData)
 				.then((res) => {
 					const { token, expired } = res.data; // 將token與過期時間寫入cookie中
 					document.cookie = `user_token=${token};expires=${new Date(

@@ -548,7 +548,7 @@ export default {
 			const { id } = this.$route.params;
 			this.$http
 				.get(
-					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/product/${id}`
+					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/product/${id}`
 				)
 				.then((res) => {
 					// 將收到的data資料展賦予給case
@@ -563,7 +563,7 @@ export default {
 		},
 		getCaseAssistant() {
 			this.$http
-				.get(`${process.env.VUE_APP_RANDOMUSER_URL}?nat=us,ch`)
+				.get(`${import.meta.env.VITE_RANDOMUSER_URL}?nat=us,ch`)
 				.then((res) => {
 					this.assistantData = res.data.results[0];
 				})
@@ -623,7 +623,7 @@ export default {
 				: "請輸入正確格式的手機號碼";
 		},
 		getCaseRecommend() {
-			const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`;
+			const url = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/products/all`;
 			this.$http
 				.get(url)
 				.then((res) => {

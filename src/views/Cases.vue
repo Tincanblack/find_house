@@ -208,9 +208,9 @@ export default {
 	methods: {
 		getCaseList(query) {
 			this.cardLoading = true;
-			let url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`;
+			let url = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/products/all`;
 			if (query) {
-				url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products?category=${query}`;
+				url = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/products?category=${query}`;
 			}
 			this.$http
 				.get(url)
