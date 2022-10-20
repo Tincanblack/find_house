@@ -6,22 +6,17 @@
 		>
 			<h2 class="collection-banner__title">心之所向，儀之所往</h2>
 		</section>
-		<section class="collection-compare py-5 bg-light" id="caseCompare">
+		<section
+			v-if="compareCaseProducts.length !== 0"
+			class="collection-compare py-5 bg-light"
+			id="caseCompare"
+		>
 			<div class="container">
-				<div
-					v-if="compareCaseProducts.length !== 0"
-					class="d-flex align-items-center justify-content-center"
-				>
+				<div class="d-flex align-items-center justify-content-center">
 					<h3 v-if="compareCaseProducts.length < 2">
 						再加入 1個案件就能幫您做「案件比較」囉！
 					</h3>
 					<h3 v-else>案件比較的結果如下</h3>
-				</div>
-				<div
-					v-else
-					class="d-flex align-items-center justify-content-center"
-				>
-					<h3>將案件「加入比較」我們來幫您分析案件之間的優劣吧</h3>
 				</div>
 				<div class="row">
 					<div
