@@ -11,3 +11,16 @@ $font-pages-list-title: 1.3rem; // 24px;
 $font-pages-list-content: 1.15rem; // 20px;
 $font-pages-txt: 1rem; // 16px;
 $font-pages-txt-min: 0.75rem; // 12px;
+
+// site
+$site-main: #028090;
+$site-sec: #d90429;
+$site-third: #02c39a;
+$site-fourth: #e9832c;
+
+$theme-site-colors: (
+	"main": $site-main,
+	"sec": $site-sec,
+	"third": $site-third,
+	"fourth": $site-fourth,
+);

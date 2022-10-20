@@ -1,5 +1,5 @@
 <template>
-	<swiper
+	<Swiper
 		class="list-slide"
 		:spaceBetween="20"
 		:slidesPerView="3.5"
@@ -15,14 +15,14 @@
 			},
 		}"
 	>
-		<swiper-slide
+		<SwiperSlide
 			class="col-12 col-md-4"
 			v-for="item in filterCases"
 			:key="item.id"
 		>
 			<CaseCard :item="item"></CaseCard>
-		</swiper-slide>
-	</swiper>
+		</SwiperSlide>
+	</Swiper>
 </template>
 <script>
 import CaseCard from "@/components/widgets/CaseCardLayout.vue";
