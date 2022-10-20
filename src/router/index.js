@@ -1,8 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from "vue-router";
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
+const routes = [
 	{
 		path: "/login",
 		component: () => import("@/views/Login.vue"),
@@ -77,13 +75,17 @@ const router = createRouter({
 		path: "/:pathMatch(.*)*",
 		component: () => import("@/views/NotFound.vue"),
 	},
-  ],
+];
+
+const router = createRouter({
+	history: createWebHashHistory(),
+	routes,
 	linkActiveClass: "active",
 	scrollBehavior() {
 		return {
 			top: 0,
 		};
 	},
-})
+});
 
-export default router
+export default router;

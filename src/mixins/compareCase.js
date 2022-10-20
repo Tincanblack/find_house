@@ -27,7 +27,7 @@ export default {
 						confirmButtonText: "去看看",
 					}).then((result) => {
 						if (result.value) {
-							this.$router.push("/collections");
+							location.href = "/collections";
 						}
 					});
 				} else {

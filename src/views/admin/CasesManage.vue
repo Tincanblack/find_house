@@ -102,9 +102,9 @@
 	></DelConfirmModal>
 </template>
 <script>
-import Pagination from "@/components/Pagination.vue";
-import CaseEditModal from "@/components/modals/CaseEditModal.vue";
-import DelConfirmModal from "@/components/modals/DelConfirmModal.vue";
+import Pagination from "@/components/Pagination";
+import CaseEditModal from "@/components/modals/CaseEditModal";
+import DelConfirmModal from "@/components/modals/DelConfirmModal";
 
 export default {
 	components: {
@@ -141,11 +141,11 @@ export default {
 		updateCase(item) {
 			this.tempCase = item;
 			this.isLoading = true;
-			let api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/product`;
+			let api = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product`;
 			let httpMethod = "post";
 			let statusText = "新增案件";
 			if (!this.isNew) {
-				api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/product/${this.tempCase.id}`;
+				api = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product/${this.tempCase.id}`;
 				httpMethod = "put";
 				statusText = "更新案件";
 			}
@@ -165,7 +165,7 @@ export default {
 			this.isLoading = true;
 			this.$http
 				.get(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/products/?page=${page}`
+					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
 				)
 				.then((response) => {
 					// 將收到的data賦予給cases, pagination
@@ -187,7 +187,7 @@ export default {
 			this.isLoading = true;
 			this.$http
 				.delete(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/product/${this.tempCase.id}`
+					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product/${this.tempCase.id}`
 				)
 				.then((response) => {
 					this.isLoading = false;

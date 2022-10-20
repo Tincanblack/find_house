@@ -5,9 +5,9 @@
 	<Footer></Footer>
 </template>
 <script>
-import FrontNav from "@/components/FrontNav.vue";
-import BackToTop from "@/components/BackToTop.vue";
-import Footer from "@/views/Footer.vue";
+import FrontNav from "@/components/FrontNav";
+import BackToTop from "@/components/BackToTop";
+import Footer from "@/views/Footer";
 export default {
 	components: {
 		FrontNav,

@@ -92,9 +92,9 @@
 	></DelConfirmModal>
 </template>
 <script>
-import Pagination from "@/components/Pagination.vue";
-import NewsEditModal from "@/components/modals/NewsEditModal.vue";
-import DelConfirmModal from "@/components/modals/DelConfirmModal.vue";
+import Pagination from "@/components/Pagination";
+import NewsEditModal from "@/components/modals/NewsEditModal";
+import DelConfirmModal from "@/components/modals/DelConfirmModal";
 
 export default {
 	components: {
@@ -128,11 +128,11 @@ export default {
 		updateNews(item) {
 			this.tempNews = item;
 			this.isLoading = true;
-			let api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/article`;
+			let api = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/article`;
 			let httpMethod = "post";
 			let statusText = "新增房訊";
 			if (!this.isNew) {
-				api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/article/${this.tempNews.id}`;
+				api = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/article/${this.tempNews.id}`;
 				httpMethod = "put";
 				statusText = "更新房訊";
 			}
@@ -152,7 +152,7 @@ export default {
 			this.isLoading = true;
 			this.$http
 				.get(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/articles/?page=${page}`
+					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/articles/?page=${page}`
 				)
 				.then((response) => {
 					// 將收到的data賦予給news, pagination
@@ -167,7 +167,7 @@ export default {
 				});
 		},
 		getNews(id) {
-			const api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/article/${id}`;
+			const api = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/article/${id}`;
 			this.isLoading = true;
 			this.$http
 				.get(api)
@@ -191,7 +191,7 @@ export default {
 			this.isLoading = true;
 			this.$http
 				.delete(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/article/${this.tempNews.id}`
+					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/article/${this.tempNews.id}`
 				)
 				.then((response) => {
 					this.isLoading = false;

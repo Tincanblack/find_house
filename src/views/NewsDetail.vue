@@ -61,7 +61,7 @@ export default {
 			const { id } = this.$route.params;
 			this.$http
 				.get(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/article/${id}`
+					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/article/${id}`
 				)
 				.then((res) => {
 					// 將收到的data資料展賦予給article

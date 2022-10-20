@@ -199,7 +199,7 @@ export default {
 	},
 	methods: {
 		getCasesList() {
-			const url = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/products/all`;
+			const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`;
 			this.$http
 				.get(url)
 				.then((res) => {
@@ -217,7 +217,7 @@ export default {
 			this.isLoading = true;
 			this.$http
 				.get(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/articles/?page=${page}`
+					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/articles/?page=${page}`
 				)
 				.then((response) => {
 					this.articles = response.data.articles;

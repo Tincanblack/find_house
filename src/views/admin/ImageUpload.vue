@@ -48,7 +48,7 @@ export default {
 			formData.append("file-to-upload", uploadedFile);
 			this.$http
 				.post(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/upload`,
+					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/upload`,
 					formData,
 					{
 						headers: {

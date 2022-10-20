@@ -1,9 +1,7 @@
 // bootstrap
-@import "~bootstrap/scss/bootstrap";
 @import "~bootstrap/scss/functions";
-// @import "~bootstrap/scss/variables";
-// @import "~bootstrap/scss/maps";
 @import "./helpers/bootstrap/_variables"; // custom bootstrap styles
+@import "~bootstrap/scss/bootstrap";
 // sweetalert2
 @import './helpers/sweetalert/variables';
 @import '~sweetalert2/src/sweetalert2';

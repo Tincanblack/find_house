@@ -80,6 +80,7 @@ export default {
 	},
 	methods: {
 		setThumbsSwiper(swiper) {
+			console.log(swiper);
 			this.thumbsSwiper = swiper;
 		},
 	},

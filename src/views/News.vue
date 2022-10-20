@@ -64,7 +64,7 @@ export default {
 		getNewsList(page = 1) {
 			this.$http
 				.get(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/articles/?page=${page}`
+					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/articles/?page=${page}`
 				)
 				.then((response) => {
 					this.news = response.data.articles;
