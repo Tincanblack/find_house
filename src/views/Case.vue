@@ -441,8 +441,8 @@
 															product.id
 														)
 															? "取消"
-															: ""
-													}}收藏案件
+															: "加入"
+													}}收藏
 												</button>
 												<button
 													type="button"
@@ -511,8 +511,13 @@
 import CaseBreadcrumb from "@/components/CaseBreadcrumb.vue";
 import CasePreviewSlide from "@/components/product/CasePreviewSlide.vue";
 import CasesSlide from "@/components/product/CasesSlide.vue";
+
 import storageCollectionCase from "@/mixins/collectionCase.js";
 import storageComparecase from "@/mixins/compareCase.js";
+import appointmentForm from "@/mixins/appointmentForm.js";
+
+import { mapState, mapActions } from "pinia";
+import compareAnchor from "@/stores/compareAnchor.js";
 
 export default {
 	components: {
@@ -529,26 +534,21 @@ export default {
 			id: "",
 			assistantData: {},
 			collectionCases: [],
-			formData: {
-				caseID: "",
-				caseName: "",
-				manager: "",
-				customer: "",
-				contactPhone: "",
-				freeTime: 0,
-				isHandle: false,
-			},
-			submitBtnLoading: false,
 		};
 	},
-	mixins: [storageCollectionCase, storageComparecase],
+	mixins: [storageCollectionCase, storageComparecase, appointmentForm],
 	methods: {
+		...mapActions(compareAnchor, ["goCompareAnchor"]),
+		...mapActions(compareAnchor, ["clickCompareAnchor"]),
+
 		getCaseData() {
 			this.isLoading = true;
 			const { id } = this.$route.params;
 			this.$http
 				.get(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/product/${id}`
+					`${import.meta.env.VITE_URL}/api/${
+						import.meta.env.VITE_PATH
+					}/product/${id}`
 				)
 				.then((res) => {
 					// 將收到的data資料展賦予給case
@@ -586,44 +586,15 @@ export default {
 				);
 			}
 		},
-		submitAppointmentForm() {
-			const today = new Date();
-			this.submitBtnLoading = true;
-			this.formData.caseID = this.id;
-			this.formData.caseName = this.product.title;
-			this.formData.manager = this.assistantData.name.first;
-			this.formData.dataTime = this.$format.dateFormatWithTime(today);
-			const googleScriptAPIUrl =
-				"https://script.google.com/macros/s/AKfycbxftWfxvDnCeDfSU1HZn-msTWyzvxjo3SWC5gPCQkD3y-K1e9ocdZgtxxra2fn7Z78X/exec";
-			this.$http
-				.post(googleScriptAPIUrl, null, { params: this.formData })
-				.then((res) => {
-					this.submitBtnLoading = false;
-					if (res.data.success !== true) {
-						this.$swal({
-							icon: "error",
-							title: "出現錯誤\n請直接諮詢服務人員",
-						}).then(() => {
-							this.$refs.appointmentForm.resetForm();
-							return false;
-						});
-					}
-					this.$swal({
-						icon: "success",
-						title: "謝謝你的諮詢\n將盡快與您聯繫",
-						confirmButtonText: "我知道了",
-					}).then(() => {
-						this.$refs.appointmentForm.resetForm();
-					});
-				});
-		},
 		validatePhone(value) {
 			return /^(09)[0-9]{8}$/.test(value)
 				? true
 				: "請輸入正確格式的手機號碼";
 		},
 		getCaseRecommend() {
-			const url = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/products/all`;
+			const url = `${import.meta.env.VITE_URL}/api/${
+				import.meta.env.VITE_PATH
+			}/products/all`;
 			this.$http
 				.get(url)
 				.then((res) => {
@@ -633,6 +604,9 @@ export default {
 					this.$httpMessageState(error.response, "錯誤訊息");
 				});
 		},
+	},
+	computed: {
+		...mapState(compareAnchor, ["toAnchor"]),
 	},
 	watch: {
 		// watch偵測到網址的id有變，將新的id帶入到data的id

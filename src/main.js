@@ -1,8 +1,7 @@
 import { createApp } from "vue";
-
+import { createPinia } from "pinia";
 // bootstrap
-// import "bootstrap";
-import * as bootstrap from 'bootstrap';
+import "bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 // fontawsome
@@ -40,6 +39,7 @@ import {
 	dateFormatWithTime,
 	publicDateFormat,
 } from "@/methods/format";
+
 import $httpMessageState from "@/methods/updateMessageState";
 import App from "./App.vue";
 import router from "./router";
@@ -56,6 +56,7 @@ configure({
 setLocale("zh_TW");
 
 const app = createApp(App);
+const pinia = createPinia();
 
 app.config.globalProperties.$format = {
 	currencyFormat,
@@ -69,6 +70,7 @@ app.config.globalProperties.$format = {
 
 // 將 $httpMessageState 加入全域下
 app.config.globalProperties.$httpMessageState = $httpMessageState;
+app.use(pinia);
 app.use(router);
 app.use(VueAxios, axios);
 app.use(CKEditor);

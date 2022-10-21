@@ -98,7 +98,6 @@
 					取消收藏
 				</button>
 				<button
-					v-if="compareCases.length < 2"
 					class="btn btn-success text-white"
 					@click="this.$emit('emit-handle-compare', item.id)"
 				>

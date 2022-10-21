@@ -27,7 +27,10 @@ export default {
 						confirmButtonText: "去看看",
 					}).then((result) => {
 						if (result.value) {
-							this.$router.push("/collections");
+							if (this.$route.params !== "collections") {
+								this.$router.push("/collections");
+							}
+							this.goCompareAnchor();
 						}
 					});
 				} else {

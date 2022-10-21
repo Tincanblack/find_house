@@ -13,9 +13,5 @@ export default defineConfig({
 			"~bootstrap": path.resolve(__dirname, "node_modules/bootstrap"),
 			"~sweetalert2": path.resolve(__dirname, "node_modules/sweetalert2"),
 		},
-	},
-	server: {
-		port: 8081,
-		hot: true,
-	},
+	}
 });

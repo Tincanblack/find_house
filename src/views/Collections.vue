@@ -6,17 +6,55 @@
 		>
 			<h2 class="collection-banner__title">心之所向，儀之所往</h2>
 		</section>
+		<section class="collection py-3">
+			<div class="container">
+				<template v-if="collectionProducts.length !== 0">
+					<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-2">
+						<div
+							class="col pb-lg-3"
+							v-for="item in collectionProducts"
+							:key="item.id"
+						>
+							<CaseCard
+								:item="item"
+								:compareCases="compareCases"
+								@emitHandleCollection="handleCollectionCase"
+								@emitHandleCompare="handleCompareCase"
+							></CaseCard>
+						</div>
+					</div>
+				</template>
+				<template v-else>
+					<div
+						class="row align-items-center justify-content-center text-center"
+					>
+						<div class="col">
+							<h3 class="collection-content__title my-3">
+								還沒看到值得收藏的物件嗎？快去找找吧
+							</h3>
+							<RouterLink
+								class="btn btn-outline-primary rounded-0 collection-content__button"
+								to="/cases"
+								>前去找房 <i class="bi bi-house"></i
+							></RouterLink>
+						</div>
+					</div>
+				</template>
+			</div>
+		</section>
 		<section
 			v-if="compareCaseProducts.length !== 0"
-			class="collection-compare py-5 bg-light"
+			class="collection-compare py-3 bg-light"
 			id="caseCompare"
 		>
 			<div class="container">
 				<div class="d-flex align-items-center justify-content-center">
-					<h3 v-if="compareCaseProducts.length < 2">
-						再加入 1個案件就能幫您做「案件比較」囉！
+					<h3 v-if="compareCaseProducts.length < 2" class="mb-3">
+						再加入
+						<span class="fs-3 text-danger">1</span
+						>個案件就能幫您做「案件比較」囉！
 					</h3>
-					<h3 v-else>案件比較的結果如下</h3>
+					<h3 v-else class="mb-3">案件比較的結果如下</h3>
 				</div>
 				<div class="row">
 					<div
@@ -259,48 +297,16 @@
 				</div>
 			</div>
 		</section>
-		<section class="collection py-3">
-			<div class="container">
-				<template v-if="collectionProducts.length !== 0">
-					<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-2">
-						<div
-							class="col pb-lg-3"
-							v-for="item in collectionProducts"
-							:key="item.id"
-						>
-							<CaseCard
-								:item="item"
-								:compareCases="compareCases"
-								@emitHandleCollection="handleCollectionCase"
-								@emitHandleCompare="handleCompareCase"
-							></CaseCard>
-						</div>
-					</div>
-				</template>
-				<template v-else>
-					<div
-						class="row align-items-center justify-content-center text-center"
-					>
-						<div class="col">
-							<h3 class="collection-content__title my-3">
-								還沒看到值得收藏的物件嗎？快去找找吧
-							</h3>
-							<RouterLink
-								class="btn btn-outline-primary rounded-0 collection-content__button"
-								to="/cases"
-								>前去找房 <i class="bi bi-house"></i
-							></RouterLink>
-						</div>
-					</div>
-				</template>
-			</div>
-		</section>
 	</div>
 </template>
 <script>
 import CaseCard from "@/components/widgets/CaseCardLayout.vue";
+
 import storageCollectionCase from "@/mixins/collectionCase.js";
 import storageComparecase from "@/mixins/compareCase.js";
+
+import { mapState, mapActions } from "pinia";
+import compareAnchor from "@/stores/compareAnchor.js";
 
 export default {
 	components: {
@@ -317,9 +323,13 @@ export default {
 	},
 	mixins: [storageCollectionCase, storageComparecase],
 	methods: {
+		...mapActions(compareAnchor, ["goCompareAnchor"]),
+
 		getCaseList() {
 			this.isLoading = true;
-			let url = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/products/all`;
+			let url = `${import.meta.env.VITE_URL}/api/${
+				import.meta.env.VITE_PATH
+			}/products/all`;
 			this.$http
 				.get(url)
 				.then((res) => {
@@ -349,6 +359,9 @@ export default {
 				this.compareCaseProducts.push(filtercompareData[0]);
 			});
 		},
+	},
+	computed: {
+		...mapState(compareAnchor, ["toAnchor"]),
 	},
 	watch: {
 		// 因資料(collectionCases)為陣列，做深層的監聽

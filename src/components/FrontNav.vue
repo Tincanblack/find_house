@@ -46,7 +46,7 @@
 							>收藏名單
 							<span
 								v-if="collectionCaseCount"
-								class="nav-link__count translate-middle badge rounded-pill bg-danger"
+								class="nav-link__count translate-middle badge rounded-pill"
 								>{{ collectionCaseCount
 								}}<span class="visually-hidden"
 									>unread messages</span

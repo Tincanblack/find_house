@@ -9,7 +9,7 @@ $success: $site-third;
 $container-max-widths: (
   sm: $mobile-width,
   md: $pad-width,
-  lg: $pad-width,
+  lg: $pad-large-width,
   xl: $laptop-width,
   xxl: $desktop-width
 );
@@ -19,6 +19,7 @@ $container-max-widths: (
 @import "~bootstrap/scss/functions";
 
 // sweetalert2
+@import './helpers/sweetalert/variables';
 @import '~sweetalert2/src/sweetalert2';
 // site
 @import "./styles/style";
