@@ -20,6 +20,7 @@ export default defineStore("compareAnchorStore", {
 				document.documentElement.scrollTop =
 					anchor.offsetTop - headerHiehgt;
 			}, 250);
+			this.toAnchor = false;
 		},
 	},
 });

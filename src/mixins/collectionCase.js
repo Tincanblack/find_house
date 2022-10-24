@@ -27,6 +27,10 @@ export default {
 			// 每當觸發 handleCollectionCase 方法時，傳遞 this.collectionCases 資料到 FrontNavbar.vue
 			this.emitter.emit("get-collection", this.collectionCases);
 		},
+		clearCollectionData() {
+			this.collectionCases = [];
+			localStorage.setItem("compare_case", JSON.stringify([]));
+		},
 	},
 	watch: {
 		// 因資料(collectionCases)為陣列，做深層的監聽

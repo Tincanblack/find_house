@@ -6,12 +6,45 @@
 		>
 			<h2 class="collection-banner__title">心之所向，儀之所往</h2>
 		</section>
-		<section class="collection py-3">
+		<section class="collection pt-5 pb-3">
 			<div class="container">
 				<template v-if="collectionProducts.length !== 0">
-					<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-2">
-						<div
-							class="col pb-lg-3"
+					<div class="row">
+						<div class="col-12">
+							<div class="section-header mb-3">
+								<h3 class="common-section-header__title">
+									收藏案件
+								</h3>
+								<div class="button-column bg-white">
+									<button
+										v-if="collectionProducts.length !== 0"
+										type="button"
+										class="btn btn-danger btn-sm collection-clear__button"
+										@click="clearCollectionData"
+									>
+										<i class="bi bi bi-x-lg"></i>
+										清除所有
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<Swiper
+						class="list-slide"
+						:navigation="true"
+						:spaceBetween="20"
+						:slidesPerView="3.5"
+						:modules="swiper.modules"
+						:breakpoints="{
+							'@0.00': {
+								slidesPerView: 1.5,
+							},
+							'@1.50': {
+								slidesPerView: 3.75,
+							},
+						}"
+					>
+						<SwiperSlide
 							v-for="item in collectionProducts"
 							:key="item.id"
 						>
@@ -21,19 +54,19 @@
 								@emitHandleCollection="handleCollectionCase"
 								@emitHandleCompare="handleCompareCase"
 							></CaseCard>
-						</div>
-					</div>
+						</SwiperSlide>
+					</Swiper>
 				</template>
 				<template v-else>
 					<div
 						class="row align-items-center justify-content-center text-center"
 					>
 						<div class="col">
-							<h3 class="collection-content__title my-3">
+							<h3 class="collection-content__title">
 								還沒看到值得收藏的物件嗎？快去找找吧
 							</h3>
 							<RouterLink
-								class="btn btn-outline-primary rounded-0 collection-content__button"
+								class="btn btn-outline-primary rounded-0 collection-content__button my-2"
 								to="/cases"
 								>前去找房 <i class="bi bi-house"></i
 							></RouterLink>
@@ -44,17 +77,39 @@
 		</section>
 		<section
 			v-if="compareCaseProducts.length !== 0"
-			class="collection-compare py-3 bg-light"
+			class="compare pt-5 pb-3 bg-light"
 			id="caseCompare"
 		>
 			<div class="container">
-				<div class="d-flex align-items-center justify-content-center">
-					<h3 v-if="compareCaseProducts.length < 2" class="mb-3">
-						再加入
-						<span class="fs-3 text-danger">1</span
-						>個案件就能幫您做「案件比較」囉！
-					</h3>
-					<h3 v-else class="mb-3">案件比較的結果如下</h3>
+				<div class="row">
+					<div class="mx-0 mx-md-auto col-12 col-md-8">
+						<div class="section-header mb-3">
+							<h3
+								v-if="compareCaseProducts.length < 2"
+								class="common-section-header__title"
+							>
+								再加入
+								<span class="fs-3 text-danger">1</span>個<span
+									class="d-block d-md-inline-block"
+									>案件就能「案件比較」</span
+								>
+							</h3>
+							<h3 v-else class="common-section-header__title">
+								案件比較的結果如下
+							</h3>
+							<div class="button-column bg-light">
+								<button
+									v-if="compareCaseProducts.length !== 0"
+									type="button"
+									class="btn btn-danger btn-sm collection-clear__button"
+									@click="clearCompareData"
+								>
+									<i class="bi bi bi-x-lg"></i>
+									清除所有
+								</button>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="row">
 					<div
@@ -300,17 +355,26 @@
 	</div>
 </template>
 <script>
+// import { Navigation } from "swiper";
+// import { Swiper, SwiperSlide } from "swiper/vue";
+
 import CaseCard from "@/components/widgets/CaseCardLayout.vue";
 
+import swiperMixin from "@/mixins/swiperMixin.js";
 import storageCollectionCase from "@/mixins/collectionCase.js";
 import storageComparecase from "@/mixins/compareCase.js";
 
 import { mapState, mapActions } from "pinia";
 import compareAnchor from "@/stores/compareAnchor.js";
 
+// import "swiper/css";
+// import "swiper/css/navigation";
+
 export default {
 	components: {
 		CaseCard,
+		// Swiper,
+		// SwiperSlide,
 	},
 	data() {
 		return {
@@ -319,9 +383,10 @@ export default {
 			cases: [],
 			collectionProducts: [],
 			compareCaseProducts: [],
+			// modules: [Navigation],
 		};
 	},
-	mixins: [storageCollectionCase, storageComparecase],
+	mixins: [swiperMixin, storageCollectionCase, storageComparecase],
 	methods: {
 		...mapActions(compareAnchor, ["goCompareAnchor"]),
 

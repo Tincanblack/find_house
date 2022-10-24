@@ -45,6 +45,10 @@ export default {
 				this.compareCases.splice(compareCaseIndex, 1);
 			}
 		},
+		clearCompareData() {
+			this.compareCases = [];
+			localStorage.setItem("compare_case", JSON.stringify([]));
+		},
 	},
 	watch: {
 		// 因資料(compareCases)為陣列，做深層的監聽
