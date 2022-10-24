@@ -11,13 +11,14 @@
 				slidesPerView: 1.5,
 			},
 			'@1.50': {
-				slidesPerView: 3.5,
+				slidesPerView: 3.75,
 			},
 		}"
 	>
 		<SwiperSlide
 			class="col-12 col-md-4"
-			v-for="item in filterCases"
+			:class="{ 'd-none': id === item.id }"
+			v-for="item in cases"
 			:key="item.id"
 		>
 			<CaseCard :item="item"></CaseCard>
@@ -26,15 +27,10 @@
 </template>
 <script>
 import CaseCard from "@/components/widgets/CaseCardLayout.vue";
-import { Thumbs, Pagination, Navigation, FreeMode } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
-import "swiper/css/pagination";
+import swiperMixin from "@/mixins/swiperMixin.js";
+
 export default {
-	components: { Swiper, SwiperSlide, CaseCard },
+	components: { CaseCard },
 	props: {
 		category: {
 			type: String,
@@ -48,25 +44,35 @@ export default {
 				return "";
 			},
 		},
-		cases: {
-			default: [],
-		},
 	},
 	data() {
 		return {
-			swiper: {
-				modules: [Thumbs, Pagination, Navigation, FreeMode],
-			},
+			cases: [],
 		};
 	},
-	computed: {
-		filterCases() {
-			return this.cases.filter(
-				(item) =>
-					(this.category === "" || item.category === this.category) &&
-					item.id !== this.id
-			);
+	mixins: [swiperMixin],
+	methods: {
+		getSlideCasesData(category) {
+			const url = `${import.meta.env.VITE_URL}/api/${
+				import.meta.env.VITE_PATH
+			}/products?category=${category}`;
+			this.$http
+				.get(url)
+				.then((res) => {
+					this.cases = res.data.products;
+				})
+				.catch((error) => {
+					this.$httpMessageState(error.response, "錯誤訊息");
+				});
 		},
+	},
+	watch: {
+		category() {
+			this.getSlideCasesData(this.category);
+		},
+	},
+	mounted() {
+		this.getSlideCasesData(this.category);
 	},
 };
 </script>

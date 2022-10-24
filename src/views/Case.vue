@@ -91,7 +91,9 @@
 							<div class="case-detail mt-3">
 								<div class="case-detail-section" id="info">
 									<div class="case-detail-header">
-										<h4 class="case-detail-header__title">
+										<h4
+											class="common-section-header__title"
+										>
 											基本資料
 										</h4>
 									</div>
@@ -213,7 +215,9 @@
 								</div>
 								<div class="case-detail-section" id="detail">
 									<div class="case-detail-header">
-										<h4 class="case-detail-header__title">
+										<h4
+											class="common-section-header__title"
+										>
 											物件特色
 										</h4>
 									</div>
@@ -481,7 +485,7 @@
 					<div class="row">
 						<div class="case-detail-section" id="near">
 							<div class="case-detail-header">
-								<h4 class="case-detail-header__title">
+								<h4 class="common-section-header__title">
 									周遭環境
 								</h4>
 							</div>
@@ -496,7 +500,9 @@
 		<section class="case-related bg-light py-5">
 			<div class="container">
 				<div class="case-detail-header">
-					<h4 class="case-detail-header__title bg-light">為您推薦</h4>
+					<h4 class="common-section-header__title bg-light">
+						為您推薦
+					</h4>
 				</div>
 				<CasesSlide
 					:category="category"
@@ -591,19 +597,6 @@ export default {
 				? true
 				: "請輸入正確格式的手機號碼";
 		},
-		getCaseRecommend() {
-			const url = `${import.meta.env.VITE_URL}/api/${
-				import.meta.env.VITE_PATH
-			}/products/all`;
-			this.$http
-				.get(url)
-				.then((res) => {
-					this.cases = res.data.products;
-				})
-				.catch((error) => {
-					this.$httpMessageState(error.response, "錯誤訊息");
-				});
-		},
 	},
 	computed: {
 		...mapState(compareAnchor, ["toAnchor"]),
@@ -622,7 +615,7 @@ export default {
 		this.getCaseData();
 		this.getCaseAssistant();
 		this.loadSotrageCase();
-		this.getCaseRecommend();
+		// this.getCaseRecommend();
 	},
 };
 </script>
