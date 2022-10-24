@@ -1,9 +1,9 @@
 <template>
-	<swiper
+	<Swiper
 		:effect="'fade'"
-		:slides-per-view="1"
+		:slidesPerView="1"
 		:loop="true"
-		:modules="modules"
+		:modules="swiper.modules"
 		:autoplay="{
 			delay: 3000,
 			stopOnLastSlide: false,
@@ -11,28 +11,28 @@
 			pauseOnMouseEnter: true,
 		}"
 	>
-		<swiper-slide
+		<SwiperSlide
 			><img
 				class="img-fluid"
 				src="https://res.sinyi.com.tw/a_d_sense/index_buy_20210825133411.jpg"
 				alt=""
 			/>
-		</swiper-slide>
-		<swiper-slide
+		</SwiperSlide>
+		<SwiperSlide
 			><img
 				class="img-fluid"
 				src="https://res.sinyi.com.tw/a_d_sense/index_buy_20210825134712.jpg"
 				alt=""
 			/>
-		</swiper-slide>
-		<swiper-slide
+		</SwiperSlide>
+		<SwiperSlide
 			><img
 				class="img-fluid"
 				src="https://res.sinyi.com.tw/a_d_sense/index_buy_20210825133411.jpg"
 				alt=""
 			/>
-		</swiper-slide>
-	</swiper>
+		</SwiperSlide>
+	</Swiper>
 </template>
 <script>
 import { EffectFade, Autoplay } from "swiper";
@@ -44,7 +44,7 @@ export default {
 	components: { Swiper, SwiperSlide },
 	data() {
 		return {
-			modules: [EffectFade, Autoplay],
+			swiper: { modules: [EffectFade, Autoplay] },
 		};
 	},
 };
