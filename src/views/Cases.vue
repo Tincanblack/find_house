@@ -127,9 +127,9 @@
 							<span
 								class="cases-card-display__button"
 								:class="{
-									isActive: this.caseCardView === 'card',
+									isActive: this.cardLayout === 'card',
 								}"
-								@click="changeCardlayout('card')"
+								@click="handleCardLayout('card')"
 							>
 								<i
 									class="bi bi-grid fs-3 cases-card-display__icon"
@@ -139,9 +139,9 @@
 							<span
 								class="cases-card-display__button"
 								:class="{
-									isActive: this.caseCardView === 'list',
+									isActive: this.cardLayout === 'list',
 								}"
-								@click="changeCardlayout('list')"
+								@click="handleCardLayout('list')"
 							>
 								<i
 									class="bi bi-list-ul fs-3 cases-card-display__icon"
@@ -156,7 +156,7 @@
 		<section class="category-cases pb-3">
 			<div class="container">
 				<div
-					v-show="caseCardView === 'card'"
+					v-show="cardLayout === 'card'"
 					class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-2"
 				>
 					<div class="col" v-for="item in cases" :key="item.id">
@@ -166,10 +166,7 @@
 						></CaseCard>
 					</div>
 				</div>
-				<div
-					v-show="caseCardView === 'list'"
-					class="row row-cols-1 g-2"
-				>
+				<div v-show="cardLayout === 'list'" class="row row-cols-1 g-2">
 					<div
 						class="col pb-lg-3"
 						v-for="item in cases"
@@ -189,6 +186,7 @@
 import CaseCard from "@/components/widgets/CaseCardLayout.vue";
 import CaseList from "@/components/widgets/CaseListLayout.vue";
 import CaseBreadcrumb from "@/components/CaseBreadcrumb.vue";
+
 export default {
 	components: {
 		CaseCard,
@@ -197,20 +195,24 @@ export default {
 	},
 	data() {
 		return {
-			cardLoading: false,
 			cases: [],
 			sortCases: [],
-			caseCardView: "card",
 			filterCategory: "",
 			sortBy: "",
+			cardLoading: false,
+			cardLayout: "card",
 		};
 	},
 	methods: {
 		getCaseList(query) {
 			this.cardLoading = true;
-			let url = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/products/all`;
+			let url = `${import.meta.env.VITE_URL}/api/${
+				import.meta.env.VITE_PATH
+			}/products/all`;
 			if (query) {
-				url = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/products?category=${query}`;
+				url = `${import.meta.env.VITE_URL}/api/${
+					import.meta.env.VITE_PATH
+				}/products?category=${query}`;
 			}
 			this.$http
 				.get(url)
@@ -258,16 +260,23 @@ export default {
 			}
 			this.sortBy = type;
 		},
-		changeCardlayout(view) {
-			this.caseCardView = view === "card" ? "card" : "list";
+		getCaseCardLayout() {
+			const layout = localStorage.getItem("card_layout");
+			if (layout === null || layout === undefined) return "card";
+			localStorage.setItem("card_layout", layout);
+			return layout;
+		},
+		handleCardLayout(view) {
+			this.cardLayout = view;
 			this.cardLoading = true;
 			setTimeout(() => {
 				this.cardLoading = false;
+				localStorage.setItem("card_layout", this.cardLayout);
 			}, 1000);
 		},
 		resizeWidth() {
 			if (window.matchMedia("(max-width: 767px)").matches)
-				this.caseCardView = "card";
+				this.cardLayout = "card";
 		},
 	},
 	watch: {
@@ -280,16 +289,19 @@ export default {
 				this.getCaseList();
 			}
 		},
-		caseCardView: {
+		cardLayout: {
 			handler() {
-				localStorage.setItem("card_layout", this.caseCardView);
+				this.handleCardLayout(this.cardLayout);
 			},
 		},
 	},
 	mounted() {
 		this.filterCategory = this.$route.query.category;
-		this.caseCardView = localStorage.getItem("card_layout");
+		this.cardLayout = this.getCaseCardLayout();
+
 		this.getCaseList(this.filterCategory);
+		this.handleCardLayout(this.cardLayout);
+
 		window.addEventListener("resize", this.resizeWidth());
 	},
 };
