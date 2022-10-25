@@ -1,6 +1,6 @@
 <template>
 	<div class="site-content">
-		<LoadingAnimate :active="isLoading" :z-index="1060"></LoadingAnimate>
+		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<NewsBreadcrumb :article="article"></NewsBreadcrumb>
 		<section class="news-detail py-3">
 			<div class="container">
@@ -43,7 +43,7 @@
 	</div>
 </template>
 <script>
-import NewsBreadcrumb from "@/components/NewsBreadcrumb.vue";
+import NewsBreadcrumb from "@/components/news/NewsBreadcrumb.vue";
 
 export default {
 	components: {
@@ -61,7 +61,9 @@ export default {
 			const { id } = this.$route.params;
 			this.$http
 				.get(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/article/${id}`
+					`${import.meta.env.VITE_URL}/api/${
+						import.meta.env.VITE_PATH
+					}/article/${id}`
 				)
 				.then((res) => {
 					// 將收到的data資料展賦予給article

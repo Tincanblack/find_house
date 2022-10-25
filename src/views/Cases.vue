@@ -185,7 +185,7 @@
 <script>
 import CaseCard from "@/components/widgets/CaseCardLayout.vue";
 import CaseList from "@/components/widgets/CaseListLayout.vue";
-import CaseBreadcrumb from "@/components/CaseBreadcrumb.vue";
+import CaseBreadcrumb from "@/components/product/CaseBreadcrumb.vue";
 
 export default {
 	components: {

@@ -24,3 +24,5 @@ $theme-site-colors: (
 	"third": $site-third,
 	"fourth": $site-fourth,
 );
+
+$theme-site-colors-array: ($site-main, $site-sec, $site-third, $site-fourth);

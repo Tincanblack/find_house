@@ -1,6 +1,6 @@
 <template>
 	<div class="site-content">
-		<LoadingAnimate :active="isLoading" :z-index="1060"></LoadingAnimate>
+		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<section
 			class="collection-banner d-flex align-items-center justify-content-center"
 		>
@@ -37,7 +37,7 @@
 						:modules="swiper.modules"
 						:breakpoints="{
 							'@0.00': {
-								slidesPerView: 1.5,
+								slidesPerView: 1.25,
 							},
 							'@1.50': {
 								slidesPerView: 3.75,
@@ -355,9 +355,6 @@
 	</div>
 </template>
 <script>
-// import { Navigation } from "swiper";
-// import { Swiper, SwiperSlide } from "swiper/vue";
-
 import CaseCard from "@/components/widgets/CaseCardLayout.vue";
 
 import swiperMixin from "@/mixins/swiperMixin.js";
@@ -367,14 +364,9 @@ import storageComparecase from "@/mixins/compareCase.js";
 import { mapState, mapActions } from "pinia";
 import compareAnchor from "@/stores/compareAnchor.js";
 
-// import "swiper/css";
-// import "swiper/css/navigation";
-
 export default {
 	components: {
 		CaseCard,
-		// Swiper,
-		// SwiperSlide,
 	},
 	data() {
 		return {
@@ -383,7 +375,6 @@ export default {
 			cases: [],
 			collectionProducts: [],
 			compareCaseProducts: [],
-			// modules: [Navigation],
 		};
 	},
 	mixins: [swiperMixin, storageCollectionCase, storageComparecase],

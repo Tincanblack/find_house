@@ -1,6 +1,6 @@
 <template>
 	<div class="main-content container-fluid px-4">
-		<LoadingAnimate :active="isLoading" :z-index="1060"></LoadingAnimate>
+		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<h3 class="mt-4 fw-bold">案件管理</h3>
 		<div class="text-end my-2">
 			<button
@@ -141,11 +141,15 @@ export default {
 		updateCase(item) {
 			this.tempCase = item;
 			this.isLoading = true;
-			let api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/product`;
+			let api = `${import.meta.env.VITE_URL}/api/${
+				import.meta.env.VITE_PATH
+			}/admin/product`;
 			let httpMethod = "post";
 			let statusText = "新增案件";
 			if (!this.isNew) {
-				api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/product/${this.tempCase.id}`;
+				api = `${import.meta.env.VITE_URL}/api/${
+					import.meta.env.VITE_PATH
+				}/admin/product/${this.tempCase.id}`;
 				httpMethod = "put";
 				statusText = "更新案件";
 			}
@@ -165,7 +169,9 @@ export default {
 			this.isLoading = true;
 			this.$http
 				.get(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/products/?page=${page}`
+					`${import.meta.env.VITE_URL}/api/${
+						import.meta.env.VITE_PATH
+					}/admin/products/?page=${page}`
 				)
 				.then((response) => {
 					// 將收到的data賦予給cases, pagination
@@ -187,7 +193,9 @@ export default {
 			this.isLoading = true;
 			this.$http
 				.delete(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/product/${this.tempCase.id}`
+					`${import.meta.env.VITE_URL}/api/${
+						import.meta.env.VITE_PATH
+					}/admin/product/${this.tempCase.id}`
 				)
 				.then((response) => {
 					this.isLoading = false;

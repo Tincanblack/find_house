@@ -1,6 +1,6 @@
 <template>
 	<div class="site-content">
-		<LoadingAnimate :active="isLoading" :z-index="1060"></LoadingAnimate>
+		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<CaseBreadcrumb :product="product"></CaseBreadcrumb>
 		<section class="case py-3">
 			<div class="case-header">
@@ -88,7 +88,7 @@
 									>
 								</div>
 							</div>
-							<div class="case-detail mt-3">
+							<div class="case-detail mt-3 d-none d-lg-block">
 								<div class="case-detail-section" id="info">
 									<div class="case-detail-header">
 										<h4
@@ -227,7 +227,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-12 col-lg-4 ms-auto d-none d-lg-block">
+						<div class="col-12 col-lg-4 ms-auto">
 							<div class="case-aside">
 								<ul class="case-aside-list list-group">
 									<li class="info-list-item">
@@ -272,19 +272,17 @@
 									</li>
 								</ul>
 							</div>
-							<div class="position-sticky" style="top: 10%">
-								<div
-									class="case-assistant card position-sticky shadow-sm mb-3"
-								>
+							<div class="case-assistant">
+								<div class="assistant card shadow-sm mb-3">
 									<div class="card-body">
-										<h4 class="case-assistant__title">
+										<h4 class="assistant__title">
 											您的案件經理人
 										</h4>
 										<div
 											class="d-flex align-items-center my-3"
 										>
 											<div
-												class="case-assistant__image me-2"
+												class="assistant__image me-2"
 												:style="{
 													backgroundImage: `url(${assistantData.picture?.medium})`,
 												}"
@@ -292,7 +290,7 @@
 											<div class="card-content">
 												<h6 class="card-subtitle">
 													<i
-														class="bi bi-person fs-5 case-assistant__icon"
+														class="bi bi-person fs-5 assistant__icon"
 													></i
 													>{{
 														assistantData.name
@@ -301,7 +299,7 @@
 												</h6>
 												<div class="card-text">
 													<i
-														class="bi bi-phone fs-5 case-assistant__icon"
+														class="bi bi-phone fs-5 assistant__icon"
 													></i>
 													<a
 														:href="`tel:${assistantData.cell}`"
@@ -312,7 +310,7 @@
 												</div>
 												<div class="card-text">
 													<i
-														class="bi bi-telephone fs-5 case-assistant__icon"
+														class="bi bi-telephone fs-5 assistant__icon"
 													></i>
 													<a
 														:href="`tel:${assistantData.phone}`"
@@ -480,6 +478,144 @@
 									</div>
 								</div>
 							</div>
+							<div class="case-detail mt-3 d-block d-lg-none">
+								<div class="case-detail-section" id="info">
+									<div class="case-detail-header">
+										<h4
+											class="common-section-header__title"
+										>
+											基本資料
+										</h4>
+									</div>
+									<div class="case-detail-content">
+										<table
+											class="table border info-table info-table--detail"
+										>
+											<tbody>
+												<tr>
+													<td>類型</td>
+													<td>
+														{{ product.category }}
+													</td>
+												</tr>
+												<tr>
+													<td>登記建坪</td>
+													<td>
+														{{ product.squareFeet }}
+														坪
+													</td>
+												</tr>
+												<tr>
+													<td>主建物</td>
+													<td>
+														{{
+															product.mainSquareFeet
+														}}
+														坪
+													</td>
+												</tr>
+												<tr>
+													<td>公設比</td>
+													<td
+														v-if="
+															product.squareFeet !==
+																product.mainSquareFeet &&
+															product.managementFee >
+																0
+														"
+													>
+														{{
+															$format.calToPercent(
+																product.squareFeet,
+																product.mainSquareFeet,
+																"management"
+															)
+														}}
+													</td>
+													<td v-else>--</td>
+												</tr>
+												<tr>
+													<td>屋齡</td>
+													<td>
+														{{ product.houseAge }}
+														年
+													</td>
+												</tr>
+												<tr>
+													<td>格局</td>
+													<td>
+														{{
+															$format.patternFormat(
+																product.pattern
+															)
+														}}
+													</td>
+												</tr>
+												<tr>
+													<td>樓層</td>
+													<td>
+														{{ product.floor }} 樓
+													</td>
+												</tr>
+												<tr>
+													<td>朝向</td>
+													<td
+														v-if="product.direction"
+													>
+														{{ product.direction }}
+													</td>
+													<td v-else>--</td>
+												</tr>
+												<tr>
+													<td>公共管理費</td>
+													<td
+														v-if="
+															product.managementFee ||
+															product.managementFee >
+																0
+														"
+													>
+														{{
+															product.managementFee
+														}}
+														元/ 每月
+													</td>
+													<td v-else>--</td>
+												</tr>
+												<tr>
+													<td>車位</td>
+													<td v-if="product.parking">
+														{{ product.parking }}
+														<span
+															v-if="
+																product.parkingPrice >
+																0
+															"
+															>(車位
+															{{
+																product.parkingPrice
+															}}萬)</span
+														>
+													</td>
+													<td v-else>--</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="case-detail-section" id="detail">
+									<div class="case-detail-header">
+										<h4
+											class="common-section-header__title"
+										>
+											物件特色
+										</h4>
+									</div>
+									<div class="detail-content">
+										{{ product.content }}
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="row">
@@ -511,12 +647,14 @@
 				></CasesSlide>
 			</div>
 		</section>
+		<!-- <BottomActionNavi></BottomActionNavi> -->
 	</div>
 </template>
 <script>
-import CaseBreadcrumb from "@/components/CaseBreadcrumb.vue";
+import CaseBreadcrumb from "@/components/product/CaseBreadcrumb.vue";
 import CasePreviewSlide from "@/components/product/CasePreviewSlide.vue";
 import CasesSlide from "@/components/product/CasesSlide.vue";
+import BottomActionNavi from "@/components/widgets/BottomActionNavi.vue";
 
 import storageCollectionCase from "@/mixins/collectionCase.js";
 import storageComparecase from "@/mixins/compareCase.js";
@@ -530,6 +668,7 @@ export default {
 		CaseBreadcrumb,
 		CasePreviewSlide,
 		CasesSlide,
+		BottomActionNavi,
 	},
 	data() {
 		return {

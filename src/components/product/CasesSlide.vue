@@ -8,7 +8,7 @@
 		:modules="swiper.modules"
 		:breakpoints="{
 			'@0.00': {
-				slidesPerView: 1.5,
+				slidesPerView: 1.25,
 			},
 			'@1.50': {
 				slidesPerView: 3.75,
@@ -17,7 +17,6 @@
 	>
 		<SwiperSlide
 			class="col-12 col-md-4"
-			:class="{ 'd-none': id === item.id }"
 			v-for="item in cases"
 			:key="item.id"
 		>
@@ -53,17 +52,30 @@ export default {
 	mixins: [swiperMixin],
 	methods: {
 		getSlideCasesData(category) {
-			const url = `${import.meta.env.VITE_URL}/api/${
-				import.meta.env.VITE_PATH
-			}/products?category=${category}`;
-			this.$http
-				.get(url)
-				.then((res) => {
-					this.cases = res.data.products;
-				})
-				.catch((error) => {
-					this.$httpMessageState(error.response, "錯誤訊息");
-				});
+			let url = "";
+			if (category !== "") {
+				url = `${import.meta.env.VITE_URL}/api/${
+					import.meta.env.VITE_PATH
+				}/products?category=${category}`;
+				this.$http
+					.get(url)
+					.then((res) => {
+						const resData = res.data.products;
+						this.cases = resData.filter(
+							(item) =>
+								(this.category === "" ||
+									item.category === this.category) &&
+								item.id !== this.id
+						);
+					})
+					.catch((error) => {
+						this.$httpMessageState(error.response, "錯誤訊息");
+					});
+			} else {
+				url = `${import.meta.env.VITE_URL}/api/${
+					import.meta.env.VITE_PATH
+				}/products/all`;
+			}
 		},
 	},
 	watch: {

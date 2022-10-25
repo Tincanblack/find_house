@@ -1,6 +1,6 @@
 <template>
 	<div class="main-content container-fluid px-4">
-		<LoadingAnimate :active="isLoading" :z-index="1060"></LoadingAnimate>
+		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<h3 class="mt-4 fw-bold">圖片上傳</h3>
 		<input
 			type="file"

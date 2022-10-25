@@ -17,8 +17,7 @@ import VueAxios from "vue-axios";
 import CKEditor from "@ckeditor/ckeditor5-vue";
 
 // loading
-import Loading from "vue3-loading-overlay";
-import "vue3-loading-overlay/dist/vue3-loading-overlay.css";
+import Loading from "@/components/widgets/LoadingComponent.vue";
 
 // vee-validate
 import { Field, Form, ErrorMessage, defineRule, configure } from "vee-validate";
@@ -74,7 +73,7 @@ app.use(pinia);
 app.use(router);
 app.use(VueAxios, axios);
 app.use(CKEditor);
-app.component("LoadingAnimate", Loading);
+app.component("LoadingComponent", Loading);
 app.component("VForm", Form);
 app.component("VField", Field);
 app.component("ErrorMessage", ErrorMessage);

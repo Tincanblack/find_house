@@ -1,5 +1,6 @@
 <template>
 	<div class="site-content">
+		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<NewsSlide v-if="news.length > 0" :articles="news"></NewsSlide>
 		<div class="news-list py-5">
 			<div class="news-list-column">
@@ -48,26 +49,30 @@
 	</div>
 </template>
 <script>
-import NewsSlide from "@/components/NewsSlide.vue";
+import NewsSlide from "@/components/news/NewsSlide.vue";
 
 export default {
 	components: {
 		NewsSlide,
 	},
-
 	data() {
 		return {
+			isLoading: false,
 			news: [],
 		};
 	},
 	methods: {
 		getNewsList(page = 1) {
+			this.isLoading = true;
 			this.$http
 				.get(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/articles/?page=${page}`
+					`${import.meta.env.VITE_URL}/api/${
+						import.meta.env.VITE_PATH
+					}/articles/?page=${page}`
 				)
 				.then((response) => {
 					this.news = response.data.articles;
+					this.isLoading = false;
 				})
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");

@@ -1,5 +1,5 @@
 <template lang="">
-	<LoadingAnimate :active="isLoading" :z-index="1060"></LoadingAnimate>
+	<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-8">

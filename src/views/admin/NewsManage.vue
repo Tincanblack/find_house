@@ -1,6 +1,6 @@
 <template>
 	<div class="main-content container-fluid px-4">
-		<LoadingAnimate :active="isLoading" :z-index="1060"></LoadingAnimate>
+		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<h3 class="mt-4 fw-bold">房訊管理</h3>
 		<div class="text-end my-2">
 			<button
