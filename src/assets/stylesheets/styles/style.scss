@@ -17,6 +17,8 @@ body {
 				margin-bottom: 0.25rem;
 				&:last-child {
 					padding-right: 0;
+				}
+				@include padWide {
 					margin-bottom: 0;
 				}
 			}
@@ -213,6 +215,9 @@ body {
 				font-family: bootstrap-icons !important;
 			}
 		}
+	}
+	@include mobile {
+		font-size: 12px;
 	}
 }
 
@@ -980,12 +985,19 @@ body {
 			align-items: center;
 			justify-content: space-between;
 		}
+		&-title {
+			margin-right: 0.5rem;
+		}
+		&__title {
+			@include mobile {
+				font-size: 1.25rem;
+			}
+		}
 		&__subtitle {
 			color: map-get($map: $grays, $key: "600");
 		}
 		&-tag {
 			font-size: 1rem;
-			margin-right: 0.5rem;
 		}
 	}
 	// case-tag
@@ -1008,8 +1020,10 @@ body {
 			&__selling {
 				font-size: 2rem;
 				margin-bottom: 0;
+				margin-left: 0.5rem;
 				@include pad {
 					font-size: 1.25rem;
+					margin-left: 0;
 				}
 			}
 			&__origin {

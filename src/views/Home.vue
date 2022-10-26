@@ -1,5 +1,6 @@
 <template>
 	<div class="site-content">
+		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<IndexBannerSlide></IndexBannerSlide>
 		<section class="index-feature py-3 py-xl-5 text-center bg-light">
 			<div class="container">
@@ -191,6 +192,7 @@ export default {
 	},
 	data() {
 		return {
+			isLoading: false,
 			cardLoading: true,
 			cases: [],
 			articles: [],
@@ -199,6 +201,7 @@ export default {
 	},
 	methods: {
 		getCasesList() {
+			this.isLoading = true;
 			const url = `${import.meta.env.VITE_URL}/api/${
 				import.meta.env.VITE_PATH
 			}/products/all`;
@@ -210,6 +213,7 @@ export default {
 					setTimeout(() => {
 						this.cardLoading = false;
 					}, 1000);
+					this.isLoading = false;
 				})
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");
@@ -225,6 +229,7 @@ export default {
 				)
 				.then((response) => {
 					this.articles = response.data.articles;
+					this.isLoading = false;
 				})
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");

@@ -66,7 +66,7 @@
 								還沒看到值得收藏的物件嗎？快去找找吧
 							</h3>
 							<RouterLink
-								class="btn btn-outline-primary rounded-0 collection-content__button my-2"
+								class="btn btn-outline-primary rounded-0 collection-content__button my-3"
 								to="/cases"
 								>前去找房 <i class="bi bi-house"></i
 							></RouterLink>
