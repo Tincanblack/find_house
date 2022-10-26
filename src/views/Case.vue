@@ -15,7 +15,9 @@
 							</h6>
 						</div>
 						<div class="case-price text-end">
-							<div class="d-flex align-items-center">
+							<div
+								class="d-flex align-items-center flex-column flex-lg-row"
+							>
 								<div
 									v-if="
 										product.origin_price !== product.price
@@ -228,7 +230,7 @@
 							</div>
 						</div>
 						<div class="col-12 col-lg-4 ms-auto">
-							<div class="case-aside">
+							<div class="case-aside d-none d-lg-block">
 								<ul class="case-aside-list list-group">
 									<li class="info-list-item">
 										<span class="info-list-title">
