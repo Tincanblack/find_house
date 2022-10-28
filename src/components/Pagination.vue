@@ -1,6 +1,10 @@
 <template lang="">
 	<ul class="pagination align-items-center justify-content-center">
-		<li class="page-item" :class="{ disabled: pages.has_pre !== true }">
+		<li
+			v-if="pages.total_pages > 0"
+			class="page-item"
+			:class="{ disabled: pages.has_pre !== true }"
+		>
 			<a
 				class="page-link"
 				href="#"
@@ -20,7 +24,11 @@
 				page
 			}}</a>
 		</li>
-		<li class="page-item" :class="{ disabled: pages.has_next !== true }">
+		<li
+			v-if="pages.total_pages > 0"
+			class="page-item"
+			:class="{ disabled: pages.has_next !== true }"
+		>
 			<a
 				class="page-link"
 				href="#"

@@ -17,7 +17,7 @@
 				<span class="nav-text fs-4 fw-bold">後臺管理</span>
 			</RouterLink>
 			<div
-				class="bx bx-chevron-right nav-toggle"
+				class="bx bx-chevron-right nav-toggle shadow-sm"
 				@click="sideBarOpen = !sideBarOpen"
 			>
 				<span class="nav-toggle-bar"></span>

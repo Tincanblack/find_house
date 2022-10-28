@@ -70,8 +70,8 @@ export default {
 						import.meta.env.VITE_PATH
 					}/articles/?page=${page}`
 				)
-				.then((response) => {
-					this.news = response.data.articles;
+				.then((res) => {
+					this.news = res.data.articles;
 					this.isLoading = false;
 				})
 				.catch((error) => {

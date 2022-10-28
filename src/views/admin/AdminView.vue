@@ -1,7 +1,7 @@
 <template>
 	<main>
 		<AdminNav></AdminNav>
-		<router-view></router-view>
+		<RouterView></RouterView>
 	</main>
 </template>
 <script>

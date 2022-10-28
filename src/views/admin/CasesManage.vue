@@ -40,7 +40,7 @@
 						{{ item.title }}
 					</td>
 					<td class="text-end">
-						{{ $format.currencyFormat(item.origin_price) }}
+						{{ $format.currencyFormat(item.origin_price) }}萬
 					</td>
 					<td
 						class="text-end"
@@ -48,12 +48,12 @@
 							'text-danger': item.origin_price > item.price,
 						}"
 					>
-						{{ $format.currencyFormat(item.price) }}
+						{{ $format.currencyFormat(item.price) }}萬
 					</td>
 					<td class="text-end">
-						<span v-if="item.parkingPrice > 0">{{
-							item.parkingPrice
-						}}</span>
+						<span v-if="item.parkingPrice > 0"
+							>{{ item.parkingPrice }}萬</span
+						>
 						<span v-else>--</span>
 					</td>
 					<td>
@@ -154,9 +154,9 @@ export default {
 				statusText = "更新案件";
 			}
 			this.$http[httpMethod](api, { data: this.tempCase })
-				.then((response) => {
+				.then((res) => {
 					this.isLoading = false;
-					this.$httpMessageState(response, statusText);
+					this.$httpMessageState(res, statusText);
 					this.$refs.caseModal.closeModal();
 					this.getCasesList(this.currentPage);
 				})
@@ -173,10 +173,10 @@ export default {
 						import.meta.env.VITE_PATH
 					}/admin/products/?page=${page}`
 				)
-				.then((response) => {
+				.then((res) => {
 					// 將收到的data賦予給cases, pagination
-					this.cases = response.data.products;
-					this.pagination = response.data.pagination;
+					this.cases = res.data.products;
+					this.pagination = res.data.pagination;
 					this.isLoading = false;
 				})
 				.catch((error) => {
@@ -197,9 +197,9 @@ export default {
 						import.meta.env.VITE_PATH
 					}/admin/product/${this.tempCase.id}`
 				)
-				.then((response) => {
+				.then((res) => {
 					this.isLoading = false;
-					this.$httpMessageState(response, "刪除案件");
+					this.$httpMessageState(res, "刪除案件");
 					this.$refs.delModal.closeModal();
 					this.getCasesList(this.currentPage);
 				})

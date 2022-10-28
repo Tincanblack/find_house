@@ -900,7 +900,9 @@ export default {
 			this.status.fileUploading = true;
 			this.$http
 				.post(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/upload`,
+					`${import.meta.env.VITE_URL}/api/${
+						import.meta.env.VITE_PATH
+					}/admin/upload`,
 					formData,
 					{
 						headers: {
@@ -908,22 +910,22 @@ export default {
 						},
 					}
 				)
-				.then((response) => {
+				.then((res) => {
 					this.status.fileUploading = false;
-					if (response.data.success) {
-						this.tempCase.imageUrl = response.data.imageUrl;
+					if (res.data.success) {
+						this.tempCase.imageUrl = res.data.imageUrl;
 						this.$refs.fileInput.value = "";
 						this.$httpMessageState(
-							response,
+							res,
 							"圖片上傳結果",
-							response.data.message
+							res.data.message
 						);
 					} else {
 						this.$refs.fileInput.value = "";
 						this.$httpMessageState(
-							response,
+							res,
 							"圖片上傳結果",
-							response.data.message
+							res.data.message
 						);
 					}
 				})

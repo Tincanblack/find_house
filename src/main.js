@@ -35,7 +35,6 @@ import {
 	calToPercent,
 	filterItemTag,
 	dateFormat,
-	dateFormatWithTime,
 	publicDateFormat,
 } from "@/methods/format";
 
@@ -63,7 +62,6 @@ app.config.globalProperties.$format = {
 	calToPercent,
 	filterItemTag,
 	dateFormat,
-	dateFormatWithTime,
 	publicDateFormat,
 };
 

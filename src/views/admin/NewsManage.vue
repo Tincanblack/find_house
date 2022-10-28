@@ -16,10 +16,10 @@
 				<tr>
 					<th width="5%">順序</th>
 					<th width="10%">封面圖片</th>
-					<th width="45%" class="text-start">標題</th>
+					<th width="40%" class="text-start">標題</th>
 					<th width="10%">分類</th>
 					<th width="10%">發布者</th>
-					<th width="5%">發布時間</th>
+					<th width="10%">發布時間</th>
 					<th width="5%">是否顯示</th>
 					<th width="10%">操作</th>
 				</tr>
@@ -35,7 +35,11 @@
 						<img class="img-fluid" :src="article.image" />
 					</td>
 					<td class="text-start">
-						{{ article.title }}
+						<RouterLink
+							:to="`/news/${article.id}`"
+							target="_blank"
+							>{{ article.title }}</RouterLink
+						>
 					</td>
 					<td>
 						{{ article.category }}
@@ -128,11 +132,15 @@ export default {
 		updateNews(item) {
 			this.tempNews = item;
 			this.isLoading = true;
-			let api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/article`;
+			let api = `${import.meta.env.VITE_URL}/api/${
+				import.meta.env.VITE_PATH
+			}/admin/article`;
 			let httpMethod = "post";
 			let statusText = "新增房訊";
 			if (!this.isNew) {
-				api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/article/${this.tempNews.id}`;
+				api = `${import.meta.env.VITE_URL}/api/${
+					import.meta.env.VITE_PATH
+				}/admin/article/${this.tempNews.id}`;
 				httpMethod = "put";
 				statusText = "更新房訊";
 			}
@@ -152,12 +160,14 @@ export default {
 			this.isLoading = true;
 			this.$http
 				.get(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/articles/?page=${page}`
+					`${import.meta.env.VITE_URL}/api/${
+						import.meta.env.VITE_PATH
+					}/admin/articles/?page=${page}`
 				)
-				.then((response) => {
+				.then((res) => {
 					// 將收到的data賦予給news, pagination
-					this.news = response.data.articles;
-					this.pagination = response.data.pagination;
+					this.news = res.data.articles;
+					this.pagination = res.data.pagination;
 					this.isLoading = false;
 				})
 				.catch((error) => {
@@ -167,14 +177,16 @@ export default {
 				});
 		},
 		getNews(id) {
-			const api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/article/${id}`;
+			const api = `${import.meta.env.VITE_URL}/api/${
+				import.meta.env.VITE_PATH
+			}/admin/article/${id}`;
 			this.isLoading = true;
 			this.$http
 				.get(api)
-				.then((response) => {
+				.then((res) => {
 					this.isLoading = false;
-					if (response.data.success) {
-						this.openModal(false, response.data.article);
+					if (res.data.success) {
+						this.openModal(false, res.data.article);
 						this.isNew = false;
 					}
 				})
@@ -191,11 +203,13 @@ export default {
 			this.isLoading = true;
 			this.$http
 				.delete(
-					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/article/${this.tempNews.id}`
+					`${import.meta.env.VITE_URL}/api/${
+						import.meta.env.VITE_PATH
+					}/admin/article/${this.tempNews.id}`
 				)
-				.then((response) => {
+				.then((res) => {
 					this.isLoading = false;
-					this.$httpMessageState(response, "刪除房訊");
+					this.$httpMessageState(res, "刪除房訊");
 					this.$refs.delModal.closeModal();
 					this.getNewsList(this.currentPage);
 				})

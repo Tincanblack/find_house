@@ -227,8 +227,8 @@ export default {
 						import.meta.env.VITE_PATH
 					}/articles/?page=${page}`
 				)
-				.then((response) => {
-					this.articles = response.data.articles;
+				.then((res) => {
+					this.articles = res.data.articles;
 					this.isLoading = false;
 				})
 				.catch((error) => {

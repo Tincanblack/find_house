@@ -20,9 +20,9 @@ class MyUploadAdapter {
 						},
 					});
 				})
-				.then((response) => {
+				.then((res) => {
 					resolve({
-						default: response.data.imageUrl,
+						default: res.data.imageUrl,
 					});
 				});
 		});
