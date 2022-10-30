@@ -1061,15 +1061,15 @@ body {
 			}
 		}
 	}
-	// case-assistant
-	&-assistant {
+	// case-manager
+	&-manager {
 		position: sticky;
 		top: 10%;
 		@include padWide {
 			position: relative;
 			top: initial;
 		}
-		.assistant {
+		.manager {
 			position: sticky;
 			@include padWide {
 				position: relative;
@@ -1081,14 +1081,13 @@ body {
 				color: map-get($map: $theme-site-colors, $key: "main");
 			}
 			&__image {
-				background-size: cover;
 				width: 70px;
 				height: 70px;
-				border: 1px solid map-get($map: $grays, $key: "500");
 				border-radius: 50%;
 			}
 			&__icon {
 				display: inline-block;
+				vertical-align: middle;
 				margin-right: 0.25rem;
 			}
 		}

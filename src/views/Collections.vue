@@ -8,7 +8,7 @@
 		</section>
 		<section class="collection pt-5 pb-3">
 			<div class="container">
-				<template v-if="collectionProducts.length !== 0">
+				<template v-if="collectionProducts.length > 0">
 					<div class="row">
 						<div class="col-12">
 							<div class="section-header mb-3">
@@ -17,7 +17,7 @@
 								</h3>
 								<div class="button-column bg-white">
 									<button
-										v-if="collectionProducts.length !== 0"
+										v-if="collectionProducts.length > 0"
 										type="button"
 										class="btn btn-danger btn-sm collection-clear__button"
 										@click="clearCollectionData"

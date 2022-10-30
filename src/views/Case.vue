@@ -274,60 +274,56 @@
 									</li>
 								</ul>
 							</div>
-							<div class="case-assistant">
-								<div class="assistant card shadow-sm mb-3">
+							<div class="case-manager">
+								<div class="manager card shadow-sm mb-3">
 									<div class="card-body">
-										<h4 class="assistant__title">
+										<h4 class="manager__title">
 											您的案件經理人
 										</h4>
 										<div
 											class="d-flex align-items-center my-3"
 										>
-											<div
-												class="assistant__image me-2"
-												:style="{
-													backgroundImage: `url(${assistantData.picture?.medium})`,
-												}"
-											></div>
+											<div class="manager__image me-2">
+												<img
+													class="img-fluid"
+													:src="fakeUser.photo"
+													alt=""
+													width="70"
+													height="70"
+												/>
+											</div>
 											<div class="card-content">
 												<h6 class="card-subtitle">
 													<i
-														class="bi bi-person fs-5 assistant__icon"
+														class="bi bi-person fs-5 manager__icon"
 													></i
-													>{{
-														assistantData.name
-															?.first
-													}}
+													>{{ fakeUser.name?.first }}
 												</h6>
 												<div class="card-text">
 													<i
-														class="bi bi-phone fs-5 assistant__icon"
+														class="bi bi-phone fs-5 manager__icon"
 													></i>
 													<a
-														:href="`tel:${assistantData.cell}`"
-														>{{
-															assistantData.cell
-														}}</a
+														:href="`tel:${fakeUser.cell}`"
+														>{{ fakeUser.cell }}</a
 													>
 												</div>
 												<div class="card-text">
 													<i
-														class="bi bi-telephone fs-5 assistant__icon"
+														class="bi bi-telephone fs-5 manager__icon"
 													></i>
 													<a
-														:href="`tel:${assistantData.phone}`"
-														>{{
-															assistantData.phone
-														}}</a
+														:href="`tel:${fakeUser.phone}`"
+														>{{ fakeUser.phone }}</a
 													>
 												</div>
 											</div>
 										</div>
 										<VForm
-											id="appointmentForm"
-											ref="appointmentForm"
+											id="reserveForm"
+											ref="reserveForm"
 											v-slot="{ errors }"
-											@submit="submitAppointmentForm"
+											@submit="fakeItem2Cart"
 										>
 											<div class="mb-3 position-relative">
 												<div class="input-group">
@@ -649,18 +645,16 @@
 				></CasesSlide>
 			</div>
 		</section>
-		<!-- <BottomActionNavi></BottomActionNavi> -->
 	</div>
 </template>
 <script>
 import CaseBreadcrumb from "@/components/product/CaseBreadcrumb.vue";
 import CasePreviewSlide from "@/components/product/CasePreviewSlide.vue";
 import CasesSlide from "@/components/product/CasesSlide.vue";
-import BottomActionNavi from "@/components/widgets/BottomActionNavi.vue";
 
 import storageCollectionCase from "@/mixins/collectionCase.js";
 import storageComparecase from "@/mixins/compareCase.js";
-import appointmentForm from "@/mixins/appointmentForm.js";
+import reserveForm from "@/mixins/reserveForm.js";
 
 import { mapState, mapActions } from "pinia";
 import compareAnchor from "@/stores/compareAnchor.js";
@@ -670,20 +664,23 @@ export default {
 		CaseBreadcrumb,
 		CasePreviewSlide,
 		CasesSlide,
-		BottomActionNavi,
 	},
 	data() {
 		return {
 			isLoading: false,
 			cases: [],
+			collectionCases: [],
 			product: {},
 			category: "",
 			id: "",
-			assistantData: {},
-			collectionCases: [],
+			fakeUser: {},
+			fakeAvatar: [
+				"../src/assets/male_avatar_icon.svg",
+				"../src/assets/female_avatar_icon.svg",
+			],
 		};
 	},
-	mixins: [storageCollectionCase, storageComparecase, appointmentForm],
+	mixins: [storageCollectionCase, storageComparecase, reserveForm],
 	methods: {
 		...mapActions(compareAnchor, ["goCompareAnchor"]),
 		...mapActions(compareAnchor, ["clickCompareAnchor"]),
@@ -708,16 +705,19 @@ export default {
 					this.$httpMessageState(error.response, "錯誤訊息");
 				});
 		},
-		getCaseAssistant() {
+		getFakeUserData() {
 			this.$http
-				.get(`${import.meta.env.VITE_RANDOMUSER_URL}?nat=us,ch`)
+				.get(`${import.meta.env.VITE_RANDOMUSER_URL}`)
 				.then((res) => {
-					this.assistantData = res.data.results[0];
+					this.fakeUser = res.data.results[0];
+					this.fakeUser.photo = this.getFakeUserPhoto(
+						this.fakeUser.gender
+					);
 				})
 				.catch((error) => {
 					this.$swal({
 						icon: "error",
-						title: `${error.response}`,
+						title: `${error.response.statusText}`,
 					});
 				});
 		},
@@ -732,6 +732,14 @@ export default {
 					localStorage.getItem("compare_case")
 				);
 			}
+		},
+		getFakeUserPhoto(gender) {
+			let genderResult = gender.replace(/\d/gi, "");
+			let photoArray = this.fakeAvatar;
+			let genderUrl = photoArray.find((url) => {
+				return url.match(genderResult);
+			});
+			return genderUrl;
 		},
 		validatePhone(value) {
 			return /^(09)[0-9]{8}$/.test(value)
@@ -754,9 +762,8 @@ export default {
 	mounted() {
 		this.id = this.$route.params.id;
 		this.getCaseData();
-		this.getCaseAssistant();
+		this.getFakeUserData();
 		this.loadSotrageCase();
-		// this.getCaseRecommend();
 	},
 };
 </script>
