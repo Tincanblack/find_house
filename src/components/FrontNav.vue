@@ -33,11 +33,9 @@
 							</span>
 						</RouterLink>
 					</li>
-					<!-- <li class="nav-item">
-						<RouterLink class="nav-link" to="/reserve"
-							>查詢預約</RouterLink
-						>
-					</li> -->
+					<li class="nav-item">
+						<RouterLink class="nav-link" to="/reserve">查詢預約</RouterLink>
+					</li>
 				</ul>
 			</div>
 		</div>

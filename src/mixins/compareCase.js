@@ -1,8 +1,7 @@
 export default {
 	data() {
 		return {
-			compareCases:
-				JSON.parse(localStorage.getItem("compare_case")) || [],
+			compareCases: JSON.parse(localStorage.getItem("compare_case")) || [],
 		};
 	},
 	inject: ["emitter"],
@@ -55,10 +54,7 @@ export default {
 		compareCases: {
 			handler() {
 				// localStorage 資料寫入
-				localStorage.setItem(
-					"compare_case",
-					JSON.stringify(this.compareCases)
-				);
+				localStorage.setItem("compare_case", JSON.stringify(this.compareCases));
 			},
 			deep: true,
 		},

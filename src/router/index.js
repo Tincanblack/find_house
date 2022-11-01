@@ -68,7 +68,7 @@ const router = createRouter({
 				{
 					path: "reserve",
 					name: "reserve",
-					component: () => import("@/views/Reserve.vue"),
+					component: () => import("@/views/SearchReserve.vue"),
 				},
 			],
 		},

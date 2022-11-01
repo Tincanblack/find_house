@@ -27,6 +27,8 @@
 			:slidesPerView="4.5"
 			:watchSlidesVisibility="true"
 			:watchSlidesProgress="true"
+			:navigation="true"
+			:modules="modules"
 			:breakpoints="{
 				'@0.00': {
 					slidesPerView: 3.5,
@@ -59,6 +61,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/pagination";
+
 export default {
 	components: { Swiper, SwiperSlide },
 	props: {

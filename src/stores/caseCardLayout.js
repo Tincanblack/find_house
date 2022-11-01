@@ -3,22 +3,23 @@ import { defineStore } from "pinia";
 export default defineStore("cardLayoutStore", {
 	// data
 	state: () => ({
-		card: {
-			cardLayout: "",
-			cardLoading: false,
-		},
+		cardLayout: "card",
+		cardLoading: false,
 	}),
 	// methods
 	actions: {
 		getCaseCardLayout() {
-			return localStorage.getItem("card_layout");
+			const layout = localStorage.getItem("card_layout");
+			if (layout === null || layout === undefined) return "card";
+			localStorage.setItem("card_layout", layout);
+			return layout;
 		},
 		changeCardlayout(view) {
-			this.card.cardLayout = view === "card" ? "card" : "list";
-			this.card.cardLoading = true;
-			localStorage.setItem("card_layout", this.card.cardLayout);
+			this.cardLayout = view;
+			this.cardLoading = true;
 			setTimeout(() => {
-				this.card.cardLoading = false;
+				this.cardLoading = false;
+				localStorage.setItem("card_layout", this.cardLayout);
 			}, 1000);
 		},
 	},

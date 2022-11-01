@@ -1197,6 +1197,12 @@ body {
 			}
 		}
 	}
+	// case-related
+	&-related {
+		.swiper {
+			padding-bottom: .75rem;
+		}
+	}
 }
 
 // page - news
@@ -1400,6 +1406,9 @@ body {
 		&__button {
 			min-width: 10vw;
 		}
+	}
+	.swiper {
+		padding-bottom: 0.75rem;
 	}
 }
 

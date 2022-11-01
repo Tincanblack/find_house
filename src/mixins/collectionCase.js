@@ -1,19 +1,16 @@
 export default {
 	data() {
 		return {
-			collectionCases:
-				JSON.parse(localStorage.getItem("collection_case")) || [],
+			collectionCases: JSON.parse(localStorage.getItem("collection_case")) || [],
 		};
 	},
 	inject: ["emitter"],
 	methods: {
 		handleCollectionCase(caseID) {
 			// 查詢 this.collectionCases 有沒有這個 caseID
-			const collectionCaseIndex = this.collectionCases.findIndex(
-				(item) => {
-					return item === caseID;
-				}
-			);
+			const collectionCaseIndex = this.collectionCases.findIndex((item) => {
+				return item === caseID;
+			});
 			if (collectionCaseIndex === -1) {
 				this.$swal({
 					icon: "success",
@@ -37,10 +34,7 @@ export default {
 		collectionCases: {
 			handler() {
 				// localStorage 資料寫入
-				localStorage.setItem(
-					"collection_case",
-					JSON.stringify(this.collectionCases)
-				);
+				localStorage.setItem("collection_case", JSON.stringify(this.collectionCases));
 			},
 			deep: true,
 		},

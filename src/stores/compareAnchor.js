@@ -12,13 +12,11 @@ export default defineStore("compareAnchorStore", {
 			this.goCompareAnchor();
 		},
 		goCompareAnchor() {
-			this.toAnchor = false;
+			if (this.toAnchor !== false) return;
 			setTimeout(() => {
 				const anchor = document.querySelector("#caseCompare");
-				const headerHiehgt =
-					document.querySelector(".navbar").offsetHeight;
-				document.documentElement.scrollTop =
-					anchor.offsetTop - headerHiehgt;
+				const headerHiehgt = document.querySelector(".navbar").offsetHeight;
+				document.documentElement.scrollTop = anchor.offsetTop - headerHiehgt;
 			}, 250);
 			this.toAnchor = false;
 		},

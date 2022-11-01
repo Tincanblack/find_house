@@ -144,12 +144,7 @@
 												</tr>
 												<tr>
 													<td>公共管理費</td>
-													<td
-														v-if="
-															product.managementFee ||
-															product.managementFee > 0
-														"
-													>
+													<td v-if="product.managementFee > 0">
 														{{ product.managementFee }}
 														元/ 每月
 													</td>
@@ -493,7 +488,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
+					<!-- <div class="row">
 						<div class="case-detail-section" id="near">
 							<div class="case-detail-header">
 								<h4 class="common-section-header__title">周遭環境</h4>
@@ -502,7 +497,7 @@
 								{{ product.content }}
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</section>

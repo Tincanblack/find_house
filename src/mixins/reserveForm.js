@@ -23,9 +23,7 @@ export default {
 
 			this.$http
 				.post(
-					`${import.meta.env.VITE_URL}/api/${
-						import.meta.env.VITE_PATH
-					}/cart/`,
+					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/cart/`,
 					postData
 				)
 				.then(() => {
@@ -62,21 +60,18 @@ export default {
 
 			this.$http
 				.post(
-					`${import.meta.env.VITE_URL}/api/${
-						import.meta.env.VITE_PATH
-					}/order`,
+					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/order`,
 					postData
 				)
-				.then(() => {
-					this.submitReserveForm();
+				.then((res) => {
+					const { orderId } = res.data;
+					this.submitReserveForm(orderId);
 				})
 				.catch((error) => {
 					if (error.response.status !== 200) {
 						let errorMsg = error.response.data.message;
 						let newErrorMsg = errorMsg.map((message) => {
-							return message
-								.replace("name", "稱呼")
-								.replace("tel", "連絡電話");
+							return message.replace("name", "稱呼").replace("tel", "連絡電話");
 						});
 						newErrorMsg = newErrorMsg.join("、");
 
@@ -89,9 +84,9 @@ export default {
 					}
 				});
 		},
-		submitReserveForm() {
+		submitReserveForm(order_id) {
 			const nowTimeStamp = Math.floor(new Date().getTime() / 1000);
-			this.formData.caseID = this.id;
+			this.formData.caseID = order_id;
 			this.formData.caseName = this.product.title;
 			this.formData.manager = this.fakeUser.name.first;
 			this.formData.dataTime = nowTimeStamp;
@@ -117,7 +112,7 @@ export default {
 					this.$swal({
 						icon: "success",
 						title: "謝謝你的諮詢\n將盡快與您聯繫",
-						confirmButtonText: "我知道了",
+						showConfirmButton: false,
 					}).then(() => {
 						this.$refs.reserveForm.resetForm();
 						this.formData.freeTime = 0;
