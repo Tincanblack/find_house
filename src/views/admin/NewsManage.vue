@@ -3,11 +3,7 @@
 		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<h3 class="mt-4 fw-bold">房訊管理</h3>
 		<div class="text-end my-2">
-			<button
-				type="button"
-				class="btn btn-success"
-				@click="openModal(true)"
-			>
+			<button type="button" class="btn btn-success text-white" @click="openModal(true)">
 				<i class="bi bi-plus-square"></i> 新增房訊
 			</button>
 		</div>
@@ -35,11 +31,9 @@
 						<img class="img-fluid" :src="article.image" />
 					</td>
 					<td class="text-start">
-						<RouterLink
-							:to="`/news/${article.id}`"
-							target="_blank"
-							>{{ article.title }}</RouterLink
-						>
+						<RouterLink :to="`/news/${article.id}`" target="_blank">{{
+							article.title
+						}}</RouterLink>
 					</td>
 					<td>
 						{{ article.category }}
@@ -49,11 +43,7 @@
 					</td>
 					<td>{{ $format.dateFormat(article.create_at) }}</td>
 					<td>
-						<span
-							class="text-success"
-							v-if="article.isPublic === true"
-							>顯示</span
-						>
+						<span class="text-success" v-if="article.isPublic === true">顯示</span>
 						<span v-else class="text-danger">不顯示</span>
 					</td>
 					<td>
@@ -69,7 +59,7 @@
 							<button
 								type="button"
 								class="btn btn-danger btn-sm"
-								@click="openDelModal(item)"
+								@click="openDelModal(article)"
 							>
 								<i class="bi bi-trash3"></i>
 								刪除
@@ -89,11 +79,9 @@
 		ref="newsModal"
 	></NewsEditModal>
 	<!-- 刪除 -->
-	<DelConfirmModal
-		:item="tempNews"
-		@del-item="deleteNews"
-		ref="delModal"
-	></DelConfirmModal>
+	<DelConfirmModal :item="tempNews" @del-item="deleteNews" ref="delModal">
+		<template #modal-text> 房訊名稱：{{ tempNews.title }} </template>
+	</DelConfirmModal>
 </template>
 <script>
 import Pagination from "@/components/Pagination.vue";
@@ -132,15 +120,13 @@ export default {
 		updateNews(item) {
 			this.tempNews = item;
 			this.isLoading = true;
-			let api = `${import.meta.env.VITE_URL}/api/${
-				import.meta.env.VITE_PATH
-			}/admin/article`;
+			let api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/article`;
 			let httpMethod = "post";
 			let statusText = "新增房訊";
 			if (!this.isNew) {
-				api = `${import.meta.env.VITE_URL}/api/${
-					import.meta.env.VITE_PATH
-				}/admin/article/${this.tempNews.id}`;
+				api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/article/${
+					this.tempNews.id
+				}`;
 				httpMethod = "put";
 				statusText = "更新房訊";
 			}
@@ -158,6 +144,8 @@ export default {
 		},
 		getNewsList(page = 1) {
 			this.isLoading = true;
+			this.currentPage = page;
+
 			this.$http
 				.get(
 					`${import.meta.env.VITE_URL}/api/${
@@ -180,11 +168,9 @@ export default {
 			const api = `${import.meta.env.VITE_URL}/api/${
 				import.meta.env.VITE_PATH
 			}/admin/article/${id}`;
-			this.isLoading = true;
 			this.$http
 				.get(api)
 				.then((res) => {
-					this.isLoading = false;
 					if (res.data.success) {
 						this.openModal(false, res.data.article);
 						this.isNew = false;
@@ -196,16 +182,16 @@ export default {
 				});
 		},
 		openDelModal(item) {
-			this.tempNews = { ...item };
+			this.tempNews = item;
 			this.$refs.delModal.openModal();
 		},
 		deleteNews() {
 			this.isLoading = true;
 			this.$http
 				.delete(
-					`${import.meta.env.VITE_URL}/api/${
-						import.meta.env.VITE_PATH
-					}/admin/article/${this.tempNews.id}`
+					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/article/${
+						this.tempNews.id
+					}`
 				)
 				.then((res) => {
 					this.isLoading = false;

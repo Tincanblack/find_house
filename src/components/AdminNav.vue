@@ -42,11 +42,7 @@
 				</RouterLink>
 			</li>
 			<li class="nav-item d-flex">
-				<RouterLink
-					class="nav-link"
-					to="/admin/reserves"
-					title="預約表單管理"
-				>
+				<RouterLink class="nav-link" to="/admin/reserves" title="預約表單管理">
 					<i class="nav-icon bi bi-pencil-square me-3"></i>
 					<span class="nav-text">預約表單管理</span>
 					<span class="nav-tooltip">預約表單管理</span>

@@ -20,9 +20,7 @@
 			v-for="page in pages.total_pages"
 			:key="'page' + page"
 		>
-			<a class="page-link" href="#" @click.prevent="clickPage(page)">{{
-				page
-			}}</a>
+			<a class="page-link" href="#" @click.prevent="clickPage(page)">{{ page }}</a>
 		</li>
 		<li
 			v-if="pages.total_pages > 0"

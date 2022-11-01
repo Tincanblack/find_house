@@ -8,18 +8,10 @@
 					<div class="news-detail-header__date">
 						<div class="public-date" v-show="article.create_at">
 							<div class="public-date__main">
-								{{
-									$format.publicDateFormat(
-										article.create_at
-									)[1]
-								}}
+								{{ $format.publicDateFormat(article.create_at)[1] }}
 							</div>
 							<div class="public-date__sec">
-								{{
-									$format.publicDateFormat(
-										article.create_at
-									)[0]
-								}}
+								{{ $format.publicDateFormat(article.create_at)[0] }}
 							</div>
 						</div>
 					</div>
@@ -32,10 +24,7 @@
 				</div>
 				<div class="row">
 					<div class="col-12">
-						<div
-							class="news-detail-content"
-							v-html="article.content"
-						></div>
+						<div class="news-detail-content" v-html="article.content"></div>
 					</div>
 				</div>
 			</div>
@@ -60,11 +49,7 @@ export default {
 			this.isLoading = true;
 			const { id } = this.$route.params;
 			this.$http
-				.get(
-					`${import.meta.env.VITE_URL}/api/${
-						import.meta.env.VITE_PATH
-					}/article/${id}`
-				)
+				.get(`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/article/${id}`)
 				.then((res) => {
 					// 將收到的data資料展賦予給article
 					this.article = res.data.article;

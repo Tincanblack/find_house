@@ -3,9 +3,7 @@
 		<CaseBreadcrumb></CaseBreadcrumb>
 		<section class="category-header py-3">
 			<div class="container">
-				<div
-					class="row row-cols-lg-auto g-3 align-items-center justify-content-between"
-				>
+				<div class="row row-cols-lg-auto g-3 align-items-center justify-content-between">
 					<div class="col-12">
 						<div class="dropdown cases-sort">
 							<button
@@ -63,12 +61,9 @@
 										type="button"
 										class="dropdown-item cases-sort-select__option"
 										:class="{
-											active:
-												sortBy === 'houseAgeLow2High',
+											active: sortBy === 'houseAgeLow2High',
 										}"
-										@click="
-											sortCaseList('houseAgeLow2High')
-										"
+										@click="sortCaseList('houseAgeLow2High')"
 									>
 										屋齡從 低 > 高
 									</button>
@@ -78,12 +73,9 @@
 										type="button"
 										class="dropdown-item cases-sort-select__option"
 										:class="{
-											active:
-												sortBy === 'houseAgeHigh2Low',
+											active: sortBy === 'houseAgeHigh2Low',
 										}"
-										@click="
-											sortCaseList('houseAgeHigh2Low')
-										"
+										@click="sortCaseList('houseAgeHigh2Low')"
 									>
 										屋齡從 高 > 低
 									</button>
@@ -93,12 +85,9 @@
 										type="button"
 										class="dropdown-item cases-sort-select__option"
 										:class="{
-											active:
-												sortBy === 'squareFeetLow2High',
+											active: sortBy === 'squareFeetLow2High',
 										}"
-										@click="
-											sortCaseList('squareFeetLow2High')
-										"
+										@click="sortCaseList('squareFeetLow2High')"
 									>
 										坪數從 小 > 大
 									</button>
@@ -108,13 +97,9 @@
 										type="button"
 										class="dropdown-item cases-sort-select__option"
 										:class="{
-											active:
-												sortBy ===
-												'squareFeetHight2Low',
+											active: sortBy === 'squareFeetHight2Low',
 										}"
-										@click="
-											sortCaseList('squareFeetHight2Low')
-										"
+										@click="sortCaseList('squareFeetHight2Low')"
 									>
 										坪數從 大 > 小
 									</button>
@@ -131,9 +116,7 @@
 								}"
 								@click="handleCardLayout('card')"
 							>
-								<i
-									class="bi bi-grid fs-3 cases-card-display__icon"
-								></i>
+								<i class="bi bi-grid fs-3 cases-card-display__icon"></i>
 								卡片
 							</span>
 							<span
@@ -143,9 +126,7 @@
 								}"
 								@click="handleCardLayout('list')"
 							>
-								<i
-									class="bi bi-list-ul fs-3 cases-card-display__icon"
-								></i>
+								<i class="bi bi-list-ul fs-3 cases-card-display__icon"></i>
 								列表
 							</span>
 						</div>
@@ -160,22 +141,12 @@
 					class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-2"
 				>
 					<div class="col" v-for="item in cases" :key="item.id">
-						<CaseCard
-							:item="item"
-							:cardLoading="cardLoading"
-						></CaseCard>
+						<CaseCard :item="item" :cardLoading="cardLoading"></CaseCard>
 					</div>
 				</div>
 				<div v-show="cardLayout === 'list'" class="row row-cols-1 g-2">
-					<div
-						class="col pb-lg-3"
-						v-for="item in cases"
-						:key="item.id"
-					>
-						<CaseList
-							:item="item"
-							:cardLoading="cardLoading"
-						></CaseList>
+					<div class="col pb-lg-3" v-for="item in cases" :key="item.id">
+						<CaseList :item="item" :cardLoading="cardLoading"></CaseList>
 					</div>
 				</div>
 			</div>
@@ -206,9 +177,7 @@ export default {
 	methods: {
 		getCaseList(query) {
 			this.cardLoading = true;
-			let url = `${import.meta.env.VITE_URL}/api/${
-				import.meta.env.VITE_PATH
-			}/products/all`;
+			let url = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/products/all`;
 			if (query) {
 				url = `${import.meta.env.VITE_URL}/api/${
 					import.meta.env.VITE_PATH
@@ -275,8 +244,7 @@ export default {
 			}, 1000);
 		},
 		resizeWidth() {
-			if (window.matchMedia("(max-width: 767px)").matches)
-				this.cardLayout = "card";
+			if (window.matchMedia("(max-width: 767px)").matches) this.cardLayout = "card";
 		},
 	},
 	watch: {

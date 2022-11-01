@@ -3,19 +3,13 @@
 		<div class="container-fluid">
 			<ul class="footer-nav nav justify-content-center pb-3 mb-3">
 				<li class="nav-item">
-					<RouterLink class="nav-link px-2 text-light" to="/cases"
-						>找房</RouterLink
-					>
+					<RouterLink class="nav-link px-2 text-light" to="/cases">找房</RouterLink>
 				</li>
 				<li class="nav-item">
-					<RouterLink class="nav-link px-2 text-light" to="/news"
-						>房訊新知</RouterLink
-					>
+					<RouterLink class="nav-link px-2 text-light" to="/news">房訊新知</RouterLink>
 				</li>
 				<li class="nav-item">
-					<RouterLink
-						class="nav-link px-2 text-light"
-						to="/collections"
+					<RouterLink class="nav-link px-2 text-light" to="/collections"
 						>收藏名單
 					</RouterLink>
 				</li>

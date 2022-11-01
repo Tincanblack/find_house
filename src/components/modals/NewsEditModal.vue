@@ -23,40 +23,9 @@
 				</div>
 				<div class="modal-body">
 					<div class="row">
-						<div class="col-sm-12">
+						<div class="col-md-4">
 							<div class="mb-3">
-								<label for="" class="form-label"
-									>顯示狀況</label
-								>
-								<div class="form-check form-switch">
-									<input
-										class="form-check-input"
-										type="checkbox"
-										v-model="tempNews.isPublic"
-										:true-value="true"
-										:false-value="false"
-										id="isPublic"
-									/>
-									<label
-										v-if="tempNews.isPublic"
-										class="form-check-label"
-										for="isPublic"
-										>顯示
-									</label>
-									<label
-										v-else
-										class="form-check-label"
-										for="isPublic"
-										>不顯示
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-12">
-							<div class="mb-3">
-								<label for="image" class="form-label"
-									>封面圖片</label
-								>
+								<label for="image" class="form-label fw-bold">封面圖片</label>
 								<input
 									type="text"
 									class="form-control"
@@ -70,96 +39,111 @@
 									class="img-fluid"
 									:src="tempNews.image"
 									:alt="tempNews.title"
+									:title="tempNews.title"
 								/>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="mb-3">
-								<label for="title" class="form-label"
-									>標題</label
-								>
-								<input
-									type="text"
-									class="form-control"
-									id="title"
-									placeholder="請輸入標題"
-									v-model="tempNews.title"
-								/>
+						<div class="col-md-8">
+							<div class="row">
+								<div class="col-12">
+									<div class="mb-3">
+										<label for="" class="form-label fw-bold">顯示狀況</label>
+										<div class="form-check form-switch">
+											<input
+												class="form-check-input"
+												type="checkbox"
+												v-model="tempNews.isPublic"
+												:true-value="true"
+												:false-value="false"
+												id="isPublic"
+											/>
+											<label
+												v-if="!tempNews.isPublic"
+												class="form-check-label"
+												for="isPublic"
+												>修改為顯示
+											</label>
+											<label v-else class="form-check-label" for="isPublic"
+												>修改為不顯示
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="mb-3">
+									<label for="title" class="form-label fw-bold">標題</label>
+									<input
+										type="text"
+										class="form-control"
+										id="title"
+										placeholder="請輸入標題"
+										v-model="tempNews.title"
+									/>
+								</div>
 							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="mb-3">
-								<label for="category" class="form-label"
-									>分類</label
-								>
-								<input
-									type="text"
-									class="form-control"
-									id="category"
-									placeholder="請輸入分類"
-									v-model="tempNews.category"
-								/>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="mb-3">
+										<label for="author" class="form-label fw-bold"
+											>作者姓名</label
+										>
+										<input
+											type="text"
+											class="form-control"
+											id="author"
+											placeholder="請輸入作者姓名"
+											v-model="tempNews.author"
+										/>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="mb-3">
+										<label for="category" class="form-label fw-bold"
+											>分類</label
+										>
+										<input
+											type="text"
+											class="form-control"
+											id="category"
+											placeholder="請輸入分類"
+											v-model="tempNews.category"
+										/>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="mb-3">
-								<label for="author" class="form-label"
-									>作者姓名</label
-								>
-								<input
-									type="text"
-									class="form-control"
-									id="author"
-									placeholder="請輸入作者姓名"
-									v-model="tempNews.author"
-								/>
+							<div class="row">
+								<div class="mb-3">
+									<label for="description" class="form-label fw-bold"
+										>文章簡述</label
+									>
+									<input
+										type="text"
+										class="form-control"
+										id="description"
+										placeholder="請輸入文章簡述"
+										v-model="tempNews.description"
+									/>
+								</div>
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="mb-3">
-								<label for="description" class="form-label"
-									>文章簡述</label
-								>
-								<input
-									type="text"
-									class="form-control"
-									id="description"
-									placeholder="請輸入文章簡述"
-									v-model="tempNews.description"
-								/>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="mb-3">
-								<label for="description" class="form-label"
-									>文章內容</label
-								>
-								<ckeditor
-									id="editor"
-									class="form-control"
-									v-model="tempNews.content"
-									:editor="editor"
-									:config="editorConfig"
-								>
-								</ckeditor>
+							<div class="row">
+								<div class="mb-3">
+									<label for="description" class="form-label fw-bold"
+										>文章內容</label
+									>
+									<ckeditor
+										id="editor"
+										class="form-control"
+										v-model="tempNews.content"
+										:editor="editor"
+										:config="editorConfig"
+									>
+									</ckeditor>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button
-						type="button"
-						class="btn btn-outline-secondary"
-						data-bs-dismiss="modal"
-					>
+					<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
 						取消
 					</button>
 					<button

@@ -10,10 +10,7 @@
 				type: 'fraction',
 			}"
 		>
-			<SwiperSlide
-				v-for="(image, index) in product.imagesUrl"
-				:key="index"
-			>
+			<SwiperSlide v-for="(image, index) in product.imagesUrl" :key="index">
 				<div
 					class="carousel-slide__image"
 					style="background-size: cover; background-position: center"

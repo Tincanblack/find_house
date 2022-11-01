@@ -15,11 +15,7 @@
 			},
 		}"
 	>
-		<SwiperSlide
-			class="col-12 col-md-4"
-			v-for="item in cases"
-			:key="item.id"
-		>
+		<SwiperSlide class="col-12 col-md-4" v-for="item in cases" :key="item.id">
 			<CaseCard :item="item"></CaseCard>
 		</SwiperSlide>
 	</Swiper>
@@ -63,8 +59,7 @@ export default {
 						const resData = res.data.products;
 						this.cases = resData.filter(
 							(item) =>
-								(this.category === "" ||
-									item.category === this.category) &&
+								(this.category === "" || item.category === this.category) &&
 								item.id !== this.id
 						);
 					})
@@ -72,9 +67,7 @@ export default {
 						this.$httpMessageState(error.response, "錯誤訊息");
 					});
 			} else {
-				url = `${import.meta.env.VITE_URL}/api/${
-					import.meta.env.VITE_PATH
-				}/products/all`;
+				url = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/products/all`;
 			}
 		},
 	},

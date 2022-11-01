@@ -15,18 +15,12 @@
 							</h6>
 						</div>
 						<div class="case-price text-end">
-							<div
-								class="d-flex align-items-center flex-column flex-lg-row"
-							>
+							<div class="d-flex align-items-center flex-column flex-lg-row">
 								<div
-									v-if="
-										product.origin_price !== product.price
-									"
+									v-if="product.origin_price !== product.price"
 									class="case-header-tag"
 								>
-									<span
-										class="badge color-secondary tag__element--sec"
-									>
+									<span class="badge color-secondary tag__element--sec">
 										<i class="bi bi-arrow-down"></i>
 										{{
 											$format.calToPercent(
@@ -41,25 +35,16 @@
 									v-if="product.price"
 									class="price price__selling text-secondary"
 								>
-									{{
-										$format.currencyFormat(product.price)
-									}}萬
+									{{ $format.currencyFormat(product.price) }}萬
 								</h2>
 							</div>
 							<div
 								v-if="
-									product.origin_price &&
-									product.origin_price !== product.price
+									product.origin_price && product.origin_price !== product.price
 								"
 								class="price price__origin fs-6"
 							>
-								<del
-									>{{
-										$format.currencyFormat(
-											product.origin_price
-										)
-									}}萬
-								</del>
+								<del>{{ $format.currencyFormat(product.origin_price) }}萬 </del>
 							</div>
 						</div>
 					</div>
@@ -77,14 +62,10 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-12 col-lg-8">
-							<CasePreviewSlide
-								:product="product"
-							></CasePreviewSlide>
+							<CasePreviewSlide :product="product"></CasePreviewSlide>
 							<div class="case-slide">
 								<div class="case-slide-footer my-1">
-									<i
-										class="bi bi-exclamation-circle-fill text-secondary"
-									></i>
+									<i class="bi bi-exclamation-circle-fill text-secondary"></i>
 									<span class="slide-footer-notice">
 										請留意！以上照片若為街景，為物件附近環境介紹，非刊登物件本身。</span
 									>
@@ -93,16 +74,10 @@
 							<div class="case-detail mt-3 d-none d-lg-block">
 								<div class="case-detail-section" id="info">
 									<div class="case-detail-header">
-										<h4
-											class="common-section-header__title"
-										>
-											基本資料
-										</h4>
+										<h4 class="common-section-header__title">基本資料</h4>
 									</div>
 									<div class="case-detail-content">
-										<table
-											class="table border info-table info-table--detail"
-										>
+										<table class="table border info-table info-table--detail">
 											<tbody>
 												<tr>
 													<td>類型</td>
@@ -120,9 +95,7 @@
 												<tr>
 													<td>主建物</td>
 													<td>
-														{{
-															product.mainSquareFeet
-														}}
+														{{ product.mainSquareFeet }}
 														坪
 													</td>
 												</tr>
@@ -132,8 +105,7 @@
 														v-if="
 															product.squareFeet !==
 																product.mainSquareFeet &&
-															product.managementFee >
-																0
+															product.managementFee > 0
 														"
 													>
 														{{
@@ -156,24 +128,16 @@
 												<tr>
 													<td>格局</td>
 													<td>
-														{{
-															$format.patternFormat(
-																product.pattern
-															)
-														}}
+														{{ $format.patternFormat(product.pattern) }}
 													</td>
 												</tr>
 												<tr>
 													<td>樓層</td>
-													<td>
-														{{ product.floor }} 樓
-													</td>
+													<td>{{ product.floor }} 樓</td>
 												</tr>
 												<tr>
 													<td>朝向</td>
-													<td
-														v-if="product.direction"
-													>
+													<td v-if="product.direction">
 														{{ product.direction }}
 													</td>
 													<td v-else>--</td>
@@ -183,13 +147,10 @@
 													<td
 														v-if="
 															product.managementFee ||
-															product.managementFee >
-																0
+															product.managementFee > 0
 														"
 													>
-														{{
-															product.managementFee
-														}}
+														{{ product.managementFee }}
 														元/ 每月
 													</td>
 													<td v-else>--</td>
@@ -198,15 +159,9 @@
 													<td>車位</td>
 													<td v-if="product.parking">
 														{{ product.parking }}
-														<span
-															v-if="
-																product.parkingPrice >
-																0
-															"
+														<span v-if="product.parkingPrice > 0"
 															>(車位
-															{{
-																product.parkingPrice
-															}}萬)</span
+															{{ product.parkingPrice }}萬)</span
 														>
 													</td>
 													<td v-else>--</td>
@@ -217,11 +172,7 @@
 								</div>
 								<div class="case-detail-section" id="detail">
 									<div class="case-detail-header">
-										<h4
-											class="common-section-header__title"
-										>
-											物件特色
-										</h4>
+										<h4 class="common-section-header__title">物件特色</h4>
 									</div>
 									<div class="detail-content">
 										{{ product.content }}
@@ -243,9 +194,7 @@
 									</li>
 									<li class="info-list-item">
 										<span class="info-list-title">
-											<i
-												class="bi bi-house info-list-title__icon fs-4"
-											></i>
+											<i class="bi bi-house info-list-title__icon fs-4"></i>
 											屋齡
 										</span>
 										{{ product.houseAge }}年
@@ -257,11 +206,7 @@
 											></i>
 											格局
 										</span>
-										{{
-											$format.patternFormat(
-												product.pattern
-											)
-										}}
+										{{ $format.patternFormat(product.pattern) }}
 									</li>
 									<li class="info-list-item">
 										<span class="info-list-title">
@@ -277,12 +222,8 @@
 							<div class="case-manager">
 								<div class="manager card shadow-sm mb-3">
 									<div class="card-body">
-										<h4 class="manager__title">
-											您的案件經理人
-										</h4>
-										<div
-											class="d-flex align-items-center my-3"
-										>
+										<h4 class="manager__title">您的案件經理人</h4>
+										<div class="d-flex align-items-center my-3">
 											<div class="manager__image me-2">
 												<img
 													class="img-fluid"
@@ -294,28 +235,22 @@
 											</div>
 											<div class="card-content">
 												<h6 class="card-subtitle">
-													<i
-														class="bi bi-person fs-5 manager__icon"
-													></i
+													<i class="bi bi-person fs-5 manager__icon"></i
 													>{{ fakeUser.name?.first }}
 												</h6>
 												<div class="card-text">
-													<i
-														class="bi bi-phone fs-5 manager__icon"
-													></i>
-													<a
-														:href="`tel:${fakeUser.cell}`"
-														>{{ fakeUser.cell }}</a
-													>
+													<i class="bi bi-phone fs-5 manager__icon"></i>
+													<a :href="`tel:${fakeUser.cell}`">{{
+														fakeUser.cell
+													}}</a>
 												</div>
 												<div class="card-text">
 													<i
 														class="bi bi-telephone fs-5 manager__icon"
 													></i>
-													<a
-														:href="`tel:${fakeUser.phone}`"
-														>{{ fakeUser.phone }}</a
-													>
+													<a :href="`tel:${fakeUser.phone}`">{{
+														fakeUser.phone
+													}}</a>
 												</div>
 											</div>
 										</div>
@@ -332,13 +267,10 @@
 														class="form-control"
 														autocomplete="off"
 														placeholder="如何稱呼"
-														v-model="
-															formData.customer
-														"
+														v-model="formData.customer"
 														name="稱呼"
 														:class="{
-															'is-invalid':
-																errors['稱呼'],
+															'is-invalid': errors['稱呼'],
 														}"
 														rules="required"
 													/>
@@ -360,14 +292,9 @@
 													autocomplete="off"
 													placeholder="連絡電話 Ex: 0987654321..."
 													name="contactPhone"
-													v-model="
-														formData.contactPhone
-													"
+													v-model="formData.contactPhone"
 													:class="{
-														'is-invalid':
-															errors[
-																'contactPhone'
-															],
+														'is-invalid': errors['contactPhone'],
 													}"
 													:rules="validatePhone"
 													maxlength="10"
@@ -406,40 +333,28 @@
 													type="submit"
 													class="case-aside-action__button btn btn-primary w-100"
 												>
-													<i
-														class="bi bi-pencil-square"
-													></i>
+													<i class="bi bi-pencil-square"></i>
 													預約諮詢
 													<span
-														v-show="
-															submitBtnLoading
-														"
+														v-show="submitBtnLoading"
 														class="spinner-border spinner-border-sm"
 													></span>
 												</button>
 												<button
 													type="button"
 													class="case-aside-action__button btn btn-secondary w-100"
-													@click="
-														handleCollectionCase(
-															product.id
-														)
-													"
+													@click="handleCollectionCase(product.id)"
 												>
 													<i
 														class="bi"
 														:class="
-															collectionCases.includes(
-																product.id
-															)
+															collectionCases.includes(product.id)
 																? 'bi-bookmark-x'
 																: 'bi-bookmark-heart'
 														"
 													></i>
 													{{
-														collectionCases.includes(
-															product.id
-														)
+														collectionCases.includes(product.id)
 															? "取消"
 															: "加入"
 													}}收藏
@@ -447,26 +362,18 @@
 												<button
 													type="button"
 													class="case-aside-action btn btn-success w-100 text-white"
-													@click="
-														handleCompareCase(
-															product.id
-														)
-													"
+													@click="handleCompareCase(product.id)"
 												>
 													<i
 														class="bi"
 														:class="
-															compareCases.includes(
-																product.id
-															)
+															compareCases.includes(product.id)
 																? 'bi-file-x'
 																: 'bi-files'
 														"
 													></i>
 													{{
-														compareCases.includes(
-															product.id
-														)
+														compareCases.includes(product.id)
 															? "取消"
 															: "加入"
 													}}比較
@@ -479,16 +386,10 @@
 							<div class="case-detail mt-3 d-block d-lg-none">
 								<div class="case-detail-section" id="info">
 									<div class="case-detail-header">
-										<h4
-											class="common-section-header__title"
-										>
-											基本資料
-										</h4>
+										<h4 class="common-section-header__title">基本資料</h4>
 									</div>
 									<div class="case-detail-content">
-										<table
-											class="table border info-table info-table--detail"
-										>
+										<table class="table border info-table info-table--detail">
 											<tbody>
 												<tr>
 													<td>類型</td>
@@ -506,9 +407,7 @@
 												<tr>
 													<td>主建物</td>
 													<td>
-														{{
-															product.mainSquareFeet
-														}}
+														{{ product.mainSquareFeet }}
 														坪
 													</td>
 												</tr>
@@ -518,8 +417,7 @@
 														v-if="
 															product.squareFeet !==
 																product.mainSquareFeet &&
-															product.managementFee >
-																0
+															product.managementFee > 0
 														"
 													>
 														{{
@@ -542,24 +440,16 @@
 												<tr>
 													<td>格局</td>
 													<td>
-														{{
-															$format.patternFormat(
-																product.pattern
-															)
-														}}
+														{{ $format.patternFormat(product.pattern) }}
 													</td>
 												</tr>
 												<tr>
 													<td>樓層</td>
-													<td>
-														{{ product.floor }} 樓
-													</td>
+													<td>{{ product.floor }} 樓</td>
 												</tr>
 												<tr>
 													<td>朝向</td>
-													<td
-														v-if="product.direction"
-													>
+													<td v-if="product.direction">
 														{{ product.direction }}
 													</td>
 													<td v-else>--</td>
@@ -569,13 +459,10 @@
 													<td
 														v-if="
 															product.managementFee ||
-															product.managementFee >
-																0
+															product.managementFee > 0
 														"
 													>
-														{{
-															product.managementFee
-														}}
+														{{ product.managementFee }}
 														元/ 每月
 													</td>
 													<td v-else>--</td>
@@ -584,15 +471,9 @@
 													<td>車位</td>
 													<td v-if="product.parking">
 														{{ product.parking }}
-														<span
-															v-if="
-																product.parkingPrice >
-																0
-															"
+														<span v-if="product.parkingPrice > 0"
 															>(車位
-															{{
-																product.parkingPrice
-															}}萬)</span
+															{{ product.parkingPrice }}萬)</span
 														>
 													</td>
 													<td v-else>--</td>
@@ -603,11 +484,7 @@
 								</div>
 								<div class="case-detail-section" id="detail">
 									<div class="case-detail-header">
-										<h4
-											class="common-section-header__title"
-										>
-											物件特色
-										</h4>
+										<h4 class="common-section-header__title">物件特色</h4>
 									</div>
 									<div class="detail-content">
 										{{ product.content }}
@@ -619,9 +496,7 @@
 					<div class="row">
 						<div class="case-detail-section" id="near">
 							<div class="case-detail-header">
-								<h4 class="common-section-header__title">
-									周遭環境
-								</h4>
+								<h4 class="common-section-header__title">周遭環境</h4>
 							</div>
 							<div class="detail-content">
 								{{ product.content }}
@@ -634,15 +509,9 @@
 		<section class="case-related bg-light py-5">
 			<div class="container">
 				<div class="case-detail-header">
-					<h4 class="common-section-header__title bg-light">
-						為您推薦
-					</h4>
+					<h4 class="common-section-header__title bg-light">為您推薦</h4>
 				</div>
-				<CasesSlide
-					:category="category"
-					:cases="cases"
-					:id="id"
-				></CasesSlide>
+				<CasesSlide :category="category" :cases="cases" :id="id"></CasesSlide>
 			</div>
 		</section>
 	</div>
@@ -689,11 +558,7 @@ export default {
 			this.isLoading = true;
 			const { id } = this.$route.params;
 			this.$http
-				.get(
-					`${import.meta.env.VITE_URL}/api/${
-						import.meta.env.VITE_PATH
-					}/product/${id}`
-				)
+				.get(`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/product/${id}`)
 				.then((res) => {
 					// 將收到的data資料展賦予給case
 					this.product = res.data.product;
@@ -710,9 +575,7 @@ export default {
 				.get(`${import.meta.env.VITE_RANDOMUSER_URL}`)
 				.then((res) => {
 					this.fakeUser = res.data.results[0];
-					this.fakeUser.photo = this.getFakeUserPhoto(
-						this.fakeUser.gender
-					);
+					this.fakeUser.photo = this.getFakeUserPhoto(this.fakeUser.gender);
 				})
 				.catch((error) => {
 					this.$swal({
@@ -723,14 +586,10 @@ export default {
 		},
 		loadSotrageCase() {
 			if (localStorage.getItem("collection_case")) {
-				this.collectionCases = JSON.parse(
-					localStorage.getItem("collection_case")
-				);
+				this.collectionCases = JSON.parse(localStorage.getItem("collection_case"));
 			}
 			if (localStorage.getItem("compare_case")) {
-				this.compareCases = JSON.parse(
-					localStorage.getItem("compare_case")
-				);
+				this.compareCases = JSON.parse(localStorage.getItem("compare_case"));
 			}
 		},
 		getFakeUserPhoto(gender) {
@@ -742,9 +601,7 @@ export default {
 			return genderUrl;
 		},
 		validatePhone(value) {
-			return /^(09)[0-9]{8}$/.test(value)
-				? true
-				: "請輸入正確格式的手機號碼";
+			return /^(09)[0-9]{8}$/.test(value) ? true : "請輸入正確格式的手機號碼";
 		},
 	},
 	computed: {

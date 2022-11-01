@@ -4,9 +4,7 @@
 		<div class="row justify-content-center">
 			<div class="col-8">
 				<form id="form" class="form-signin" @submit.prevent="login">
-					<h1 class="h3 mb-3 font-weight-normal text-center">
-						請先登入
-					</h1>
+					<h1 class="h3 mb-3 font-weight-normal text-center">請先登入</h1>
 					<div class="form-floating mb-3">
 						<input
 							type="email"
@@ -30,15 +28,8 @@
 						/>
 						<label for="password">Password</label>
 					</div>
-					<button
-						class="btn btn-lg btn-primary w-100 mt-3"
-						type="submit"
-					>
-						登入
-					</button>
-					<p class="mt-5 mb-3 text-muted text-center">
-						&copy; 2021~∞ - 六角學院
-					</p>
+					<button class="btn btn-lg btn-primary w-100 mt-3" type="submit">登入</button>
+					<p class="mt-5 mb-3 text-muted text-center">&copy; 2021~∞ - 六角學院</p>
 				</form>
 			</div>
 		</div>
@@ -61,9 +52,7 @@ export default {
 				.post(`${import.meta.env.VITE_URL}/admin/signin`, formData)
 				.then((res) => {
 					const { token, expired } = res.data; // 將token與過期時間寫入cookie中
-					document.cookie = `user_token=${token};expires=${new Date(
-						expired
-					)}; path=/`;
+					document.cookie = `user_token=${token};expires=${new Date(expired)}; path=/`;
 					this.isLoading = false;
 					this.$router.push("/admin");
 				})

@@ -3,11 +3,7 @@
 		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<h3 class="mt-4 fw-bold">案件管理</h3>
 		<div class="text-end my-2">
-			<button
-				type="button"
-				class="btn btn-success"
-				@click="openModal(true)"
-			>
+			<button type="button" class="btn btn-success text-white" @click="openModal(true)">
 				<i class="bi bi-plus-square"></i> 建立新的案件
 			</button>
 		</div>
@@ -16,8 +12,7 @@
 				<tr>
 					<th width="5%">順序</th>
 					<th width="10%">案件圖片</th>
-					<th width="10%">案件分類</th>
-					<th width="45%" class="text-start">案件名稱</th>
+					<th width="55%" class="text-start">案件名稱</th>
 					<th width="5%" class="text-end">原價</th>
 					<th width="5%" class="text-end">售價</th>
 					<th width="5%" class="text-end">車位售價</th>
@@ -26,22 +21,28 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr
-					v-for="(item, index) in cases"
-					:key="item.id"
-					style="vertical-align: middle"
-				>
+				<tr v-for="(item, index) in cases" :key="item.id" style="vertical-align: middle">
 					<td>{{ index + 1 }}</td>
 					<td>
 						<img class="img-fluid" :src="item.imageUrl" />
 					</td>
-					<td>{{ item.category }}</td>
 					<td class="text-start">
-						{{ item.title }}
+						<span
+							class="badge tag__element me-1"
+							:class="{
+								'tag__element--main': item.category === '華廈',
+								'tag__element--sec': item.category === '公寓',
+								'tag__element--third': item.category === '別墅',
+								'tag__element--fourth': item.category === '大樓',
+							}"
+						>
+							{{ item.category }}</span
+						>
+						<RouterLink :to="`/case/${item.id}`" target="_blank">{{
+							item.title
+						}}</RouterLink>
 					</td>
-					<td class="text-end">
-						{{ $format.currencyFormat(item.origin_price) }}萬
-					</td>
+					<td class="text-end">{{ $format.currencyFormat(item.origin_price) }}萬</td>
 					<td
 						class="text-end"
 						:class="{
@@ -51,15 +52,11 @@
 						{{ $format.currencyFormat(item.price) }}萬
 					</td>
 					<td class="text-end">
-						<span v-if="item.parkingPrice > 0"
-							>{{ item.parkingPrice }}萬</span
-						>
+						<span v-if="item.parkingPrice > 0">{{ item.parkingPrice }}萬</span>
 						<span v-else>--</span>
 					</td>
 					<td>
-						<span class="text-success" v-if="item.is_enabled === 1"
-							>顯示</span
-						>
+						<span class="text-success" v-if="item.is_enabled === 1">顯示</span>
 						<span v-else class="text-danger">不顯示</span>
 					</td>
 					<td>
@@ -89,17 +86,15 @@
 	</div>
 	<!-- 新增/更新 -->
 	<CaseEditModal
-		:product="tempCase"
+		:product="targetCase"
 		:isNew="isNew"
 		@update-product="updateCase"
 		ref="caseModal"
 	></CaseEditModal>
 	<!-- 刪除 -->
-	<DelConfirmModal
-		:item="tempCase"
-		@del-item="deleteCase"
-		ref="delModal"
-	></DelConfirmModal>
+	<DelConfirmModal :item="targetCase" @del-item="deleteCase" ref="delModal">
+		<template #modal-text> 案件名稱：{{ targetCase.title }} </template>
+	</DelConfirmModal>
 </template>
 <script>
 import Pagination from "@/components/Pagination.vue";
@@ -115,16 +110,17 @@ export default {
 	data() {
 		return {
 			isLoading: false,
-			tempCase: { imagesUrl: [], category: "", tags: [] },
+			targetCase: { imagesUrl: [], category: "", tags: [] },
 			cases: [],
 			pagination: {},
 			isNew: false,
+			currentPage: 1,
 		};
 	},
 	methods: {
 		openModal(isNew, item) {
 			if (isNew) {
-				this.tempCase = {
+				this.targetCase = {
 					imagesUrl: [],
 					category: "",
 					unit: "坪",
@@ -133,27 +129,25 @@ export default {
 				};
 				this.isNew = true;
 			} else {
-				this.tempCase = { ...item };
+				this.targetCase = { ...item };
 				this.isNew = false;
 			}
 			this.$refs.caseModal.openModal();
 		},
 		updateCase(item) {
-			this.tempCase = item;
+			this.targetCase = item;
 			this.isLoading = true;
-			let api = `${import.meta.env.VITE_URL}/api/${
-				import.meta.env.VITE_PATH
-			}/admin/product`;
+			let api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/product`;
 			let httpMethod = "post";
 			let statusText = "新增案件";
 			if (!this.isNew) {
-				api = `${import.meta.env.VITE_URL}/api/${
-					import.meta.env.VITE_PATH
-				}/admin/product/${this.tempCase.id}`;
+				api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/product/${
+					this.targetCase.id
+				}`;
 				httpMethod = "put";
 				statusText = "更新案件";
 			}
-			this.$http[httpMethod](api, { data: this.tempCase })
+			this.$http[httpMethod](api, { data: this.targetCase })
 				.then((res) => {
 					this.isLoading = false;
 					this.$httpMessageState(res, statusText);
@@ -167,6 +161,8 @@ export default {
 		},
 		getCasesList(page = 1) {
 			this.isLoading = true;
+			this.currentPage = page;
+
 			this.$http
 				.get(
 					`${import.meta.env.VITE_URL}/api/${
@@ -186,16 +182,16 @@ export default {
 				});
 		},
 		openDelModal(item) {
-			this.tempCase = { ...item };
+			this.targetCase = { ...item };
 			this.$refs.delModal.openModal();
 		},
 		deleteCase() {
 			this.isLoading = true;
 			this.$http
 				.delete(
-					`${import.meta.env.VITE_URL}/api/${
-						import.meta.env.VITE_PATH
-					}/admin/product/${this.tempCase.id}`
+					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/product/${
+						this.targetCase.id
+					}`
 				)
 				.then((res) => {
 					this.isLoading = false;

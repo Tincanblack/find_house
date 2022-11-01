@@ -48,9 +48,7 @@ export default {
 			formData.append("file-to-upload", uploadedFile);
 			this.$http
 				.post(
-					`${import.meta.env.VITE_URL}/api/${
-						import.meta.env.VITE_PATH
-					}/admin/upload`,
+					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/upload`,
 					formData,
 					{
 						headers: {
@@ -61,19 +59,11 @@ export default {
 				.then((res) => {
 					if (res.data.success) {
 						this.$refs.fileInput.value = "";
-						this.$httpMessageState(
-							res,
-							"圖片上傳結果",
-							res.data.message
-						);
+						this.$httpMessageState(res, "圖片上傳結果", res.data.message);
 						this.uploadImagesUrl.push(res.data.imageUrl);
 					} else {
 						this.$refs.fileInput.value = "";
-						this.$httpMessageState(
-							response,
-							"圖片上傳結果",
-							response.data.message
-						);
+						this.$httpMessageState(response, "圖片上傳結果", response.data.message);
 						console.log(response);
 					}
 				})

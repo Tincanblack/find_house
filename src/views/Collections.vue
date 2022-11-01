@@ -1,9 +1,7 @@
 <template>
 	<div class="site-content">
 		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
-		<section
-			class="collection-banner d-flex align-items-center justify-content-center"
-		>
+		<section class="collection-banner d-flex align-items-center justify-content-center">
 			<h2 class="collection-banner__title">心之所向，儀之所往</h2>
 		</section>
 		<section class="collection pt-5 pb-3">
@@ -12,9 +10,7 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="section-header mb-3">
-								<h3 class="common-section-header__title">
-									收藏案件
-								</h3>
+								<h3 class="common-section-header__title">收藏案件</h3>
 								<div class="button-column bg-white">
 									<button
 										v-if="collectionProducts.length > 0"
@@ -44,10 +40,7 @@
 							},
 						}"
 					>
-						<SwiperSlide
-							v-for="item in collectionProducts"
-							:key="item.id"
-						>
+						<SwiperSlide v-for="item in collectionProducts" :key="item.id">
 							<CaseCard
 								:item="item"
 								:compareCases="compareCases"
@@ -58,9 +51,7 @@
 					</Swiper>
 				</template>
 				<template v-else>
-					<div
-						class="row align-items-center justify-content-center text-center"
-					>
+					<div class="row align-items-center justify-content-center text-center">
 						<div class="col">
 							<h3 class="collection-content__title">
 								還沒看到值得收藏的物件嗎？快去找找吧
@@ -94,9 +85,7 @@
 									>案件就能「案件比較」</span
 								>
 							</h3>
-							<h3 v-else class="common-section-header__title">
-								案件比較的結果如下
-							</h3>
+							<h3 v-else class="common-section-header__title">案件比較的結果如下</h3>
 							<div class="button-column bg-light">
 								<button
 									v-if="compareCaseProducts.length !== 0"
@@ -115,9 +104,7 @@
 					<div
 						class="mx-0 mx-md-auto"
 						:class="
-							compareCaseProducts.length === 2
-								? 'col-12 col-md-8'
-								: 'col-12 col-md-5'
+							compareCaseProducts.length === 2 ? 'col-12 col-md-8' : 'col-12 col-md-5'
 						"
 					>
 						<div class="table-responsive">
@@ -133,26 +120,16 @@
 											:key="item.id"
 										>
 											<td>
-												<div
-													class="d-flex justify-content-between"
-												>
-													<div
-														class="compare-table__title"
-													>
+												<div class="d-flex justify-content-between">
+													<div class="compare-table__title">
 														{{ item.title }}
 													</div>
 													<button
 														type="button"
 														class="compare-table__button btn btn-danger btn-sm"
-														@click="
-															handleCompareCase(
-																item.id
-															)
-														"
+														@click="handleCompareCase(item.id)"
 													>
-														<i
-															class="bi bi-x-lg"
-														></i>
+														<i class="bi bi-x-lg"></i>
 													</button>
 												</div>
 											</td>
@@ -169,9 +146,7 @@
 													class="compare-table__link"
 													:to="`/case/${item.id}`"
 												>
-													<div
-														class="compare-table-img"
-													>
+													<div class="compare-table-img">
 														<img
 															class="img-fluid"
 															:src="item.imageUrl"
@@ -189,14 +164,8 @@
 											:key="item.id"
 										>
 											<td>
-												<span
-													class="fs-3 fw-bold text-danger"
-												>
-													{{
-														$format.currencyFormat(
-															item.price
-														)
-													}}</span
+												<span class="fs-3 fw-bold text-danger">
+													{{ $format.currencyFormat(item.price) }}</span
 												>
 												萬
 											</td>
@@ -243,12 +212,7 @@
 											v-for="item in compareCaseProducts"
 											:key="item.id"
 										>
-											<td
-												v-if="
-													item.squareFeet !==
-													item.mainSquareFeet
-												"
-											>
+											<td v-if="item.squareFeet !== item.mainSquareFeet">
 												{{
 													$format.calToPercent(
 														item.squareFeet,
@@ -279,11 +243,7 @@
 											:key="item.id"
 										>
 											<td>
-												{{
-													$format.patternFormat(
-														item.pattern
-													)
-												}}
+												{{ $format.patternFormat(item.pattern) }}
 											</td>
 										</template>
 									</tr>
@@ -314,12 +274,7 @@
 											v-for="item in compareCaseProducts"
 											:key="item.id"
 										>
-											<td
-												v-if="
-													item.managementFee ||
-													item.managementFee > 0
-												"
-											>
+											<td v-if="item.managementFee || item.managementFee > 0">
 												{{ item.managementFee }}
 												元/ 每月
 											</td>
@@ -334,12 +289,8 @@
 										>
 											<td v-if="item.parking">
 												{{ item.parking }}
-												<span
-													v-if="item.parkingPrice > 0"
-													>(車位
-													{{
-														item.parkingPrice
-													}}萬)</span
+												<span v-if="item.parkingPrice > 0"
+													>(車位 {{ item.parkingPrice }}萬)</span
 												>
 											</td>
 											<td v-else>--</td>
@@ -383,9 +334,7 @@ export default {
 
 		getCaseList() {
 			this.isLoading = true;
-			let url = `${import.meta.env.VITE_URL}/api/${
-				import.meta.env.VITE_PATH
-			}/products/all`;
+			let url = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/products/all`;
 			this.$http
 				.get(url)
 				.then((res) => {
