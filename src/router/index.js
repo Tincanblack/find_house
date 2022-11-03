@@ -13,6 +13,10 @@ const router = createRouter({
 			component: () => import("@/views/admin/AdminView.vue"),
 			children: [
 				{
+					path: "dashboard",
+					component: () => import("@/views/admin/Dashboard.vue"),
+				},
+				{
 					path: "cases",
 					component: () => import("@/views/admin/CasesManage.vue"),
 				},
@@ -70,12 +74,12 @@ const router = createRouter({
 					name: "reserve",
 					component: () => import("@/views/SearchReserve.vue"),
 				},
+				// 404頁面
+				{
+					path: "/:pathMatch(.*)*",
+					component: () => import("@/views/NotFound.vue"),
+				},
 			],
-		},
-		// 404頁面
-		{
-			path: "/:pathMatch(.*)*",
-			component: () => import("@/views/NotFound.vue"),
 		},
 	],
 	linkActiveClass: "active",

@@ -1200,7 +1200,7 @@ body {
 	// case-related
 	&-related {
 		.swiper {
-			padding-bottom: .75rem;
+			padding-bottom: 0.75rem;
 		}
 	}
 }
@@ -1460,5 +1460,40 @@ body {
 		top: 50%;
 		transform: translate(0, -50%);
 		z-index: 2;
+	}
+}
+
+// reserve
+.search {
+	&-reserve {
+		background-image: url("/src/assets/images/reserve_bg.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+		background-color: rgba(white, 0.5);
+		background-blend-mode: overlay;
+		min-height: 100vh;
+		.reserve {
+			&-form {
+				position: relative;
+				padding: 3rem 1rem 3rem;
+				background: white;
+				&__icon {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					position: absolute;
+					width: 75px;
+					height: 75px;
+					border: 1px solid map-get($map: $grays, $key: "100");
+					border-radius: 50%;
+					background: white;
+					top: -35px;
+					left: 50%;
+					transform: translate(-50%, 0);
+					font-size: 2rem;
+				}
+			}
+		}
 	}
 }

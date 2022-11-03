@@ -23,6 +23,9 @@
 						>
 					</li>
 					<li class="nav-item">
+						<RouterLink class="nav-link" to="/reserve">查詢預約</RouterLink>
+					</li>
+					<li class="nav-item">
 						<RouterLink class="nav-link" to="/collections" @click="closeCollapse"
 							>收藏名單
 							<span
@@ -32,9 +35,6 @@
 								}}<span class="visually-hidden">unread messages</span>
 							</span>
 						</RouterLink>
-					</li>
-					<li class="nav-item">
-						<RouterLink class="nav-link" to="/reserve">查詢預約</RouterLink>
 					</li>
 				</ul>
 			</div>
