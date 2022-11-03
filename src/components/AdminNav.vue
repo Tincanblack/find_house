@@ -1,11 +1,11 @@
 <template lang="">
 	<div
-		class="sidebar d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
+		class="sidebar d-flex flex-column flex-shrink-0 p-3 text-white bg-dark shadow-sm"
 		:class="{ isOpen: sideBarOpen }"
 	>
 		<header class="position-relative">
 			<RouterLink
-				to="/admin"
+				to="/admin/dashboard"
 				class="d-flex align-items-center mb-md-0 me-md-auto text-white text-decoration-none"
 			>
 				<img

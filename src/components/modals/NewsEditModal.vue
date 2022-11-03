@@ -152,6 +152,7 @@
 						@click="$emit('update-news', tempNews)"
 					>
 						確認
+						<span v-show="btnLoading" class="spinner-border spinner-border-sm"></span>
 					</button>
 				</div>
 			</div>
@@ -188,6 +189,10 @@ export default {
 			type: Boolean,
 			default: false,
 		},
+		btnLoading: {
+			type: Boolean,
+			default: false,
+		},
 	},
 	data() {
 		return {
@@ -215,7 +220,6 @@ export default {
 	emits: ["update-news"],
 	mixins: [modalMixin],
 	inject: ["emitter"],
-	methods: {},
 	watch: {
 		news() {
 			this.tempNews = this.news;

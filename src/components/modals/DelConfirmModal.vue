@@ -32,6 +32,7 @@
 					</button>
 					<button type="button" class="btn btn-danger" @click="$emit('del-item')">
 						確認刪除
+						<span v-show="btnLoading" class="spinner-border spinner-border-sm"></span>
 					</button>
 				</div>
 			</div>
@@ -48,6 +49,10 @@ export default {
 			default() {
 				return {};
 			},
+		},
+		btnLoading: {
+			type: Boolean,
+			default: false,
 		},
 	},
 	data() {

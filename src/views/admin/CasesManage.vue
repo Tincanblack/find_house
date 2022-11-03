@@ -88,16 +88,22 @@
 	<CaseEditModal
 		:product="targetCase"
 		:isNew="isNew"
+		:btnLoading="submitBtnLoading"
 		@update-product="updateCase"
 		ref="caseModal"
 	></CaseEditModal>
 	<!-- 刪除 -->
-	<DelConfirmModal :item="targetCase" @del-item="deleteCase" ref="delModal">
+	<DelConfirmModal
+		:item="targetCase"
+		@del-item="deleteCase"
+		:btnLoading="submitBtnLoading"
+		ref="delModal"
+	>
 		<template #modal-text> 案件名稱：{{ targetCase.title }} </template>
 	</DelConfirmModal>
 </template>
 <script>
-import Pagination from "@/components/Pagination.vue";
+import Pagination from "@/components/widgets/Pagination.vue";
 import CaseEditModal from "@/components/modals/CaseEditModal.vue";
 import DelConfirmModal from "@/components/modals/DelConfirmModal.vue";
 
@@ -110,6 +116,7 @@ export default {
 	data() {
 		return {
 			isLoading: false,
+			submitBtnLoading: false,
 			targetCase: { imagesUrl: [], category: "", tags: [] },
 			cases: [],
 			pagination: {},
@@ -137,6 +144,8 @@ export default {
 		updateCase(item) {
 			this.targetCase = item;
 			this.isLoading = true;
+			this.submitBtnLoading = true;
+
 			let api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/product`;
 			let httpMethod = "post";
 			let statusText = "新增案件";
@@ -150,12 +159,16 @@ export default {
 			this.$http[httpMethod](api, { data: this.targetCase })
 				.then((res) => {
 					this.isLoading = false;
+					this.submitBtnLoading = false;
+
 					this.$httpMessageState(res, statusText);
 					this.$refs.caseModal.closeModal();
 					this.getCasesList(this.currentPage);
 				})
 				.catch((error) => {
 					this.isLoading = false;
+					this.submitBtnLoading = false;
+
 					this.$httpMessageState(error.response, statusText);
 				});
 		},
@@ -187,6 +200,8 @@ export default {
 		},
 		deleteCase() {
 			this.isLoading = true;
+			this.submitBtnLoading = true;
+
 			this.$http
 				.delete(
 					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/product/${
@@ -195,12 +210,16 @@ export default {
 				)
 				.then((res) => {
 					this.isLoading = false;
+					this.submitBtnLoading = false;
+
 					this.$httpMessageState(res, "刪除案件");
 					this.$refs.delModal.closeModal();
 					this.getCasesList(this.currentPage);
 				})
 				.catch((error) => {
 					this.isLoading = false;
+					this.submitBtnLoading = false;
+
 					this.$httpMessageState(error.response, "刪除案件");
 				});
 		},

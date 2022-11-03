@@ -36,15 +36,19 @@ main {
 			align-items: center;
 			color: white;
 			&.active {
-				color: $body-color;
-				background: white;
+				color: white;
+				background: map-get($map: $theme-site-colors, $key: "main");
 			}
 			&:hover {
 				opacity: 0.8;
-				background: rgba(white, 0.8);
+				color: white;
+				background: rgba(
+					map-get($map: $theme-site-colors, $key: "main"),
+					0.8
+				);
 				.nav-text,
 				.nav-icon {
-					color: $body-color;
+					color: white;
 				}
 				.nav-tooltip {
 					opacity: 1;

@@ -75,16 +75,22 @@
 	<NewsEditModal
 		:news="tempNews"
 		:isNew="isNew"
+		:btnLoading="submitBtnLoading"
 		@update-news="updateNews"
 		ref="newsModal"
 	></NewsEditModal>
 	<!-- 刪除 -->
-	<DelConfirmModal :item="tempNews" @del-item="deleteNews" ref="delModal">
+	<DelConfirmModal
+		:item="tempNews"
+		:btnLoading="submitBtnLoading"
+		@del-item="deleteNews"
+		ref="delModal"
+	>
 		<template #modal-text> 房訊名稱：{{ tempNews.title }} </template>
 	</DelConfirmModal>
 </template>
 <script>
-import Pagination from "@/components/Pagination.vue";
+import Pagination from "@/components/widgets/Pagination.vue";
 import NewsEditModal from "@/components/modals/NewsEditModal.vue";
 import DelConfirmModal from "@/components/modals/DelConfirmModal.vue";
 
@@ -97,6 +103,7 @@ export default {
 	data() {
 		return {
 			isLoading: false,
+			submitBtnLoading: false,
 			isNew: false,
 			tempNews: {},
 			news: [],
@@ -120,6 +127,8 @@ export default {
 		updateNews(item) {
 			this.tempNews = item;
 			this.isLoading = true;
+			this.submitBtnLoading = true;
+
 			let api = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/article`;
 			let httpMethod = "post";
 			let statusText = "新增房訊";
@@ -133,12 +142,16 @@ export default {
 			this.$http[httpMethod](api, { data: this.tempNews })
 				.then((response) => {
 					this.isLoading = false;
+					this.submitBtnLoading = false;
+
 					this.$httpMessageState(response, statusText);
 					this.$refs.newsModal.closeModal();
 					this.getNewsList(this.currentPage);
 				})
 				.catch((error) => {
 					this.isLoading = false;
+					this.submitBtnLoading = false;
+
 					this.$httpMessageState(error.response, statusText);
 				});
 		},
@@ -187,6 +200,8 @@ export default {
 		},
 		deleteNews() {
 			this.isLoading = true;
+			this.submitBtnLoading = true;
+
 			this.$http
 				.delete(
 					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/article/${
@@ -195,12 +210,16 @@ export default {
 				)
 				.then((res) => {
 					this.isLoading = false;
+					this.submitBtnLoading = false;
+
 					this.$httpMessageState(res, "刪除房訊");
 					this.$refs.delModal.closeModal();
 					this.getNewsList(this.currentPage);
 				})
 				.catch((error) => {
 					this.isLoading = false;
+					this.submitBtnLoading = false;
+
 					this.$httpMessageState(error.response, "刪除房訊");
 				});
 		},
