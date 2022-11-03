@@ -5,7 +5,7 @@
 	>
 		<header class="position-relative">
 			<RouterLink
-				to="/admin/dashboard"
+				to="/admin/"
 				class="d-flex align-items-center mb-md-0 me-md-auto text-white text-decoration-none"
 			>
 				<img

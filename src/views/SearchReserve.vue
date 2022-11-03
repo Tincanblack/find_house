@@ -1,5 +1,6 @@
 <template>
 	<div class="site-content">
+		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<section class="search-reserve d-flex align-items-center justify-content-center">
 			<div class="search-reserve-form w-100">
 				<div class="container">
@@ -157,6 +158,12 @@ export default {
 					this.isLoading = false;
 				});
 		},
+	},
+	mounted() {
+		this.isLoading = true;
+		setTimeout(() => {
+			this.isLoading = false;
+		}, 1000);
 	},
 };
 </script>

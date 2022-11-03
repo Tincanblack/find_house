@@ -29,6 +29,7 @@ export function calToPercent(originPrice = 0, currentPrice = 0, type) {
 			result = result.toFixed(1) + "%";
 			break;
 		default:
+			result = result.toFixed(1);
 			break;
 	}
 	return result;

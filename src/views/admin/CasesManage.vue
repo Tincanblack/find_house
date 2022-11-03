@@ -1,28 +1,33 @@
 <template>
-	<div class="main-content container-fluid px-4">
+	<div class="main-content container-fluid px-4 bg-light">
 		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<h3 class="mt-4 fw-bold">案件管理</h3>
+		<AdminBreadcrumb></AdminBreadcrumb>
 		<div class="text-end my-2">
-			<button type="button" class="btn btn-success text-white" @click="openModal(true)">
+			<button
+				type="button"
+				class="btn btn-success text-white shadow-sm"
+				@click="openModal(true)"
+			>
 				<i class="bi bi-plus-square"></i> 建立新的案件
 			</button>
 		</div>
-		<table class="table table-hover table-striped mt-4 text-center">
+		<table class="table table-hover table-striped table-bordered mt-4 text-center shadow-sm">
 			<thead class="table-dark">
 				<tr>
 					<th width="5%">順序</th>
 					<th width="10%">案件圖片</th>
 					<th width="55%" class="text-start">案件名稱</th>
-					<th width="5%" class="text-end">原價</th>
-					<th width="5%" class="text-end">售價</th>
-					<th width="5%" class="text-end">車位售價</th>
+					<th width="5%">原價</th>
+					<th width="5%">售價</th>
+					<th width="5%">車位售價</th>
 					<th width="5%">是否顯示</th>
 					<th width="10%">操作</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="(item, index) in cases" :key="item.id" style="vertical-align: middle">
-					<td>{{ index + 1 }}</td>
+				<tr v-for="item in cases" :key="item.id" style="vertical-align: middle">
+					<td>{{ item.num }}</td>
 					<td>
 						<img class="img-fluid" :src="item.imageUrl" />
 					</td>
@@ -42,16 +47,15 @@
 							item.title
 						}}</RouterLink>
 					</td>
-					<td class="text-end">{{ $format.currencyFormat(item.origin_price) }}萬</td>
+					<td>{{ $format.currencyFormat(item.origin_price) }}萬</td>
 					<td
-						class="text-end"
 						:class="{
 							'text-danger': item.origin_price > item.price,
 						}"
 					>
 						{{ $format.currencyFormat(item.price) }}萬
 					</td>
-					<td class="text-end">
+					<td>
 						<span v-if="item.parkingPrice > 0">{{ item.parkingPrice }}萬</span>
 						<span v-else>--</span>
 					</td>
@@ -103,15 +107,17 @@
 	</DelConfirmModal>
 </template>
 <script>
+import AdminBreadcrumb from "@/components/AdminBreadcrumb.vue";
 import Pagination from "@/components/widgets/Pagination.vue";
 import CaseEditModal from "@/components/modals/CaseEditModal.vue";
 import DelConfirmModal from "@/components/modals/DelConfirmModal.vue";
 
 export default {
 	components: {
+		AdminBreadcrumb,
+		Pagination,
 		CaseEditModal,
 		DelConfirmModal,
-		Pagination,
 	},
 	data() {
 		return {
@@ -142,7 +148,7 @@ export default {
 			this.$refs.caseModal.openModal();
 		},
 		updateCase(item) {
-			this.targetCase = item;
+			this.targetCase = { ...item };
 			this.isLoading = true;
 			this.submitBtnLoading = true;
 

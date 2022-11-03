@@ -1,18 +1,19 @@
 <template>
-	<div class="main-content container-fluid px-4">
+	<div class="main-content container-fluid px-4 bg-light">
 		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<h3 class="mt-4 fw-bold">預約表單管理</h3>
+		<AdminBreadcrumb></AdminBreadcrumb>
 		<div class="text-end my-2">
 			<button
 				type="button"
-				class="btn btn-danger"
+				class="btn btn-danger shadow-sm"
 				:class="{ disabled: reserves.length === 0 }"
 				@click="delAllOrders"
 			>
 				<i class="bi bi-x-lg"></i> 刪除所有案件
 			</button>
 		</div>
-		<table class="table table-hover table-striped mt-4 text-center">
+		<table class="table table-hover table-striped table-bordered mt-4 text-center shadow-sm">
 			<thead class="table-dark">
 				<tr>
 					<th width="5%">順序</th>
@@ -47,6 +48,8 @@
 					</td>
 					<td>
 						{{ item.user.name }}
+						<span class="fs-6" v-if="item.user.gender == 1">先生</span>
+						<span class="fs-6" v-else>小姐</span>
 					</td>
 					<td>
 						{{ item.user.tel }}
@@ -137,12 +140,14 @@
 	</DelConfirmModal>
 </template>
 <script>
+import AdminBreadcrumb from "@/components/AdminBreadcrumb.vue";
 import Pagination from "@/components/widgets/Pagination.vue";
 import ReserveEditModal from "@/components/modals/ReserveEditModal.vue";
 import DelConfirmModal from "@/components/modals/DelConfirmModal.vue";
 
 export default {
 	components: {
+		AdminBreadcrumb,
 		Pagination,
 		ReserveEditModal,
 		DelConfirmModal,

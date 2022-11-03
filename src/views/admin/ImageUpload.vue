@@ -63,8 +63,8 @@ export default {
 						this.uploadImagesUrl.push(res.data.imageUrl);
 					} else {
 						this.$refs.fileInput.value = "";
-						this.$httpMessageState(response, "圖片上傳結果", response.data.message);
-						console.log(response);
+						this.$httpMessageState(res, "圖片上傳結果", res.data.message);
+						console.log(res);
 					}
 				})
 				.catch((error) => {

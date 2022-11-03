@@ -13,19 +13,23 @@ const router = createRouter({
 			component: () => import("@/views/admin/AdminView.vue"),
 			children: [
 				{
-					path: "dashboard",
+					path: "",
+					name: "dashboard",
 					component: () => import("@/views/admin/Dashboard.vue"),
 				},
 				{
 					path: "cases",
+					name: "casesManage",
 					component: () => import("@/views/admin/CasesManage.vue"),
 				},
 				{
 					path: "news",
+					name: "newsManage",
 					component: () => import("@/views/admin/NewsManage.vue"),
 				},
 				{
 					path: "reserves",
+					name: "reservesManage",
 					component: () => import("@/views/admin/ReservesManage.vue"),
 				},
 				{

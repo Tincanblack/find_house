@@ -4,11 +4,6 @@ import { createPinia } from "pinia";
 import "bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-// fontawsome
-import "@fortawesome/fontawesome-free";
-import "@fortawesome/fontawesome-free/css/all.css";
-import "@fortawesome/fontawesome-free/js/all.js";
-
 // axios
 import axios from "axios";
 import VueAxios from "vue-axios";
@@ -25,8 +20,12 @@ import AllRules from "@vee-validate/rules";
 import { localize, setLocale } from "@vee-validate/i18n";
 import zhTW from "@vee-validate/i18n/dist/locale/zh_TW.json";
 
+// sweetaleret2
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+
+// moment
+import moment from "moment";
 
 // user
 import {
@@ -55,6 +54,10 @@ setLocale("zh_TW");
 
 const app = createApp(App);
 const pinia = createPinia();
+
+app.config.globalProperties.$moment = {
+	moment,
+};
 
 app.config.globalProperties.$format = {
 	currencyFormat,

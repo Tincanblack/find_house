@@ -1,13 +1,18 @@
 <template>
-	<div class="main-content container-fluid px-4">
+	<div class="main-content container-fluid px-4 bg-light">
 		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<h3 class="mt-4 fw-bold">房訊管理</h3>
+		<AdminBreadcrumb></AdminBreadcrumb>
 		<div class="text-end my-2">
-			<button type="button" class="btn btn-success text-white" @click="openModal(true)">
+			<button
+				type="button"
+				class="btn btn-success text-white shadow-sm"
+				@click="openModal(true)"
+			>
 				<i class="bi bi-plus-square"></i> 新增房訊
 			</button>
 		</div>
-		<table class="table table-hover table-striped mt-4 text-center">
+		<table class="table table-hover table-striped table-bordered mt-4 text-center shadow-sm">
 			<thead class="table-dark">
 				<tr>
 					<th width="5%">順序</th>
@@ -90,12 +95,14 @@
 	</DelConfirmModal>
 </template>
 <script>
+import AdminBreadcrumb from "@/components/AdminBreadcrumb.vue";
 import Pagination from "@/components/widgets/Pagination.vue";
 import NewsEditModal from "@/components/modals/NewsEditModal.vue";
 import DelConfirmModal from "@/components/modals/DelConfirmModal.vue";
 
 export default {
 	components: {
+		AdminBreadcrumb,
 		NewsEditModal,
 		DelConfirmModal,
 		Pagination,
@@ -125,7 +132,7 @@ export default {
 			this.$refs.newsModal.openModal();
 		},
 		updateNews(item) {
-			this.tempNews = item;
+			this.tempNews = { ...item };
 			this.isLoading = true;
 			this.submitBtnLoading = true;
 
@@ -195,7 +202,7 @@ export default {
 				});
 		},
 		openDelModal(item) {
-			this.tempNews = item;
+			this.tempNews = { ...item };
 			this.$refs.delModal.openModal();
 		},
 		deleteNews() {
