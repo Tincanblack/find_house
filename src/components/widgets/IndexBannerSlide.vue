@@ -11,26 +11,8 @@
 			pauseOnMouseEnter: true,
 		}"
 	>
-		<SwiperSlide
-			><img
-				class="img-fluid"
-				src="https://res.sinyi.com.tw/a_d_sense/index_buy_20210825133411.jpg"
-				alt=""
-			/>
-		</SwiperSlide>
-		<SwiperSlide
-			><img
-				class="img-fluid"
-				src="https://res.sinyi.com.tw/a_d_sense/index_buy_20210825134712.jpg"
-				alt=""
-			/>
-		</SwiperSlide>
-		<SwiperSlide
-			><img
-				class="img-fluid"
-				src="https://res.sinyi.com.tw/a_d_sense/index_buy_20210825133411.jpg"
-				alt=""
-			/>
+		<SwiperSlide v-for="(banner, index) in banners" :key="index"
+			><img class="img-fluid" :src="banner" alt="" />
 		</SwiperSlide>
 	</Swiper>
 </template>
@@ -45,6 +27,11 @@ export default {
 	data() {
 		return {
 			swiper: { modules: [EffectFade, Autoplay] },
+			banners: [
+				"https://res.sinyi.com.tw/a_d_sense/index_buy_20210825133411.jpg",
+				"https://res.sinyi.com.tw/a_d_sense/index_buy_20210825134712.jpg",
+				"https://res.sinyi.com.tw/a_d_sense/index_buy_20210825133411.jpg",
+			],
 		};
 	},
 };

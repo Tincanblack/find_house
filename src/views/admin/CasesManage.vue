@@ -107,7 +107,7 @@
 	</DelConfirmModal>
 </template>
 <script>
-import AdminBreadcrumb from "@/components/AdminBreadcrumb.vue";
+import AdminBreadcrumb from "@/components/admin/AdminBreadcrumb.vue";
 import Pagination from "@/components/widgets/Pagination.vue";
 import CaseEditModal from "@/components/modals/CaseEditModal.vue";
 import DelConfirmModal from "@/components/modals/DelConfirmModal.vue";

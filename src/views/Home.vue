@@ -154,7 +154,7 @@
 	</div>
 </template>
 <script>
-import IndexBannerSlide from "@/components/IndexBannerSlide.vue";
+import IndexBannerSlide from "@/components/widgets/IndexBannerSlide.vue";
 import CaseCard from "@/components/widgets/CaseCardLayout.vue";
 
 export default {
