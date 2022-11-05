@@ -130,65 +130,56 @@
 												<div class="col-3">
 													<label
 														for="contactPhone"
-														class="form-label mb-0 fw-bold"
-														>電話
+														class="form-label fw-bold"
+														>性別
 													</label>
 												</div>
 												<div class="col-9">
-													<input
-														type="text"
-														class="form-control"
-														id="contactPhone"
-														v-model="targetItem.user.tel"
-													/>
+													<div class="form-check form-check-inline">
+														<input
+															type="radio"
+															class="form-check-input"
+															id="male"
+															v-model="targetItem.user.gender"
+															value="1"
+															name="性別"
+															rules="required"
+														/>
+														<label class="form-check-label" for="male"
+															>先生</label
+														>
+													</div>
+													<div class="form-check form-check-inline">
+														<input
+															type="radio"
+															class="form-check-input"
+															id="female"
+															v-model="targetItem.user.gender"
+															value="0"
+															name="性別"
+															rules="required"
+														/>
+														<label class="form-check-label" for="female"
+															>小姐</label
+														>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 									<div class="row gx-3">
 										<div class="mb-3 col-lg-6">
-											<div class="row align-items-center">
-												<div class="col-3">
-													<label
-														for="contactEmail"
-														class="form-label mb-0 fw-bold"
-														>電子信箱
-													</label>
-												</div>
-												<div class="col-9">
-													<input
-														type="text"
-														class="form-control"
-														id="contactEmail"
-														disabled
-														v-model="targetItem.user.email"
-													/>
-												</div>
-											</div>
+											<label for="contactPhone" class="form-label fw-bold"
+												>電話
+											</label>
+											<input
+												type="text"
+												class="form-control"
+												id="contactPhone"
+												v-model="targetItem.user.tel"
+											/>
 										</div>
 										<div class="mb-3 col-lg-6">
-											<div class="row align-items-center">
-												<div class="col-3">
-													<label
-														for="contactaddress"
-														class="form-label mb-0 fw-bold"
-														>地址
-													</label>
-												</div>
-												<div class="col-9">
-													<input
-														type="text"
-														class="form-control"
-														id="contactaddress"
-														disabled
-														v-model="targetItem.user.address"
-													/>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="mb-3">
 											<label for="freeTime" class="form-label fw-bold"
 												>方便連絡的時間
 											</label>

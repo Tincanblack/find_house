@@ -6,16 +6,17 @@ export default {
 				caseName: "",
 				manager: "",
 				customer: "",
+				gender: "1",
 				contactPhone: "",
-				freeTime: 0,
+				freeTime: "0",
 				isHandle: false,
-				updateTime: "",
+				dataTime: "",
 			},
 			submitBtnLoading: false,
 		};
 	},
 	methods: {
-		// 加入到購物車
+		// 加入到購物車 (API需要)
 		fakeItem2Cart() {
 			this.submitBtnLoading = true;
 
@@ -30,7 +31,6 @@ export default {
 					this.fakeItem2Checkout();
 				})
 				.catch((error) => {
-					console.log(error.response.status);
 					if (error.response.status !== 200) {
 						this.$swal({
 							icon: "error",
@@ -40,7 +40,7 @@ export default {
 					}
 				});
 		},
-		// 結帳商品
+		// 結帳商品 (API需要)
 		fakeItem2Checkout() {
 			const nowTimeStamp = Math.floor(new Date().getTime() / 1000);
 
@@ -49,9 +49,10 @@ export default {
 					user: {
 						address: this.fakeUser.location.city,
 						email: this.fakeUser.email,
-						manger: this.fakeUser.name.first,
+						mangaer: this.fakeUser.name.first,
 						message: this.formData.freeTime,
 						name: this.formData.customer,
+						gender: this.formData.gender,
 						tel: this.formData.contactPhone,
 						dataTime: nowTimeStamp,
 					},
@@ -65,6 +66,7 @@ export default {
 				)
 				.then((res) => {
 					const { orderId } = res.data;
+					return false;
 					this.submitReserveForm(orderId);
 				})
 				.catch((error) => {

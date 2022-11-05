@@ -787,26 +787,61 @@
 									>顯示狀況
 									<span class="text-danger">*</span>
 								</label>
-								<div class="form-check form-switch">
-									<input
-										class="form-check-input"
-										type="checkbox"
-										v-model="targetCase.is_enabled"
-										:true-value="1"
-										:false-value="0"
-										id="is_enabled"
-									/>
-									<label
-										v-if="!targetCase.is_enabled"
-										class="form-check-label"
-										for="is_enabled"
-										>變更為
-										<span class="text-success">顯示</span>
-									</label>
-									<label v-else class="form-check-label" for="is_enabled"
-										>變更為
-										<span class="text-danger">不顯示</span>
-									</label>
+								<div class="d-flex">
+									<div class="form-check form-check-inline">
+										<input
+											class="form-check-input"
+											type="radio"
+											v-model.number="targetCase.is_enabled"
+											name="inlineRadioOptions"
+											id="enabled1"
+											value="1"
+										/>
+										<label class="form-check-label text-success" for="enabled1"
+											>顯示</label
+										>
+									</div>
+									<div class="form-check form-check-inline">
+										<input
+											class="form-check-input"
+											type="radio"
+											v-model.number="targetCase.is_enabled"
+											name="inlineRadioOptions"
+											id="enabled2"
+											value="0"
+										/>
+										<label
+											class="form-check-label text-secondary"
+											for="enabled2"
+											>不顯示</label
+										>
+									</div>
+									<div class="form-check form-check-inline">
+										<input
+											class="form-check-input"
+											type="radio"
+											v-model.number="targetCase.is_enabled"
+											name="inlineRadioOptions"
+											id="enabled3"
+											value="2"
+										/>
+										<label class="form-check-label text-warning" for="enabled3"
+											>處理中</label
+										>
+									</div>
+									<div class="form-check form-check-inline">
+										<input
+											class="form-check-input"
+											type="radio"
+											v-model.number="targetCase.is_enabled"
+											name="inlineRadioOptions"
+											id="enabled4"
+											value="3"
+										/>
+										<label class="form-check-label text-muted" for="enabled4"
+											>已結案</label
+										>
+									</div>
 								</div>
 							</div>
 						</div>

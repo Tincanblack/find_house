@@ -1,7 +1,7 @@
 <template>
 	<div class="main-content container-fluid px-4 bg-light">
 		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
-		<h3 class="mt-4 fw-bold">案件管理</h3>
+		<h3 class="my-4 fw-bold">案件管理</h3>
 		<AdminBreadcrumb></AdminBreadcrumb>
 		<div class="text-end my-2">
 			<button
@@ -60,7 +60,9 @@
 						<span v-else>--</span>
 					</td>
 					<td>
-						<span class="text-success" v-if="item.is_enabled === 1">顯示</span>
+						<span v-if="item.is_enabled == '1'" class="text-success">顯示</span>
+						<span v-else-if="item.is_enabled == '2'" class="text-warning">處理中</span>
+						<span v-else-if="item.is_enabled == '3'" class="text-muted">已結案</span>
 						<span v-else class="text-danger">不顯示</span>
 					</td>
 					<td>

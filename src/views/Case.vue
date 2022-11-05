@@ -256,28 +256,61 @@
 											@submit="fakeItem2Cart"
 										>
 											<div class="mb-3 position-relative">
-												<div class="input-group">
-													<VField
-														type="text"
-														class="form-control"
-														autocomplete="off"
-														placeholder="如何稱呼"
-														v-model="formData.customer"
-														name="稱呼"
-														:class="{
-															'is-invalid': errors['稱呼'],
-														}"
-														rules="required"
-													/>
-													<span
-														class="input-group-text"
-														id="validationTooltipUsernamePrepend"
-														>先生 / 小姐</span
-													>
-													<ErrorMessage
-														name="稱呼"
-														class="invalid-tooltip"
-													></ErrorMessage>
+												<div
+													class="row row-cols-lg-auto g-3 align-items-center"
+												>
+													<div class="col" style="flex: 1">
+														<VField
+															type="text"
+															class="form-control"
+															:class="{
+																'is-invalid': errors['稱呼'],
+															}"
+															autocomplete="off"
+															placeholder="如何稱呼"
+															v-model="formData.customer"
+															name="稱呼"
+															rules="required"
+														/>
+														<ErrorMessage
+															name="稱呼"
+															class="invalid-tooltip"
+														></ErrorMessage>
+													</div>
+													<div class="col">
+														<div class="form-check form-check-inline">
+															<VField
+																type="radio"
+																class="form-check-input"
+																id="male"
+																v-model="formData.gender"
+																value="1"
+																name="性別"
+																rules="required"
+															/>
+															<label
+																class="form-check-label"
+																for="male"
+																>先生</label
+															>
+														</div>
+														<div class="form-check form-check-inline">
+															<VField
+																type="radio"
+																class="form-check-input"
+																id="female"
+																v-model="formData.gender"
+																value="0"
+																name="性別"
+																rules="required"
+															/>
+															<label
+																class="form-check-label"
+																for="female"
+																>小姐</label
+															>
+														</div>
+													</div>
 												</div>
 											</div>
 											<div class="mb-3 position-relative">
