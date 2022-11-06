@@ -178,7 +178,7 @@ export default {
 			this.$http
 				.get(url)
 				.then((res) => {
-					this.cases = res.data.products;
+					this.cases = res.data.products.filter((product) => product.is_enabled == 1);
 					this.randomItem(12);
 					setTimeout(() => {
 						this.cardLoading = false;

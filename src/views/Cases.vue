@@ -140,12 +140,12 @@
 					v-show="cardLayout === 'card'"
 					class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-2"
 				>
-					<div class="col" v-for="item in cases" :key="item.id">
+					<div class="col" v-for="item in filterEnabledData" :key="item.id">
 						<CaseCard :item="item" :cardLoading="cardLoading"></CaseCard>
 					</div>
 				</div>
 				<div v-show="cardLayout === 'list'" class="row row-cols-1 g-2">
-					<div class="col pb-lg-3" v-for="item in cases" :key="item.id">
+					<div class="col pb-lg-3" v-for="item in filterEnabledData" :key="item.id">
 						<CaseList :item="item" :cardLoading="cardLoading"></CaseList>
 					</div>
 				</div>
@@ -261,6 +261,11 @@ export default {
 			handler() {
 				this.handleCardLayout(this.cardLayout);
 			},
+		},
+	},
+	computed: {
+		filterEnabledData() {
+			return this.cases.filter((product) => product.is_enabled == 1);
 		},
 	},
 	mounted() {
