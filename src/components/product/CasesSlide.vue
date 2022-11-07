@@ -60,7 +60,8 @@ export default {
 						this.cases = resData.filter(
 							(item) =>
 								(this.category === "" || item.category === this.category) &&
-								item.id !== this.id
+								item.id !== this.id &&
+								item.is_enabled == 1
 						);
 					})
 					.catch((error) => {
