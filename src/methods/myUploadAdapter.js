@@ -9,7 +9,9 @@ class MyUploadAdapter {
 	// Starts the upload process.
 	upload() {
 		const formData = new FormData();
-		const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/upload`;
+		const url = `${import.meta.env.VUE_APP_API}/api/${
+			import.meta.env.VUE_APP_PATH
+		}/admin/upload`;
 		return new Promise((resolve) => {
 			this.loader.file
 				.then((loadFile) => {
@@ -20,9 +22,9 @@ class MyUploadAdapter {
 						},
 					});
 				})
-				.then((response) => {
+				.then((res) => {
 					resolve({
-						default: response.data.imageUrl,
+						default: res.data.imageUrl,
 					});
 				});
 		});

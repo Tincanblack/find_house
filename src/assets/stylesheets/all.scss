@@ -1,7 +1,24 @@
+ // siteVariables
+@import "./styles/siteVariable";
+
+// customBootstrapVariables
+$primary: $site-main;
+$secondary: $site-sec;
+$success: $site-third;
+$warning: $site-fourth;
+
+$container-max-widths: (
+  sm: $mobile-width,
+  md: $pad-width,
+  lg: $pad-large-width,
+  xl: $laptop-width,
+  xxl: $desktop-width
+);
+
 // bootstrap
-@import "~bootstrap/scss/functions";
-@import "./helpers/bootstrap/_variables"; // custom bootstrap styles
 @import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/functions";
+
 // sweetalert2
 @import './helpers/sweetalert/variables';
 @import '~sweetalert2/src/sweetalert2';

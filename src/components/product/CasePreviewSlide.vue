@@ -10,10 +10,7 @@
 				type: 'fraction',
 			}"
 		>
-			<SwiperSlide
-				v-for="(image, index) in product.imagesUrl"
-				:key="index"
-			>
+			<SwiperSlide v-for="(image, index) in product.imagesUrl" :key="index">
 				<div
 					class="carousel-slide__image"
 					style="background-size: cover; background-position: center"
@@ -30,6 +27,8 @@
 			:slidesPerView="4.5"
 			:watchSlidesVisibility="true"
 			:watchSlidesProgress="true"
+			:navigation="true"
+			:modules="modules"
 			:breakpoints="{
 				'@0.00': {
 					slidesPerView: 3.5,
@@ -62,6 +61,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/pagination";
+
 export default {
 	components: { Swiper, SwiperSlide },
 	props: {
@@ -80,7 +80,6 @@ export default {
 	},
 	methods: {
 		setThumbsSwiper(swiper) {
-			console.log(swiper);
 			this.thumbsSwiper = swiper;
 		},
 	},

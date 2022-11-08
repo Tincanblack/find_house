@@ -4,7 +4,7 @@
 </template>
 <script>
 import emitter from "@/methods/emitter";
-import ToastMessages from "@/components/ToastMessages.vue";
+import ToastMessages from "@/components/widgets/ToastMessages.vue";
 export default {
 	components: {
 		ToastMessages,

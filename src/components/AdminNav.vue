@@ -1,11 +1,11 @@
 <template lang="">
 	<div
-		class="sidebar d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
+		class="sidebar d-flex flex-column flex-shrink-0 p-3 text-white bg-dark shadow-sm"
 		:class="{ isOpen: sideBarOpen }"
 	>
 		<header class="position-relative">
 			<RouterLink
-				to="/admin"
+				to="/admin/"
 				class="d-flex align-items-center mb-md-0 me-md-auto text-white text-decoration-none"
 			>
 				<img
@@ -17,7 +17,7 @@
 				<span class="nav-text fs-4 fw-bold">後臺管理</span>
 			</RouterLink>
 			<div
-				class="bx bx-chevron-right nav-toggle"
+				class="bx bx-chevron-right nav-toggle shadow-sm"
 				@click="sideBarOpen = !sideBarOpen"
 			>
 				<span class="nav-toggle-bar"></span>
@@ -42,11 +42,7 @@
 				</RouterLink>
 			</li>
 			<li class="nav-item d-flex">
-				<RouterLink
-					class="nav-link"
-					to="/admin/reserves"
-					title="預約表單管理"
-				>
+				<RouterLink class="nav-link" to="/admin/reserves" title="預約表單管理">
 					<i class="nav-icon bi bi-pencil-square me-3"></i>
 					<span class="nav-text">預約表單管理</span>
 					<span class="nav-tooltip">預約表單管理</span>

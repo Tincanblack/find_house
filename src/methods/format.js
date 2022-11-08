@@ -29,6 +29,7 @@ export function calToPercent(originPrice = 0, currentPrice = 0, type) {
 			result = result.toFixed(1) + "%";
 			break;
 		default:
+			result = result.toFixed(1);
 			break;
 	}
 	return result;
@@ -44,37 +45,32 @@ export function filterItemTag(item) {
 
 // 時間
 // YYYY-MM-DD
-export function dateFormat(time = "") {
-	if (time === "") return false;
-	const localDate = new Date(time * 1000);
-	return localDate.toLocaleDateString();
-}
-
-// YYYY-MM-DD HH:MM
-export function dateFormatWithTime(dateTime) {
-	function padTo2Digits(dateTime) {
-		return dateTime.toString().padStart(2, "0");
+export function dateFormat(timestamp = "", clock = false) {
+	if (timestamp === "") return false;
+	let dataTime = new Date(timestamp * 1000);
+	let Y = dataTime.getFullYear() + "-";
+	let M =
+		(dataTime.getMonth() + 1 < 10 ? "0" + (dataTime.getMonth() + 1) : dataTime.getMonth() + 1) +
+		"-";
+	let D = (dataTime.getDate() < 10 ? "0" + dataTime.getDate() : dataTime.getDate()) + " ";
+	let h = "";
+	let m = "";
+	let s = "";
+	if (clock) {
+		h = (dataTime.getHours() < 10 ? "0" + dataTime.getHours() : dataTime.getHours()) + ":";
+		m =
+			(dataTime.getMinutes() < 10 ? "0" + dataTime.getMinutes() : dataTime.getMinutes()) +
+			":";
+		s = dataTime.getSeconds() < 10 ? "0" + dataTime.getSeconds() : dataTime.getSeconds();
 	}
-
-	return (
-		[
-			dateTime.getFullYear(),
-			padTo2Digits(dateTime.getMonth() + 1),
-			padTo2Digits(dateTime.getDate()),
-		].join("/") +
-		" " +
-		[
-			padTo2Digits(dateTime.getHours()),
-			padTo2Digits(dateTime.getMinutes()),
-			padTo2Digits(dateTime.getSeconds()),
-		].join(":")
-	);
+	dataTime = Y + M + D + h + m + s;
+	return dataTime;
 }
 
 // DD YYYY-MM
-export function publicDateFormat(time = "") {
-	if (time === "") return false;
-	let dateFormatAttay = dateFormat(time);
+export function publicDateFormat(timestamp = "") {
+	if (timestamp === "") return false;
+	let dateFormatAttay = new Date(timestamp * 1000).toLocaleDateString();
 	dateFormatAttay = dateFormatAttay.replace("/", ".").split("/");
 	return dateFormatAttay;
 }

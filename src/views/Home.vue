@@ -1,11 +1,10 @@
 <template>
 	<div class="site-content">
+		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<IndexBannerSlide></IndexBannerSlide>
 		<section class="index-feature py-3 py-xl-5 text-center bg-light">
 			<div class="container">
-				<h2 class="index-feature__title mb-3 mb-xl-5 fw-bold">
-					想要找什麼樣類型的房子?
-				</h2>
+				<h2 class="index-feature__title mb-3 mb-xl-5 fw-bold">想要找什麼樣類型的房子?</h2>
 				<div class="row">
 					<div class="col-6 col-xl-3">
 						<RouterLink
@@ -16,10 +15,7 @@
 							}"
 						>
 							<div class="index-feature-image shadow-sm">
-								<img
-									src="../assets/images/index_feature_card_1.png"
-									alt=""
-								/>
+								<img src="../assets/images/index_feature_card_1.png" alt="" />
 								<h5 class="index-feature-card__title">公寓</h5>
 							</div>
 						</RouterLink>
@@ -33,10 +29,7 @@
 							}"
 						>
 							<div class="index-feature-image shadow-sm">
-								<img
-									src="../assets/images/index_feature_card_2.png"
-									alt=""
-								/>
+								<img src="../assets/images/index_feature_card_2.png" alt="" />
 								<h5 class="index-feature-card__title">別墅</h5>
 							</div>
 						</RouterLink>
@@ -50,10 +43,7 @@
 							}"
 						>
 							<div class="index-feature-image shadow-sm">
-								<img
-									src="../assets/images/index_feature_card_3.png"
-									alt=""
-								/>
+								<img src="../assets/images/index_feature_card_3.png" alt="" />
 								<h5 class="index-feature-card__title">華廈</h5>
 							</div>
 						</RouterLink>
@@ -67,10 +57,7 @@
 							}"
 						>
 							<div class="index-feature-image shadow-sm">
-								<img
-									src="../assets/images/index_feature_card_4.png"
-									alt=""
-								/>
+								<img src="../assets/images/index_feature_card_4.png" alt="" />
 								<h5 class="index-feature-card__title">大樓</h5>
 							</div>
 						</RouterLink>
@@ -82,10 +69,7 @@
 			<div class="container">
 				<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-2">
 					<div v-for="item in randomData" :key="item.id">
-						<CaseCard
-							:item="item"
-							:cardLoading="cardLoading"
-						></CaseCard>
+						<CaseCard :item="item" :cardLoading="cardLoading"></CaseCard>
 					</div>
 				</div>
 				<div class="row">
@@ -121,16 +105,11 @@
 							class="index-news-image"
 							to="/news"
 						>
-							<span class="index-news-image__text"
-								>更多房訊新知</span
-							>
+							<span class="index-news-image__text">更多房訊新知</span>
 						</RouterLink>
 					</div>
 					<div class="col-12 col-xl-6">
-						<template
-							v-for="(news, index) in articles"
-							:key="news.id"
-						>
+						<template v-for="(news, index) in articles" :key="news.id">
 							<div
 								class="list-group index-news-list rounded-0"
 								v-if="index >= 0 && index <= 2"
@@ -146,16 +125,12 @@
 											<div class="public-date">
 												<div class="public-date__main">
 													{{
-														$format.publicDateFormat(
-															news.create_at
-														)[1]
+														$format.publicDateFormat(news.create_at)[1]
 													}}
 												</div>
 												<div class="public-date__sec">
 													{{
-														$format.publicDateFormat(
-															news.create_at
-														)[0]
+														$format.publicDateFormat(news.create_at)[0]
 													}}
 												</div>
 											</div>
@@ -164,9 +139,7 @@
 											<h6 class="index-news-list__title">
 												{{ news.title }}
 											</h6>
-											<div
-												class="opacity-75 index-news-list__description"
-											>
+											<div class="opacity-75 index-news-list__description">
 												{{ news.description }}
 											</div>
 										</div>
@@ -181,7 +154,7 @@
 	</div>
 </template>
 <script>
-import IndexBannerSlide from "@/components/IndexBannerSlide.vue";
+import IndexBannerSlide from "@/components/widgets/IndexBannerSlide.vue";
 import CaseCard from "@/components/widgets/CaseCardLayout.vue";
 
 export default {
@@ -191,6 +164,7 @@ export default {
 	},
 	data() {
 		return {
+			isLoading: false,
 			cardLoading: true,
 			cases: [],
 			articles: [],
@@ -199,15 +173,17 @@ export default {
 	},
 	methods: {
 		getCasesList() {
-			const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`;
+			this.isLoading = true;
+			const url = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/products/all`;
 			this.$http
 				.get(url)
 				.then((res) => {
-					this.cases = res.data.products;
+					this.cases = res.data.products.filter((product) => product.is_enabled == 1);
 					this.randomItem(12);
 					setTimeout(() => {
 						this.cardLoading = false;
 					}, 1000);
+					this.isLoading = false;
 				})
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");
@@ -217,10 +193,13 @@ export default {
 			this.isLoading = true;
 			this.$http
 				.get(
-					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/articles/?page=${page}`
+					`${import.meta.env.VITE_URL}/api/${
+						import.meta.env.VITE_PATH
+					}/articles/?page=${page}`
 				)
-				.then((response) => {
-					this.articles = response.data.articles;
+				.then((res) => {
+					this.articles = res.data.articles;
+					this.isLoading = false;
 				})
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");
@@ -230,9 +209,7 @@ export default {
 			const tempData = this.cases;
 			this.randomData = [];
 			for (let x = 0; x < count; x += 1) {
-				const randomItem = Math.floor(
-					Math.random() * (tempData.length - 0) + 0
-				);
+				const randomItem = Math.floor(Math.random() * (tempData.length - 0) + 0);
 				this.randomData.push(this.cases[randomItem]);
 				tempData.splice(randomItem, 1);
 			}

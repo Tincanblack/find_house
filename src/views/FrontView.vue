@@ -1,17 +1,17 @@
 <template>
 	<FrontNav></FrontNav>
-	<router-view></router-view>
+	<RouterView></RouterView>
 	<BackToTop></BackToTop>
-	<Footer></Footer>
+	<FooterBar></FooterBar>
 </template>
 <script>
-import FrontNav from "@/components/FrontNav";
-import BackToTop from "@/components/BackToTop";
-import Footer from "@/views/Footer";
+import FrontNav from "@/components/FrontNav.vue";
+import BackToTop from "@/components/widgets/BackToTop.vue";
+import FooterBar from "@/views/Footer.vue";
 export default {
 	components: {
 		FrontNav,
-		Footer,
+		FooterBar,
 		BackToTop,
 	},
 };

@@ -1,6 +1,10 @@
 <template lang="">
 	<ul class="pagination align-items-center justify-content-center">
-		<li class="page-item" :class="{ disabled: pages.has_pre !== true }">
+		<li
+			v-if="pages.total_pages > 0"
+			class="page-item shadow-sm"
+			:class="{ disabled: pages.has_pre !== true }"
+		>
 			<a
 				class="page-link"
 				href="#"
@@ -11,16 +15,18 @@
 			</a>
 		</li>
 		<li
-			class="page-item"
+			class="page-item shadow-sm"
 			:class="{ active: pages.current_page === page }"
 			v-for="page in pages.total_pages"
 			:key="'page' + page"
 		>
-			<a class="page-link" href="#" @click.prevent="clickPage(page)">{{
-				page
-			}}</a>
+			<a class="page-link" href="#" @click.prevent="clickPage(page)">{{ page }}</a>
 		</li>
-		<li class="page-item" :class="{ disabled: pages.has_next !== true }">
+		<li
+			v-if="pages.total_pages > 0"
+			class="page-item shadow-sm"
+			:class="{ disabled: pages.has_next !== true }"
+		>
 			<a
 				class="page-link"
 				href="#"

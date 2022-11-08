@@ -1,7 +1,7 @@
 <template>
 	<main>
 		<AdminNav></AdminNav>
-		<router-view></router-view>
+		<RouterView></RouterView>
 	</main>
 </template>
 <script>
@@ -22,7 +22,7 @@ export default {
 
 		this.$http.defaults.headers.common.Authorization = `${token}`;
 		this.$http
-			.post(`${process.env.VUE_APP_URL}/api/user/check`)
+			.post(`${import.meta.env.VITE_URL}/api/user/check`)
 			.then((res) => {
 				this.$httpMessageState(res, "登入");
 				this.isCheckLogin = true;

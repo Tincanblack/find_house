@@ -3,9 +3,7 @@
 		<CaseBreadcrumb></CaseBreadcrumb>
 		<section class="category-header py-3">
 			<div class="container">
-				<div
-					class="row row-cols-lg-auto g-3 align-items-center justify-content-between"
-				>
+				<div class="row row-cols-lg-auto g-3 align-items-center justify-content-between">
 					<div class="col-12">
 						<div class="dropdown cases-sort">
 							<button
@@ -63,12 +61,9 @@
 										type="button"
 										class="dropdown-item cases-sort-select__option"
 										:class="{
-											active:
-												sortBy === 'houseAgeLow2High',
+											active: sortBy === 'houseAgeLow2High',
 										}"
-										@click="
-											sortCaseList('houseAgeLow2High')
-										"
+										@click="sortCaseList('houseAgeLow2High')"
 									>
 										屋齡從 低 > 高
 									</button>
@@ -78,12 +73,9 @@
 										type="button"
 										class="dropdown-item cases-sort-select__option"
 										:class="{
-											active:
-												sortBy === 'houseAgeHigh2Low',
+											active: sortBy === 'houseAgeHigh2Low',
 										}"
-										@click="
-											sortCaseList('houseAgeHigh2Low')
-										"
+										@click="sortCaseList('houseAgeHigh2Low')"
 									>
 										屋齡從 高 > 低
 									</button>
@@ -93,12 +85,9 @@
 										type="button"
 										class="dropdown-item cases-sort-select__option"
 										:class="{
-											active:
-												sortBy === 'squareFeetLow2High',
+											active: sortBy === 'squareFeetLow2High',
 										}"
-										@click="
-											sortCaseList('squareFeetLow2High')
-										"
+										@click="sortCaseList('squareFeetLow2High')"
 									>
 										坪數從 小 > 大
 									</button>
@@ -108,13 +97,9 @@
 										type="button"
 										class="dropdown-item cases-sort-select__option"
 										:class="{
-											active:
-												sortBy ===
-												'squareFeetHight2Low',
+											active: sortBy === 'squareFeetHight2Low',
 										}"
-										@click="
-											sortCaseList('squareFeetHight2Low')
-										"
+										@click="sortCaseList('squareFeetHight2Low')"
 									>
 										坪數從 大 > 小
 									</button>
@@ -127,25 +112,21 @@
 							<span
 								class="cases-card-display__button"
 								:class="{
-									isActive: this.caseCardView === 'card',
+									isActive: this.cardLayout === 'card',
 								}"
-								@click="changeCardlayout('card')"
+								@click="handleCardLayout('card')"
 							>
-								<i
-									class="bi bi-grid fs-3 cases-card-display__icon"
-								></i>
+								<i class="bi bi-grid fs-3 cases-card-display__icon"></i>
 								卡片
 							</span>
 							<span
 								class="cases-card-display__button"
 								:class="{
-									isActive: this.caseCardView === 'list',
+									isActive: this.cardLayout === 'list',
 								}"
-								@click="changeCardlayout('list')"
+								@click="handleCardLayout('list')"
 							>
-								<i
-									class="bi bi-list-ul fs-3 cases-card-display__icon"
-								></i>
+								<i class="bi bi-list-ul fs-3 cases-card-display__icon"></i>
 								列表
 							</span>
 						</div>
@@ -156,29 +137,16 @@
 		<section class="category-cases pb-3">
 			<div class="container">
 				<div
-					v-show="caseCardView === 'card'"
+					v-show="cardLayout === 'card'"
 					class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-2"
 				>
-					<div class="col" v-for="item in cases" :key="item.id">
-						<CaseCard
-							:item="item"
-							:cardLoading="cardLoading"
-						></CaseCard>
+					<div class="col" v-for="item in filterEnabledData" :key="item.id">
+						<CaseCard :item="item" :cardLoading="cardLoading"></CaseCard>
 					</div>
 				</div>
-				<div
-					v-show="caseCardView === 'list'"
-					class="row row-cols-1 g-2"
-				>
-					<div
-						class="col pb-lg-3"
-						v-for="item in cases"
-						:key="item.id"
-					>
-						<CaseList
-							:item="item"
-							:cardLoading="cardLoading"
-						></CaseList>
+				<div v-show="cardLayout === 'list'" class="row row-cols-1 g-2">
+					<div class="col pb-lg-3" v-for="item in filterEnabledData" :key="item.id">
+						<CaseList :item="item" :cardLoading="cardLoading"></CaseList>
 					</div>
 				</div>
 			</div>
@@ -188,7 +156,8 @@
 <script>
 import CaseCard from "@/components/widgets/CaseCardLayout.vue";
 import CaseList from "@/components/widgets/CaseListLayout.vue";
-import CaseBreadcrumb from "@/components/CaseBreadcrumb.vue";
+import CaseBreadcrumb from "@/components/product/CaseBreadcrumb.vue";
+
 export default {
 	components: {
 		CaseCard,
@@ -197,20 +166,22 @@ export default {
 	},
 	data() {
 		return {
-			cardLoading: false,
 			cases: [],
 			sortCases: [],
-			caseCardView: "card",
 			filterCategory: "",
 			sortBy: "",
+			cardLoading: false,
+			cardLayout: "card",
 		};
 	},
 	methods: {
 		getCaseList(query) {
 			this.cardLoading = true;
-			let url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`;
+			let url = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/products/all`;
 			if (query) {
-				url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products?category=${query}`;
+				url = `${import.meta.env.VITE_URL}/api/${
+					import.meta.env.VITE_PATH
+				}/products?category=${query}`;
 			}
 			this.$http
 				.get(url)
@@ -258,16 +229,22 @@ export default {
 			}
 			this.sortBy = type;
 		},
-		changeCardlayout(view) {
-			this.caseCardView = view === "card" ? "card" : "list";
+		getCaseCardLayout() {
+			const layout = localStorage.getItem("card_layout");
+			if (layout === null || layout === undefined) return "card";
+			localStorage.setItem("card_layout", layout);
+			return layout;
+		},
+		handleCardLayout(view) {
+			this.cardLayout = view;
 			this.cardLoading = true;
 			setTimeout(() => {
 				this.cardLoading = false;
+				localStorage.setItem("card_layout", this.cardLayout);
 			}, 1000);
 		},
 		resizeWidth() {
-			if (window.matchMedia("(max-width: 767px)").matches)
-				this.caseCardView = "card";
+			if (window.matchMedia("(max-width: 767px)").matches) this.cardLayout = "card";
 		},
 	},
 	watch: {
@@ -280,16 +257,24 @@ export default {
 				this.getCaseList();
 			}
 		},
-		caseCardView: {
+		cardLayout: {
 			handler() {
-				localStorage.setItem("card_layout", this.caseCardView);
+				this.handleCardLayout(this.cardLayout);
 			},
+		},
+	},
+	computed: {
+		filterEnabledData() {
+			return this.cases.filter((product) => product.is_enabled == 1);
 		},
 	},
 	mounted() {
 		this.filterCategory = this.$route.query.category;
-		this.caseCardView = localStorage.getItem("card_layout");
+		this.cardLayout = this.getCaseCardLayout();
+
 		this.getCaseList(this.filterCategory);
+		this.handleCardLayout(this.cardLayout);
+
 		window.addEventListener("resize", this.resizeWidth());
 	},
 };

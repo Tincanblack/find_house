@@ -1,6 +1,6 @@
 <template>
 	<div class="main-content container-fluid px-4">
-		<LoadingAnimate :active="isLoading" :z-index="1060"></LoadingAnimate>
+		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<h3 class="mt-4 fw-bold">圖片上傳</h3>
 		<input
 			type="file"
@@ -48,7 +48,7 @@ export default {
 			formData.append("file-to-upload", uploadedFile);
 			this.$http
 				.post(
-					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/upload`,
+					`${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/admin/upload`,
 					formData,
 					{
 						headers: {
@@ -56,23 +56,15 @@ export default {
 						},
 					}
 				)
-				.then((response) => {
-					if (response.data.success) {
+				.then((res) => {
+					if (res.data.success) {
 						this.$refs.fileInput.value = "";
-						this.$httpMessageState(
-							response,
-							"圖片上傳結果",
-							response.data.message
-						);
-						this.uploadImagesUrl.push(response.data.imageUrl);
+						this.$httpMessageState(res, "圖片上傳結果", res.data.message);
+						this.uploadImagesUrl.push(res.data.imageUrl);
 					} else {
 						this.$refs.fileInput.value = "";
-						this.$httpMessageState(
-							response,
-							"圖片上傳結果",
-							response.data.message
-						);
-						console.log(response);
+						this.$httpMessageState(res, "圖片上傳結果", res.data.message);
+						console.log(res);
 					}
 				})
 				.catch((error) => {

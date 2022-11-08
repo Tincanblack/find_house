@@ -1,8 +1,7 @@
 export default {
 	data() {
 		return {
-			compareCases:
-				JSON.parse(localStorage.getItem("compare_case")) || [],
+			compareCases: JSON.parse(localStorage.getItem("compare_case")) || [],
 		};
 	},
 	inject: ["emitter"],
@@ -27,7 +26,10 @@ export default {
 						confirmButtonText: "去看看",
 					}).then((result) => {
 						if (result.value) {
-							this.$router.push("/collections");
+							if (this.$route.params !== "collections") {
+								this.$router.push("/collections");
+							}
+							this.goCompareAnchor();
 						}
 					});
 				} else {
@@ -42,16 +44,17 @@ export default {
 				this.compareCases.splice(compareCaseIndex, 1);
 			}
 		},
+		clearCompareData() {
+			this.compareCases = [];
+			localStorage.setItem("compare_case", JSON.stringify([]));
+		},
 	},
 	watch: {
 		// 因資料(compareCases)為陣列，做深層的監聽
 		compareCases: {
 			handler() {
 				// localStorage 資料寫入
-				localStorage.setItem(
-					"compare_case",
-					JSON.stringify(this.compareCases)
-				);
+				localStorage.setItem("compare_case", JSON.stringify(this.compareCases));
 			},
 			deep: true,
 		},

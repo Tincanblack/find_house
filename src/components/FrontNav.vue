@@ -4,61 +4,38 @@
 		:class="[navStyle.shadow]"
 	>
 		<div class="container">
-			<a class="navbar-brand" href="#"
-				><img src="../assets/logo.svg" alt="心儀房屋" width="140"
-			/></a>
-			<button
-				class="navbar-toggler collapsed"
-				type="button"
-				@click="toggleCollapse"
-			>
+			<RouterLink class="navbar-brand" to="/">
+				<img src="../assets/logo.svg" alt="心儀房屋" width="140" />
+			</RouterLink>
+			<button class="navbar-toggler collapsed" type="button" @click="toggleCollapse">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div
-				class="navbar-collapse collapse"
-				id="navbarCollapse"
-				ref="collapse"
-			>
-				<ul
-					class="navbar-nav flex-md-row ms-md-auto align-items-md-center"
-				>
+			<div class="navbar-collapse collapse" id="navbarCollapse" ref="collapse">
+				<ul class="navbar-nav flex-md-row ms-md-auto align-items-md-center">
 					<li class="nav-item">
-						<RouterLink
-							class="nav-link"
-							to="/cases"
-							@click="closeCollapse"
+						<RouterLink class="nav-link" to="/cases" @click="closeCollapse"
 							>找房</RouterLink
 						>
 					</li>
 					<li class="nav-item">
-						<RouterLink
-							class="nav-link"
-							to="/news"
-							@click="closeCollapse"
+						<RouterLink class="nav-link" to="/news" @click="closeCollapse"
 							>房訊新知</RouterLink
 						>
 					</li>
 					<li class="nav-item">
-						<RouterLink
-							class="nav-link"
-							to="/collections"
-							@click="closeCollapse"
+						<RouterLink class="nav-link" to="/reserve">查詢預約</RouterLink>
+					</li>
+					<li class="nav-item">
+						<RouterLink class="nav-link" to="/collections" @click="closeCollapse"
 							>收藏名單
 							<span
 								v-if="collectionCaseCount"
-								class="nav-link__count translate-middle badge rounded-pill bg-danger"
+								class="nav-link__count translate-middle badge rounded-pill"
 								>{{ collectionCaseCount
-								}}<span class="visually-hidden"
-									>unread messages</span
-								>
+								}}<span class="visually-hidden">unread messages</span>
 							</span>
 						</RouterLink>
 					</li>
-					<!-- <li class="nav-item">
-						<RouterLink class="nav-link" to="/reserve"
-							>查詢預約</RouterLink
-						>
-					</li> -->
 				</ul>
 			</div>
 		</div>

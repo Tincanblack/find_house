@@ -1,5 +1,6 @@
 <template>
 	<div class="site-content">
+		<LoadingComponent :isLoading="isLoading"></LoadingComponent>
 		<NewsSlide v-if="news.length > 0" :articles="news"></NewsSlide>
 		<div class="news-list py-5">
 			<div class="news-list-column">
@@ -7,25 +8,14 @@
 					<div class="row row-cols-1 row-cols-md-3">
 						<div class="col" v-for="item in news" :key="item.id">
 							<div class="news-list-card">
-								<RouterLink
-									class="news-list-card__link"
-									:to="`/news/${item.id}`"
-								>
+								<RouterLink class="news-list-card__link" :to="`/news/${item.id}`">
 									<div class="news-list-card__date">
 										<div class="public-date">
 											<div class="public-date__main">
-												{{
-													$format.publicDateFormat(
-														item.create_at
-													)[1]
-												}}
+												{{ $format.publicDateFormat(item.create_at)[1] }}
 											</div>
 											<div class="public-date__sec">
-												{{
-													$format.publicDateFormat(
-														item.create_at
-													)[0]
-												}}
+												{{ $format.publicDateFormat(item.create_at)[0] }}
 											</div>
 										</div>
 									</div>
@@ -48,26 +38,30 @@
 	</div>
 </template>
 <script>
-import NewsSlide from "@/components/NewsSlide.vue";
+import NewsSlide from "@/components/news/NewsSlide.vue";
 
 export default {
 	components: {
 		NewsSlide,
 	},
-
 	data() {
 		return {
+			isLoading: false,
 			news: [],
 		};
 	},
 	methods: {
 		getNewsList(page = 1) {
+			this.isLoading = true;
 			this.$http
 				.get(
-					`${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/articles/?page=${page}`
+					`${import.meta.env.VITE_URL}/api/${
+						import.meta.env.VITE_PATH
+					}/articles/?page=${page}`
 				)
-				.then((response) => {
-					this.news = response.data.articles;
+				.then((res) => {
+					this.news = res.data.articles;
+					this.isLoading = false;
 				})
 				.catch((error) => {
 					this.$httpMessageState(error.response, "錯誤訊息");

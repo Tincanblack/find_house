@@ -1,5 +1,5 @@
 <template>
-	<swiper
+	<Swiper
 		class="list-slide"
 		:spaceBetween="20"
 		:slidesPerView="3.5"
@@ -8,33 +8,24 @@
 		:modules="swiper.modules"
 		:breakpoints="{
 			'@0.00': {
-				slidesPerView: 1.5,
+				slidesPerView: 1.25,
 			},
 			'@1.50': {
-				slidesPerView: 3.5,
+				slidesPerView: 3.75,
 			},
 		}"
 	>
-		<swiper-slide
-			class="col-12 col-md-4"
-			v-for="item in filterCases"
-			:key="item.id"
-		>
+		<SwiperSlide class="col-12 col-md-4" v-for="item in cases" :key="item.id">
 			<CaseCard :item="item"></CaseCard>
-		</swiper-slide>
-	</swiper>
+		</SwiperSlide>
+	</Swiper>
 </template>
 <script>
 import CaseCard from "@/components/widgets/CaseCardLayout.vue";
-import { Thumbs, Pagination, Navigation, FreeMode } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
-import "swiper/css/pagination";
+import swiperMixin from "@/mixins/swiperMixin.js";
+
 export default {
-	components: { Swiper, SwiperSlide, CaseCard },
+	components: { CaseCard },
 	props: {
 		category: {
 			type: String,
@@ -48,25 +39,46 @@ export default {
 				return "";
 			},
 		},
-		cases: {
-			default: [],
-		},
 	},
 	data() {
 		return {
-			swiper: {
-				modules: [Thumbs, Pagination, Navigation, FreeMode],
-			},
+			cases: [],
 		};
 	},
-	computed: {
-		filterCases() {
-			return this.cases.filter(
-				(item) =>
-					(this.category === "" || item.category === this.category) &&
-					item.id !== this.id
-			);
+	mixins: [swiperMixin],
+	methods: {
+		getSlideCasesData(category) {
+			let url = "";
+			if (category !== "") {
+				url = `${import.meta.env.VITE_URL}/api/${
+					import.meta.env.VITE_PATH
+				}/products?category=${category}`;
+				this.$http
+					.get(url)
+					.then((res) => {
+						const resData = res.data.products;
+						this.cases = resData.filter(
+							(item) =>
+								(this.category === "" || item.category === this.category) &&
+								item.id !== this.id &&
+								item.is_enabled == 1
+						);
+					})
+					.catch((error) => {
+						this.$httpMessageState(error.response, "錯誤訊息");
+					});
+			} else {
+				url = `${import.meta.env.VITE_URL}/api/${import.meta.env.VITE_PATH}/products/all`;
+			}
 		},
+	},
+	watch: {
+		category() {
+			this.getSlideCasesData(this.category);
+		},
+	},
+	mounted() {
+		this.getSlideCasesData(this.category);
 	},
 };
 </script>
