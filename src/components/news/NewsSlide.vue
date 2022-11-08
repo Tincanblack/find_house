@@ -16,10 +16,7 @@
 				<swiper-slide v-for="article in articles" :key="article.id">
 					<div class="row">
 						<div class="col-md-6">
-							<RouterLink
-								class="news-slide__link"
-								:to="`/news/${article.id}`"
-							>
+							<RouterLink class="news-slide__link" :to="`/news/${article.id}`">
 								<div
 									class="news-slide__image"
 									:style="{

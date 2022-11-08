@@ -1,35 +1,21 @@
 <template>
 	<div class="card" :class="{ 'is-loading': cardLoading }">
-		<RouterLink
-			class="text-decoration-none rounded-0 text-dark"
-			:to="`/case/${item.id}`"
-		>
+		<RouterLink class="text-decoration-none rounded-0 text-dark" :to="`/case/${item.id}`">
 			<div class="case-item__card case-item__card--cardStyle">
 				<div v-if="item.imageUrl" class="card-image">
 					<div class="card-tag" v-show="!cardLoading">
-						<div
-							class="tag"
-							v-if="item.origin_price !== item.price"
-						>
+						<div class="tag" v-if="item.origin_price !== item.price">
 							<span
 								v-if="item.origin_price && item.price"
 								class="badge tag__element--sec"
 							>
 								<i class="bi bi-arrow-down"></i>
 								{{
-									$format.calToPercent(
-										item.origin_price,
-										item.price,
-										"discount"
-									)
+									$format.calToPercent(item.origin_price, item.price, "discount")
 								}}
 							</span>
 						</div>
-						<div
-							class="tag"
-							v-for="tag in $format.filterItemTag(item)"
-							:key="tag"
-						>
+						<div class="tag" v-for="tag in $format.filterItemTag(item)" :key="tag">
 							<span
 								class="badge tag__element"
 								:class="{
@@ -42,21 +28,14 @@
 						</div>
 					</div>
 					<div class="card-price" v-show="!cardLoading">
-						<span
-							class="card-price__price card-price__price--selling"
-						>
+						<span class="card-price__price card-price__price--selling">
 							{{ $format.currencyFormat(item.price) }}
 							<span class="card-price__price-unit">萬</span>
 						</span>
 						<small
 							v-if="item.origin_price !== item.price"
 							class="card-price__price card-price__price--origin fs-6"
-							><del
-								>{{
-									$format.currencyFormat(item.origin_price)
-								}}
-								萬</del
-							></small
+							><del>{{ $format.currencyFormat(item.origin_price) }} 萬</del></small
 						>
 					</div>
 					<img class="img-fluid" :src="item.imageUrl" alt="" />
@@ -71,11 +50,7 @@
 								{{ cardLoading ? "" : item.squareFeet + "坪" }}
 							</span>
 							<span class="card-text-list__item">
-								{{
-									cardLoading
-										? ""
-										: $format.patternFormat(item.pattern)
-								}}
+								{{ cardLoading ? "" : $format.patternFormat(item.pattern) }}
 							</span>
 							<span class="card-text-list__item">
 								{{ cardLoading ? "" : item.houseAge + "年" }}
@@ -85,10 +60,7 @@
 				</div>
 			</div>
 		</RouterLink>
-		<div
-			class="card-footer text-center"
-			v-if="$route.name === 'collections'"
-		>
+		<div class="card-footer text-center" v-if="$route.name === 'collections'">
 			<div class="btn-group">
 				<button
 					class="btn btn-danger"
@@ -103,11 +75,7 @@
 				>
 					<i
 						class="bi"
-						:class="
-							compareCases.includes(item.id)
-								? 'bi-file-x'
-								: 'bi-files'
-						"
+						:class="compareCases.includes(item.id) ? 'bi-file-x' : 'bi-files'"
 					></i>
 					{{ compareCases.includes(item.id) ? "取消" : "加入" }}比較
 				</button>

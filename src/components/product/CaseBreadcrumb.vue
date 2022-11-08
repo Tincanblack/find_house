@@ -7,23 +7,16 @@
 		<div class="container">
 			<ol class="breadcrumb text-dark">
 				<li class="breadcrumb-item">
-					<RouterLink
-						to="/"
-						class="breadcrumb-link text-decoration-none"
+					<RouterLink to="/" class="breadcrumb-link text-decoration-none"
 						>首頁</RouterLink
 					>
 				</li>
 				<li class="breadcrumb-item">
-					<RouterLink
-						to="/cases"
-						class="breadcrumb-link text-decoration-none"
+					<RouterLink to="/cases" class="breadcrumb-link text-decoration-none"
 						>找房</RouterLink
 					>
 				</li>
-				<li
-					class="breadcrumb-item"
-					v-show="$route.query.category || product.category"
-				>
+				<li class="breadcrumb-item" v-show="$route.query.category || product.category">
 					<RouterLink
 						class="breadcrumb-link text-decoration-none"
 						:to="{
