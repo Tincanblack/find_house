@@ -42,14 +42,14 @@ export default {
 		},
 		// 結帳商品 (API需要)
 		fakeItem2Checkout() {
-			const nowTimeStamp = Math.floor(new Date().getTime() / 1000);
+			const nowTimeStamp = this.$moment.moment().unix();
 
 			const postData = {
 				data: {
 					user: {
 						address: this.fakeUser.location.city,
 						email: this.fakeUser.email,
-						mangaer: this.fakeUser.name.first,
+						manager: this.fakeUser.name.first,
 						message: this.formData.freeTime,
 						name: this.formData.customer,
 						gender: this.formData.gender,
@@ -66,7 +66,6 @@ export default {
 				)
 				.then((res) => {
 					const { orderId } = res.data;
-					return false;
 					this.submitReserveForm(orderId);
 				})
 				.catch((error) => {
@@ -87,7 +86,7 @@ export default {
 				});
 		},
 		submitReserveForm(order_id) {
-			const nowTimeStamp = Math.floor(new Date().getTime() / 1000);
+			const nowTimeStamp = this.$moment.moment().unix();
 			this.formData.caseID = order_id;
 			this.formData.caseName = this.product.title;
 			this.formData.manager = this.fakeUser.name.first;
@@ -113,8 +112,9 @@ export default {
 					}
 					this.$swal({
 						icon: "success",
-						title: "謝謝你的諮詢\n將盡快與您聯繫",
-						showConfirmButton: false,
+						title: "我們將盡快與您聯繫\n您的諮詢表單ID為：",
+						text: `${order_id}`,
+						confirmButtonText: "我知道了",
 					}).then(() => {
 						this.$refs.reserveForm.resetForm();
 						this.formData.freeTime = 0;

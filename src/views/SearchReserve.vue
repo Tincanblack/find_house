@@ -76,7 +76,7 @@
 										<div class="row">
 											<div class="col text-muted">案件經紀人</div>
 											<div class="col text-sm-end fw-bold">
-												{{ reserve.user.manger }}
+												{{ reserve.user.manager }}
 											</div>
 										</div>
 										<hr />
