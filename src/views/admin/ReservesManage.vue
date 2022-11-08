@@ -63,11 +63,13 @@
 						<span v-else>皆可 (09-21)</span>
 					</td>
 					<td>
-						<span>{{ $format.dateFormat(item.create_at, true) }}</span>
+						<span>{{
+							$moment.moment(item.create_at * 1000).format("YYYY-MM-DD HH:mm")
+						}}</span>
 					</td>
 					<td>
 						<span v-if="item.is_paid && item.paid_date">
-							{{ $format.dateFormat(item.paid_date, true) }}
+							{{ $moment.moment(item.create_at * 1000).format("YYYY-MM-DD HH:mm") }}
 						</span>
 						<span v-else>--</span>
 					</td>
@@ -195,7 +197,7 @@ export default {
 			this.submitBtnLoading = true;
 			this.isProcessingTarget = item.id;
 			const handle = item.is_paid;
-			const nowTimeStamp = Math.floor(new Date().getTime() / 1000);
+			const nowTimeStamp = this.$moment.moment().unix();
 
 			const postData = {
 				data: {

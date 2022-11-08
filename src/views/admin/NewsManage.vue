@@ -26,29 +26,27 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr
-					v-for="(article, index) in news"
-					:key="article.id"
-					style="vertical-align: middle"
-				>
+				<tr v-for="(item, index) in news" :key="item.id" style="vertical-align: middle">
 					<td>{{ index + 1 }}</td>
 					<td>
-						<img class="img-fluid" :src="article.image" />
+						<img class="img-fluid" :src="item.image" />
 					</td>
 					<td class="text-start">
-						<RouterLink :to="`/news/${article.id}`" target="_blank">{{
-							article.title
+						<RouterLink :to="`/news/${item.id}`" target="_blank">{{
+							item.title
 						}}</RouterLink>
 					</td>
 					<td>
-						{{ article.category }}
+						{{ item.category }}
 					</td>
 					<td>
-						{{ article.author }}
+						{{ item.author }}
 					</td>
-					<td>{{ $format.dateFormat(article.create_at) }}</td>
 					<td>
-						<span class="text-success" v-if="article.isPublic === true">顯示</span>
+						{{ $moment.moment(item.create_at * 1000).format("YYYY-MM-DD") }}
+					</td>
+					<td>
+						<span class="text-success" v-if="item.isPublic === true">顯示</span>
 						<span v-else class="text-danger">不顯示</span>
 					</td>
 					<td>
@@ -56,7 +54,7 @@
 							<button
 								type="button"
 								class="btn btn-primary btn-sm"
-								@click="getNews(article.id)"
+								@click="getNews(item.id)"
 							>
 								<i class="bi bi-pencil-square"></i>
 								編輯
@@ -64,7 +62,7 @@
 							<button
 								type="button"
 								class="btn btn-danger btn-sm"
-								@click="openDelModal(article)"
+								@click="openDelModal(item)"
 							>
 								<i class="bi bi-trash3"></i>
 								刪除

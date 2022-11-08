@@ -81,7 +81,11 @@
 												>諮詢時間</label
 											>
 											<span>
-												{{ $format.dateFormat(targetItem.create_at, true) }}
+												{{
+													$moment
+														.moment(targetItem.create_at * 1000)
+														.format("YYYY-MM-DD HH:mm:ss")
+												}}
 											</span>
 										</div>
 									</div>
@@ -100,7 +104,11 @@
 												>最後聯絡時間</label
 											>
 											<span v-if="targetItem.paid_date && targetItem.is_paid">
-												{{ $format.dateFormat(targetItem.paid_date, true) }}
+												{{
+													$moment
+														.moment(targetItem.paid_date * 1000)
+														.format("YYYY-MM-DD HH:mm:ss")
+												}}
 											</span>
 											<span v-else>--</span>
 										</div>
@@ -361,7 +369,11 @@
 								<div v-if="targetItem.user" class="mb-3 col-lg-6">
 									<label for="" class="form-label fw-bold">資料異動時間</label>
 									<div>
-										{{ $format.dateFormat(targetItem.user.dataTime, true) }}
+										{{
+											$moment
+												.moment(targetItem.dataTime * 1000)
+												.format("YYYY-MM-DD HH:mm:ss")
+										}}
 									</div>
 								</div>
 								<div class="mb-3 col-lg-6">
