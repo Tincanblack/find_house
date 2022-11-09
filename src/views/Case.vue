@@ -571,10 +571,7 @@ export default {
 			category: "",
 			id: "",
 			fakeUser: {},
-			fakeAvatar: [
-				"../src/assets/male_avatar_icon.svg",
-				"../src/assets/female_avatar_icon.svg",
-			],
+			fakeAvatar: ["/assets/male_avatar_icon.svg", "/assets/female_avatar_icon.svg"],
 		};
 	},
 	mixins: [storageCollectionCase, storageComparecase, reserveForm],
