@@ -550,7 +550,7 @@ import CasePreviewSlide from "@/components/product/CasePreviewSlide.vue";
 import CasesSlide from "@/components/product/CasesSlide.vue";
 
 import storageCollectionCase from "@/mixins/collectionCase.js";
-import storageComparecase from "@/mixins/compareCase.js";
+import storageCompareCase from "@/mixins/compareCase.js";
 import reserveForm from "@/mixins/reserveForm.js";
 
 import { mapState, mapActions } from "pinia";
@@ -571,10 +571,10 @@ export default {
 			category: "",
 			id: "",
 			fakeUser: {},
-			fakeAvatar: ["/assets/male_avatar_icon.svg", "/assets/female_avatar_icon.svg"],
+			fakeAvatar: ["./assets/male_avatar_icon.svg", "./assets/female_avatar_icon.svg"],
 		};
 	},
-	mixins: [storageCollectionCase, storageComparecase, reserveForm],
+	mixins: [storageCollectionCase, storageCompareCase, reserveForm],
 	methods: {
 		...mapActions(compareAnchor, ["goCompareAnchor"]),
 		...mapActions(compareAnchor, ["clickCompareAnchor"]),
