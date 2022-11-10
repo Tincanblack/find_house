@@ -571,7 +571,10 @@ export default {
 			category: "",
 			id: "",
 			fakeUser: {},
-			fakeAvatar: ["./assets/male_avatar_icon.svg", "./assets/female_avatar_icon.svg"],
+			fakeAvatar: [
+				"/found_houses/src/assets/male_avatar_icon.png",
+				"/found_houses/src/assets/female_avatar_icon.png",
+			],
 		};
 	},
 	mixins: [storageCollectionCase, storageCompareCase, reserveForm],

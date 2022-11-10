@@ -69,11 +69,16 @@
 				</RouterLink>
 			</li>
 			<li class="nav-item d-flex">
-				<a class="nav-link text-danger" href="#">
+				<button
+					type="button"
+					class="nav-link text-danger"
+					href="#"
+					@click="this.$emit('emitLogOut')"
+				>
 					<i class="nav-icon bi bi-box-arrow-left me-3"></i>
 					<span class="nav-text nav-logout">登出</span>
 					<span class="nav-tooltip">登出</span>
-				</a>
+				</button>
 			</li>
 		</ul>
 	</div>

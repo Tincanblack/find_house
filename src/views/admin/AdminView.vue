@@ -1,6 +1,6 @@
 <template>
 	<main>
-		<AdminNav></AdminNav>
+		<AdminNav @emitLogOut="logOut"></AdminNav>
 		<RouterView></RouterView>
 	</main>
 </template>
@@ -12,6 +12,20 @@ export default {
 	},
 	data() {
 		return { isCheckLogin: false };
+	},
+	methods: {
+		logOut() {
+			this.$http
+				.post(`${import.meta.env.VITE_URL}/logout`)
+				.then((res) => {
+					this.isCheckLogin = false;
+					this.$httpMessageState(res, "登出");
+					this.$router.push("/login");
+				})
+				.catch((err) => {
+					this.$httpMessageState(err.response, "錯誤訊息");
+				});
+		},
 	},
 	created() {
 		// 將token寫入至headers
