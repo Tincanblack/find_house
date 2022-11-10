@@ -16,6 +16,9 @@
 				<li class="nav-item">
 					<RouterLink class="nav-link px-2 text-light" to="/reserve">查詢預約</RouterLink>
 				</li>
+				<li class="nav-item">
+					<RouterLink class="nav-link px-2 text-light" to="/admin">後台登入</RouterLink>
+				</li>
 			</ul>
 			<p class="text-center text-light m-0">
 				Copyright 2022. 心儀房屋 found_houses All rights reserved. <br />
