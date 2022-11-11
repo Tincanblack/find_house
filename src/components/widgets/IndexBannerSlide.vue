@@ -28,9 +28,9 @@ export default {
 		return {
 			swiper: { modules: [EffectFade, Autoplay] },
 			banners: [
-				"https://res.sinyi.com.tw/a_d_sense/index_buy_20210825133411.jpg",
-				"https://res.sinyi.com.tw/a_d_sense/index_buy_20210825134712.jpg",
-				"https://res.sinyi.com.tw/a_d_sense/index_buy_20210825133411.jpg",
+				"https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1668135933546.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=keTx%2FpMiZhySRZwjV%2Fc7QeLaiDllHMwH2kolmvVAdVzzh1o7kCo3uWxQ1lhkEgv%2B9i9MNccCaM5EApAwDFw1g3inhhr2r9aWhHbD4m7mGjm0HaGyNF7dWA3VRmX5u5lA0zOzJpuK4nTZSE0uFDtRUvppYl2TfA%2FVXLmRP9IR61TEAXsyZLdjcI%2BPRrm2hxqv5EDa2%2Fh%2BJQojyTJMvXf8dwzB3xPW7H187Ti3etEcAZwagomcDxecqkyg%2BA%2B33hrRV39K83zjx%2BXZyexrmfLkpreyp6wum911u5ug3VaMXKM09KAQqIruUd%2Fs1CHpNh53sxPWzy3IAT8uyhU7ksdLSQ%3D%3D",
+				"https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1668135949046.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=oI4kqjGEtYNbtZ5OmfjVBByKBHwCwM9Yrm%2F8NPG3vN6ZoVjrGxXtYfYTIAcpaxMkBU54IhX3tSWbcq%2F2NLvzjD3NI%2FG9dTDqisr5elLJLzWpUEOkioY76gs86pdbErhu61%2F8mkzuiO4BHKkJClfzm5QenlfepX5Q%2FEFEOFIUwe4mnxS6EE57rMZve%2FKZNsiFvy3tZBFPc387XsG6ooiXUFkBaQJuejD4XIOsJqj6pVEkFcYA%2Bkz3Hu5l90TMwg4INajgb36p21BTiNvJknpP33gnOikq%2B0z03Ip4EC14anK3aMTb7GWeCLjiuUlTJoasPdVDIhv3tHBmN6WJFbM7rA%3D%3D",
+				"https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1668135974548.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=WUJLHE%2BcQ2qAFohPg4iSPQ1ZINSNGF77IFCI3eGhQktD4jhbs7HroBy%2FW0z9tptK9Wi5CsuFOPFHAkLGRZgSNOofyMaaHzlb02i%2BWwDC8%2FnNO5KAQ5shnCZmx5CvFpLImWLsixLsU6EZNIWi4xG7dBPS9oPskVGFOULSyJKMtWIsYwQ%2FJanoCinx4tM6K%2BQs73mf23ARi3%2BlOuUrdKN9julPOgO5KTytAGAYgQAa%2FUeZW1P%2BdFXjIATUK0BtAYf6eVPFOHD0orenE4ClGlT7SeohtAcyCjStNTcZSPOWen%2FD6CdbvkF9p8aREZR1YJt84QChdkLS5fvahE0hrMgjlg%3D%3D",
 			],
 		};
 	},

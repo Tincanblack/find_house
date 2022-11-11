@@ -521,16 +521,13 @@
 							</div>
 						</div>
 					</div>
-					<!-- <div class="row">
+					<div class="row">
 						<div class="case-detail-section" id="near">
 							<div class="case-detail-header">
 								<h4 class="common-section-header__title">周遭環境</h4>
 							</div>
-							<div class="detail-content">
-								{{ product.content }}
-							</div>
 						</div>
-					</div> -->
+					</div>
 				</div>
 			</div>
 		</section>
@@ -572,8 +569,8 @@ export default {
 			id: "",
 			fakeUser: {},
 			fakeAvatar: [
-				"/found_houses/src/assets/male_avatar_icon.png",
-				"/found_houses/src/assets/female_avatar_icon.png",
+				"/found_houses/assets/male_avatar_icon.png",
+				"/found_houses/assets/female_avatar_icon.png",
 			],
 		};
 	},
@@ -628,6 +625,7 @@ export default {
 			});
 			return genderUrl;
 		},
+
 		validatePhone(value) {
 			return /^(09)[0-9]{8}$/.test(value) ? true : "請輸入正確格式的手機號碼";
 		},
