@@ -48,8 +48,10 @@
 					</td>
 					<td>
 						{{ item.user.name }}
-						<span class="fs-6 text-muted" v-if="item.user.gender == 1">先生</span>
-						<span class="fs-6 text-muted" v-else-if="item.user.gender == 0">小姐</span>
+						<span class="fs-6 text-muted" v-if="item.user.gender === '1'">先生</span>
+						<span class="fs-6 text-muted" v-else-if="item.user.gender === '0'"
+							>小姐</span
+						>
 						<span class="fs-6 text-muted" v-else>未填寫</span>
 					</td>
 					<td>
