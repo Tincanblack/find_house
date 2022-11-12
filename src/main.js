@@ -4,6 +4,9 @@ import { createPinia } from "pinia";
 import "bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
+//
+import "@fortawesome/fontawesome-pro/css/all.min.css";
+
 // axios
 import axios from "axios";
 import VueAxios from "vue-axios";
@@ -74,9 +77,9 @@ app.use(pinia);
 app.use(router);
 app.use(VueAxios, axios);
 app.use(CKEditor);
+app.use(VueSweetalert2);
 app.component("LoadingComponent", Loading);
 app.component("VForm", Form);
 app.component("VField", Field);
 app.component("ErrorMessage", ErrorMessage);
-app.use(VueSweetalert2);
 app.mount("#app");
