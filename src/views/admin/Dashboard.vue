@@ -312,10 +312,10 @@ export default {
 					this.daysAgoReservesChartData = this.formatDaysAgoReserves(10);
 					this.counting = false;
 				})
-				.catch((err) => {
+				.catch((error) => {
 					// 跳出錯誤訊息
 					this.isLoading = false;
-					this.$httpMessageState(err.response, "錯誤訊息");
+					this.$httpMessageState(error.response, "錯誤訊息");
 				});
 		},
 		getUnHandleCount(orders) {

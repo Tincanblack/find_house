@@ -22,8 +22,8 @@ export default {
 					this.$httpMessageState(res, "登出");
 					this.$router.push("/login");
 				})
-				.catch((err) => {
-					this.$httpMessageState(err.response, "錯誤訊息");
+				.catch((error) => {
+					this.$httpMessageState(error.response, "錯誤訊息");
 				});
 		},
 	},
