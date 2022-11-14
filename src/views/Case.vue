@@ -524,8 +524,9 @@
 					<div class="row">
 						<div class="case-detail-section" id="near">
 							<div class="case-detail-header">
-								<h4 class="common-section-header__title">周遭環境</h4>
+								<h4 class="common-section-header__title">地理位置</h4>
 							</div>
+							<GoogleMaps :center="center" :caseItem="product"></GoogleMaps>
 						</div>
 					</div>
 				</div>
@@ -545,6 +546,7 @@
 import CaseBreadcrumb from "@/components/product/CaseBreadcrumb.vue";
 import CasePreviewSlide from "@/components/product/CasePreviewSlide.vue";
 import CasesSlide from "@/components/product/CasesSlide.vue";
+import GoogleMaps from "@/components/Maps.vue";
 
 import storageCollectionCase from "@/mixins/collectionCase.js";
 import storageCompareCase from "@/mixins/compareCase.js";
@@ -558,6 +560,7 @@ export default {
 		CaseBreadcrumb,
 		CasePreviewSlide,
 		CasesSlide,
+		GoogleMaps,
 	},
 	data() {
 		return {
@@ -572,6 +575,8 @@ export default {
 				"/found_houses/assets/male_avatar_icon.png",
 				"/found_houses/assets/female_avatar_icon.png",
 			],
+			center: { lat: 0, lng: 0 },
+			markers: [],
 		};
 	},
 	mixins: [storageCollectionCase, storageCompareCase, reserveForm],
@@ -588,7 +593,7 @@ export default {
 					// 將收到的data資料展賦予給case
 					this.product = res.data.product;
 					this.category = res.data.product.category;
-
+					this.center = this.formatCaseLocation();
 					this.isLoading = false;
 				})
 				.catch((error) => {
@@ -625,7 +630,14 @@ export default {
 			});
 			return genderUrl;
 		},
-
+		formatCaseLocation() {
+			const locationArray = this.product.location.split(",");
+			let location = {
+				lat: parseFloat(locationArray[0]),
+				lng: parseFloat(locationArray[1]),
+			};
+			return location;
+		},
 		validatePhone(value) {
 			return /^(09)[0-9]{8}$/.test(value) ? true : "請輸入正確格式的手機號碼";
 		},

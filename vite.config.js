@@ -15,4 +15,7 @@ export default defineConfig({
 			"~sweetalert2": path.resolve(__dirname, "node_modules/sweetalert2"),
 		},
 	},
+	optimizeDeps: {
+		include: ["vue-google-maps-community-fork", "fast-deep-equal"],
+	},
 });
