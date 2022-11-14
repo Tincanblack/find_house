@@ -125,7 +125,7 @@ export default {
 		return {
 			isLoading: false,
 			submitBtnLoading: false,
-			targetCase: { imagesUrl: [], category: "", tags: [] },
+			targetCase: { imagesUrl: [], category: "", tags: [], location: "" },
 			cases: [],
 			pagination: {},
 			isNew: false,
