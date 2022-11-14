@@ -571,7 +571,7 @@ export default {
 			category: "",
 			id: "",
 			fakeUser: {},
-			fakeAvatar: ["/assets/male_avatar_icon.png", "/assets/female_avatar_icon.png"],
+			fakeAvatar: ["/src/assets/male_avatar_icon.png", "/src/assets/female_avatar_icon.png"],
 			center: { lat: 0, lng: 0 },
 			markers: [],
 		};
