@@ -221,8 +221,17 @@
 										<div class="d-flex align-items-center my-3">
 											<div class="manager__image me-2">
 												<img
+													v-if="fakeUser.gender === 'male'"
+													src="../assets/images/male_avatar_icon.svg"
+													alt=""
+													width="70"
+													height="70"
+												/>
+
+												<img
+													v-else
 													class="img-fluid"
-													:src="fakeUser.photo"
+													src="../assets/images/female_avatar_icon.svg"
 													alt=""
 													width="70"
 													height="70"
@@ -571,7 +580,6 @@ export default {
 			category: "",
 			id: "",
 			fakeUser: {},
-			fakeAvatar: ["/src/assets/male_avatar_icon.png", "/src/assets/female_avatar_icon.png"],
 			center: { lat: 0, lng: 0 },
 			markers: [],
 		};
@@ -602,7 +610,6 @@ export default {
 				.get(`${import.meta.env.VITE_RANDOMUSER_URL}`)
 				.then((res) => {
 					this.fakeUser = res.data.results[0];
-					this.fakeUser.photo = this.getFakeUserPhoto(this.fakeUser.gender);
 				})
 				.catch((error) => {
 					this.$swal({
@@ -618,14 +625,6 @@ export default {
 			if (localStorage.getItem("compare_case")) {
 				this.compareCases = JSON.parse(localStorage.getItem("compare_case"));
 			}
-		},
-		getFakeUserPhoto(gender) {
-			let genderResult = gender.replace(/\d/gi, "");
-			let photoArray = this.fakeAvatar;
-			let genderUrl = photoArray.find((url) => {
-				return url.match(genderResult);
-			});
-			return genderUrl;
 		},
 		formatCaseLocation() {
 			const locationArray = this.product.location.split(",");
