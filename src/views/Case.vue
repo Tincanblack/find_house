@@ -571,10 +571,7 @@ export default {
 			category: "",
 			id: "",
 			fakeUser: {},
-			fakeAvatar: [
-				"/found_houses/assets/male_avatar_icon.png",
-				"/found_houses/assets/female_avatar_icon.png",
-			],
+			fakeAvatar: ["../assets/male_avatar_icon.png", "../assets/female_avatar_icon.png"],
 			center: { lat: 0, lng: 0 },
 			markers: [],
 		};

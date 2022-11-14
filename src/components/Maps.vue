@@ -98,8 +98,7 @@
 				:key="marker.id"
 				v-for="marker in markers"
 				:position="marker.position"
-				:label="marker.title"
-				:icon="marker.url"
+				:icon="marker.icon.url"
 			/>
 		</GMapMap>
 	</div>
@@ -134,7 +133,9 @@ export default {
 				this.markers.push({
 					id: this.caseItem.id,
 					position,
-					title: this.caseItem.title,
+					icon: {
+						url: "https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1668402620550.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=dd9YH9dXWh6CyoIi3XT%2BbEf868FkSNdNLZTC1YwzE9bsyEU4m%2FWk9WloCPETcaMHnRhVinMN1%2BNvq43z70xRbzmLdXOOjIX8cX6w5mfiRdxIcqtWQi1DtZKT5l3Lds36n5auZPjNPo0BAzfpCIpNNVKD0UNnmfC2GCvjfm6NZZqUn8%2FqsdXAU%2B6ASHnDZ8GKkWSVnLqwzMWzZOKI%2BDeYmpvuDaVlZ1%2FAc4mWVLFbifEm0ct77v6WjESMu54D5LG6MxppVfKKEUeetwLDhWOxqbE9FlblDOx32iXI1cFEWZA%2BZ7R%2F9ahB%2Bwgn8O0Gu0oi6msnjJvLdgSk%2BXe0U%2B9rjA%3D%3D",
+					},
 				});
 				console.log(this.caseItem);
 			});
