@@ -1,4 +1,4 @@
-# Chord
+# 心儀房屋
 
 ## 專案簡介
 提供房屋資訊的諮詢平台，主要以 Vue 框架練習開發前端
@@ -25,7 +25,7 @@ https://tincanblack.github.io/found_houses/#/
 ## 使用技術 / 套件
 | 技術        | 簡述                       |
 | ---------------- | -------------------------- |
-| Vue Cli 3        | 以 Vue.js 開發 SPA 網站    |
+| Vite        | 以 Vue.js 開發 SPA 網站    |
 | VueRouter        | 以 Vue.js 開發 SPA 網站、路由設計  |
 | VueComponents    | 將重複使用的模組整理為元件 | 
 | ESlint(Standard) | 優化程式碼品質、維持風格統一 |
