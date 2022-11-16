@@ -3,7 +3,7 @@ import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
-const path = require("path");
+import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
 	base: "/found_houses/",
@@ -14,5 +14,8 @@ export default defineConfig({
 			"~bootstrap": path.resolve(__dirname, "node_modules/bootstrap"),
 			"~sweetalert2": path.resolve(__dirname, "node_modules/sweetalert2"),
 		},
+	},
+	optimizeDeps: {
+		include: ["vue-google-maps-community-fork", "fast-deep-equal"],
 	},
 });

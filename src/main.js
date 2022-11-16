@@ -4,6 +4,9 @@ import { createPinia } from "pinia";
 import "bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
+//
+import "@fortawesome/fontawesome-pro/css/all.min.css";
+
 // axios
 import axios from "axios";
 import VueAxios from "vue-axios";
@@ -27,13 +30,15 @@ import "sweetalert2/dist/sweetalert2.min.css";
 // moment
 import moment from "moment";
 
+// google-maps
+import VueGoogleMaps from "vue-google-maps-community-fork";
+
 // user
 import {
 	currencyFormat,
 	patternFormat,
 	calToPercent,
 	filterItemTag,
-	dateFormat,
 	publicDateFormat,
 } from "@/methods/format";
 
@@ -64,7 +69,6 @@ app.config.globalProperties.$format = {
 	patternFormat,
 	calToPercent,
 	filterItemTag,
-	dateFormat,
 	publicDateFormat,
 };
 
@@ -74,9 +78,16 @@ app.use(pinia);
 app.use(router);
 app.use(VueAxios, axios);
 app.use(CKEditor);
+app.use(VueSweetalert2);
+app.use(VueGoogleMaps, {
+	load: {
+		key: `${import.meta.env.VITE_GOOGLE_MAPS_TOKEN}`,
+		libraries: "places",
+	},
+	installComponents: true,
+});
 app.component("LoadingComponent", Loading);
 app.component("VForm", Form);
 app.component("VField", Field);
 app.component("ErrorMessage", ErrorMessage);
-app.use(VueSweetalert2);
 app.mount("#app");

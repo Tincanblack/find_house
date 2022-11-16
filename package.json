@@ -12,6 +12,7 @@
     "@ckeditor/ckeditor5-horizontal-line": "^34.1.0",
     "@ckeditor/ckeditor5-vue": "^4.0.1",
     "@fortawesome/fontawesome-free": "^6.2.0",
+    "@fortawesome/fontawesome-pro": "^6.2.0",
     "@popperjs/core": "^2.11.2",
     "@vee-validate/i18n": "^4.6.10",
     "@vee-validate/rules": "^4.6.10",
@@ -28,8 +29,10 @@
     "vue": "^3.2.38",
     "vue-axios": "^3.4.1",
     "vue-google-charts": "^1.1.0",
+    "vue-google-maps-community-fork": "^0.1.4",
     "vue-router": "^4.1.5",
     "vue-sweetalert2": "^5.0.5",
+    "vue2-google-maps": "^0.10.7",
     "vue3-loading-overlay": "0.0.0"
   },
   "devDependencies": {

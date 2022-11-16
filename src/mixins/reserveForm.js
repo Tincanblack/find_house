@@ -112,8 +112,8 @@ export default {
 					}
 					this.$swal({
 						icon: "success",
-						title: "我們將盡快與您聯繫\n您的諮詢表單ID為：",
-						text: `${order_id}`,
+						title: "謝謝！我們將盡快與您聯繫",
+						text: `您的諮詢表單ID為：${order_id}`,
 						confirmButtonText: "我知道了",
 					}).then(() => {
 						this.$refs.reserveForm.resetForm();

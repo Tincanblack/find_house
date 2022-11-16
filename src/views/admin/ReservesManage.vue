@@ -48,8 +48,10 @@
 					</td>
 					<td>
 						{{ item.user.name }}
-						<span class="fs-6 text-muted" v-if="item.user.gender == 1">先生</span>
-						<span class="fs-6 text-muted" v-else-if="item.user.gender == 0">小姐</span>
+						<span class="fs-6 text-muted" v-if="item.user.gender === '1'">先生</span>
+						<span class="fs-6 text-muted" v-else-if="item.user.gender === '0'"
+							>小姐</span
+						>
 						<span class="fs-6 text-muted" v-else>未填寫</span>
 					</td>
 					<td>
@@ -183,10 +185,10 @@ export default {
 					this.pagination = res.data.pagination;
 					this.isLoading = false;
 				})
-				.catch((err) => {
+				.catch((error) => {
 					// 跳出錯誤訊息
 					this.isLoading = false;
-					this.$httpMessageState(err.response, "錯誤訊息");
+					this.$httpMessageState(error.response, "錯誤訊息");
 				});
 		},
 		openReserveModal(item) {
@@ -224,10 +226,10 @@ export default {
 					this.$refs.reserveModal.closeModal();
 					this.getReservesList(this.currentPage);
 				})
-				.catch((err) => {
+				.catch((error) => {
 					this.submitBtnLoading = false;
 					this.isProcessingTarget = "";
-					this.$httpMessageState(err.response, "錯誤訊息");
+					this.$httpMessageState(error.response, "錯誤訊息");
 				});
 		},
 		openDelModal(item) {
@@ -252,11 +254,11 @@ export default {
 					this.$httpMessageState(res, "刪除諮詢");
 					this.getReservesList(this.currentPage);
 				})
-				.catch((err) => {
+				.catch((error) => {
 					this.submitBtnLoading = false;
 					this.isProcessingTarget = "";
 
-					this.$httpMessageState(err.response, "錯誤訊息");
+					this.$httpMessageState(error.response, "錯誤訊息");
 				});
 		},
 		delAllOrders() {
