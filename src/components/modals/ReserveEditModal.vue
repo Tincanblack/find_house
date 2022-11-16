@@ -371,7 +371,7 @@
 									<div>
 										{{
 											$moment
-												.moment(targetItem.dataTime * 1000)
+												.moment(targetItem.dataTime)
 												.format("YYYY-MM-DD HH:mm:ss")
 										}}
 									</div>

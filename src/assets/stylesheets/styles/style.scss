@@ -526,7 +526,6 @@ body {
 		background: url("assets/images/index_feature_bg.png"),
 			linear-gradient(0deg, white 50%, #b9efff 100%);
 		background-position: center bottom;
-		background-size: contain;
 		background-repeat: no-repeat;
 		@include pad {
 			background-size: cover;

@@ -43,6 +43,22 @@
 									<div class="reserve-form-result mt-5" v-if="reserve.user">
 										<h4 class="text-center">搜尋結果如下</h4>
 										<div class="row">
+											<div class="col">
+												<div
+													class="mb-3 text-center"
+													v-for="caseItem in reserve.products"
+													:key="caseItem.id"
+												>
+													<img
+														class="img-fluid"
+														:src="caseItem.product.imageUrl"
+														alt=""
+														style="max-width: 330px"
+													/>
+												</div>
+											</div>
+										</div>
+										<div class="row">
 											<div class="col text-muted">諮詢的案件</div>
 											<div class="col text-sm-end fw-bold">
 												<div
@@ -119,6 +135,20 @@
 												<span v-else>皆可(9:00-21:00)</span>
 											</div>
 										</div>
+										<h5
+											class="fw-bold text-center mt-3"
+											:class="
+												reserve.is_paid === true
+													? 'text-success'
+													: 'text-secondary'
+											"
+										>
+											{{
+												reserve.is_paid === true
+													? "經理人已向連絡您，請注意未接來電"
+													: "經理人處理中"
+											}}
+										</h5>
 									</div>
 								</template>
 							</div>
