@@ -12,83 +12,81 @@
 				<i class="bi bi-plus-square"></i> 建立新的案件
 			</button>
 		</div>
-		<table class="table table-hover table-striped table-bordered mt-4 text-center shadow-sm">
-			<thead class="table-dark">
-				<tr>
-					<th width="5%">順序</th>
-					<th width="10%">案件圖片</th>
-					<th width="55%" class="text-start">案件名稱</th>
-					<th width="5%">原價</th>
-					<th width="5%">售價</th>
-					<th width="5%">車位售價</th>
-					<th width="5%">是否顯示</th>
-					<th width="10%">操作</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr v-for="item in cases" :key="item.id" style="vertical-align: middle">
-					<td>{{ item.num }}</td>
-					<td>
-						<img class="img-fluid" :src="item.imageUrl" />
-					</td>
-					<td class="text-start">
-						<span
-							class="badge tag__element me-1"
-							:class="{
-								'tag__element--main': item.category === '華廈',
-								'tag__element--sec': item.category === '公寓',
-								'tag__element--third': item.category === '別墅',
-								'tag__element--fourth': item.category === '大樓',
-							}"
-						>
-							{{ item.category }}</span
-						>
-						<RouterLink :to="`/case/${item.id}`" target="_blank">{{
-							item.title
-						}}</RouterLink>
-					</td>
-					<td>{{ $format.currencyFormat(item.origin_price) }}萬</td>
-					<td
+		<VueGoodTable
+			:columns="tableTh"
+			:rows="cases"
+			:pagination-options="{
+				enabled: true,
+			}"
+			styleClass="vgt-table striped condensed table table-hover"
+		>
+			<template #table-row="props">
+				<div v-if="props.column.field === 'imageUrl'">
+					<img
+						class="img-fluid"
+						:src="props.row.imageUrl"
+						style="max-width: 100px"
+						alt=""
+					/>
+				</div>
+				<div v-if="props.column.field === 'title'">
+					<span
+						class="badge tag__element me-1"
 						:class="{
-							'text-danger': item.origin_price > item.price,
+							'tag__element--main': props.row.category === '華廈',
+							'tag__element--sec': props.row.category === '公寓',
+							'tag__element--third': props.row.category === '別墅',
+							'tag__element--fourth': props.row.category === '大樓',
 						}"
 					>
-						{{ $format.currencyFormat(item.price) }}萬
-					</td>
-					<td>
-						<span v-if="item.parkingPrice > 0">{{ item.parkingPrice }}萬</span>
-						<span v-else>--</span>
-					</td>
-					<td>
-						<span v-if="item.is_enabled == '1'" class="text-success">顯示</span>
-						<span v-else-if="item.is_enabled == '2'" class="text-warning">處理中</span>
-						<span v-else-if="item.is_enabled == '3'" class="text-muted">已結案</span>
-						<span v-else class="text-danger">不顯示</span>
-					</td>
-					<td>
-						<div class="btn-group">
-							<button
-								type="button"
-								class="btn btn-primary btn-sm"
-								@click="openModal(false, item)"
-							>
-								<i class="bi bi-pencil-square"></i>
-								編輯
-							</button>
-							<button
-								type="button"
-								class="btn btn-danger btn-sm"
-								@click="openDelModal(item)"
-							>
-								<i class="bi bi-trash3"></i>
-								刪除
-							</button>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<Pagination :pages="pagination" @emit-pages="getCasesList"></Pagination>
+						{{ props.row.category }}</span
+					>
+					<RouterLink :to="`/case/${props.row.id}`" target="_blank">{{
+						props.row.title
+					}}</RouterLink>
+				</div>
+				<div v-if="props.column.field === 'price'">
+					{{ $format.currencyFormat(props.row.origin_price) }}萬 /
+					<span
+						:class="{
+							'text-danger': props.row.origin_price > props.row.price,
+						}"
+						>{{ $format.currencyFormat(props.row.price) }}萬</span
+					>
+				</div>
+				<div v-if="props.column.field === 'parkingPrice'">
+					<span v-if="props.row.parkingPrice > 0">{{ props.row.parkingPrice }}萬</span>
+					<span v-else>--</span>
+				</div>
+				<div v-if="props.column.field === 'is_enabled'">
+					<span v-if="props.row.is_enabled == '1'" class="text-success">顯示</span>
+					<span v-else-if="props.row.is_enabled == '2'" class="text-warning">處理中</span>
+					<span v-else-if="props.row.is_enabled == '3'" class="text-muted">已結案</span>
+					<span v-else class="text-danger">不顯示</span>
+				</div>
+				<div v-if="props.column.field === 'actions'" class="btn-group">
+					<button
+						type="button"
+						class="btn btn-primary btn-sm"
+						@click="openModal(false, props.row)"
+					>
+						<i class="bi bi-pencil-square"></i>
+						編輯
+					</button>
+					<button
+						type="button"
+						class="btn btn-danger btn-sm"
+						@click="openDelModal(props.row)"
+					>
+						<i class="bi bi-trash3"></i>
+						刪除
+					</button>
+				</div>
+			</template>
+			<template #pagination-bottom="">
+				<Pagination :pages="pagination" @emit-pages="getCasesList"></Pagination>
+			</template>
+		</VueGoodTable>
 	</div>
 	<!-- 新增/更新 -->
 	<CaseEditModal
@@ -125,10 +123,56 @@ export default {
 		return {
 			isLoading: false,
 			submitBtnLoading: false,
+			isNew: false,
 			targetCase: { imagesUrl: [], category: "", tags: [], location: "" },
+			tableTh: [
+				{
+					label: "順序",
+					field: "num",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+					width: "5%",
+				},
+				{
+					label: "案件圖片",
+					field: "imageUrl",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+					width: "5%",
+				},
+				{ label: "案件名稱", field: "title", tdClass: "align-middle", width: "35%" },
+				{
+					label: "價格",
+					field: "price",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+					width: "10%",
+				},
+				{
+					label: "車位售價",
+					field: "parkingPrice",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+					width: "10%",
+				},
+				{
+					label: "是否顯示",
+					field: "is_enabled",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+					width: "10%",
+				},
+				{
+					label: "操作",
+					field: "actions",
+					sortable: false,
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+					width: "10%",
+				},
+			],
 			cases: [],
 			pagination: {},
-			isNew: false,
 			currentPage: 1,
 		};
 	},

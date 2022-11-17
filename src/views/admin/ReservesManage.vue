@@ -13,24 +13,25 @@
 				<i class="bi bi-x-lg"></i> 刪除所有案件
 			</button>
 		</div>
-		<table class="table table-hover table-striped table-bordered mt-4 text-center shadow-sm">
-			<thead class="table-dark">
-				<tr>
-					<th width="5%">順序</th>
-					<th width="20%" class="text-start">案件名稱</th>
-					<th width="15%">聯絡人</th>
-					<th width="10%">連絡電話</th>
-					<th width="10%">方便連絡的時間</th>
-					<th width="10%">諮詢時間</th>
-					<th width="10%">聯絡時間</th>
-					<th width="10%">是否處理</th>
-					<th width="10%">操作</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr v-for="item in reserves" :key="item.id" style="vertical-align: middle">
-					<td>{{ item.num }}</td>
-					<td v-for="caseItem in item.products" :key="`${caseItem}`" class="text-start">
+		<VueGoodTable
+			:columns="tableTh"
+			:rows="reserves"
+			:pagination-options="{
+				enabled: true,
+			}"
+			styleClass="vgt-table striped condensed table table-hover"
+		>
+			<template #table-row="props">
+				<div v-if="props.column.field === 'name'">
+					{{ props.row.user.name }}
+					<span class="fs-6 text-muted" v-if="props.row.user.gender === '1'">先生</span>
+					<span class="fs-6 text-muted" v-else-if="props.row.user.gender === '0'"
+						>小姐</span
+					>
+					<span class="fs-6 text-muted" v-else>未填寫</span>
+				</div>
+				<div v-if="props.column.field === 'title'">
+					<template v-for="caseItem in props.row.products" :key="caseItem.product.id">
 						<span
 							class="badge tag__element me-1"
 							:class="{
@@ -42,88 +43,78 @@
 						>
 							{{ caseItem.product.category }}</span
 						>
-						<RouterLink :to="`/case/${caseItem.product.id}`" target="_blank">
-							{{ caseItem.product.title }}
-						</RouterLink>
-					</td>
-					<td>
-						{{ item.user.name }}
-						<span class="fs-6 text-muted" v-if="item.user.gender === '1'">先生</span>
-						<span class="fs-6 text-muted" v-else-if="item.user.gender === '0'"
-							>小姐</span
-						>
-						<span class="fs-6 text-muted" v-else>未填寫</span>
-					</td>
-					<td>
-						{{ item.user.tel }}
-					</td>
-					<td>
-						<span v-if="item.user.message === '1'">上午 (09-12)</span>
-						<span v-else-if="item.user.message === '2'">中午 (12-14)</span>
-						<span v-else-if="item.user.message === '3'">下午 (14-18)</span>
-						<span v-else-if="item.user.message === '4'">晚上 (18-21)</span>
-						<span v-else>皆可 (09-21)</span>
-					</td>
-					<td>
-						<span>{{
-							$moment.moment(item.create_at * 1000).format("YYYY-MM-DD HH:mm")
-						}}</span>
-					</td>
-					<td>
-						<span v-if="item.is_paid && item.paid_date">
-							{{ $moment.moment(item.create_at * 1000).format("YYYY-MM-DD HH:mm") }}
-						</span>
-						<span v-else>--</span>
-					</td>
-					<td>
-						<div class="form-check form-switch d-inline-block">
-							<input
-								class="form-check-input"
-								type="checkbox"
-								v-model="item.is_paid"
-								:true-value="true"
-								:false-value="false"
-								id="is_paid"
-								@change="updateReserve(item)"
-								:disabled="isProcessingTarget === item.id"
-							/>
-							<label
-								v-if="item.is_paid"
-								class="form-check-label text-success"
-								for="is_paid"
-								>已處理
-							</label>
-							<label v-else class="form-check-label text-danger" for="is_paid"
-								>未處理
-							</label>
-						</div>
-					</td>
-					<td>
-						<div class="btn-group">
-							<button
-								type="button"
-								class="btn btn-primary btn-sm"
-								@click="openReserveModal(item)"
-								:disabled="isProcessingTarget === item.id"
-							>
-								<i class="bi bi-pencil-square"></i>
-								編輯
-							</button>
-							<button
-								type="button"
-								class="btn btn-danger btn-sm"
-								@click="openDelModal(item)"
-								:disabled="isProcessingTarget === item.id"
-							>
-								<i class="bi bi-trash3"></i>
-								刪除
-							</button>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<Pagination :pages="pagination" @emit-pages="getReservesList"></Pagination>
+						<RouterLink :to="`/case/${caseItem.product.id}`" target="_blank">{{
+							caseItem.product.title
+						}}</RouterLink>
+					</template>
+				</div>
+				<div v-if="props.column.field === 'tel'">
+					{{ props.row.user.tel }}
+				</div>
+				<div v-if="props.column.field === 'create_at'">
+					{{ $moment.moment(props.row.create_at * 1000).format("YYYY-MM-DD hh:mm:ss") }}
+				</div>
+				<div v-if="props.column.field === 'paid_date'">
+					<span v-if="props.row.is_paid && props.row.paid_date">
+						{{
+							$moment.moment(props.row.paid_date * 1000).format("YYYY-MM-DD hh:mm:ss")
+						}}
+					</span>
+					<span v-else>--</span>
+				</div>
+				<div v-if="props.column.field === 'message'">
+					<span v-if="props.row.user.message === '1'">上午 (09-12)</span>
+					<span v-else-if="props.row.user.message === '2'">中午 (12-14)</span>
+					<span v-else-if="props.row.user.message === '3'">下午 (14-18)</span>
+					<span v-else-if="props.row.user.message === '4'">晚上 (18-21)</span>
+					<span v-else>皆可 (09-21)</span>
+				</div>
+				<div v-if="props.column.field === 'is_paid'">
+					<div class="form-check form-switch d-inline-block">
+						<input
+							class="form-check-input"
+							type="checkbox"
+							v-model="props.row.is_paid"
+							:true-value="true"
+							:false-value="false"
+							id="is_paid"
+							@change="updateReserve(props.row)"
+							:disabled="isProcessingTarget === props.row.id"
+						/>
+						<label
+							v-if="props.row.is_paid"
+							class="form-check-label text-success"
+							for="is_paid"
+							>已處理
+						</label>
+						<label v-else class="form-check-label text-danger" for="is_paid"
+							>未處理
+						</label>
+					</div>
+				</div>
+				<div v-if="props.column.field === 'actions'" class="btn-group">
+					<button
+						type="button"
+						class="btn btn-primary btn-sm"
+						@click="openReserveModal(props.row)"
+					>
+						<i class="bi bi-pencil-square"></i>
+						編輯
+					</button>
+					<button
+						type="button"
+						class="btn btn-danger btn-sm"
+						@click="openDelModal(props.row)"
+					>
+						<i class="bi bi-trash3"></i>
+						刪除
+					</button>
+				</div>
+			</template>
+			<template #pagination-bottom="">
+				<Pagination :pages="pagination" @emit-pages="getReservesList"></Pagination>
+			</template>
+		</VueGoodTable>
 	</div>
 	<!-- 更新 -->
 	<ReserveEditModal
@@ -164,6 +155,72 @@ export default {
 			isProcessingTarget: "",
 			targetItem: {},
 			reserves: [],
+			tableTh: [
+				{
+					label: "順序",
+					field: "num",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+					width: "5%",
+				},
+				{
+					label: "案件名稱",
+					field: "title",
+					thClass: "text-start",
+					tdClass: "text-start align-middle",
+					width: "20%",
+				},
+				{
+					label: "聯絡人",
+					field: "name",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+					width: "15%",
+				},
+				{
+					label: "連絡電話",
+					field: "tel",
+					type: "number",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+					width: "10%",
+				},
+				{
+					label: "方便連絡的時間",
+					field: "message",
+					tdClass: "text-center align-middle",
+					width: "10%",
+				},
+				{
+					label: "諮詢時間",
+					field: "create_at",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+					width: "10%",
+				},
+				{
+					label: "聯絡時間",
+					field: "paid_date",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+					width: "10%",
+				},
+				{
+					label: "是否處理",
+					field: "is_paid",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+					width: "10%",
+				},
+				{
+					label: "操作",
+					field: "actions",
+					sortable: false,
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+					width: "10%",
+				},
+			],
 			pagination: {},
 			currentPage: 1,
 		};
@@ -192,6 +249,7 @@ export default {
 				});
 		},
 		openReserveModal(item) {
+			console.log(item);
 			this.targetItem = { ...item };
 			this.$refs.reserveModal.openModal();
 		},
