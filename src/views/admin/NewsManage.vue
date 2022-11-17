@@ -12,67 +12,53 @@
 				<i class="bi bi-plus-square"></i> 新增房訊
 			</button>
 		</div>
-		<table class="table table-hover table-striped table-bordered mt-4 text-center shadow-sm">
-			<thead class="table-dark">
-				<tr>
-					<th width="5%">順序</th>
-					<th width="10%">封面圖片</th>
-					<th width="40%" class="text-start">標題</th>
-					<th width="10%">分類</th>
-					<th width="10%">發布者</th>
-					<th width="10%">發布時間</th>
-					<th width="5%">是否顯示</th>
-					<th width="10%">操作</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr v-for="(item, index) in news" :key="item.id" style="vertical-align: middle">
-					<td>{{ index + 1 }}</td>
-					<td>
-						<img class="img-fluid" :src="item.image" />
-					</td>
-					<td class="text-start">
-						<RouterLink :to="`/news/${item.id}`" target="_blank">{{
-							item.title
-						}}</RouterLink>
-					</td>
-					<td>
-						{{ item.category }}
-					</td>
-					<td>
-						{{ item.author }}
-					</td>
-					<td>
-						{{ $moment.moment(item.create_at * 1000).format("YYYY-MM-DD") }}
-					</td>
-					<td>
-						<span class="text-success" v-if="item.isPublic === true">顯示</span>
-						<span v-else class="text-danger">不顯示</span>
-					</td>
-					<td>
-						<div class="btn-group">
-							<button
-								type="button"
-								class="btn btn-primary btn-sm"
-								@click="getNews(item.id)"
-							>
-								<i class="bi bi-pencil-square"></i>
-								編輯
-							</button>
-							<button
-								type="button"
-								class="btn btn-danger btn-sm"
-								@click="openDelModal(item)"
-							>
-								<i class="bi bi-trash3"></i>
-								刪除
-							</button>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<Pagination :pages="pagination" @emit-pages="getNewsList"></Pagination>
+		<VueGoodTable
+			:columns="tableTh"
+			:rows="news"
+			:pagination-options="{
+				enabled: true,
+			}"
+			styleClass="vgt-table striped condensed table table-hover"
+		>
+			<template #table-row="props">
+				<div v-if="props.column.field === 'image'">
+					<img class="img-fluid" :src="props.row.image" style="max-width: 200px" alt="" />
+				</div>
+				<div v-if="props.column.field === 'title'">
+					<RouterLink :to="`/news/${props.row.id}`" target="_blank">{{
+						props.row.title
+					}}</RouterLink>
+				</div>
+				<div v-if="props.column.field === 'create_at'">
+					{{ $moment.moment(props.row.create_at * 1000).format("YYYY-MM-DD") }}
+				</div>
+				<div v-if="props.column.field === 'isPublic'">
+					<span class="text-success" v-if="props.row.isPublic === true">顯示</span>
+					<span v-else class="text-danger">不顯示</span>
+				</div>
+				<div v-if="props.column.field === 'actions'" class="btn-group">
+					<button
+						type="button"
+						class="btn btn-primary btn-sm"
+						@click="getNews(props.row.id)"
+					>
+						<i class="bi bi-pencil-square"></i>
+						編輯
+					</button>
+					<button
+						type="button"
+						class="btn btn-danger btn-sm"
+						@click="openDelModal(props.row)"
+					>
+						<i class="bi bi-trash3"></i>
+						刪除
+					</button>
+				</div>
+			</template>
+			<template #pagination-bottom="">
+				<Pagination :pages="pagination" @emit-pages="getNewsList"></Pagination>
+			</template>
+		</VueGoodTable>
 	</div>
 	<!-- 新增/更新 -->
 	<NewsEditModal
@@ -97,9 +83,11 @@ import AdminBreadcrumb from "@/components/admin/AdminBreadcrumb.vue";
 import Pagination from "@/components/widgets/Pagination.vue";
 import NewsEditModal from "@/components/modals/NewsEditModal.vue";
 import DelConfirmModal from "@/components/modals/DelConfirmModal.vue";
+import { VueGoodTable } from "vue-good-table-next";
 
 export default {
 	components: {
+		VueGoodTable,
 		AdminBreadcrumb,
 		NewsEditModal,
 		DelConfirmModal,
@@ -111,6 +99,52 @@ export default {
 			submitBtnLoading: false,
 			isNew: false,
 			tempNews: {},
+			tableTh: [
+				{
+					label: "順序",
+					field: "num",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+				},
+				{
+					label: "封面圖片",
+					field: "image",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+				},
+				{ label: "標題", field: "title", tdClass: "align-middle" },
+				{
+					label: "分類",
+					field: "category",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+				},
+				{
+					label: "發布者",
+					field: "author",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+				},
+				{
+					label: "發布時間",
+					field: "create_at",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+				},
+				{
+					label: "是否顯示",
+					field: "isPublic",
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+				},
+				{
+					label: "操作",
+					field: "actions",
+					sortable: false,
+					thClass: "text-center",
+					tdClass: "text-center align-middle",
+				},
+			],
 			news: [],
 			pagination: {},
 		};

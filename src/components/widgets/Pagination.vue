@@ -1,5 +1,5 @@
 <template lang="">
-	<ul class="pagination align-items-center justify-content-center">
+	<ul class="pagination align-items-center justify-content-center pb-3">
 		<li
 			v-if="pages.total_pages > 0"
 			class="page-item shadow-sm"
