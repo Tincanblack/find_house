@@ -1,7 +1,7 @@
 # 心儀房屋
 
 ## 專案簡介
-提供房屋資訊的諮詢平台，主要以 Vue 框架練習開發前端
+收錄房屋資訊的SPA網站，使用者可以發送諮詢表單、進行諮詢表單查詢、也可以將案件加入案互相比較或是將案件收藏以便後續查看。
 
 ### Demo
 https://tincanblack.github.io/found_houses/#/
@@ -11,7 +11,8 @@ https://tincanblack.github.io/found_houses/#/
 ### 前台
 - 案件展示、分類展示、單一商品介紹、隨機商品展示
 - 案件的收藏與比較
-- 寄送諮詢表單一併到googleSheets
+- 寄送諮詢表單一併到 Google Sheets 留查
+- 串接 Google Map API 顯示案件位置
 - 諮詢狀態查詢
 
 ### 後台
@@ -20,7 +21,7 @@ https://tincanblack.github.io/found_houses/#/
   - 案件管理
   - 文章管理
   - 諮詢表單管理
-- 提供資料搜尋、排序
+- 提供資料排序
 
 ## 使用技術 / 套件
 | 技術        | 簡述                       |
@@ -36,9 +37,11 @@ https://tincanblack.github.io/found_houses/#/
 | 套件             | 簡述                   |
 | ---------------- | --------------------- |
 | Vue-axios| 串接 API   |
-| Vee-validate| 表單驗證  |
+| Vee-validate| 表單驗證 |
+| Vue-good-table| 資料排序 |
+| momentjs |統一時間格式 |
 | Swiper| 首頁、單一案件、相關案件、輪播 | 
-| google-charts | 圖表相關 |
+| google-charts | 資料視覺化 |
 | Ckeditor5| 編輯文章內容介面 |
 | Mitt| 跨元件傳遞資料 |
 
@@ -77,8 +80,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### 圖片來源
 
-Unsplash、iconfinder、Bootstrap icon
+Unsplash、iconfinder、Bootstrap icon、fortawesome pro
 
 ### 版型設計樣式參考
 
-信義房屋、房地網、樂屋網
+各大房屋資訊網站
