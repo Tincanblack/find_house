@@ -26,7 +26,7 @@ export default {
 						confirmButtonText: "去看看",
 					}).then((result) => {
 						if (result.value) {
-							if (this.$route.params !== "collections") {
+							if (this.$route.name === "case") {
 								this.$router.push("/collections");
 							}
 							this.goCompareAnchor();
