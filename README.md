@@ -39,6 +39,7 @@ https://tincanblack.github.io/found_houses/#/
 | Vue-axios| 串接 API   |
 | Vee-validate| 表單驗證 |
 | Vue-good-table| 資料排序 |
+| momentjs |統一時間格式 |
 | Swiper| 首頁、單一案件、相關案件、輪播 | 
 | google-charts | 資料視覺化 |
 | Ckeditor5| 編輯文章內容介面 |
@@ -79,8 +80,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### 圖片來源
 
-Unsplash、iconfinder、Bootstrap icon
+Unsplash、iconfinder、Bootstrap icon、fortawesome pro
 
 ### 版型設計樣式參考
 
-信義房屋、房地網、樂屋網
+各大房屋資訊網站
