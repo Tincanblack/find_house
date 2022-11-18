@@ -17,7 +17,7 @@ export default defineStore("compareAnchorStore", {
 				const anchor = document.querySelector("#caseCompare");
 				const headerHiehgt = document.querySelector(".navbar").offsetHeight;
 				document.documentElement.scrollTop = anchor.offsetTop - headerHiehgt;
-			}, 500);
+			}, 750);
 			this.toAnchor = false;
 		},
 	},
