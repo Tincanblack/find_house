@@ -1,6 +1,7 @@
 <template>
-	<div class="feature-places">
-		<!-- <div class="feature-places-header mb-3">
+	<div class="case-location">
+		<div class="case-location-feature">
+			<!-- <div class="feature-places-header mb-3">
 			<div class="dropdown">
 				<button
 					class="btn btn-outline-primary dropdown-toggle"
@@ -86,21 +87,46 @@
 				</ul>
 			</div>
 		</div> -->
-		<GMapMap
-			id="map"
-			ref="mapRef"
-			:center="center"
-			:zoom="17"
-			map-type-id="terrain"
-			style="width: 100%; height: 300px"
-		>
-			<GMapMarker
-				:key="marker.id"
-				v-for="marker in markers"
-				:position="marker.position"
-				:icon="marker.icon.url"
-			/>
-		</GMapMap>
+			<div class="case-location-map">
+				<template v-if="mapEnabled">
+					<GMapMap
+						id="map"
+						ref="mapRef"
+						:center="center"
+						:zoom="17"
+						map-type-id="terrain"
+						style="width: 100%; height: 300px"
+						:options="{
+							mapTypeControl: false,
+							streetViewControl: false,
+							fullscreenControl: false,
+						}"
+					>
+						<GMapMarker
+							:key="marker.id"
+							v-for="marker in markers"
+							:position="marker.position"
+							:icon="marker.icon.url"
+						/>
+					</GMapMap>
+				</template>
+				<template v-else>
+					<div class="case-location-map__overlay" @click="this.initCaseMap()">
+						<button
+							type="button"
+							class="btn btn-primary case-location-map__overlay-text"
+						>
+							點我查看案件位置
+						</button>
+					</div>
+					<img
+						class="case-location-map__overlay-image"
+						src="../assets/images/fakemap.jpg"
+						alt=""
+					/>
+				</template>
+			</div>
+		</div>
 	</div>
 </template>
 <script>
@@ -122,30 +148,28 @@ export default {
 	data() {
 		return {
 			markers: [],
+			mapEnabled: false,
 		};
 	},
 	methods: {
 		initCaseMap() {
-			this.$refs.mapRef.$mapPromise.then((map) => {
-				const position = this.center;
-
-				map.panTo(position);
-				this.markers.push({
-					id: this.caseItem.id,
-					position,
-					icon: {
-						url: "https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1668402620550.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=dd9YH9dXWh6CyoIi3XT%2BbEf868FkSNdNLZTC1YwzE9bsyEU4m%2FWk9WloCPETcaMHnRhVinMN1%2BNvq43z70xRbzmLdXOOjIX8cX6w5mfiRdxIcqtWQi1DtZKT5l3Lds36n5auZPjNPo0BAzfpCIpNNVKD0UNnmfC2GCvjfm6NZZqUn8%2FqsdXAU%2B6ASHnDZ8GKkWSVnLqwzMWzZOKI%2BDeYmpvuDaVlZ1%2FAc4mWVLFbifEm0ct77v6WjESMu54D5LG6MxppVfKKEUeetwLDhWOxqbE9FlblDOx32iXI1cFEWZA%2BZ7R%2F9ahB%2Bwgn8O0Gu0oi6msnjJvLdgSk%2BXe0U%2B9rjA%3D%3D",
-					},
+			this.mapEnabled = true;
+			this.$nextTick(() => {
+				this.$refs.mapRef.$mapPromise.then((map) => {
+					const position = this.center;
+					map.panTo(position);
+					this.setMapMarker(position);
 				});
 			});
 		},
-	},
-	watch: {
-		center: {
-			handler() {
-				if (this.center !== {}) this.initCaseMap();
-			},
-			deep: true,
+		setMapMarker(position) {
+			this.markers.push({
+				id: this.caseItem.id,
+				position,
+				icon: {
+					url: "https://storage.googleapis.com/vue-course-api.appspot.com/found_houses_v2/1668402620550.png?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=dd9YH9dXWh6CyoIi3XT%2BbEf868FkSNdNLZTC1YwzE9bsyEU4m%2FWk9WloCPETcaMHnRhVinMN1%2BNvq43z70xRbzmLdXOOjIX8cX6w5mfiRdxIcqtWQi1DtZKT5l3Lds36n5auZPjNPo0BAzfpCIpNNVKD0UNnmfC2GCvjfm6NZZqUn8%2FqsdXAU%2B6ASHnDZ8GKkWSVnLqwzMWzZOKI%2BDeYmpvuDaVlZ1%2FAc4mWVLFbifEm0ct77v6WjESMu54D5LG6MxppVfKKEUeetwLDhWOxqbE9FlblDOx32iXI1cFEWZA%2BZ7R%2F9ahB%2Bwgn8O0Gu0oi6msnjJvLdgSk%2BXe0U%2B9rjA%3D%3D",
+				},
+			});
 		},
 	},
 };
