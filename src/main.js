@@ -83,13 +83,13 @@ app.use(router);
 app.use(VueAxios, axios);
 app.use(CKEditor);
 app.use(VueSweetalert2);
-app.use(VueGoogleMaps, {
-	load: {
-		key: `${import.meta.env.VITE_GOOGLE_MAPS_TOKEN}`,
-		libraries: "places",
-	},
-	installComponents: true,
-});
+// app.use(VueGoogleMaps, {
+// 	load: {
+// 		key: `${import.meta.env.VITE_GOOGLE_MAPS_TOKEN}`,
+// 		libraries: "places",
+// 	},
+// 	installComponents: true,
+// });
 app.use(VueGoodTablePlugin);
 app.component("LoadingComponent", Loading);
 app.component("VForm", Form);
