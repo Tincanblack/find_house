@@ -161,6 +161,7 @@ export default {
 			this.mapEnabled = true;
 			this.$nextTick(() => {
 				this.$refs.mapRef.$mapPromise.then((map) => {
+					console.log(this.$refs.mapRef.$mapPromise);
 					const position = this.center;
 					map.panTo(position);
 					this.setMapMarker(position);

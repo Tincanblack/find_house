@@ -535,7 +535,8 @@
 							<div class="case-detail-header">
 								<h4 class="common-section-header__title">地理位置</h4>
 							</div>
-							<GoogleMaps :center="center" :caseItem="product"></GoogleMaps>
+							<!-- <GoogleMaps :center="center" :caseItem="product"></GoogleMaps> -->
+							<CaseMap :center="center" :caseItem="product"></CaseMap>
 						</div>
 					</div>
 				</div>
@@ -555,7 +556,8 @@
 import CaseBreadcrumb from "@/components/product/CaseBreadcrumb.vue";
 import CasePreviewSlide from "@/components/product/CasePreviewSlide.vue";
 import CasesSlide from "@/components/product/CasesSlide.vue";
-import GoogleMaps from "@/components/Maps.vue";
+import CaseMap from "@/components/CaseMap.vue";
+// import GoogleMaps from "@/components/Maps.vue";
 
 import storageCollectionCase from "@/mixins/collectionCase.js";
 import storageCompareCase from "@/mixins/compareCase.js";
@@ -569,7 +571,8 @@ export default {
 		CaseBreadcrumb,
 		CasePreviewSlide,
 		CasesSlide,
-		GoogleMaps,
+		CaseMap,
+		// GoogleMaps,
 	},
 	data() {
 		return {
